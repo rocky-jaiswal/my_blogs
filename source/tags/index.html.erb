@@ -1,0 +1,11 @@
+<ul>
+  <% data.blog.tags.each do |slug, tag| %>
+    <li>
+      <h5><%= tag.title %></h5>
+      <ul>
+        <% tag.pages.each do |title, url| %>
+          <li><a href="<%= url %>"><%= title %></a></li>
+        <% end %>
+      </ul>
+  <% end %>
+</ul>

@@ -1,0 +1,32 @@
+.highlighted {
+  background: #E7F9FF;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px dashed #000000;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.dark-chocolate {
+  color: #3D1F00;
+}
+
+.bottom-padded-25 {
+  padding-bottom: 25px;
+}
+
+.play {
+  font-family: 'Play', serif; 
+  color: #9e4d2b;
+}
+
+.plain-play {
+  font-family: 'Play', serif; 
+}
+
+.head-date {
+  color: #3D1F00; 
+  float:right; 
+  font-size: 0.6em;
+}
