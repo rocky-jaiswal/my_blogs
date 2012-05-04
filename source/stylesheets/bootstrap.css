@@ -161,12 +161,12 @@ body {
 }
 
 a {
-  color: #0088cc;
+  color: #60664f;
   text-decoration: none;
 }
 
 a:hover {
-  color: #005580;
+  color: #3d1f00;
   text-decoration: underline;
 }
 
@@ -4916,7 +4916,7 @@ a.badge:hover {
 }
 
 .hero-unit {
-  font-family: 'Mate SC', serif;
+  font-family: 'Ultra', serif;
   padding: 10px;
   margin-bottom: 30px;
   background: #ffa243 url('../images/back.png') repeat;

@@ -9,20 +9,22 @@
     <%= stylesheet_link_tag 'bootstrap' %>
     <%= stylesheet_link_tag 'bootstrap-responsive' %>
     <%= javascript_include_tag 'bootstrap' %>
-    <link href='http://fonts.googleapis.com/css?family=Mate+SC|Play' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ultra|Play' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
 
+    <div class="banner">
+        <h1 class="bottom-padded-25">
+          <a class="dark-chocolate" href="/">Still Learning ...</a>
+        </h1>
+        <p class="play">Musings of an agile developer</p>
+    </div>
+
     <div id="main" role="main" class="container-fluid">
 
-      <div class="hero-unit">
-        <h1 class="dark-chocolate bottom-padded-25">Still Learning ...</h1>
-        <p class="play">Musings of an agile developer</p>
-      </div>
-
       <div class="row-fluid">
-        <div class="span10">
+        <div class="span9">
           <% if is_blog_article? %>
             <% content_for :blog_article, yield %>
             <%= partial settings.blog_article_template %>
@@ -31,24 +33,30 @@
           <% end %>
         </div>
 
-        <div class="span2">
+        <div class="span3">
+          <h2>
+            <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" style="max-width: 100%;"/>
+            <br/>
+            <a href="/about">About</a>
+          </h2>
+          <hr/>
           <h2>
             <a href="/archives">Recent Articles</a>
           </h2>
           <ol>
-            <% data.blog.articles[0...10].each do |article| %>
+            <% data.blog.articles[0...20].each do |article| %>
               <li>
                 <a href="<%= article.url %>"><%= article.title %></a> 
                 <span><%= article.date.strftime('%b %Y') %></span>
               </li>
             <% end %>
           </ol>
-          
+          <hr/>
           <h2>
             <a href="/tags">Tags</a>
           </h2>
           <ul>
-            <% data.blog.tags.each do |slug, tag| %>
+            <% data.blog.tags.first(9).each do |slug, tag| %>
               <li>
                 <h5><%= tag.title %></h5>
                 <ul>
