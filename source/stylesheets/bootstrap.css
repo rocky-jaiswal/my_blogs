@@ -157,16 +157,16 @@ body {
   font-size: 13px;
   line-height: 18px;
   color: #333333;
-  background-color: #FFF5EB;
+  background-color: #FFE9A3;
 }
 
 a {
-  color: #60664f;
+  color: #AC6167;
   text-decoration: none;
 }
 
 a:hover {
-  color: #3d1f00;
+  color: #AC6167;
   text-decoration: underline;
 }
 

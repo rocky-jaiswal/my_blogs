@@ -1,5 +1,5 @@
 .highlighted {
-  background: #FA5449;
+  background: #E85D3C;
   padding: 5px;
   margin-bottom: 10px;
   border: 1px dashed #000000;
@@ -9,7 +9,7 @@
 }
 
 .dark-chocolate {
-  color: #3D1F00 !important;
+  color: #F1F1F1 !important;
 }
 
 .bottom-padded-25 {
@@ -17,12 +17,12 @@
 }
 
 .play {
-  font-family: 'Play', serif; 
-  color: #9e4d2b;
+  font-family: 'Open Sans', serif; 
+  color: #000000;
 }
 
 .play-white {
-  font-family: 'Play', serif;
+  font-family: 'Bree Serif', serif;
   color: #ffffff;
 }
 
@@ -36,8 +36,7 @@
   font-family: 'Ultra', serif;
   padding: 10px;
   margin-bottom: 30px;
-  background: #ffa243 url('../images/back.png') repeat;
-  width: 100%;
+  background: #C3A239;
 }
 
 .banner h1 {
