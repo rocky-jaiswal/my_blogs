@@ -5,6 +5,12 @@
   border: 1px solid #000000;
 }
 
+.highlighted a:hover {
+  background: #E86A4D;
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
 .head {
   color: #CDC23F !important;
 }
