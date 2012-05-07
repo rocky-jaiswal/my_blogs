@@ -41,10 +41,14 @@
           </h2>
           <hr/>
           <h2>
+            <a href="http://github.com/rocky-jaiswal" target="_blank">Github</a>
+          </h2>
+          <hr/>
+          <h2>
             <a href="/archives">Recent Articles</a>
           </h2>
           <ol>
-            <% data.blog.articles[0...20].each do |article| %>
+            <% data.blog.articles[0...10].each do |article| %>
               <li>
                 <a href="<%= article.url %>"><%= article.title %></a> 
                 <span><%= article.date.strftime('%b %Y') %></span>
