@@ -1,10 +1,10 @@
 xml.instruct!
 xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
-  xml.title "Blog Name"
-  xml.subtitle "Blog subtitle"
-  xml.id "http://blog.url.com/"
-  xml.link "href" => "http://blog.url.com/"
-  xml.link "href" => "http://blog.url.com/feed.xml", "rel" => "self"
+  xml.title "Rocky Jaiswal"
+  xml.subtitle "Musings of an agile developer"
+  xml.id "http://rockyj.in/"
+  xml.link "href" => "http://rockyj.in/"
+  xml.link "href" => "http://rockyj.in//feed.xml", "rel" => "self"
   xml.updated data.blog.articles.first.date.to_time.iso8601
   xml.author { xml.name "Blog Author" }
 
