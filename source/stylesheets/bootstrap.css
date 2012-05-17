@@ -154,7 +154,7 @@ textarea {
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 18px;
   color: #333333;
   background-color: #CCCCCC;
@@ -211,6 +211,7 @@ a:hover {
 
 .span9 {
   width: 700px;
+  text-shadow: #F0F0F0 0px 1px 0px;
 }
 
 .span8 {
@@ -235,6 +236,7 @@ a:hover {
 
 .span3 {
   width: 220px;
+  text-shadow: #F0F0F0 0px 1px 0px;
 }
 
 .span2 {
@@ -420,8 +422,9 @@ a:hover {
 p {
   margin: 0 0 9px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 18px;
+
 }
 
 p small {

@@ -3,6 +3,7 @@
   padding: 5px;
   margin-bottom: 10px;
   border: 1px solid #000000;
+  text-shadow: none !important;
 }
 
 .highlighted a:hover {
