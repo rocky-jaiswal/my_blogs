@@ -45,7 +45,7 @@
 .banner h1 {
   margin-bottom: 0;
   margin-left: 50px;
-  font-size: 3.3em;
+  font-size: 3.1em;
   line-height: 1;
   letter-spacing: -1px;
   color: inherit;
@@ -56,4 +56,8 @@
   font-size: 18px;
   font-weight: 200;
   line-height: 27px;
+}
+
+.banner a:hover {
+  text-decoration: none !important;
 }
