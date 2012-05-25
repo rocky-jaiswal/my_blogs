@@ -82,13 +82,14 @@ Now lets use Backbone to rewrite this code. With Backbone we get a MVC kind of s
         });
 
         var SelectionView = Backbone.View.extend({ //Line 19
+          el : $('#user-selection'),
           render: function() {
-            $('#user-selection').html("You Selected : " + this.model.get('name')); //Line 21
+            $(this.el).html("You Selected : " + this.model.get('name')); //Line 22
             return this;
           },
         });
 
-        var users = new UserList(); //Line 26
+        var users = new UserList(); //Lin 26
         users.fetch({async: false});
         var userNames = users.pluck("name");
 
@@ -103,6 +104,7 @@ Now lets use Backbone to rewrite this code. With Backbone we get a MVC kind of s
         });
       });
     </script>
+
 
 Don't worry if this looks too complicated. In 5 minutes, you will understand everything.
 
@@ -124,9 +126,9 @@ Firstly, there is no change in HTML. I have delibrately kept it that way.
 
 - Line 37 - We render our view.
 
-Let's now analyze our render function on line 21. this.model.get('name') will give you the selected model's name. We create a string by appending it with "You Selected : ".
+Let's now analyze our render function on line 22. this.model.get('name') will give you the selected model's name. We create a string by appending it with "You Selected : ".
 
-We all know what $("#some-id").html() will do. So what is "this.el"? Basically, all Backbone Views have an el property which is the DOM element it is binded to. If not specified it is a 'div'. We could have also done away appending html to $(this.el) but it's ok. 
+We all know what $("#some-id").html() will do. So what is "el"? Basically, all Backbone Views have an el property which is the DOM element it is binded to. If not specified it is a 'div'. So we have binded our View to a div using a jQuery selector.
 
 *Talking of views we have manually set a string to be our HTML, this is ok for now but for more HTML Backbone also provides you with "templates" that can be compiled and added to your Views.
 
