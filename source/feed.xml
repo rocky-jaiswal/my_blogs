@@ -2442,103 +2442,136 @@ We now can play with the rules inside the Ruby script as much as we want. Anyone
   </entry>
   <entry>
     <title>Big bad projects</title>
-    <link rel="http://rockyj.in" href="/2011/03/11/2011-03-11-big-bad-projects.html"/>
-    <id>http://rockyj.in/2011/03/11/2011-03-11-big-bad-projects.html</id>
+    <link rel="http://rockyj.in" href="/2011/03/11/big-bad-projects.html"/>
+    <id>http://rockyj.in/2011/03/11/big-bad-projects.html</id>
     <published>2011-03-11T00:00:00+05:30</published>
     <updated>2011-03-11T00:00:00+05:30</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;A long time back (when I had more hair on my head), one of my managers remarked - &amp;#8220;You know guys, I just met an old friend of mine who now works for _____ as a Project Manager and he said that he delivered a 18 months fixed price project right on time and right on schedule. We need to have the same capabilities as ____.&amp;#8221;&lt;/p&gt;
+    <summary type="html">&lt;p&gt;A long time back (when I had more hair on my head), one of my managers remarked - &amp;#8220;You know guys, I just met an old friend of mine who now works for ABC Corp as a Project Manager and he said that he delivered a 18 months fixed price project right on time and right on schedule. We need to have the same capabilities as ABC Corp.&amp;#8221;&lt;/p&gt;
 
 &lt;p&gt;I sat dumbfounded, I wanted to scream out &amp;#8220;He was just lucky or he was lying or you should talk to the team members who worked in that team&amp;#8221;, but I didn&amp;#8217;t say anything because pesky &amp;#8220;juniors&amp;#8221; aren&amp;#8217;t looked upon very nicely in hierarchical organizations.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;A long time back (when I had more hair on my head), one of my managers remarked - &amp;#8220;You know guys, I just met an old friend of mine who now works for _____ as a Project Manager and he said that he delivered a 18 months fixed price project right on time and right on schedule. We need to have the same capabilities as ____.&amp;#8221;&lt;/p&gt;
+    <content type="html">&lt;p&gt;A long time back (when I had more hair on my head), one of my managers remarked - &amp;#8220;You know guys, I just met an old friend of mine who now works for ABC Corp as a Project Manager and he said that he delivered a 18 months fixed price project right on time and right on schedule. We need to have the same capabilities as ABC Corp.&amp;#8221;&lt;/p&gt;
 
 &lt;p&gt;I sat dumbfounded, I wanted to scream out &amp;#8220;He was just lucky or he was lying or you should talk to the team members who worked in that team&amp;#8221;, but I didn&amp;#8217;t say anything because pesky &amp;#8220;juniors&amp;#8221; aren&amp;#8217;t looked upon very nicely in hierarchical organizations.&lt;/p&gt;
 
 &lt;p&gt;I now imagine myself having a conversation with the same manager in that same room, which goes something like this.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Lets play a game. Please indulge me. Can you tell me in exact seconds, the time you will take to reach the nearest door in this room.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Yes, around 10 seconds.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Good. How can you say that?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Coz its 15 feet and I think I can cover 15 feet in 10 seconds.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Fair enough. Now can you tell me the time it will take for you to reach London from Delhi in exact number of seconds. Forget seconds, tell me in minutes.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - (after a pause) &amp;quot;Well, depending on flight time and the distance to airport approx 600 minutes.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;I have to tell you that even if there is one minute of delay, there is a huge penalty and what if your taxi is late or the flight is delayed ?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;One cannot say for sure. In fact, no one can tell you with exact certainty because too many un-predictable things can happen.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;How many times have you been to London?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;More than 8 times .&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;So you cannot say for certainty the exact time you will take for something which you have done for more than 8 times. But you could tell me the exact time you will take to reach for a nearby door. Why is that?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Coz I can see the door. Geez, are you thick or something.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Yes, I have always been a bit thick. But let us apply this analogy to software. You want me to tell you for sure the exact time it will take for me to develop a software which is unique in its own way and which no-one has developed before. But you yourself cannot tell me the exact time you will take to reach London although you have done it more than 8 times.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Hmmm ... what are you getting at?&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;What I am saying is, as you increase the distance or time horizon, uncertainty increases.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;That is quite true.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Yes, so what I can only say with a fair degree of certainty is where we will be in this project after 1-2 weeks.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;You maybe right, but that is not how it works. The customer asks how long will it take to build the whole thing.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Why do think they do that?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;I guess they feel safe this way, they can allocate a budget to it.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Again, I am a bit thick. So a customer looks at a project, lets say a Reporting System and thinks this work should take 6 months to build for 4 people ergo the time is 6 months and budget is $10,000 or something like that. Do they have the expertise to make this call?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Hmmm .. maybe they have the expertise or maybe they don&amp;#39;t and sometimes they even ask us to do this.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;I am not getting it, why do they do this every single time if it is so error prone and they do not trust even themselves.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Coz maybe they feel safe.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Ok. So they allocate a budget and outsource to project to someone, asking them to complete it in 6 months or give a penalty. They can sleep easy this way.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Yes. I think that&amp;#39;s it!&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;But if I say, I will give it my best and give you a commitment for only the next two weeks of work and see how it goes from there. What would a customer say.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;I don&amp;#39;t think he would agree.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Why?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Coz he doesn&amp;#39;t know when his project will end ?&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;But I am working hard and in the best way I can. Which is in no way different than the 6 months commitment I make.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;But he wants a deadline, what if you are slacking?&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Bingo!! Its because the work is done somewhere in a different location and you cannot trust someone is why you want deadlines.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Yes, I guess that is what outsourcing is about.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;But if you trust me as your partner who is fully committed to the project, does the two week commitment sound good.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Yes. I think so. But I still don&amp;#39;t buy it. We have delivered many projects on time after giving a long term commitment.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;We all know how that happens. People spend nights in office and quality goes for a toss. Giving the same international travel analogy you put a gun to the pilots head and ask him to fly fast coz you made a commitment to reach London in 10 hours. Except you cannot do that on a plane but you can do it with us developers. Geez... and then people complain about the high rate of software project failures and late bug discovery.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Hmmm...&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;If I say there is a clause that no-one will work beyond 9 hours, how many of your so called successful commitments be successful ?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Not a lot.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Just because you can do it, doesn&amp;#39;t mean you should.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;I kinda agree, I remember my days when I had to spend 3 nights in the office to deliver a project and I can tell you the code we wrote was shit.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;And yet it continues. Why is that?&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;You are irritating me. I say its again its because the customer wants a deadline. He cannot give us a free hand to deliver the project when we say its ready. They don&amp;#39;t trust us that much.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Yes. And that my friend is the problem. Trust. If you can monitor each and every second of my day I guess you would be very comfortable with the 2 week work schedule, lets call it a Sprint.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Yes. Good idea.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;If I give you a daily status report, put cameras in my working area and give you a working software demo every two weeks this trust can be built.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;Sounds good. Maybe we can try it.&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;Yes, lets build that trust by delivering high quality software regularly without making the team slog and lets make our customers really happy.&amp;quot;
-&amp;lt;strong&amp;gt;Manager&amp;lt;/strong&amp;gt; - &amp;quot;And what&amp;#39;s there in it for the customer apart from your so called high quality?&amp;quot;
-&amp;lt;strong&amp;gt;Me&amp;lt;/strong&amp;gt; - &amp;quot;We hear a lot of time, why isn&amp;#39;t my software as reliable as my car or as reliable as the house I live in. I think the answer lies here. If I ask a car maker to make a car for me no matter what in 6 months or I ask a builder to build my house, flood or rain in 3 months before a brick is laid, I wouldn&amp;#39;t be so comfortable in that car or house later. Software programming is even harder, there are new technologies, the user keeps changing his mind and numerous other un-certainties. Maybe if we follow this model, more software projects would be successful. Lets give it a shot.&amp;quot;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Lets play a game. Please indulge me. Can you tell me in exact seconds, the time you will take to reach the nearest door in this room.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Yes, around 10 seconds.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Good. How can you say that?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Coz its 15 feet and I think I can cover 15 feet in 10 seconds.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Fair enough. Now can you tell me the time it will take for you to reach London from Delhi in exact number of seconds. Forget seconds, tell me in minutes.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - (after a pause) &amp;#8220;Well, depending on flight time and the distance to airport approx 600 minutes.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;I have to tell you that even if there is one minute of delay, there is a huge penalty and what if your taxi is late or the flight is delayed ?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;One cannot say for sure. In fact, no one can tell you with exact certainty because too many un-predictable things can happen.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;How many times have you been to London?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;More than 8 times .&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;So you cannot say for certainty the exact time you will take for something which you have done for more than 8 times. But you could tell me the exact time you will take to reach for a nearby door. Why is that?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Coz I can see the door. Geez, are you thick or something.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Yes, I have always been a bit thick. But let us apply this analogy to software. You want me to tell you for sure the exact time it will take for me to develop a software which is unique in its own way and which no-one has developed before. But you yourself cannot tell me the exact time you will take to reach London although you have done it more than 8 times.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Hmmm &amp;#8230; what are you getting at?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;What I am saying is, as you increase the distance or time horizon, uncertainty increases.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;That is quite true.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Yes, so what I can only say with a fair degree of certainty is where we will be in this project after 1-2 weeks.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;You maybe right, but that is not how it works. The customer asks how long will it take to build the whole thing.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Why do think they do that?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;I guess they feel safe this way, they can allocate a budget to it.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Again, I am a bit thick. So a customer looks at a project, lets say a Reporting System and thinks this work should take 6 months to build for 4 people ergo the time is 6 months and budget is $10,000 or something like that. Do they have the expertise to make this call?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Hmmm .. maybe they have the expertise or maybe they don&amp;#8217;t and sometimes they even ask us to do this.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;I am not getting it, why do they do this every single time if it is so error prone and they do not trust even themselves.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Coz maybe they feel safe.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Ok. So they allocate a budget and outsource to project to someone, asking them to complete it in 6 months or give a penalty. They can sleep easy this way.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Yes. I think that&amp;#8217;s it!&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;But if I say, I will give it my best and give you a commitment for only the next two weeks of work and see how it goes from there. What would a customer say.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;I don&amp;#8217;t think he would agree.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Why?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Coz he doesn&amp;#8217;t know when his project will end ?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;But I am working hard and in the best way I can. Which is in no way different than the 6 months commitment I make.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;But he wants a deadline, what if you are slacking?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Bingo!! Its because the work is done somewhere in a different location and you cannot trust someone is why you want deadlines.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Yes, I guess that is what outsourcing is about.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;But if you trust me as your partner who is fully committed to the project, does the two week commitment sound good.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Yes. I think so. But I still don&amp;#8217;t buy it. We have delivered many projects on time after giving a long term commitment.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;We all know how that happens. People spend nights in office and quality goes for a toss. Giving the same international travel analogy you put a gun to the pilots head and ask him to fly fast coz you made a commitment to reach London in 10 hours. Except you cannot do that on a plane but you can do it with us developers. Geez&amp;#8230; and then people complain about the high rate of software project failures and late bug discovery.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Hmmm&amp;#8230;&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;If I say there is a clause that no-one will work beyond 9 hours, how many of your so called successful commitments be successful ?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Not a lot.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Just because you can do it, doesn&amp;#8217;t mean you should.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;I kinda agree, I remember my days when I had to spend 3 nights in the office to deliver a project and I can tell you the code we wrote was shit.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;And yet it continues. Why is that?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;You are irritating me. I say its again its because the customer wants a deadline. He cannot give us a free hand to deliver the project when we say its ready. They don&amp;#8217;t trust us that much.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Yes. And that my friend is the problem. Trust. If you can monitor each and every second of my day I guess you would be very comfortable with the 2 week work schedule, lets call it a Sprint.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Yes. Good idea.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;If I give you a daily status report, put cameras in my working area and give you a working software demo every two weeks this trust can be built.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;Sounds good. Maybe we can try it.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;Yes, lets build that trust by delivering high quality software regularly without making the team slog and lets make our customers really happy.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Manager&lt;/strong&gt; - &amp;#8220;And what&amp;#8217;s there in it for the customer apart from your so called high quality?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Me&lt;/strong&gt; - &amp;#8220;We hear a lot of time, why isn&amp;#8217;t my software as reliable as my car or as reliable as the house I live in. I think the answer lies here. If I ask a car maker to make a car for me no matter what in 6 months or I ask a builder to build my house, flood or rain in 3 months before a brick is laid, I wouldn&amp;#8217;t be so comfortable in that car or house later. Software programming is even harder, there are new technologies, the user keeps changing his mind and numerous other un-certainties. Maybe if we follow this model, more software projects would be successful. Lets give it a shot.&amp;#8221;&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Working with Git</title>
-    <link rel="http://rockyj.in" href="/2011/03/11/2011-03-11-working-with-git.html"/>
-    <id>http://rockyj.in/2011/03/11/2011-03-11-working-with-git.html</id>
+    <link rel="http://rockyj.in" href="/2011/03/11/working-with-git.html"/>
+    <id>http://rockyj.in/2011/03/11/working-with-git.html</id>
     <published>2011-03-11T00:00:00+05:30</published>
     <updated>2011-03-11T00:00:00+05:30</updated>
     <author>
       <name>Article Author</name>
     </author>
     <summary type="html">&lt;p&gt;A video blog / screencast to help you get started with Git.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    &amp;lt;div id=&amp;quot;media&amp;quot;&amp;gt;
-                           &amp;lt;object type=&amp;quot;application/x-shockwave-flash&amp;quot; data=&amp;quot;http://xebee.xebia.in/wp-content/uploads/2010/10/git-1-perfect-1_controller.swf&amp;quot; width=&amp;quot;640&amp;quot; height=&amp;quot;379&amp;quot;&amp;gt;
-                        &amp;lt;param name=&amp;quot;quality&amp;quot; value=&amp;quot;best&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;bgcolor&amp;quot; value=&amp;quot;#1a1a1a&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;allowfullscreen&amp;quot; value=&amp;quot;true&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;scale&amp;quot; value=&amp;quot;showall&amp;quot; /&amp;gt;&lt;/code&gt;&lt;/pre&gt;</summary>
+&lt;object data='http://xebee.xebia.in/wp-content/uploads/2010/10/git-1-perfect-1_controller.swf' height='379' type='application/x-shockwave-flash' width='640' /&gt;</summary>
     <content type="html">&lt;p&gt;A video blog / screencast to help you get started with Git.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    &amp;lt;div id=&amp;quot;media&amp;quot;&amp;gt;
-                           &amp;lt;object type=&amp;quot;application/x-shockwave-flash&amp;quot; data=&amp;quot;http://xebee.xebia.in/wp-content/uploads/2010/10/git-1-perfect-1_controller.swf&amp;quot; width=&amp;quot;640&amp;quot; height=&amp;quot;379&amp;quot;&amp;gt;
-                        &amp;lt;param name=&amp;quot;quality&amp;quot; value=&amp;quot;best&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;bgcolor&amp;quot; value=&amp;quot;#1a1a1a&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;allowfullscreen&amp;quot; value=&amp;quot;true&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;scale&amp;quot; value=&amp;quot;showall&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;allowscriptaccess&amp;quot; value=&amp;quot;always&amp;quot; /&amp;gt;
-                        &amp;lt;param name=&amp;quot;flashvars&amp;quot; value=&amp;quot;autostart=false&amp;amp;thumb=http://xebee.xebia.in/wp-content/uploads/2010/10/FirstFrame.png&amp;amp;thumbscale=45&amp;amp;color=0x000000,0x000000&amp;quot; /&amp;gt;
-                    &amp;lt;/object&amp;gt;
-                &amp;lt;/object&amp;gt;
-            &amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;object data='http://xebee.xebia.in/wp-content/uploads/2010/10/git-1-perfect-1_controller.swf' height='379' type='application/x-shockwave-flash' width='640' /&gt;</content>
   </entry>
 </feed>
