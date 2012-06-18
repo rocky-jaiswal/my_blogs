@@ -89,7 +89,7 @@ Now lets use Backbone to rewrite this code. With Backbone we get a MVC kind of s
           },
         });
 
-        var users = new UserList(); //Lin 26
+        var users = new UserList(); //Line 26
         users.fetch({async: false});
         var userNames = users.pluck("name");
 
