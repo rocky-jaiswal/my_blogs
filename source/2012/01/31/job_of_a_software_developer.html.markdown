@@ -4,7 +4,7 @@ tags: Agile, Me
 date: 31/01/2012
 ---
 
-[This](http://www.quora.com/Engineering-Management/Why-are-software-development-task-estimations-regularly-off-by-a-factor-of-2-3) is a great post. It is the kinda post that makes you want to jump up and shout "Listen to this guy!".
+[This post here](http://www.quora.com/Engineering-Management/Why-are-software-development-task-estimations-regularly-off-by-a-factor-of-2-3) is really inspiring. It is the kinda post that makes you want to jump up and shout "Listen to this guy!".
 
 Software development is a weird job, I have been doing it for almost 10 years and everyday is completely new. Although now I feel, most of the problems in software development can be broken down into these categories -
 - Communication
