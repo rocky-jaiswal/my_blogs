@@ -487,7 +487,7 @@ puts test_java.stringify({&amp;#39;name&amp;#39; =&amp;gt; &amp;#39;rocky&amp;#3
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;&lt;a href='http://www.quora.com/Engineering-Management/Why-are-software-development-task-estimations-regularly-off-by-a-factor-of-2-3'&gt;This&lt;/a&gt; is a great post. It is the kinda post that makes you want to jump up and shout &amp;#8220;Listen to this guy!&amp;#8221;.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;&lt;a href='http://www.quora.com/Engineering-Management/Why-are-software-development-task-estimations-regularly-off-by-a-factor-of-2-3'&gt;This post here&lt;/a&gt; is really inspiring. It is the kinda post that makes you want to jump up and shout &amp;#8220;Listen to this guy!&amp;#8221;.&lt;/p&gt;
 
 &lt;p&gt;Software development is a weird job, I have been doing it for almost 10 years and everyday is completely new. Although now I feel, most of the problems in software development can be broken down into these categories -&lt;/p&gt;
 
@@ -498,7 +498,7 @@ puts test_java.stringify({&amp;#39;name&amp;#39; =&amp;gt; &amp;#39;rocky&amp;#3
 
 &lt;li&gt;Requirement Management&lt;/li&gt;
 &lt;/ul&gt;</summary>
-    <content type="html">&lt;p&gt;&lt;a href='http://www.quora.com/Engineering-Management/Why-are-software-development-task-estimations-regularly-off-by-a-factor-of-2-3'&gt;This&lt;/a&gt; is a great post. It is the kinda post that makes you want to jump up and shout &amp;#8220;Listen to this guy!&amp;#8221;.&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;a href='http://www.quora.com/Engineering-Management/Why-are-software-development-task-estimations-regularly-off-by-a-factor-of-2-3'&gt;This post here&lt;/a&gt; is really inspiring. It is the kinda post that makes you want to jump up and shout &amp;#8220;Listen to this guy!&amp;#8221;.&lt;/p&gt;
 
 &lt;p&gt;Software development is a weird job, I have been doing it for almost 10 years and everyday is completely new. Although now I feel, most of the problems in software development can be broken down into these categories -&lt;/p&gt;
 
@@ -516,7 +516,7 @@ puts test_java.stringify({&amp;#39;name&amp;#39; =&amp;gt; &amp;#39;rocky&amp;#3
 
 &lt;p&gt;Its amazing that how combination of these problems baffles every organization to this date. I saw many failed projects in the beginning of my career but when I discovered Agile, Scrum and XP it knocked me off. It seemed to me that everyone faced these problems and there were some very smart people who sat down and discussed these problems and came up with some recommendations. I followed these recommendations to the full and did a few successful projects.&lt;/p&gt;
 
-&lt;p&gt;With Agile now gaining acceptance, I now see another set of problems. People who follow Agile but don&amp;#8217;t follow the full set of recommendations, for example working in Sprints but having Sprints without goals. Or working in Sprints but changing users stories everyday. Then there is the new breed of software developers who have not done any other methodology except Scrum and they feel Scrum itself is bloated. &amp;#8220;Who needs a planning meeting&amp;#8221; they will say. And there are Project Managers who have adopted Scrum because it is the &amp;#8220;in&amp;#8221; thing these days like some PMI certification read from books but in their heart of hearts they still consider software&#160;development&#160;as a command and control task done by &amp;#8220;resources&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;With Agile now gaining acceptance, I now see another set of problems. People who follow Agile but don&amp;#8217;t follow the full set of recommendations, for example working in Sprints but having Sprints without goals. Or working in Sprints but changing users stories everyday. Then there is the new breed of software developers who have not done any other methodology except Scrum and they feel Scrum itself is bloated. &amp;#8220;Who needs a planning meeting&amp;#8221; they will say. And there are Project Managers who have adopted Scrum because it is the &amp;#8220;in&amp;#8221; thing these days like some PMI certification read from books but in their heart of hearts they still consider software development as a command and control task done by &amp;#8220;resources&amp;#8221;.&lt;/p&gt;
 
 &lt;p&gt;So amidst this all doom and gloom, what does the developer do? I have thought about it for days and there are only two things that we need to do -&lt;/p&gt;
 
@@ -526,7 +526,7 @@ puts test_java.stringify({&amp;#39;name&amp;#39; =&amp;gt; &amp;#39;rocky&amp;#3
 &lt;li&gt;Plan and meet the Sprint goals.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;For me, if a developer does these two things and these two things only he can&#160;hold his head high and go home&#160;even if everything else falls apart. Period.&lt;/p&gt;</content>
+&lt;p&gt;For me, if a developer does these two things and these two things only he can hold his head high and go home even if everything else falls apart. Period.&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>A weekend with CouchDB, Solr and Torquebox</title>
@@ -906,8 +906,8 @@ puts users.sort(&amp;amp;sorter)&lt;/code&gt;&lt;/pre&gt;
   </entry>
   <entry>
     <title>Using Spring for Scheduling Tasks</title>
-    <link rel="http://rockyj.in" href="/2011/06/29/2011-06-29-using-spring-for-scheduling-tasks.html"/>
-    <id>http://rockyj.in/2011/06/29/2011-06-29-using-spring-for-scheduling-tasks.html</id>
+    <link rel="http://rockyj.in" href="/2011/06/29/using-spring-for-scheduling-tasks.html"/>
+    <id>http://rockyj.in/2011/06/29/using-spring-for-scheduling-tasks.html</id>
     <published>2011-06-29T00:00:00+05:30</published>
     <updated>2011-06-29T00:00:00+05:30</updated>
     <author>
@@ -915,102 +915,111 @@ puts users.sort(&amp;amp;sorter)&lt;/code&gt;&lt;/pre&gt;
     </author>
     <summary type="html">&lt;p&gt;One of the common requirements we face as developers is to do things in a scheduled manner. For example, check database for change every 10 mins and do something if a change has occurred or send emails at a specific time. The Spring documentation is a bit thin on this one although Spring does a fantastic job of scheduling things. So in this blog I am going explain how I used Spring for scheduling things. Please note I am using Spring 3.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    &amp;lt;strong&amp;gt;First of all here is my Spring application context file to enable annotations etc.&amp;lt;/strong&amp;gt;&lt;/code&gt;&lt;/pre&gt;</summary>
+&lt;p&gt;&lt;strong&gt;First of all here is my Spring application context file to enable annotations etc.&lt;/strong&gt;&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;One of the common requirements we face as developers is to do things in a scheduled manner. For example, check database for change every 10 mins and do something if a change has occurred or send emails at a specific time. The Spring documentation is a bit thin on this one although Spring does a fantastic job of scheduling things. So in this blog I am going explain how I used Spring for scheduling things. Please note I am using Spring 3.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    &amp;lt;strong&amp;gt;First of all here is my Spring application context file to enable annotations etc.&amp;lt;/strong&amp;gt;
-    &amp;lt;beans xmlns=&amp;quot;http://www.springframework.org/schema/beans&amp;quot;
-    	xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xmlns:p=&amp;quot;http://www.springframework.org/schema/p&amp;quot;
-    	xmlns:context=&amp;quot;http://www.springframework.org/schema/context&amp;quot; xmlns:tx=&amp;quot;http://www.springframework.org/schema/tx&amp;quot;
-    	xmlns:security=&amp;quot;http://www.springframework.org/schema/security&amp;quot;
-    	xsi:schemaLocation=&amp;quot;
+&lt;p&gt;&lt;strong&gt;First of all here is my Spring application context file to enable annotations etc.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;beans xmlns=&amp;quot;http://www.springframework.org/schema/beans&amp;quot;
+    xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xmlns:p=&amp;quot;http://www.springframework.org/schema/p&amp;quot;
+    xmlns:context=&amp;quot;http://www.springframework.org/schema/context&amp;quot; xmlns:tx=&amp;quot;http://www.springframework.org/schema/tx&amp;quot;
+    xmlns:security=&amp;quot;http://www.springframework.org/schema/security&amp;quot;
+    xsi:schemaLocation=&amp;quot;
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.3.xsd&amp;quot;&amp;gt;
 
-        &amp;lt;context:component-scan base-package=&amp;quot;in.rockyj&amp;quot; /&amp;gt;
+    &amp;lt;context:component-scan base-package=&amp;quot;in.rockyj&amp;quot; /&amp;gt;
         
-        &amp;lt;context:property-placeholder location=&amp;quot;classpath:/dev.app.properties&amp;quot;/&amp;gt;
+    &amp;lt;context:property-placeholder location=&amp;quot;classpath:/dev.app.properties&amp;quot;/&amp;gt;
         
-        &amp;lt;bean id=&amp;quot;threadPoolTaskScheduler&amp;quot; class=&amp;quot;org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler&amp;quot;&amp;gt;
-            &amp;lt;property name=&amp;quot;poolSize&amp;quot; value=&amp;quot;3&amp;quot; /&amp;gt;
-        &amp;lt;/bean&amp;gt;
+    &amp;lt;bean id=&amp;quot;threadPoolTaskScheduler&amp;quot; class=&amp;quot;org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler&amp;quot;&amp;gt;
+        &amp;lt;property name=&amp;quot;poolSize&amp;quot; value=&amp;quot;3&amp;quot; /&amp;gt;
+    &amp;lt;/bean&amp;gt;
 
-    &amp;lt;/beans&amp;gt;
+&amp;lt;/beans&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 
-    Here I am doing three things basically - 
-    1. Setting up a component scan for handling Spring annotations 
-    2. Informing Spring about a properties file 
-    3. Setting up a bean - ThreadPoolTaskScheduler which is a Spring provided class for scheduling stuff.
+&lt;p&gt;Here I am doing three things basically -&lt;/p&gt;
 
-    The ThreadPoolTaskScheduler a Spring provided class that handles the scheduling logic for us. All it needs is a thread pool size which defaults to 1. This class provides various methods to schedule tasks, for example scheduleWithFixedDelay method takes two parameters - a runnable task and the delay after which the task should be run. For example see code below -
+&lt;ol&gt;
+&lt;li&gt;Setting up a component scan for handling Spring annotations&lt;/li&gt;
 
-    &amp;lt;strong&amp;gt;in my properties file there is only one entry -&amp;lt;/strong&amp;gt;
-    service.pollTime=10000
+&lt;li&gt;Informing Spring about a properties file&lt;/li&gt;
 
-    &amp;lt;strong&amp;gt;My main Scheduler class -&amp;lt;/strong&amp;gt;
-    @Component
-    public class Scheduler {
+&lt;li&gt;Setting up a bean - ThreadPoolTaskScheduler which is a Spring provided class for scheduling stuff.&lt;/li&gt;
+&lt;/ol&gt;
 
-        @Resource
-        ThreadPoolTaskScheduler threadPoolTaskScheduler;
+&lt;p&gt;The ThreadPoolTaskScheduler a Spring provided class that handles the scheduling logic for us. All it needs is a thread pool size which defaults to 1. This class provides various methods to schedule tasks, for example scheduleWithFixedDelay method takes two parameters - a runnable task and the delay after which the task should be run. For example see code below -&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;in my properties file there is only one entry -&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service.pollTime=10000&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;My main Scheduler class -&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@Component
+public class Scheduler {
+
+    @Resource
+    ThreadPoolTaskScheduler threadPoolTaskScheduler;
         
-        @Resource
-        Worker worker;
+    @Resource
+    Worker worker;
         
-        @Value(&amp;quot;${service.pollTime}&amp;quot;)
-        Long servicePollTime;
+    @Value(&amp;quot;${service.pollTime}&amp;quot;)
+    Long servicePollTime;
         
-        /**
-         * Schedule the run of the worker
-         */
-        public void schedule() {
-            threadPoolTaskScheduler.scheduleWithFixedDelay(worker, servicePollTime);
-        }
+    /**
+     * Schedule the run of the worker
+    */
+    public void schedule() {
+        threadPoolTaskScheduler.scheduleWithFixedDelay(worker, servicePollTime);
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;My Worker class -&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@Component
+public class Worker implements Runnable {
+        
+    @Override
+    public void run() {
+        //Main task goes here - For example just a console output
+        System.out.println(Thread.currentThread().getName() + &amp;quot; working ... Time - &amp;quot; + new Date());
+    }
+        
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;And finally my main class -&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class App {
+
+    /**
+     * Main method to run the application
+     */
+    public static void main(String[] args) {
+        ApplicationContext context = loadSpringContext();
+        Scheduler scheduler = context.getBean(Scheduler.class);
+        scheduler.schedule();
     }
 
-    &amp;lt;strong&amp;gt;My Worker class -&amp;lt;/strong&amp;gt;
-    @Component
-    public class Worker implements Runnable {
-        
-        @Override
-        public void run() {
-            //Main task goes here - For example just a console output
-            System.out.println(Thread.currentThread().getName() + &amp;quot; working ... Time - &amp;quot; + new Date());
-        }
-        
+    private static ApplicationContext loadSpringContext() {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(&amp;quot;classpath*:applicationContext.xml&amp;quot;);
+        context.start();
+        return context;
     }
+}&lt;/code&gt;&lt;/pre&gt;
 
-    &amp;lt;strong&amp;gt;And finally my main class -&amp;lt;/strong&amp;gt;
-    public class App {
+&lt;p&gt;&lt;strong&gt;Which gives me the output -&lt;/strong&gt;&lt;/p&gt;
 
-        /**
-         * Main method to run the application
-         */
-        public static void main(String[] args) {
-            ApplicationContext context = loadSpringContext();
-            Scheduler scheduler = context.getBean(Scheduler.class);
-            scheduler.schedule();
-        }
+&lt;pre&gt;&lt;code&gt;threadPoolTaskScheduler-1 working ... Time - Wed Jun 29 13:02:17 IST 2011
+threadPoolTaskScheduler-1 working ... Time - Wed Jun 29 13:02:27 IST 2011
+threadPoolTaskScheduler-1 working ... Time - Wed Jun 29 13:02:37 IST 2011
+...&lt;/code&gt;&lt;/pre&gt;
 
-
-        private static ApplicationContext loadSpringContext() {
-            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(&amp;quot;classpath*:applicationContext.xml&amp;quot;);
-            context.start();
-            return context;
-        }
-    }
-
-    &amp;lt;strong&amp;gt;Which gives me the output -&amp;lt;/strong&amp;gt;
-    threadPoolTaskScheduler-1 working ... Time - Wed Jun 29 13:02:17 IST 2011
-    threadPoolTaskScheduler-1 working ... Time - Wed Jun 29 13:02:27 IST 2011
-    threadPoolTaskScheduler-1 working ... Time - Wed Jun 29 13:02:37 IST 2011
-    ...
-
-
-    This is pretty self explanatory stuff. The main advantage here is that I have not cluttered my code with any Scheduling logic, the classes are loosely coupled and everything is 100% testable. :)&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;p&gt;This is pretty self explanatory stuff. The main advantage here is that I have not cluttered my code with any Scheduling logic, the classes are loosely coupled and everything is 100% testable. :)&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Excel manipulation and testing in Java</title>
@@ -1209,6 +1218,18 @@ Thats it! Go crazy with your new Oracle Server and Client.&lt;/code&gt;&lt;/pre&
     p.s. This is one of my gripes with Kanban as it never gives me this happy feeling so I never recommend it.&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
+    <title>Thoughts of the week 24 - 30 April</title>
+    <link rel="http://rockyj.in" href="/2011/05/02/2011-05-02-thoughts-of-the-week-24-30-april.html"/>
+    <id>http://rockyj.in/2011/05/02/2011-05-02-thoughts-of-the-week-24-30-april.html</id>
+    <published>2011-05-02T00:00:00+05:30</published>
+    <updated>2011-05-02T00:00:00+05:30</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;Busy busy last week. But still got a lot of time to think on my way back home. &lt;li&gt;Only two things that you should aim for - happy teams and delighted customers. Choose any process that gives you these. Why I favor Agile? Because I have seen it deliver these two things time and time again.&lt;/li&gt; &lt;li&gt;The dictionary meaning of estimate - es·ti·mate/-mit/ - Noun: An approximate calculation or judgment of the value, number, quantity, or extent of something. Wonder when the IT industry turned estimates to contracts??&lt;/li&gt;&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Busy busy last week. But still got a lot of time to think on my way back home. &lt;li&gt;Only two things that you should aim for - happy teams and delighted customers. Choose any process that gives you these. Why I favor Agile? Because I have seen it deliver these two things time and time again.&lt;/li&gt; &lt;li&gt;The dictionary meaning of estimate - es·ti·mate/-mit/ - Noun: An approximate calculation or judgment of the value, number, quantity, or extent of something. Wonder when the IT industry turned estimates to contracts??&lt;/li&gt; &lt;li&gt;If I were to hire me, what would I pay myself? Crazy thought.&lt;/li&gt; &lt;li&gt;Need to read this daily - &lt;a href='http://mmiika.wordpress.com/oo-design-principles/' title='http://mmiika.wordpress.com/oo-design-principles/'&gt;http://mmiika.wordpress.com/oo-design-principles/&lt;/a&gt;&lt;/li&gt; &lt;li&gt;The organization hired you for a reason. So while being flexible, one should not change his/her principles to fit in the organization. Because what makes you special is your uniqueness :).&lt;/li&gt; &lt;li&gt;Practical never changed the world (oldie but a goldie).&lt;/li&gt; &lt;li&gt;It takes a lot of effort to keep things simple. Making complex solutions is way too easy.&lt;/li&gt; &lt;li&gt;Joke between Indian developers - Developer 1 : "You know, I went to XYZ country and the office was empty by 6 PM". Everyone else laughs their socks off. I don't know whether to smile or frown.&lt;/li&gt; &lt;li&gt;I think I have have turned a corner. I now think what is the minimum amount of money I need, I plan to have no mortgage/home loan, pay off my car loan and see what is the minimum salary I can get by. Then I can concentrate on other important things.&lt;/li&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <title>Views from across the table</title>
     <link rel="http://rockyj.in" href="/2011/05/02/2011-05-02-views-from-across-the-table.html"/>
     <id>http://rockyj.in/2011/05/02/2011-05-02-views-from-across-the-table.html</id>
@@ -1219,34 +1240,22 @@ Thats it! Go crazy with your new Oracle Server and Client.&lt;/code&gt;&lt;/pre&
     </author>
     <summary type="html">&lt;p&gt;A few weeks back, I had the unique opportunity to visit my old employer, this time however as a customer. It was good to hear some old terms which I last heard when I worked there. It also got me thinking that, throughout my career I worked as a software developer who developed software for other clients and now here I was looking at a bunch of inquisitive developers asking me questions.&lt;/p&gt;
 
-&lt;p&gt;The tables had turned, from a service provider + &#160;developer, I had now turned into a customer + developer. This unique experience also made me think, what can I learn from it. If I am the customer, what do I look for in my consultants. Or&#160;conversely&#160;how could I have be a better consultant + developer based on my new found position.&lt;/p&gt;</summary>
+&lt;p&gt;The tables had turned, from a service provider +  developer, I had now turned into a customer + developer. This unique experience also made me think, what can I learn from it. If I am the customer, what do I look for in my consultants. Or conversely how could I have be a better consultant + developer based on my new found position.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;A few weeks back, I had the unique opportunity to visit my old employer, this time however as a customer. It was good to hear some old terms which I last heard when I worked there. It also got me thinking that, throughout my career I worked as a software developer who developed software for other clients and now here I was looking at a bunch of inquisitive developers asking me questions.&lt;/p&gt;
 
-&lt;p&gt;The tables had turned, from a service provider + &#160;developer, I had now turned into a customer + developer. This unique experience also made me think, what can I learn from it. If I am the customer, what do I look for in my consultants. Or&#160;conversely&#160;how could I have be a better consultant + developer based on my new found position.&lt;/p&gt;
+&lt;p&gt;The tables had turned, from a service provider +  developer, I had now turned into a customer + developer. This unique experience also made me think, what can I learn from it. If I am the customer, what do I look for in my consultants. Or conversely how could I have be a better consultant + developer based on my new found position.&lt;/p&gt;
 
 &lt;p&gt;So here goes, these are the qualities I believe every customer would appreciate -&lt;/p&gt;
 &lt;strong&gt;Have no fear -&lt;/strong&gt;
-&lt;p&gt;No&#160;customer&#160;would&#160;appreciate&#160;that the developer on the other side never expresses his opinion or always agrees to what he says. This makes the customer feel that the team is not thinking on its own and his decisions can make or break the project. I myself have been&#160;guilty&#160;of this, I just sat through a whole lot of meetings just listening and never expressing my opinion as I thought &amp;#8220;Who would care about what I say, I&amp;#8217;ll just do it the way they tell me to&amp;#8221;. Or &amp;#8220;I am way too junior to express my opinions, better shut up and listen&amp;#8221;. However, when you are on the other side of the table you want all sorts of inputs / validations / questions to see if you are going in the right direction.&lt;/p&gt;
+&lt;p&gt;No customer would appreciate that the developer on the other side never expresses his opinion or always agrees to what he says. This makes the customer feel that the team is not thinking on its own and his decisions can make or break the project. I myself have been guilty of this, I just sat through a whole lot of meetings just listening and never expressing my opinion as I thought &amp;#8220;Who would care about what I say, I&amp;#8217;ll just do it the way they tell me to&amp;#8221;. Or &amp;#8220;I am way too junior to express my opinions, better shut up and listen&amp;#8221;. However, when you are on the other side of the table you want all sorts of inputs / validations / questions to see if you are going in the right direction.&lt;/p&gt;
 &lt;strong&gt;Express your opinion -&lt;/strong&gt;
 &lt;p&gt;Kind of extension to the point above. Any customer would want to hear to how a developer plans to achieve a solution. There may be a obvious solution but if some alternate ways exist it is best to discuss them. If your opinion is not in line with the customer, still go ahead and express it. It would be a huge relief instead of anything else to the customer as he/she will understand that this team is thinking about this project and wants to do it in a best possible manner as per their knowledge. If differences exist between the two parties, they can be mutually resolved through discussion and analysis.&lt;/p&gt;
 &lt;strong&gt;Communicate clearly and precisely -&lt;/strong&gt;
-&lt;p&gt;This is a cliche and every developer is told to do this. Yet, it is&#160;surprising that so few of us actually practice it. When I was over the phone and the customer asked a question, me and my team would sometimes nod as that&amp;#8217;s what Indians do but surprise surprise the customer could not see the&#160;vigorous&#160;&#160;shake of heads over the phone. Another example is when a customer asks a question, we the developers first tried to whisper a solution among ourselves and before speaking it over the phone but when you are on the other side of the phone you wonder if anyone even listened to your question. Personally I am trying to implement an idea to speak over the phone&#160;whatever I am doing like - I am clicking on the link right now&amp;#8221; or &amp;#8220;I am thinking about a possible solution&amp;#8221;. Remember keep the&#160;customer&#160;engaged and informed.&lt;/p&gt;
+&lt;p&gt;This is a cliche and every developer is told to do this. Yet, it is surprising that so few of us actually practice it. When I was over the phone and the customer asked a question, me and my team would sometimes nod as that&amp;#8217;s what Indians do but surprise surprise the customer could not see the vigorous  shake of heads over the phone. Another example is when a customer asks a question, we the developers first tried to whisper a solution among ourselves and before speaking it over the phone but when you are on the other side of the phone you wonder if anyone even listened to your question. Personally I am trying to implement an idea to speak over the phone whatever I am doing like - I am clicking on the link right now&amp;#8221; or &amp;#8220;I am thinking about a possible solution&amp;#8221;. Remember keep the customer engaged and informed.&lt;/p&gt;
 &lt;strong&gt;Build trust -&lt;/strong&gt;
-&lt;p&gt;This is one of the most&#160;important&#160;things. In fact, most people will say that this is the most important thing between a customer and a consultant. But how do you build trust specially in a new&#160;engagement. &#160;The only way to do this according to me is to showcase progress regularly, give and get frequent feedback and share your status at the start of the day and at its end. This is where Agile can help, with sprints, daily standups and sprint review you have all the necessary tools available with you. Feel free to talk more and more in the first few weeks of an engagement just to let the customer know that you are working and the project is constantly on your mind.&lt;/p&gt;
+&lt;p&gt;This is one of the most important things. In fact, most people will say that this is the most important thing between a customer and a consultant. But how do you build trust specially in a new engagement.  The only way to do this according to me is to showcase progress regularly, give and get frequent feedback and share your status at the start of the day and at its end. This is where Agile can help, with sprints, daily standups and sprint review you have all the necessary tools available with you. Feel free to talk more and more in the first few weeks of an engagement just to let the customer know that you are working and the project is constantly on your mind.&lt;/p&gt;
 
 &lt;p&gt;Well here I am with all the points I could think of. Developing software in India is unique in its own way, the customer is usually in US or Europe, you only meet the customer once or twice a year and then everyday there is this huge time difference. We also have a lot more service providers than product development companies. So if you are working in a service provider setup then apart from developing great software you will also have to take a lot of other things into consideration and sometimes these small things can be a difference between a sad project and a great project.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Thoughts of the week 24 - 30 April</title>
-    <link rel="http://rockyj.in" href="/2011/05/02/2011-05-02-thoughts-of-the-week-24-30-april.html"/>
-    <id>http://rockyj.in/2011/05/02/2011-05-02-thoughts-of-the-week-24-30-april.html</id>
-    <published>2011-05-02T00:00:00+05:30</published>
-    <updated>2011-05-02T00:00:00+05:30</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;Busy busy last week. But still got a lot of time to think on my way back home. &lt;li&gt;Only two things that you should aim for - happy teams and delighted customers. Choose any process that gives you these. Why I favor Agile? Because I have seen it deliver these two things time and time again.&lt;/li&gt; &lt;li&gt;The dictionary meaning of estimate - es&#183;ti&#183;mate/-mit/ -&#160;Noun: An approximate calculation or judgment of the value, number, quantity, or extent of something. Wonder when the IT industry turned&#160;estimates to contracts??&lt;/li&gt;&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;Busy busy last week. But still got a lot of time to think on my way back home. &lt;li&gt;Only two things that you should aim for - happy teams and delighted customers. Choose any process that gives you these. Why I favor Agile? Because I have seen it deliver these two things time and time again.&lt;/li&gt; &lt;li&gt;The dictionary meaning of estimate - es&#183;ti&#183;mate/-mit/ -&#160;Noun: An approximate calculation or judgment of the value, number, quantity, or extent of something. Wonder when the IT industry turned&#160;estimates to contracts??&lt;/li&gt; &lt;li&gt;If I were to hire me, what would I pay myself? Crazy thought.&lt;/li&gt; &lt;li&gt;Need to read this daily - &lt;a href='http://mmiika.wordpress.com/oo-design-principles/' title='http://mmiika.wordpress.com/oo-design-principles/'&gt;http://mmiika.wordpress.com/oo-design-principles/&lt;/a&gt;&lt;/li&gt; &lt;li&gt;The organization hired you for a reason. So while being flexible, one should not change his/her principles to fit in the organization.&#160;Because what makes you special is your uniqueness :).&lt;/li&gt; &lt;li&gt;Practical never changed the world (oldie but a goldie).&lt;/li&gt; &lt;li&gt;It takes a lot of effort to keep things simple. Making complex solutions is way too easy.&lt;/li&gt; &lt;li&gt;Joke between Indian developers - Developer 1 : "You know, I went to XYZ country and the office was empty by 6 PM". Everyone else laughs their socks off. I don't know whether to smile or frown.&lt;/li&gt; &lt;li&gt;I think I have have turned a corner. I now think what is the minimum amount of money I need, I plan to have no mortgage/home loan, pay off my&#160;car loan and see what is the minimum salary I can get by. Then I can concentrate on other important things.&lt;/li&gt;&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Be Happy to Fail</title>
@@ -1259,12 +1268,12 @@ Thats it! Go crazy with your new Oracle Server and Client.&lt;/code&gt;&lt;/pre&
     </author>
     <summary type="html">&lt;p&gt;Be Happy to Fail - a statement that sounds like heresy and may ruffle a few feathers. But in Agile, we say this is good.&lt;/p&gt;
 
-&lt;p&gt;The question then comes is why Agile preaches such&#160;contrarian thoughts. People pay good money to developers and they should always be motivated to make each sprint successful.&lt;/p&gt;
+&lt;p&gt;The question then comes is why Agile preaches such contrarian thoughts. People pay good money to developers and they should always be motivated to make each sprint successful.&lt;/p&gt;
 
 &lt;p&gt;Let me start by giving an example - A team is under high pressure to make each sprint demo successful. Two days before the demo they realize that a lot of work needs to be done. Since, failing the demo is not an option, the team works late nights and gets the job done. The demo is then successful and the management applauds the team and since they met the Sprint Goals everyone picks up the same amount of work again coz hey the velocity is good and they did all the work. So in the next sprint the same thing happens all over again and the team works overtime. Over a period of 2 months the team is exhausted, they think the project is a burden and Agile sucks and its just another tool for the management to add pressure on to them and a few team members plan to leave, the rest are just happy coding so that the demo is successful. The code quality and motivation goes down the hill from here.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;Be Happy to Fail - a statement that sounds like heresy and may ruffle a few feathers. But in Agile, we say this is good.&lt;/p&gt;
 
-&lt;p&gt;The question then comes is why Agile preaches such&#160;contrarian thoughts. People pay good money to developers and they should always be motivated to make each sprint successful.&lt;/p&gt;
+&lt;p&gt;The question then comes is why Agile preaches such contrarian thoughts. People pay good money to developers and they should always be motivated to make each sprint successful.&lt;/p&gt;
 
 &lt;p&gt;Let me start by giving an example - A team is under high pressure to make each sprint demo successful. Two days before the demo they realize that a lot of work needs to be done. Since, failing the demo is not an option, the team works late nights and gets the job done. The demo is then successful and the management applauds the team and since they met the Sprint Goals everyone picks up the same amount of work again coz hey the velocity is good and they did all the work. So in the next sprint the same thing happens all over again and the team works overtime. Over a period of 2 months the team is exhausted, they think the project is a burden and Agile sucks and its just another tool for the management to add pressure on to them and a few team members plan to leave, the rest are just happy coding so that the demo is successful. The code quality and motivation goes down the hill from here.&lt;/p&gt;
 
@@ -1272,7 +1281,7 @@ Thats it! Go crazy with your new Oracle Server and Client.&lt;/code&gt;&lt;/pre&
 
 &lt;p&gt;On of the main things I say is - Happy teams are performing teams. When I delivered my last project as a Scrum Master before time and within budget, my customer said how did you do it. I just said I had a great team and I all I did was to keep them happy (which of course included pushing them out of office after 8 hrs of work).&lt;/p&gt;
 
-&lt;p&gt;I think these are the finer difference between Following Agile and Being Agile. A lot of times we associate ceremony around Agile, have this meeting and that and oh! oh! the demo should never fail. All I say is relax! The demo is not the end of the world. Just keep giving it your best, work&#160;happily&#160;and the rest will take care of itself.&lt;/p&gt;</content>
+&lt;p&gt;I think these are the finer difference between Following Agile and Being Agile. A lot of times we associate ceremony around Agile, have this meeting and that and oh! oh! the demo should never fail. All I say is relax! The demo is not the end of the world. Just keep giving it your best, work happily and the rest will take care of itself.&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Using RVM on Ubuntu to install (multiple versions of) Ruby</title>
@@ -1627,118 +1636,6 @@ Now for calling this code from Java -
 We now can play with the rules inside the Ruby script as much as we want. Anyone can change the Ranges and add/remove Customer classes but we will never need to restart our web application or modify the Java code. That is the power of dynamic languages in action! Simple and powerful, ain&amp;#39;t it :).&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
-    <title>From Zero to a CRUD App (without writing a single line of code) using JRuby</title>
-    <link rel="http://rockyj.in" href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html"/>
-    <id>http://rockyj.in/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html</id>
-    <published>2011-03-31T00:00:00+05:30</published>
-    <updated>2011-03-31T00:00:00+05:30</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;pre&gt;&lt;code&gt;    This blog introduces you to JRuby and Rails. We will create a simple web application with CRUD features and deploy it on Tomcat.
-
-    Required Software -
-    - JDK 6
-    - Tomcat 6
-    - MySql
-    - JRuby (&amp;lt;a href=&amp;quot;http://jruby.org/download&amp;quot;&amp;gt;http://jruby.org/download&amp;lt;/a&amp;gt;)
-
-
-    The blog assumes that you have JDK, MySql and Tomcat set up. Download JRuby from the link above and add the {JRUBY_DIR}/bin to your classpath.
-
-    Let&amp;#39;s run the first command (from any directory) -&lt;/code&gt;&lt;/pre&gt;</summary>
-    <content type="html">&lt;pre&gt;&lt;code&gt;    This blog introduces you to JRuby and Rails. We will create a simple web application with CRUD features and deploy it on Tomcat.
-
-    Required Software -
-    - JDK 6
-    - Tomcat 6
-    - MySql
-    - JRuby (&amp;lt;a href=&amp;quot;http://jruby.org/download&amp;quot;&amp;gt;http://jruby.org/download&amp;lt;/a&amp;gt;)
-
-
-    The blog assumes that you have JDK, MySql and Tomcat set up. Download JRuby from the link above and add the {JRUBY_DIR}/bin to your classpath.
-
-    Let&amp;#39;s run the first command (from any directory) -
-
-    jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails
-
-    If the command above complains of lack of jruby-openssl then abort it (using Ctrl+C) and first run &amp;quot;jruby -S gem install jruby-openssl&amp;quot;.
-
-    This will install mongrel server, activerecord-jdbcmysql-adapter and rails. &amp;quot;gem install&amp;quot; is the Ruby way to install libraries, in Java you download jars and add them to your classpath. Similarly in Ruby you do a &amp;quot;gem install&amp;quot; which does everything for you.
-
-    Now run the following command -
-
-    jruby -S rails XLib -d mysql
-
-    Here we are using JRuby to tell Rails (a Ruby web application framework) to create a application XLib which uses MySql as the database.
-
-    Enter the newly-created &amp;quot;XLib&amp;quot; directory, then modify the config/database.yml. First and foremost, you need to adjust the adapter name, and instead of &amp;#39;mysql&amp;#39; you should specify &amp;#39;jdbcmysql&amp;#39;. You might also want to delete the lines starting with &amp;#39;socket:&amp;#39;. Your development environment config can look like -
-
-    development:
-    adapter: jdbcmysql
-    encoding: utf8
-    reconnect: false
-    database: XLib_dev
-    pool: 5
-    username: root
-    password: root
-
-
-    Now let&amp;#39;s create our schema (make sure you are in your XLib directory) -
-
-    jruby -S rake db:create:all
-
-    The command above runs a rake (like make but for Ruby) task that creates the necessary schema in MySql.
-
-    * Please note, there is currently a bug in activerecord-jdbcmysql-adapter due to which first time schema creation may not work. You can create the schema manually (just name it XLib_dev as in config above), this is a one time task so it doesn&amp;#39;t hurt too much.
-
-    Now lets run  -
-
-    jruby script/generate scaffold book title:string authors:string genre:string quantity:int added_on:date
-
-    Scaffolding is one of the main USPs of Rails, it generates the necessary CRUD  for a domain object, in our case a &amp;quot;book&amp;quot;.
-
-    Now we need to update our database -
-
-    jruby -S rake db:migrate
-
-    We&amp;#39;re all done, let&amp;#39;s start the mongrel server -
-
-    jruby script/server
-
-    check out the application at -
-
-    &amp;lt;a href=&amp;quot;http://localhost:3000/books&amp;quot;&amp;gt;http://localhost:3000/books&amp;lt;/a&amp;gt;
-
-    You can add, edit, delete and see a listing of all the books.
-
-    We used JRuby (which is the Java implementation of Ruby) so that our application can run on JVM. Since it can run on JVM it can also run on Tomcat. To run it on Tomcat we first need to convert it to a war file. You guessed it, there is a gem for that - 
-
-    jruby -S gem install warbler
-
-    Next, run the following (inside XLib directory) -
-
-    warble config
-
-    This will generate a config file for warble as warble.rb in your app&amp;#39;s config directory
-
-    Open this config file and add the following line at the end -
-
-    config.gems += [&amp;quot;activerecord-jdbcmysql-adapter&amp;quot;, &amp;quot;jruby-openssl&amp;quot;]
-
-    This enables the gems above to be bundled in your war, otherwise Tomcat complains of missing libraries.
-
-    Now, run the command -
-
-    warble
-
-    This will create XLib.war in you XLib directory, copy this file to your $TOMCAT_HOME/webapps and start Tomcat. This will unzip the war, shutdown Tomcat after a while, check XLibs&amp;#39; web.xml and make sure the environment points to development. Restart Tomcat.
-
-    Go to &amp;lt;a href=&amp;quot;http://localhost:8080/XLib/books&amp;quot;&amp;gt;http://localhost:8080/XLib/books&amp;lt;/a&amp;gt;
-
-    And that&amp;#39;s it, you have a CRUD application running on Tomcat without even writing a single line of .&lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
     <title>Hello jQuery!</title>
     <link rel="http://rockyj.in" href="/2011/03/31/2011-03-31-hello-jquery.html"/>
     <id>http://rockyj.in/2011/03/31/2011-03-31-hello-jquery.html</id>
@@ -1881,270 +1778,6 @@ We now can play with the rules inside the Ruby script as much as we want. Anyone
     &amp;lt;strong&amp;gt;jQueryUI&amp;lt;/strong&amp;gt;
 
     This blog would not be complete without a mention of jQueryUI - &amp;lt;a href=&amp;quot;http://jqueryui.com/&amp;quot;&amp;gt;http://jqueryui.com/&amp;lt;/a&amp;gt; - jQueryUI builds upon jQuery to provide an effects and interaction API as well as ready to use widgets. Using jQueryUI, it is a breeze to add behaviours like draggable and resizeable to spans/divs. The widgets include a highly customizable date picker among others. Feel free to visit the jQueryUI site to see the demos.&lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
-    <title>Google App Engine + Maven + JSF2</title>
-    <link rel="http://rockyj.in" href="/2011/03/31/2011-03-31-google-app-engine-maven-jsf2.html"/>
-    <id>http://rockyj.in/2011/03/31/2011-03-31-google-app-engine-maven-jsf2.html</id>
-    <published>2011-03-31T00:00:00+05:30</published>
-    <updated>2011-03-31T00:00:00+05:30</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;pre&gt;&lt;code&gt;    I have tried to put all the keywords in the title of this blog, hoping that it will turn some heads. Google App Engine (GAE) provides a great hosting platform for open source apps written in Java/Python. So if you have no qualms about hosting you Java applications on a public server then you have no better choice than GAE.
-
-    The only catch however is, that GAE does not support certain APIs (see the white-list here - &amp;lt;a href=&amp;quot;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;lt;/a&amp;gt;). This restriction makes it difficult to host certain apps / frameworks.&lt;/code&gt;&lt;/pre&gt;</summary>
-    <content type="html">&lt;pre&gt;&lt;code&gt;    I have tried to put all the keywords in the title of this blog, hoping that it will turn some heads. Google App Engine (GAE) provides a great hosting platform for open source apps written in Java/Python. So if you have no qualms about hosting you Java applications on a public server then you have no better choice than GAE.
-
-    The only catch however is, that GAE does not support certain APIs (see the white-list here - &amp;lt;a href=&amp;quot;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;lt;/a&amp;gt;). This restriction makes it difficult to host certain apps / frameworks.
-
-    GAE provides the infrastructure, a modified Jetty server included in the GAE SDK (&amp;lt;a href=&amp;quot;http://code.google.com/appengine/downloads.html&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;http://code.google.com/appengine/downloads.html&amp;lt;/a&amp;gt;) though which you can test your app. If it runs on the local GAE Jetty server then it will also run on GAE itself. The project structure that Google asks you to create for uploading an app is also quite typical (unless you use Ant) which brings me to my next point.
-
-    &amp;lt;!--more--&amp;gt;
-
-    Maven is my favorite build tool, it would really take something for me to move on to Ant now. So I tried to create my application using Maven and then test it locally on GAE&amp;#39;s Jetty and finally upload it to GAE. After a little search I found the Maven GAE plugin (&amp;lt;a href=&amp;quot;http://code.google.com/p/maven-gae-plugin/&amp;quot;&amp;gt;http://code.google.com/p/maven-gae-plugin/&amp;lt;/a&amp;gt;).
-
-    Below is my pom.xml to make this plugin work - 
-
-    &amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;
-             xsi:schemaLocation=&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&amp;quot;&amp;gt;
-
-        &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;
-        &amp;lt;groupId&amp;gt;net.rocky&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;rocky-gae-app&amp;lt;/artifactId&amp;gt;
-        &amp;lt;packaging&amp;gt;war&amp;lt;/packaging&amp;gt;
-        &amp;lt;version&amp;gt;1&amp;lt;/version&amp;gt;
-        &amp;lt;name&amp;gt;rocky-gae-app&amp;lt;/name&amp;gt;
-        &amp;lt;url&amp;gt;http://maven.apache.org&amp;lt;/url&amp;gt;
-
-        &amp;lt;repositories&amp;gt;
-            &amp;lt;repository&amp;gt;
-                &amp;lt;id&amp;gt;java.net&amp;lt;/id&amp;gt;
-                &amp;lt;url&amp;gt;http://download.java.net/maven/2&amp;lt;/url&amp;gt;
-            &amp;lt;/repository&amp;gt;
-        &amp;lt;/repositories&amp;gt;
-
-        &amp;lt;pluginRepositories&amp;gt;
-            &amp;lt;pluginRepository&amp;gt;
-                &amp;lt;id&amp;gt;maven-gae-plugin-repo&amp;lt;/id&amp;gt;
-                &amp;lt;name&amp;gt;maven-gae-plugin repository&amp;lt;/name&amp;gt;
-                &amp;lt;url&amp;gt;http://maven-gae-plugin.googlecode.com/svn/repository&amp;lt;/url&amp;gt;
-            &amp;lt;/pluginRepository&amp;gt;
-        &amp;lt;/pluginRepositories&amp;gt;
-
-        &amp;lt;dependencies&amp;gt;
-            &amp;lt;dependency&amp;gt;
-                &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt;
-                &amp;lt;artifactId&amp;gt;servlet-api&amp;lt;/artifactId&amp;gt;
-                &amp;lt;version&amp;gt;2.5&amp;lt;/version&amp;gt;
-                &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt;
-            &amp;lt;/dependency&amp;gt;
-            &amp;lt;dependency&amp;gt;
-                &amp;lt;groupId&amp;gt;javax.servlet.jsp&amp;lt;/groupId&amp;gt;
-                &amp;lt;artifactId&amp;gt;jsp-api&amp;lt;/artifactId&amp;gt;
-                &amp;lt;version&amp;gt;2.1&amp;lt;/version&amp;gt;
-                &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt;
-            &amp;lt;/dependency&amp;gt;
-            &amp;lt;dependency&amp;gt;
-                &amp;lt;groupId&amp;gt;com.sun.faces&amp;lt;/groupId&amp;gt;
-                &amp;lt;artifactId&amp;gt;jsf-api&amp;lt;/artifactId&amp;gt;
-                &amp;lt;version&amp;gt;2.0.2&amp;lt;/version&amp;gt;
-            &amp;lt;/dependency&amp;gt;
-            &amp;lt;dependency&amp;gt;
-                &amp;lt;groupId&amp;gt;com.sun.faces&amp;lt;/groupId&amp;gt;
-                &amp;lt;artifactId&amp;gt;jsf-impl&amp;lt;/artifactId&amp;gt;
-                &amp;lt;version&amp;gt;2.0.2&amp;lt;/version&amp;gt;
-                &amp;lt;classifier&amp;gt;gae&amp;lt;/classifier&amp;gt;
-            &amp;lt;/dependency&amp;gt;
-            &amp;lt;dependency&amp;gt;
-                &amp;lt;groupId&amp;gt;org.glassfish.web&amp;lt;/groupId&amp;gt;
-                &amp;lt;artifactId&amp;gt;el-impl&amp;lt;/artifactId&amp;gt;
-                &amp;lt;version&amp;gt;2.2&amp;lt;/version&amp;gt;
-            &amp;lt;/dependency&amp;gt;
-            &amp;lt;dependency&amp;gt;
-                &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
-                &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
-                &amp;lt;version&amp;gt;4.8.1&amp;lt;/version&amp;gt;
-                &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
-            &amp;lt;/dependency&amp;gt;
-        &amp;lt;/dependencies&amp;gt;
-
-        &amp;lt;build&amp;gt;
-            &amp;lt;plugins&amp;gt;
-                &amp;lt;plugin&amp;gt;
-                    &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
-                    &amp;lt;artifactId&amp;gt;maven-compiler-plugin&amp;lt;/artifactId&amp;gt;
-                    &amp;lt;version&amp;gt;2.0.2&amp;lt;/version&amp;gt;
-                    &amp;lt;configuration&amp;gt;
-                        &amp;lt;source&amp;gt;1.6&amp;lt;/source&amp;gt;
-                        &amp;lt;target&amp;gt;1.6&amp;lt;/target&amp;gt;
-                    &amp;lt;/configuration&amp;gt;
-                &amp;lt;/plugin&amp;gt;
-                &amp;lt;plugin&amp;gt;
-                    &amp;lt;groupId&amp;gt;net.kindleit&amp;lt;/groupId&amp;gt;
-                    &amp;lt;artifactId&amp;gt;maven-gae-plugin&amp;lt;/artifactId&amp;gt;
-                    &amp;lt;version&amp;gt;0.6.0&amp;lt;/version&amp;gt;
-                    &amp;lt;configuration&amp;gt;
-                        &amp;lt;sdkDir&amp;gt;/home/rockyj/01rocky/02apps/appengine-java-sdk-1.3.5&amp;lt;/sdkDir&amp;gt;
-                    &amp;lt;/configuration&amp;gt;
-                &amp;lt;/plugin&amp;gt;
-            &amp;lt;/plugins&amp;gt;
-            &amp;lt;finalName&amp;gt;rocky-gae-app&amp;lt;/finalName&amp;gt;
-        &amp;lt;/build&amp;gt;
-        
-    &amp;lt;/project&amp;gt;
-
-    I have included the whole pom as there is hardly anything I can miss here. The GAE plugin is not in maven central so we need to include the plugin repository, the dependencies are pretty standard except one (which I will explain in a moment) and the plugin itself needs the configuration to know where you have the GAE SDK.
-
-    As I mentioned earlier, some classes are blacklisted on the GAE so your default jsf-impl.jar (Mojarra) wil not work on GAE. You will need a modified jar which you can download from here (&amp;lt;a href=&amp;quot;http://code.google.com/p/joshjcarrier/source/browse/trunk/Sun%20JSF%20GAE/jsf-impl-gae.jar&amp;quot;&amp;gt;http://code.google.com/p/joshjcarrier/source/browse/trunk/Sun%20JSF%20GAE/jsf-impl-gae.jar&amp;lt;/a&amp;gt;), if you have a Nexus repo you can install the modified jar there or install the jar in you local repository manually. Also as seen in the pom, for resolving EL (Expression Language) you need el-impl.jar, GAE does not support EL unlike Tomcat. 
-
-    To make JSF work you need the following entries in your web.xml -
-
-        &amp;lt;!-- Seems like GAE 1.2.6 cannot handle server side session management. At least for JSF 2.0.1 --&amp;gt; 
-        &amp;lt;context-param&amp;gt; 
-          &amp;lt;param-name&amp;gt;javax.faces.STATE_SAVING_METHOD&amp;lt;/param-name&amp;gt; 
-          &amp;lt;param-value&amp;gt;client&amp;lt;/param-value&amp;gt; 
-        &amp;lt;/context-param&amp;gt; 
-        &amp;lt;!-- Recommendation from GAE pages  --&amp;gt; 
-        &amp;lt;context-param&amp;gt; 
-          &amp;lt;param-name&amp;gt;javax.faces.PROJECT_STAGE&amp;lt;/param-name&amp;gt; 
-          &amp;lt;param-value&amp;gt;Production&amp;lt;/param-value&amp;gt; 
-        &amp;lt;/context-param&amp;gt;
-        &amp;lt;!-- Accommodate Single-Threaded Requirement of Google AppEngine  --&amp;gt;
-        &amp;lt;context-param&amp;gt;
-          &amp;lt;param-name&amp;gt;com.sun.faces.enableThreading&amp;lt;/param-name&amp;gt;
-          &amp;lt;param-value&amp;gt;false&amp;lt;/param-value&amp;gt;
-        &amp;lt;/context-param&amp;gt;
-
-    Finally, in your appengine-web.xml (the GAE configuration file), you need the following entry - 
-
-    &amp;lt;sessions-enabled&amp;gt;true&amp;lt;/sessions-enabled&amp;gt;
-
-    That&amp;#39;s it. Now you can work on your JSF2 application. To test, all you need to do is : &amp;lt;strong&amp;gt;mvn clean gae:run&amp;lt;/strong&amp;gt;
-
-    For uploading the application, I would still recommend using the SDK provided script (otherwise you need a whole lot of other changes). What I do is - 
-
-    $HOME/01rocky/02apps/appengine-java-sdk-1.3.5/bin/appcfg.sh update /home/rockyj/01rocky/03workspace/scbcd/rocky-gae-app/target/rocky-gae-app/
-
-    This means run the GAE script with the param &amp;lt;strong&amp;gt;&amp;quot;update&amp;quot;&amp;lt;/strong&amp;gt; and the path to your maven created target folder. If you have signed up for GAE, it will ask your username and password and your app will be uploaded to GAE.&lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
-    <title>Integrating Spring 3 with JPA 2</title>
-    <link rel="http://rockyj.in" href="/2011/03/31/2011-03-31-integrating-spring-3-with-jpa-2.html"/>
-    <id>http://rockyj.in/2011/03/31/2011-03-31-integrating-spring-3-with-jpa-2.html</id>
-    <published>2011-03-31T00:00:00+05:30</published>
-    <updated>2011-03-31T00:00:00+05:30</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;pre&gt;&lt;code&gt;	I have been working on Grails recently and am amazed with the productivity gains it gives. Grails is great for giving you a kick-start, it uses convention over configuration and gives you things such as ORM, transaction management, dependency injection among others, without you writing a single line of configuration.
-
-	I decided to mimic the Grails behavior in a Spring + Hibernate application. To stay on the cutting edge I decided to use Hibernate 3.5 and Spring 3, to top it up I decided to use Hibernate as an implementation of JPA 2. Recently released, Hibernate 3.5 combines the Hibernate Annotations and the Hibernate Entity-Manager projects into Hibernate-Core, so basically its just one jar which provides the full implementation of JPA 2. For advantages of using JPA 2 see the excellent presentation here - &amp;lt;a href=&amp;quot;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;quot;&amp;gt;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/pre&gt;</summary>
-    <content type="html">&lt;pre&gt;&lt;code&gt;	I have been working on Grails recently and am amazed with the productivity gains it gives. Grails is great for giving you a kick-start, it uses convention over configuration and gives you things such as ORM, transaction management, dependency injection among others, without you writing a single line of configuration.
-
-	I decided to mimic the Grails behavior in a Spring + Hibernate application. To stay on the cutting edge I decided to use Hibernate 3.5 and Spring 3, to top it up I decided to use Hibernate as an implementation of JPA 2. Recently released, Hibernate 3.5 combines the Hibernate Annotations and the Hibernate Entity-Manager projects into Hibernate-Core, so basically its just one jar which provides the full implementation of JPA 2. For advantages of using JPA 2 see the excellent presentation here - &amp;lt;a href=&amp;quot;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;quot;&amp;gt;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;lt;/a&amp;gt;
-
-	&amp;lt;strong&amp;gt;Integrating Hibernate with JPA 2&amp;lt;/strong&amp;gt;
-
-	As usual, I started with a vanilla maven web project and started adding dependencies, the first being Hibernate - 
-		&amp;lt;dependency&amp;gt;
-	            &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt;
-	            &amp;lt;artifactId&amp;gt;hibernate-core&amp;lt;/artifactId&amp;gt;
-	            &amp;lt;version&amp;gt;3.5.4-Final&amp;lt;/version&amp;gt;
-		&amp;lt;/dependency&amp;gt;
-	This dependency is found in the repository - &amp;lt;a href=&amp;quot;https://repository.jboss.org/nexus/content/groups/public/&amp;quot;&amp;gt;https://repository.jboss.org/nexus/content/groups/public/&amp;lt;/a&amp;gt; as mentioned on the Hibernate site. After a lot of pain I found that this jar did not match the jar you from &amp;lt;a href=&amp;quot;http://sourceforge.net/projects/hibernate/files/hibernate3&amp;quot;&amp;gt;http://sourceforge.net/projects/hibernate/files/hibernate3&amp;lt;/a&amp;gt;. So, I had to manually install the jar in my local repository (remember, I found this out after setting up JPA, Spring etc. which I will cover next). Similarly, in the JBoss repository I could not find the JPA 2 specfication jar (again available if you download the Hibernate distribution from sourceforge).I had to install that manually as well. After all this jiggery-pokery and some more, I somehow got Hibernate and JPA working.
-
-	JPA needs a persistence.xml file in META-INF folder in the classpath. I added META-INF folder in source/main/resources with persistence.xml reading as - 
-		&amp;lt;persistence xmlns=&amp;quot;http://java.sun.com/xml/ns/persistence&amp;quot;
-		    xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;
-		    xsi:schemaLocation=&amp;quot;http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&amp;quot;
-		    version=&amp;quot;2.0&amp;quot;&amp;gt;
-			&amp;lt;persistence-unit name=&amp;quot;postage&amp;quot; transaction-type=&amp;quot;RESOURCE_LOCAL&amp;quot;&amp;gt;
-				&amp;lt;provider&amp;gt;org.hibernate.ejb.HibernatePersistence&amp;lt;/provider&amp;gt;
-			&amp;lt;/persistence-unit&amp;gt;
-		&amp;lt;/persistence&amp;gt;
-	So, here I basically tell JPA that Hibernate is providing its implementation. Plus I give my persistence-unit a name &amp;quot;postage&amp;quot; (the name of my application).
-
-	&amp;lt;strong&amp;gt;Integrating Spring with JPA&amp;lt;/strong&amp;gt;
-
-	Now, I need to get Spring working with JPA and it is not exactly a cakewalk. With a lot of people pointing in different directions and the Spring documentation itself not very helpful in this particular aspect.
-
-	The Spring JPA support itself offers three ways of setting up the JPA EntityManagerFactory, so that it can be used by the application to obtain an entity manager. I chose the &amp;quot;LocalContainerEntityManagerFactoryBean&amp;quot; because it gives full control over EntityManagerFactory configuration and is appropriate for fine-grained customization, if required. Below is my config - 
-		&amp;lt;bean id=&amp;quot;entityManagerFactory&amp;quot; class=&amp;quot;org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean&amp;quot;
-			p:dataSource-ref=&amp;quot;dataSource&amp;quot;&amp;gt;
-			&amp;lt;property name=&amp;quot;jpaProperties&amp;quot;&amp;gt;
-				&amp;lt;props&amp;gt;
-					&amp;lt;prop key=&amp;quot;hibernate.dialect&amp;quot;&amp;gt;${hibernate.dialect}&amp;lt;/prop&amp;gt;
-					&amp;lt;prop key=&amp;quot;hibernate.hbm2ddl.auto&amp;quot;&amp;gt;${hibernate.hbm2ddl.auto}&amp;lt;/prop&amp;gt;
-					&amp;lt;prop key=&amp;quot;hibernate.show_sql&amp;quot;&amp;gt;${hibernate.show_sql}&amp;lt;/prop&amp;gt;
-				&amp;lt;/props&amp;gt;
-			&amp;lt;/property&amp;gt;      
-		&amp;lt;/bean&amp;gt;
-	As evident, you need a &amp;quot;dataSource&amp;quot; bean defined, which looks like - 
-		&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;org.springframework.jdbc.datasource.DriverManagerDataSource&amp;quot;
-			p:driverClassName=&amp;quot;${dataSource.driverClassName}&amp;quot;
-			p:url=&amp;quot;${dataSource.url}&amp;quot;
-			p:username=&amp;quot;${dataSource.username}&amp;quot;
-			p:password=&amp;quot;${dataSource.password}&amp;quot;
-		/&amp;gt;
-	To get the &amp;quot;${}&amp;quot; thingy working, i.e. a properties file lookup, add - 
-		&amp;lt;context:property-placeholder location=&amp;quot;classpath:datasource.properties&amp;quot;/&amp;gt;
-	datasource.properties can look like - 
-		dataSource.driverClassName=org.hsqldb.jdbcDriver
-		dataSource.url=jdbc:hsqldb:mem:postage
-		dataSource.username=sa
-		dataSource.password=
-		#Hibernate Properties
-		hibernate.hbm2ddl.auto=create-drop
-		hibernate.dialect=org.hibernate.dialect.HSQLDialect
-		hibernate.show_sql=true
-	To get transactions working, add - 
-		&amp;lt;tx:annotation-driven/&amp;gt;
-	And define a transaction manager - 
-		&amp;lt;bean id=&amp;quot;transactionManager&amp;quot; class=&amp;quot;org.springframework.orm.jpa.JpaTransactionManager&amp;quot;
-				p:entityManagerFactory-ref=&amp;quot;entityManagerFactory&amp;quot;
-		/&amp;gt;
-	Now, assuming that you have an Entity &amp;quot;Post&amp;quot;, lets create the DAO - 
-		@Repository
-		@Transactional
-		public class PostageDAOImpl implements PostageDAO {
-
-			@PersistenceContext
-			private EntityManager em;
-
-			public void savePost(Post post){
-				em.persist(post);
-				em.flush();
-			}
-
-		}
-	The @Transactional annotation makes the DAO transactional (remember we added &amp;lt;tx:annotation-driven/&amp;gt;). Let&amp;#39;s look at the other Annotations - @Repository annotation is a &amp;quot;stereotype&amp;quot; annotation added in Spring 2.5 which enables Spring to identify Beans for AOP pointcuts. In our case @Repository annotation also enables Spring to automatically convert JPA exceptions to Spring exception hierarchy. Finally, the EntityManager is automatically injected by Spring as it is annotated by @PersistenceContext. Also add - 
-	      &amp;lt;context:component-scan base-package=&amp;quot;net.rocky.postage&amp;quot;/&amp;gt;
-	This tag enables dependency injection with annotations and also auto-detects stereotype classes in the specified package and registers the corresponding beans. 
-
-	That&amp;#39;s it! We have integrated Spring with JPA 2 and Hibernate. Let&amp;#39;s write a test case to verify our setup - 
-	@RunWith(SpringJUnit4ClassRunner.class)
-	@ContextConfiguration(&amp;quot;/applicationContext.xml&amp;quot;)
-	public class PostageDAOImplTest {
-
-		@Resource
-		private PostageDAO postageDAOImpl;
-
-		@Test
-		public void testPostStorage() throws Exception {
-			Post post = new Post();
-			post.setComments(&amp;quot;A simple comment&amp;quot;);
-			post.setDescription(&amp;quot;A simple description&amp;quot;);
-			postageDAOImpl.savePost(post);
-		}
-
-	...
-
-	&amp;lt;strong&amp;gt;Parting thoughts&amp;lt;/strong&amp;gt;
-
-	This whole exercise took me a long time due to lack of comprehensive documentation, version mismatches and multiple approaches suggested by documents/bloggers. The advantage of the approach I have suggested above is that it allows you to switch to different databases for test/production as the datasource and dialect is specified in a .properties file.
-
-	The big idea behind this exercise was to setup a DAO and domain layer akin to Grails which can be easily scaled up. We can further add a service layer to access the data and then use it over a UI. For my next blog I will build on this and create a web application that uses GWT as the front-end.&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Accessing JBoss managed resources using MBeans</title>
@@ -2439,6 +2072,382 @@ We now can play with the rules inside the Ruby script as much as we want. Anyone
         As can be seen, the MBean DomainName is same for all queues, the name-value though differs and is printed. This code can be further used to retrieve attributes for the individual queue or to execute operations on it. Hope this code helps you get started.
 
         &amp;lt;strong&amp;gt;Credits&amp;lt;/strong&amp;gt; - JBoss team for providing the source to JMX Console, which helped us get started and &amp;lt;a href=&amp;quot;http://www-scf.usc.edu/~meghaj/&amp;quot;&amp;gt;Megha Jain &amp;lt;/a&amp;gt; my colleague for working with me on this exercise.&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>From Zero to a CRUD App (without writing a single line of code) using JRuby</title>
+    <link rel="http://rockyj.in" href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html"/>
+    <id>http://rockyj.in/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html</id>
+    <published>2011-03-31T00:00:00+05:30</published>
+    <updated>2011-03-31T00:00:00+05:30</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;pre&gt;&lt;code&gt;    This blog introduces you to JRuby and Rails. We will create a simple web application with CRUD features and deploy it on Tomcat.
+
+    Required Software -
+    - JDK 6
+    - Tomcat 6
+    - MySql
+    - JRuby (&amp;lt;a href=&amp;quot;http://jruby.org/download&amp;quot;&amp;gt;http://jruby.org/download&amp;lt;/a&amp;gt;)
+
+
+    The blog assumes that you have JDK, MySql and Tomcat set up. Download JRuby from the link above and add the {JRUBY_DIR}/bin to your classpath.
+
+    Let&amp;#39;s run the first command (from any directory) -&lt;/code&gt;&lt;/pre&gt;</summary>
+    <content type="html">&lt;pre&gt;&lt;code&gt;    This blog introduces you to JRuby and Rails. We will create a simple web application with CRUD features and deploy it on Tomcat.
+
+    Required Software -
+    - JDK 6
+    - Tomcat 6
+    - MySql
+    - JRuby (&amp;lt;a href=&amp;quot;http://jruby.org/download&amp;quot;&amp;gt;http://jruby.org/download&amp;lt;/a&amp;gt;)
+
+
+    The blog assumes that you have JDK, MySql and Tomcat set up. Download JRuby from the link above and add the {JRUBY_DIR}/bin to your classpath.
+
+    Let&amp;#39;s run the first command (from any directory) -
+
+    jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails
+
+    If the command above complains of lack of jruby-openssl then abort it (using Ctrl+C) and first run &amp;quot;jruby -S gem install jruby-openssl&amp;quot;.
+
+    This will install mongrel server, activerecord-jdbcmysql-adapter and rails. &amp;quot;gem install&amp;quot; is the Ruby way to install libraries, in Java you download jars and add them to your classpath. Similarly in Ruby you do a &amp;quot;gem install&amp;quot; which does everything for you.
+
+    Now run the following command -
+
+    jruby -S rails XLib -d mysql
+
+    Here we are using JRuby to tell Rails (a Ruby web application framework) to create a application XLib which uses MySql as the database.
+
+    Enter the newly-created &amp;quot;XLib&amp;quot; directory, then modify the config/database.yml. First and foremost, you need to adjust the adapter name, and instead of &amp;#39;mysql&amp;#39; you should specify &amp;#39;jdbcmysql&amp;#39;. You might also want to delete the lines starting with &amp;#39;socket:&amp;#39;. Your development environment config can look like -
+
+    development:
+    adapter: jdbcmysql
+    encoding: utf8
+    reconnect: false
+    database: XLib_dev
+    pool: 5
+    username: root
+    password: root
+
+
+    Now let&amp;#39;s create our schema (make sure you are in your XLib directory) -
+
+    jruby -S rake db:create:all
+
+    The command above runs a rake (like make but for Ruby) task that creates the necessary schema in MySql.
+
+    * Please note, there is currently a bug in activerecord-jdbcmysql-adapter due to which first time schema creation may not work. You can create the schema manually (just name it XLib_dev as in config above), this is a one time task so it doesn&amp;#39;t hurt too much.
+
+    Now lets run  -
+
+    jruby script/generate scaffold book title:string authors:string genre:string quantity:int added_on:date
+
+    Scaffolding is one of the main USPs of Rails, it generates the necessary CRUD  for a domain object, in our case a &amp;quot;book&amp;quot;.
+
+    Now we need to update our database -
+
+    jruby -S rake db:migrate
+
+    We&amp;#39;re all done, let&amp;#39;s start the mongrel server -
+
+    jruby script/server
+
+    check out the application at -
+
+    &amp;lt;a href=&amp;quot;http://localhost:3000/books&amp;quot;&amp;gt;http://localhost:3000/books&amp;lt;/a&amp;gt;
+
+    You can add, edit, delete and see a listing of all the books.
+
+    We used JRuby (which is the Java implementation of Ruby) so that our application can run on JVM. Since it can run on JVM it can also run on Tomcat. To run it on Tomcat we first need to convert it to a war file. You guessed it, there is a gem for that - 
+
+    jruby -S gem install warbler
+
+    Next, run the following (inside XLib directory) -
+
+    warble config
+
+    This will generate a config file for warble as warble.rb in your app&amp;#39;s config directory
+
+    Open this config file and add the following line at the end -
+
+    config.gems += [&amp;quot;activerecord-jdbcmysql-adapter&amp;quot;, &amp;quot;jruby-openssl&amp;quot;]
+
+    This enables the gems above to be bundled in your war, otherwise Tomcat complains of missing libraries.
+
+    Now, run the command -
+
+    warble
+
+    This will create XLib.war in you XLib directory, copy this file to your $TOMCAT_HOME/webapps and start Tomcat. This will unzip the war, shutdown Tomcat after a while, check XLibs&amp;#39; web.xml and make sure the environment points to development. Restart Tomcat.
+
+    Go to &amp;lt;a href=&amp;quot;http://localhost:8080/XLib/books&amp;quot;&amp;gt;http://localhost:8080/XLib/books&amp;lt;/a&amp;gt;
+
+    And that&amp;#39;s it, you have a CRUD application running on Tomcat without even writing a single line of .&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Integrating Spring 3 with JPA 2</title>
+    <link rel="http://rockyj.in" href="/2011/03/31/2011-03-31-integrating-spring-3-with-jpa-2.html"/>
+    <id>http://rockyj.in/2011/03/31/2011-03-31-integrating-spring-3-with-jpa-2.html</id>
+    <published>2011-03-31T00:00:00+05:30</published>
+    <updated>2011-03-31T00:00:00+05:30</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;pre&gt;&lt;code&gt;	I have been working on Grails recently and am amazed with the productivity gains it gives. Grails is great for giving you a kick-start, it uses convention over configuration and gives you things such as ORM, transaction management, dependency injection among others, without you writing a single line of configuration.
+
+	I decided to mimic the Grails behavior in a Spring + Hibernate application. To stay on the cutting edge I decided to use Hibernate 3.5 and Spring 3, to top it up I decided to use Hibernate as an implementation of JPA 2. Recently released, Hibernate 3.5 combines the Hibernate Annotations and the Hibernate Entity-Manager projects into Hibernate-Core, so basically its just one jar which provides the full implementation of JPA 2. For advantages of using JPA 2 see the excellent presentation here - &amp;lt;a href=&amp;quot;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;quot;&amp;gt;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/pre&gt;</summary>
+    <content type="html">&lt;pre&gt;&lt;code&gt;	I have been working on Grails recently and am amazed with the productivity gains it gives. Grails is great for giving you a kick-start, it uses convention over configuration and gives you things such as ORM, transaction management, dependency injection among others, without you writing a single line of configuration.
+
+	I decided to mimic the Grails behavior in a Spring + Hibernate application. To stay on the cutting edge I decided to use Hibernate 3.5 and Spring 3, to top it up I decided to use Hibernate as an implementation of JPA 2. Recently released, Hibernate 3.5 combines the Hibernate Annotations and the Hibernate Entity-Manager projects into Hibernate-Core, so basically its just one jar which provides the full implementation of JPA 2. For advantages of using JPA 2 see the excellent presentation here - &amp;lt;a href=&amp;quot;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;quot;&amp;gt;http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf&amp;lt;/a&amp;gt;
+
+	&amp;lt;strong&amp;gt;Integrating Hibernate with JPA 2&amp;lt;/strong&amp;gt;
+
+	As usual, I started with a vanilla maven web project and started adding dependencies, the first being Hibernate - 
+		&amp;lt;dependency&amp;gt;
+	            &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt;
+	            &amp;lt;artifactId&amp;gt;hibernate-core&amp;lt;/artifactId&amp;gt;
+	            &amp;lt;version&amp;gt;3.5.4-Final&amp;lt;/version&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+	This dependency is found in the repository - &amp;lt;a href=&amp;quot;https://repository.jboss.org/nexus/content/groups/public/&amp;quot;&amp;gt;https://repository.jboss.org/nexus/content/groups/public/&amp;lt;/a&amp;gt; as mentioned on the Hibernate site. After a lot of pain I found that this jar did not match the jar you from &amp;lt;a href=&amp;quot;http://sourceforge.net/projects/hibernate/files/hibernate3&amp;quot;&amp;gt;http://sourceforge.net/projects/hibernate/files/hibernate3&amp;lt;/a&amp;gt;. So, I had to manually install the jar in my local repository (remember, I found this out after setting up JPA, Spring etc. which I will cover next). Similarly, in the JBoss repository I could not find the JPA 2 specfication jar (again available if you download the Hibernate distribution from sourceforge).I had to install that manually as well. After all this jiggery-pokery and some more, I somehow got Hibernate and JPA working.
+
+	JPA needs a persistence.xml file in META-INF folder in the classpath. I added META-INF folder in source/main/resources with persistence.xml reading as - 
+		&amp;lt;persistence xmlns=&amp;quot;http://java.sun.com/xml/ns/persistence&amp;quot;
+		    xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;
+		    xsi:schemaLocation=&amp;quot;http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&amp;quot;
+		    version=&amp;quot;2.0&amp;quot;&amp;gt;
+			&amp;lt;persistence-unit name=&amp;quot;postage&amp;quot; transaction-type=&amp;quot;RESOURCE_LOCAL&amp;quot;&amp;gt;
+				&amp;lt;provider&amp;gt;org.hibernate.ejb.HibernatePersistence&amp;lt;/provider&amp;gt;
+			&amp;lt;/persistence-unit&amp;gt;
+		&amp;lt;/persistence&amp;gt;
+	So, here I basically tell JPA that Hibernate is providing its implementation. Plus I give my persistence-unit a name &amp;quot;postage&amp;quot; (the name of my application).
+
+	&amp;lt;strong&amp;gt;Integrating Spring with JPA&amp;lt;/strong&amp;gt;
+
+	Now, I need to get Spring working with JPA and it is not exactly a cakewalk. With a lot of people pointing in different directions and the Spring documentation itself not very helpful in this particular aspect.
+
+	The Spring JPA support itself offers three ways of setting up the JPA EntityManagerFactory, so that it can be used by the application to obtain an entity manager. I chose the &amp;quot;LocalContainerEntityManagerFactoryBean&amp;quot; because it gives full control over EntityManagerFactory configuration and is appropriate for fine-grained customization, if required. Below is my config - 
+		&amp;lt;bean id=&amp;quot;entityManagerFactory&amp;quot; class=&amp;quot;org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean&amp;quot;
+			p:dataSource-ref=&amp;quot;dataSource&amp;quot;&amp;gt;
+			&amp;lt;property name=&amp;quot;jpaProperties&amp;quot;&amp;gt;
+				&amp;lt;props&amp;gt;
+					&amp;lt;prop key=&amp;quot;hibernate.dialect&amp;quot;&amp;gt;${hibernate.dialect}&amp;lt;/prop&amp;gt;
+					&amp;lt;prop key=&amp;quot;hibernate.hbm2ddl.auto&amp;quot;&amp;gt;${hibernate.hbm2ddl.auto}&amp;lt;/prop&amp;gt;
+					&amp;lt;prop key=&amp;quot;hibernate.show_sql&amp;quot;&amp;gt;${hibernate.show_sql}&amp;lt;/prop&amp;gt;
+				&amp;lt;/props&amp;gt;
+			&amp;lt;/property&amp;gt;      
+		&amp;lt;/bean&amp;gt;
+	As evident, you need a &amp;quot;dataSource&amp;quot; bean defined, which looks like - 
+		&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;org.springframework.jdbc.datasource.DriverManagerDataSource&amp;quot;
+			p:driverClassName=&amp;quot;${dataSource.driverClassName}&amp;quot;
+			p:url=&amp;quot;${dataSource.url}&amp;quot;
+			p:username=&amp;quot;${dataSource.username}&amp;quot;
+			p:password=&amp;quot;${dataSource.password}&amp;quot;
+		/&amp;gt;
+	To get the &amp;quot;${}&amp;quot; thingy working, i.e. a properties file lookup, add - 
+		&amp;lt;context:property-placeholder location=&amp;quot;classpath:datasource.properties&amp;quot;/&amp;gt;
+	datasource.properties can look like - 
+		dataSource.driverClassName=org.hsqldb.jdbcDriver
+		dataSource.url=jdbc:hsqldb:mem:postage
+		dataSource.username=sa
+		dataSource.password=
+		#Hibernate Properties
+		hibernate.hbm2ddl.auto=create-drop
+		hibernate.dialect=org.hibernate.dialect.HSQLDialect
+		hibernate.show_sql=true
+	To get transactions working, add - 
+		&amp;lt;tx:annotation-driven/&amp;gt;
+	And define a transaction manager - 
+		&amp;lt;bean id=&amp;quot;transactionManager&amp;quot; class=&amp;quot;org.springframework.orm.jpa.JpaTransactionManager&amp;quot;
+				p:entityManagerFactory-ref=&amp;quot;entityManagerFactory&amp;quot;
+		/&amp;gt;
+	Now, assuming that you have an Entity &amp;quot;Post&amp;quot;, lets create the DAO - 
+		@Repository
+		@Transactional
+		public class PostageDAOImpl implements PostageDAO {
+
+			@PersistenceContext
+			private EntityManager em;
+
+			public void savePost(Post post){
+				em.persist(post);
+				em.flush();
+			}
+
+		}
+	The @Transactional annotation makes the DAO transactional (remember we added &amp;lt;tx:annotation-driven/&amp;gt;). Let&amp;#39;s look at the other Annotations - @Repository annotation is a &amp;quot;stereotype&amp;quot; annotation added in Spring 2.5 which enables Spring to identify Beans for AOP pointcuts. In our case @Repository annotation also enables Spring to automatically convert JPA exceptions to Spring exception hierarchy. Finally, the EntityManager is automatically injected by Spring as it is annotated by @PersistenceContext. Also add - 
+	      &amp;lt;context:component-scan base-package=&amp;quot;net.rocky.postage&amp;quot;/&amp;gt;
+	This tag enables dependency injection with annotations and also auto-detects stereotype classes in the specified package and registers the corresponding beans. 
+
+	That&amp;#39;s it! We have integrated Spring with JPA 2 and Hibernate. Let&amp;#39;s write a test case to verify our setup - 
+	@RunWith(SpringJUnit4ClassRunner.class)
+	@ContextConfiguration(&amp;quot;/applicationContext.xml&amp;quot;)
+	public class PostageDAOImplTest {
+
+		@Resource
+		private PostageDAO postageDAOImpl;
+
+		@Test
+		public void testPostStorage() throws Exception {
+			Post post = new Post();
+			post.setComments(&amp;quot;A simple comment&amp;quot;);
+			post.setDescription(&amp;quot;A simple description&amp;quot;);
+			postageDAOImpl.savePost(post);
+		}
+
+	...
+
+	&amp;lt;strong&amp;gt;Parting thoughts&amp;lt;/strong&amp;gt;
+
+	This whole exercise took me a long time due to lack of comprehensive documentation, version mismatches and multiple approaches suggested by documents/bloggers. The advantage of the approach I have suggested above is that it allows you to switch to different databases for test/production as the datasource and dialect is specified in a .properties file.
+
+	The big idea behind this exercise was to setup a DAO and domain layer akin to Grails which can be easily scaled up. We can further add a service layer to access the data and then use it over a UI. For my next blog I will build on this and create a web application that uses GWT as the front-end.&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Google App Engine + Maven + JSF2</title>
+    <link rel="http://rockyj.in" href="/2011/03/31/2011-03-31-google-app-engine-maven-jsf2.html"/>
+    <id>http://rockyj.in/2011/03/31/2011-03-31-google-app-engine-maven-jsf2.html</id>
+    <published>2011-03-31T00:00:00+05:30</published>
+    <updated>2011-03-31T00:00:00+05:30</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;pre&gt;&lt;code&gt;    I have tried to put all the keywords in the title of this blog, hoping that it will turn some heads. Google App Engine (GAE) provides a great hosting platform for open source apps written in Java/Python. So if you have no qualms about hosting you Java applications on a public server then you have no better choice than GAE.
+
+    The only catch however is, that GAE does not support certain APIs (see the white-list here - &amp;lt;a href=&amp;quot;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;lt;/a&amp;gt;). This restriction makes it difficult to host certain apps / frameworks.&lt;/code&gt;&lt;/pre&gt;</summary>
+    <content type="html">&lt;pre&gt;&lt;code&gt;    I have tried to put all the keywords in the title of this blog, hoping that it will turn some heads. Google App Engine (GAE) provides a great hosting platform for open source apps written in Java/Python. So if you have no qualms about hosting you Java applications on a public server then you have no better choice than GAE.
+
+    The only catch however is, that GAE does not support certain APIs (see the white-list here - &amp;lt;a href=&amp;quot;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html&amp;lt;/a&amp;gt;). This restriction makes it difficult to host certain apps / frameworks.
+
+    GAE provides the infrastructure, a modified Jetty server included in the GAE SDK (&amp;lt;a href=&amp;quot;http://code.google.com/appengine/downloads.html&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;http://code.google.com/appengine/downloads.html&amp;lt;/a&amp;gt;) though which you can test your app. If it runs on the local GAE Jetty server then it will also run on GAE itself. The project structure that Google asks you to create for uploading an app is also quite typical (unless you use Ant) which brings me to my next point.
+
+    &amp;lt;!--more--&amp;gt;
+
+    Maven is my favorite build tool, it would really take something for me to move on to Ant now. So I tried to create my application using Maven and then test it locally on GAE&amp;#39;s Jetty and finally upload it to GAE. After a little search I found the Maven GAE plugin (&amp;lt;a href=&amp;quot;http://code.google.com/p/maven-gae-plugin/&amp;quot;&amp;gt;http://code.google.com/p/maven-gae-plugin/&amp;lt;/a&amp;gt;).
+
+    Below is my pom.xml to make this plugin work - 
+
+    &amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;
+             xsi:schemaLocation=&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&amp;quot;&amp;gt;
+
+        &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;
+        &amp;lt;groupId&amp;gt;net.rocky&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;rocky-gae-app&amp;lt;/artifactId&amp;gt;
+        &amp;lt;packaging&amp;gt;war&amp;lt;/packaging&amp;gt;
+        &amp;lt;version&amp;gt;1&amp;lt;/version&amp;gt;
+        &amp;lt;name&amp;gt;rocky-gae-app&amp;lt;/name&amp;gt;
+        &amp;lt;url&amp;gt;http://maven.apache.org&amp;lt;/url&amp;gt;
+
+        &amp;lt;repositories&amp;gt;
+            &amp;lt;repository&amp;gt;
+                &amp;lt;id&amp;gt;java.net&amp;lt;/id&amp;gt;
+                &amp;lt;url&amp;gt;http://download.java.net/maven/2&amp;lt;/url&amp;gt;
+            &amp;lt;/repository&amp;gt;
+        &amp;lt;/repositories&amp;gt;
+
+        &amp;lt;pluginRepositories&amp;gt;
+            &amp;lt;pluginRepository&amp;gt;
+                &amp;lt;id&amp;gt;maven-gae-plugin-repo&amp;lt;/id&amp;gt;
+                &amp;lt;name&amp;gt;maven-gae-plugin repository&amp;lt;/name&amp;gt;
+                &amp;lt;url&amp;gt;http://maven-gae-plugin.googlecode.com/svn/repository&amp;lt;/url&amp;gt;
+            &amp;lt;/pluginRepository&amp;gt;
+        &amp;lt;/pluginRepositories&amp;gt;
+
+        &amp;lt;dependencies&amp;gt;
+            &amp;lt;dependency&amp;gt;
+                &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt;
+                &amp;lt;artifactId&amp;gt;servlet-api&amp;lt;/artifactId&amp;gt;
+                &amp;lt;version&amp;gt;2.5&amp;lt;/version&amp;gt;
+                &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt;
+            &amp;lt;/dependency&amp;gt;
+            &amp;lt;dependency&amp;gt;
+                &amp;lt;groupId&amp;gt;javax.servlet.jsp&amp;lt;/groupId&amp;gt;
+                &amp;lt;artifactId&amp;gt;jsp-api&amp;lt;/artifactId&amp;gt;
+                &amp;lt;version&amp;gt;2.1&amp;lt;/version&amp;gt;
+                &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt;
+            &amp;lt;/dependency&amp;gt;
+            &amp;lt;dependency&amp;gt;
+                &amp;lt;groupId&amp;gt;com.sun.faces&amp;lt;/groupId&amp;gt;
+                &amp;lt;artifactId&amp;gt;jsf-api&amp;lt;/artifactId&amp;gt;
+                &amp;lt;version&amp;gt;2.0.2&amp;lt;/version&amp;gt;
+            &amp;lt;/dependency&amp;gt;
+            &amp;lt;dependency&amp;gt;
+                &amp;lt;groupId&amp;gt;com.sun.faces&amp;lt;/groupId&amp;gt;
+                &amp;lt;artifactId&amp;gt;jsf-impl&amp;lt;/artifactId&amp;gt;
+                &amp;lt;version&amp;gt;2.0.2&amp;lt;/version&amp;gt;
+                &amp;lt;classifier&amp;gt;gae&amp;lt;/classifier&amp;gt;
+            &amp;lt;/dependency&amp;gt;
+            &amp;lt;dependency&amp;gt;
+                &amp;lt;groupId&amp;gt;org.glassfish.web&amp;lt;/groupId&amp;gt;
+                &amp;lt;artifactId&amp;gt;el-impl&amp;lt;/artifactId&amp;gt;
+                &amp;lt;version&amp;gt;2.2&amp;lt;/version&amp;gt;
+            &amp;lt;/dependency&amp;gt;
+            &amp;lt;dependency&amp;gt;
+                &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
+                &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
+                &amp;lt;version&amp;gt;4.8.1&amp;lt;/version&amp;gt;
+                &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
+            &amp;lt;/dependency&amp;gt;
+        &amp;lt;/dependencies&amp;gt;
+
+        &amp;lt;build&amp;gt;
+            &amp;lt;plugins&amp;gt;
+                &amp;lt;plugin&amp;gt;
+                    &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
+                    &amp;lt;artifactId&amp;gt;maven-compiler-plugin&amp;lt;/artifactId&amp;gt;
+                    &amp;lt;version&amp;gt;2.0.2&amp;lt;/version&amp;gt;
+                    &amp;lt;configuration&amp;gt;
+                        &amp;lt;source&amp;gt;1.6&amp;lt;/source&amp;gt;
+                        &amp;lt;target&amp;gt;1.6&amp;lt;/target&amp;gt;
+                    &amp;lt;/configuration&amp;gt;
+                &amp;lt;/plugin&amp;gt;
+                &amp;lt;plugin&amp;gt;
+                    &amp;lt;groupId&amp;gt;net.kindleit&amp;lt;/groupId&amp;gt;
+                    &amp;lt;artifactId&amp;gt;maven-gae-plugin&amp;lt;/artifactId&amp;gt;
+                    &amp;lt;version&amp;gt;0.6.0&amp;lt;/version&amp;gt;
+                    &amp;lt;configuration&amp;gt;
+                        &amp;lt;sdkDir&amp;gt;/home/rockyj/01rocky/02apps/appengine-java-sdk-1.3.5&amp;lt;/sdkDir&amp;gt;
+                    &amp;lt;/configuration&amp;gt;
+                &amp;lt;/plugin&amp;gt;
+            &amp;lt;/plugins&amp;gt;
+            &amp;lt;finalName&amp;gt;rocky-gae-app&amp;lt;/finalName&amp;gt;
+        &amp;lt;/build&amp;gt;
+        
+    &amp;lt;/project&amp;gt;
+
+    I have included the whole pom as there is hardly anything I can miss here. The GAE plugin is not in maven central so we need to include the plugin repository, the dependencies are pretty standard except one (which I will explain in a moment) and the plugin itself needs the configuration to know where you have the GAE SDK.
+
+    As I mentioned earlier, some classes are blacklisted on the GAE so your default jsf-impl.jar (Mojarra) wil not work on GAE. You will need a modified jar which you can download from here (&amp;lt;a href=&amp;quot;http://code.google.com/p/joshjcarrier/source/browse/trunk/Sun%20JSF%20GAE/jsf-impl-gae.jar&amp;quot;&amp;gt;http://code.google.com/p/joshjcarrier/source/browse/trunk/Sun%20JSF%20GAE/jsf-impl-gae.jar&amp;lt;/a&amp;gt;), if you have a Nexus repo you can install the modified jar there or install the jar in you local repository manually. Also as seen in the pom, for resolving EL (Expression Language) you need el-impl.jar, GAE does not support EL unlike Tomcat. 
+
+    To make JSF work you need the following entries in your web.xml -
+
+        &amp;lt;!-- Seems like GAE 1.2.6 cannot handle server side session management. At least for JSF 2.0.1 --&amp;gt; 
+        &amp;lt;context-param&amp;gt; 
+          &amp;lt;param-name&amp;gt;javax.faces.STATE_SAVING_METHOD&amp;lt;/param-name&amp;gt; 
+          &amp;lt;param-value&amp;gt;client&amp;lt;/param-value&amp;gt; 
+        &amp;lt;/context-param&amp;gt; 
+        &amp;lt;!-- Recommendation from GAE pages  --&amp;gt; 
+        &amp;lt;context-param&amp;gt; 
+          &amp;lt;param-name&amp;gt;javax.faces.PROJECT_STAGE&amp;lt;/param-name&amp;gt; 
+          &amp;lt;param-value&amp;gt;Production&amp;lt;/param-value&amp;gt; 
+        &amp;lt;/context-param&amp;gt;
+        &amp;lt;!-- Accommodate Single-Threaded Requirement of Google AppEngine  --&amp;gt;
+        &amp;lt;context-param&amp;gt;
+          &amp;lt;param-name&amp;gt;com.sun.faces.enableThreading&amp;lt;/param-name&amp;gt;
+          &amp;lt;param-value&amp;gt;false&amp;lt;/param-value&amp;gt;
+        &amp;lt;/context-param&amp;gt;
+
+    Finally, in your appengine-web.xml (the GAE configuration file), you need the following entry - 
+
+    &amp;lt;sessions-enabled&amp;gt;true&amp;lt;/sessions-enabled&amp;gt;
+
+    That&amp;#39;s it. Now you can work on your JSF2 application. To test, all you need to do is : &amp;lt;strong&amp;gt;mvn clean gae:run&amp;lt;/strong&amp;gt;
+
+    For uploading the application, I would still recommend using the SDK provided script (otherwise you need a whole lot of other changes). What I do is - 
+
+    $HOME/01rocky/02apps/appengine-java-sdk-1.3.5/bin/appcfg.sh update /home/rockyj/01rocky/03workspace/scbcd/rocky-gae-app/target/rocky-gae-app/
+
+    This means run the GAE script with the param &amp;lt;strong&amp;gt;&amp;quot;update&amp;quot;&amp;lt;/strong&amp;gt; and the path to your maven created target folder. If you have signed up for GAE, it will ask your username and password and your app will be uploaded to GAE.&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
   <entry>
     <title>Big bad projects</title>
