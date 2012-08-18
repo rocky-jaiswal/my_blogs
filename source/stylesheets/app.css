@@ -1,60 +1,15 @@
-.highlighted {
-  background: #333333;
-  padding: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #000000;
-  text-shadow: none !important;
-}
-
-.highlighted a:hover {
-  color: #FFFFFF;
-  text-decoration: underline;
+.banner {
+  padding: 10px 0px 4px 0px;
+  font-family: 'Ultra', serif;
+  margin-bottom: 30px;
+  background: #FF4533;
 }
 
 .head {
-  color: #CDC23F !important;
-}
-
-.bottom-padded-25 {
-  padding-bottom: 25px;
-}
-
-.sub-title {
-  font-family: 'Open Sans', sans-serif; 
-  color: #FFFFFF;
-}
-
-.bree-citric {
-  font-family: 'Bree Serif', serif;
-  color: #CDC23F;
-}
-
-.head-date {
-  color: #FFFFFF; 
-  float:right; 
-  font-size: 0.7em;
-}
-
-.banner {
-  font-family: 'Ultra', serif;
-  padding: 10px;
-  margin-bottom: 30px;
-  background: #333333;
-}
-
-.banner h1 {
-  margin-bottom: 0;
-  margin-left: 50px;
-  font-size: 3.1em;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: inherit;
+  color: #FFFFFF !important;
 }
 
 .banner p {
-  margin-left: 50px;
-  font-size: 18px;
-  font-weight: 200;
   line-height: 27px;
 }
 
@@ -62,21 +17,27 @@
   text-decoration: none !important;
 }
 
-.gist-highlight {
-    border-left: 3ex solid #eee;
-    position: relative;
+.summary {
+  margin-bottom: 20px;
+  text-align: justify;
 }
 
-.gist-highlight pre {
-    counter-reset: linenumbers;
+.summary p{
+  font-size: 1.1em;
 }
 
-.gist-highlight pre div:before {
-    color: #aaa;
-    content: counter(linenumbers);
-    counter-increment: linenumbers;
-    left: -3ex;
-    position: absolute;
-    text-align: right;
-    width: 2.5ex;
+.post {
+  text-align: justify;
+}
+
+.post p{
+  font-size: 1.1em;
+}
+
+.color-orange {
+  color: #FF4533 !important;
+}
+
+a {
+  color: #FF4533 !important;
 }

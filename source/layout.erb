@@ -9,33 +9,30 @@
     <%= stylesheet_link_tag 'bootstrap' %>
     <%= stylesheet_link_tag 'bootstrap-responsive' %>
     <%= javascript_include_tag 'bootstrap' %>
-    <link href='http://fonts.googleapis.com/css?family=Ultra|Open+Sans|Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
 
     <div class="banner">
-        <h1 class="bottom-padded-25">
+      <div class="container">
+        <h1>
           <a class="head" href="/">Still Learning ...</a>
         </h1>
-        <p class="sub-title">Musings of an agile developer</p>
+        <p>Musings of an agile developer</p>
+      </div>
     </div>
 
-    <div id="main" role="main" class="container-fluid">
-
-      <div class="row-fluid">
+    <div id="main" role="main" class="container">
+      <div class="row">
         <div class="span9">
-          <% if is_blog_article? %>
-            <% content_for :blog_article, yield %>
-            <%= partial settings.blog_article_template %>
-          <% else %>
+          <div id="main" role="main">
             <%= yield %>
-          <% end %>
+          </div>
         </div>
-
         <div class="span3">
           <h2>
-            <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="175" height="118" style="max-width: 100%;"/>
+            <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
             <br/>
             <a href="/about">About</a>
           </h2>
@@ -44,37 +41,25 @@
             <a href="http://github.com/rocky-jaiswal" target="_blank">Github</a>
           </h2>
           <hr/>
-          <h2>
-            <a href="/archives">Recent Articles</a>
-          </h2>
+          <h2>Articles</h2>
           <ol>
-            <% data.blog.articles[0...10].each do |article| %>
-              <li>
-                <a href="<%= article.url %>"><%= article.title %></a> 
-                <span><%= article.date.strftime('%b %Y') %></span>
-              </li>
+            <% blog.articles.each do |article| %>
+              <li><a href="<%= article.url %>"><%= article.title %></a> <span><%= article.date.strftime('%b %e') %></span></li>
             <% end %>
           </ol>
-          <hr/>
-          <h2>
-            <a href="/tags">Tags</a>
-          </h2>
-          <ul>
-            <% data.blog.tags.first(9).each do |slug, tag| %>
-              <li>
-                <h5><%= tag.title %></h5>
-                <ul>
-                  <% tag.pages.each do |title, url| %>
-                    <li>
-                      <a href="<%= url %>"><%= title %></a>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
+          <h2>Tags</h2>
+          <ol>
+            <% blog.tags.each do |tag, articles| %>
+              <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
             <% end %>
-          </ul>
+          </ol>
+          <h2>By Year</h2>
+          <ol>
+            <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
+              <li><a href="<%= blog_year_path year %>"><%= year %> (<%= articles.size %>)</a></li>
+            <% end %>
+          </ol>
         </div>
-      
       </div>
     </div>
   </body>
@@ -90,3 +75,4 @@
     })();
   </script>
 </html>
+
