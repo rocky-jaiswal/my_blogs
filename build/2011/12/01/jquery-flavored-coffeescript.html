@@ -37,7 +37,14 @@
 
 <p>So in a Rails 3.1 application if you do - bundle exec rails g controller Pages home</p>
 
-<p>You get an output like the following - create app/controllers/pages_controller.rb route get &#8220;pages/home&#8221; &#8230; invoke assets invoke coffee create app/assets/javascripts/pages.js.coffee</p>
+<p>You get an output like the following -</p>
+
+<pre><code>create  app/controllers/pages_controller.rb
+      route  get &quot;pages/home&quot;
+      ...
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/pages.js.coffee</code></pre>
 
 <p>As you can see from the output above Rails will generate a .coffee file for you with the controller.</p>
 
@@ -51,7 +58,12 @@
 
 <p>With these things in mind, I decided to write jQuery code in JavaScript. After all, if we intend to write JavaScript for our web application there is no escaping jQuery.</p>
 
-<p>Lets say our haml/html is like %h1 Hello World! = link_to &#8220;Click Me&#8221;, &#8221;#&#8221;, .message Say hello to my new friend!</p>
+<p>Lets say our haml/html is like</p>
+
+<pre><code>%h1 Hello World!
+= link_to &quot;Click Me&quot;, &quot;#&quot;, {:id =&gt; &quot;click_me_link&quot;}
+.message{:style =&gt; &quot;visibility:hidden&quot;}
+	Say hello to my new friend!</code></pre>
 
 <p>Which renders to - <img alt='coffee' src='/images/hello_coffee.jpg' /></p>
 

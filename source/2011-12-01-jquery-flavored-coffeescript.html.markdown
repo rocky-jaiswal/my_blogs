@@ -10,6 +10,7 @@ So in a Rails 3.1 application if you do -
     bundle exec rails g controller Pages home
 
 You get an output like the following - 
+    
     create  app/controllers/pages_controller.rb
           route  get "pages/home"
           ...
@@ -30,6 +31,7 @@ The two keys in CoffeeScript "-" and ">" are enough to declare a function in Jav
 With these things in mind, I decided to write jQuery code in JavaScript. After all, if we intend to write JavaScript for our web application there is no escaping jQuery.
 
 Lets say our haml/html is like
+    
     %h1 Hello World!
     = link_to "Click Me", "#", {:id => "click_me_link"}
     .message{:style => "visibility:hidden"}
