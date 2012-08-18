@@ -35,13 +35,13 @@
               <div class="post">
                 <p>This blog introduces you to JRuby and Rails. We will create a simple web application with CRUD features and deploy it on Tomcat.</p>
 
-<p>Required Software - -JDK 6 -Tomcat 6 -MySql -JRuby (<a href='http://jruby.org/download'>http://jruby.org/download</a>)</p>
+<p>Required Software - -JDK 6 -Tomcat 6 -MySql -JRuby</p>
 
 <p>The blog assumes that you have JDK, MySql and Tomcat set up. Download JRuby from the link above and add the {JRUBY_DIR}/bin to your classpath.</p>
 
 <p>Let&#8217;s run the first command (from any directory) -</p>
 
-<p>jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails</p>
+<pre><code>jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails</code></pre>
 
 <p>If the command above complains of lack of jruby-openssl then abort it (using Ctrl+C) and first run &#8220;jruby -S gem install jruby-openssl&#8221;.</p>
 
@@ -49,17 +49,24 @@
 
 <p>Now run the following command -</p>
 
-<p>jruby -S rails XLib -d mysql</p>
+<pre><code>jruby -S rails XLib -d mysql</code></pre>
 
 <p>Here we are using JRuby to tell Rails (a Ruby web application framework) to create a application XLib which uses MySql as the database.</p>
 
 <p>Enter the newly-created &#8220;XLib&#8221; directory, then modify the config/database.yml. First and foremost, you need to adjust the adapter name, and instead of &#8216;mysql&#8217; you should specify &#8216;jdbcmysql&#8217;. You might also want to delete the lines starting with &#8216;socket:&#8217;. Your development environment config can look like -</p>
 
-<p>development: adapter: jdbcmysql encoding: utf8 reconnect: false database: XLib_dev pool: 5 username: root password: root</p>
+<pre><code>development:
+adapter: jdbcmysql
+encoding: utf8
+reconnect: false
+database: XLib_dev
+pool: 5
+username: root
+password: root</code></pre>
 
 <p>Now let&#8217;s create our schema (make sure you are in your XLib directory) -</p>
 
-<p>jruby -S rake db:create:all</p>
+<pre><code>jruby -S rake db:create:all</code></pre>
 
 <p>The command above runs a rake (like make but for Ruby) task that creates the necessary schema in MySql.</p>
 
@@ -69,45 +76,47 @@
 
 <p>Now lets run -</p>
 
-<p>jruby script/generate scaffold book title:string authors:string genre:string quantity:int added_on:date</p>
+<pre><code>jruby script/generate scaffold book title:string authors:string genre:string quantity:int added_on:date</code></pre>
 
 <p>Scaffolding is one of the main USPs of Rails, it generates the necessary CRUD for a domain object, in our case a &#8220;book&#8221;.</p>
 
 <p>Now we need to update our database -</p>
 
-<p>jruby -S rake db:migrate</p>
+<pre><code>jruby -S rake db:migrate</code></pre>
 
 <p>We&#8217;re all done, let&#8217;s start the mongrel server -</p>
 
-<p>jruby script/server</p>
+<pre><code>jruby script/server</code></pre>
 
 <p>check out the application at -</p>
-<a href='http://localhost:3000/books'>http://localhost:3000/books</a>
+
+<p><strong>http://localhost:3000/books</strong></p>
+
 <p>You can add, edit, delete and see a listing of all the books.</p>
 
 <p>We used JRuby (which is the Java implementation of Ruby) so that our application can run on JVM. Since it can run on JVM it can also run on Tomcat. To run it on Tomcat we first need to convert it to a war file. You guessed it, there is a gem for that -</p>
 
-<p>jruby -S gem install warbler</p>
+<pre><code>jruby -S gem install warbler</code></pre>
 
 <p>Next, run the following (inside XLib directory) -</p>
 
-<p>warble config</p>
+<pre><code>warble config</code></pre>
 
 <p>This will generate a config file for warble as warble.rb in your app&#8217;s config directory</p>
 
 <p>Open this config file and add the following line at the end -</p>
 
-<p>config.gems += <span>&#8220;activerecord-jdbcmysql-adapter&#8221;, &#8220;jruby-openssl&#8221;</span></p>
+<pre><code>config.gems += [&quot;activerecord-jdbcmysql-adapter&quot;, &quot;jruby-openssl&quot;]</code></pre>
 
 <p>This enables the gems above to be bundled in your war, otherwise Tomcat complains of missing libraries.</p>
 
 <p>Now, run the command -</p>
 
-<p>warble</p>
+<pre><code>warble</code></pre>
 
 <p>This will create XLib.war in you XLib directory, copy this file to your $TOMCAT_HOME/webapps and start Tomcat. This will unzip the war, shutdown Tomcat after a while, check XLibs&#8217; web.xml and make sure the environment points to development. Restart Tomcat.</p>
 
-<p>Go to <a href='http://localhost:8080/XLib/books'>http://localhost:8080/XLib/books</a></p>
+<p>Go to <strong>http://localhost:8080/XLib/books</strong></p>
 
 <p>And that&#8217;s it, you have a CRUD application running on Tomcat without even writing a single line of code.</p>
               </div>

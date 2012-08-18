@@ -21,7 +21,7 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a>
 
 Inclusion of jQuery is adding a standard line in html -
 
-&lt;script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" /&gt;
+        <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" />
 
 That is all it takes to setup jQuery.
 
@@ -31,7 +31,7 @@ Almost all jQuery operations can be divided into two parts - Selection and Manip
 
 jQuery allows you to select an HTML element and carry out operations on it. An example of this would be -
 
-$("#an-id").addClass("error")
+        $("#an-id").addClass("error")
 
 Here we have used jQuery to select an HTML element of id "an-id" and add a style class to it. The part before the dot (.) is equivalent to document.getElementById("an-id") but is much easier to write.
 
