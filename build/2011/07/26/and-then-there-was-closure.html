@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocky Jaiswal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="container">
+        <h1>
+          <a class="head" href="/">Still Learning ...</a>
+        </h1>
+        <p class="sub-title">Musings of an agile developer</p>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <div class="row">
+        <div class="span12">
+          <div id="main" role="main">
+            <article>
+              <h2>
+                  <span class="color-orange">And then there was Closure</span> 
+                  <span>Jul 26 2011</span>
+              </h2>
+              
+              <div class="post">
+                <p>A while back when I introduced Ruby to a few fellow Java developers they were intrigued by Closures / Lambdas. For most Java developers its difficult to understand what the hullabaloo around Closures and Functional programming is. What more, one might be a Ruby programmer for years and write code without ever creating Closures and doing functional programming. With the Object Oriented way of thinking, data is stored in fields and operations on this data is done by methods. Why in this wide world does one need Closures? I thought for a long time about the answer to this question and as I started learning JavaScript I realized the beauty of Closures and functional programming.</p>
+
+<p>Below is a simple code problem written in Java and Ruby which I hope will help some of the Java developers understand Closures and also help us answer the question - Why we need Closures?</p>
+
+<p>The problem is simple, I have a User class which has many fields like name, age, department code etc. I want to sort a list of users based on any of the fields it contains.</p>
+
+<p>Below is the sample User class in Java and Ruby.</p>
+
+<pre><code>//Java Code
+class User {
+    
+    private String name;
+    private Integer age;
+
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;User &quot; + this.getName() + &quot; - &quot; + this.getAge();
+    }
+    
+}</code></pre>
+
+<p>Ruby class User attr_accessor :name, :age</p>
+
+<pre><code>  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+
+  def to_s
+    &quot;User #{name} - #{age}&quot;
+  end
+
+end</code></pre>
+
+<p>Simple enough.</p>
+
+<p>To sort a list of Users based on a parameter that is passed, Java will have code somewhat like this -</p>
+
+<pre><code>public class Sorter {
+    
+    public static void main(String args[]) {
+        Sorter sorter = new Sorter();
+        
+        User user1 = new User(&quot;Rocky&quot;, 31);
+        User user2 = new User(&quot;Aditya&quot;, 30);
+        User user3 = new User(&quot;Sukhpal&quot;, 32);
+        List&lt;User&gt; users = Arrays.asList(user1, user2, user3);
+        
+        if(args[0].equals(&quot;name&quot;)) {
+            sorter.sortOnName(users);
+        }
+        if(args[0].equals(&quot;age&quot;)) {
+            sorter.sortOnAge(users);
+        }   
+        System.out.println(users);
+    }
+    
+    List&lt;User&gt; sortOnName(List&lt;User&gt; users) {
+        Collections.sort(users, new Comparator&lt;User&gt;() {
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        return users;
+    }
+
+    List&lt;User&gt; sortOnAge(List&lt;User&gt; users) {
+        Collections.sort(users, new Comparator&lt;User&gt;() {
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.getAge().compareTo(o2.getAge());
+            }
+        });
+        return users;
+    }
+    
+}</code></pre>
+
+<p>So in the main method we are creating a few users just for testing (yes I could have done this in a test case) and then we are invoking the sorting code based on a parameter. To sort we are using the &#8220;sort&#8221; utility method provided in Collections class which expects the list and a Comparator object. We are creating the Comparator object inline and passing it.</p>
+
+<p>In comparison, to do the same thing in Ruby we have to do this -</p>
+
+<pre><code>user1 = User.new(&quot;Rocky&quot;, 31)
+user2 = User.new(&quot;Aditya&quot;, 30)
+user3 = User.new(&quot;Sukhpal&quot;, 32)
+user4 = User.new(&quot;Rohan&quot;, 25)
+
+users = [user1, user2, user3, user4]
+
+sorter = -&gt;(user_x, user_y){ user_x.name &lt;=&gt; user_y.name } if(ARGV[0] == &quot;name&quot;)
+sorter = -&gt;(user_x, user_y){ user_x.age &lt;=&gt; user_y.age } if(ARGV[0] == &quot;age&quot;)
+
+puts users.sort(&amp;sorter)</code></pre>
+
+<p>The first thing that strikes you about the Ruby code is how small it is. If we ignore creation of the test data this code is merely 3 lines, as compared to around 20 lines in Java (assuming we are trying to do some clean coding). Moreover adding a new &#8220;sortable&#8221; field in Java is around 8-10 lines of code and in Ruby its just one line!</p>
+
+<p>Lets try and understand what Ruby is doing. Line 8 is where the magic happens, simply speaking Closures are methods that can be passed around as values. So you can store a function in an array, retrieve it by the array&#8217;s index and execute it. So in this line we are creating a function that expects two parameters (inside the two parentheses) and has the body (inside the curly braces) where we are doing comparison (using Ruby&#8217;s &lt;=&gt; operator). Of course, since Ruby is a dynamic language, there are no types associated with the variables.</p>
+
+<p>So in this logic we define our closure based on the parameter passed (lines 8 and 9) and hold it&#8217;s reference in the variable &#8220;sorter&#8221;.</p>
+
+<p>Finally we call the Array.sort method which expects a code block / closure that does the comparison. In our case we pass the sorter&#8217;s reference and we are all done.</p>
+
+<p>Now the question comes why are we doing all this. As mentioned earlier, the number of lines of code in the Ruby solution is drastically less which means lesser lines to test and lesser lines to maintain and consequently the code has lesser chances of breaking. One still might argue that for an end user or my non-technical manager it only matters that a job is done, no matter how. But even for them functional programming brings added robustness to software and scales well too (e.g. adding a new &#8220;sortable&#8221; field). For a developer, its also about software craftsmanship and improving the way we code day in and day out.</p>
+
+<p>Finally, if you think that Ruby&#8217;s dynamic typing is too much for you and you miss type safety, generics etc. and you still want to do functional programming try <strong>Scala</strong>. It is an Object Oriented yet Functional, type safe programming language which runs on JVM. More on it later :).</p>
+              </div>
+
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

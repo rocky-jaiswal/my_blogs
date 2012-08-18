@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog Name</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://blog.url.com/</id>
+  <link href="http://blog.url.com/"/>
+  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2012-06-08T00:00:00Z</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>The non-tangibles of Agile</title>
+    <link rel="alternate" href="/2012/06/08/non_tangibles_of_agile.html"/>
+    <id>/2012/06/08/non_tangibles_of_agile.html</id>
+    <published>2012-06-08T00:00:00Z</published>
+    <updated>2012-06-08T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;A lot of times I have been told that being Agile is all about attitude, a statement which I could not understand until a while back. I thought like in every process if you do X, Y, Z you become Agile. However lately I have realized that Agility is not just about burndown charts, having planning &amp;amp; retrospective meetings or doing you daily stand-ups.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;A lot of times I have been told that being Agile is all about attitude, a statement which I could not understand until a while back. I thought like in every process if you do X, Y, Z you become Agile. However lately I have realized that Agility is not just about burndown charts, having planning &amp;amp; retrospective meetings or doing you daily stand-ups.&lt;/p&gt;
+
+&lt;p&gt;Being Agile is an actually an attitude, which may sound gibberish but in this post I will try and make some sense of the this &amp;#8220;attitude&amp;#8221; and try to make it more tangible. So if you are doing planning poker, burndown charts and all that jazz that is great but you should still item about these not so obvious things -&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Trust&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I talk a lot about trust in my blogs, but what is trust in professional life? In a Scrum project, you can ask yourselves the following questions -&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Do you trust your developers to do the right thing every single time?&lt;/li&gt;
+
+&lt;li&gt;Do you trust the estimates your developers are giving you?&lt;/li&gt;
+
+&lt;li&gt;Do you trust the estimate of the developer even when you see him doing something not related to project?&lt;/li&gt;
+
+&lt;li&gt;Do the developers trust the product owner that the backlog is sufficiently refined and prioritized?&lt;/li&gt;
+
+&lt;li&gt;Do the developers trust that the Scrum Master is helping them?&lt;/li&gt;
+
+&lt;li&gt;Do you trust the Product Owner that he has the larger plan and release date in his/her mind and every action takes you towards that release date?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Trust takes a long time to build and breaks with one small action. The Scrum master, product owner and the developers need to really trust each other if Scrum has to succeed. For example the PO who doesn&amp;#8217;t trust the team&amp;#8217;s estimates will always think that the developers are slacking and keep pushing them to do more which will ultimately destroy the team morale and the project.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Courage&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Agile or Scrum does not fix a single problem. Yes, that is true! I will only highlight and identify some problems as quickly as you allow it to. One can do all the retros in the world but not have the courage to break the bad news or become the bad guy who bring the bad news. For example, the release backlog is no where near the state it should be or the developers don&amp;#8217;t have the tools they need, this will be easily identified in the sprint demo or retro but a lot of times people choose to postpone it or ignore talking about it let alone taking tough decisions like backlog pruning or reducing features. Courage can be in simple things like cancelling a phone call if the phone line is not clear, even do it multiple times forcing change to a better communication solution rather than sleep talking on calls.&lt;/p&gt;
+
+&lt;p&gt;One should encourage the people who dissent, who shout and scream when they feel something is not right. Most of the times these people will help you avoid the proverbial iceberg.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Motivation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Motivation is a huge thing, and sometimes even Agile will not even identify it. Motivation degrades over time in situations where product is not released for a long time, there are constant changes within the sprint, there is mistrust among the team members or worse case some team members are disgruntled by organization policies or work culture. This situation demands extreme caution and monitoring that falls outside the Scrum purview. This can be indentified while going for team lunches, having one-on-ones with senior management or sometimes encouraging people to vent out their negative feelings. If any de-motivating factors are identified they should be fixed as soon as possible otherwise Scrum or no Scrum, the project is doomed.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sense of Purpose and Sense of Achievement&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The essence of a Sprint is to provide the team a sense of purpose and focus towards a limited set of problems or functionalites so that they can just think about a few tasks each and focus working on them. Developers work in a state of flow, they like it when things are organized and they know exactly what they have to do and what is the next item on their plate and nothing else. I have found programming to be a greater joy when I know exactly what is needed and the business value it will deliver. It makes me believe that my effort is helping someone and is driving the project forward. Same thing goes for a Sprint demo, if your spring demo is successful, celebrate a little, take the rest of the day off for open-source or gaming or whatever you fancy. Success and appreciation are highly addictive it will keep the team coming back for more.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Team Composition and Working Style&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Software projects are hard, not only technically but also in terms of team dynamics. Developers meet new team members, work with them for a while and the team is disbanded in six months or so. The whole process repeats itself time and again and is emotinally draining. The best performing teams I have met are the ones where every team member enjoy&amp;#8217;s the others&amp;#8217; company, cracks jokes, pulls pranks on each other and even enjoy the blaring music on their teammates&amp;#8217; laptop. This is very hard to achieve and I think the only one way to create such teams is being cautious during interviews. Try and identify the organization culture you want to develop, put it on your website, identify 5-6 culture related questions that you will ask in interviews. Build teams who can share a similar goal, for example a team where the PO is fine to release a half baked product as soon as possible and a team which wants to deliver to great product but with time will find it hard to work with each other. Agile may help you identify such symptoms but it may be too late to fix them by then.&lt;/p&gt;
+
+&lt;p&gt;I hope you enjoyed reading this blog, feel free to comment on the non-tangibles of Agile which you feel are important but often ignored.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Blog moved to pure HTML5, CSS3</title>
+    <link rel="alternate" href="/2012/05/28/moved_to_html.html"/>
+    <id>/2012/05/28/moved_to_html.html</id>
+    <published>2012-05-28T00:00:00Z</published>
+    <updated>2012-05-28T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;I have recently moved the blog to pure HTML5 and CSS3 (as you can see) from Wordpress. It gives me more control over the layout, look and feel and also helps me express my ideas freely.&lt;/p&gt;
+
+&lt;p&gt;However, the migration is far from complete. Few of my older blog posts might not show up or look funny. I am working to fix this. I am really sorry for the inconvenice.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;I have recently moved the blog to pure HTML5 and CSS3 (as you can see) from Wordpress. It gives me more control over the layout, look and feel and also helps me express my ideas freely.&lt;/p&gt;
+
+&lt;p&gt;However, the migration is far from complete. Few of my older blog posts might not show up or look funny. I am working to fix this. I am really sorry for the inconvenice.&lt;/p&gt;
+
+&lt;p&gt;Some of your great comments have also been lost, something which I am again trying to fix.&lt;/p&gt;
+
+&lt;p&gt;On the flip side, the new blog is built with &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, Twitter bootstrap (with a resposive twist) and my own Nginx setup so it should feel much snappier and work on multiple devices. You can check out the source code on &lt;a href='https://github.com/rocky-jaiswal/my_blogs'&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thanks for your patience.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>A gentle introduction to Backbone with jQuery</title>
+    <link rel="alternate" href="/2012/05/25/intro_to_backbone_jQuery.html"/>
+    <id>/2012/05/25/intro_to_backbone_jQuery.html</id>
+    <published>2012-05-25T00:00:00Z</published>
+    <updated>2012-05-25T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;Backbone is a great JavaScript framework, I am sure most developers would have heard about it. I spent some time learning Backbone and want to share the little I have learned so far.&lt;/p&gt;
+
+&lt;p&gt;When you go to the backbone.js &lt;a href='http://backbonejs.org'&gt;page&lt;/a&gt; it gives you a very nice view of Backbone&amp;#8217;s api and a very small introduction. This was a problem was for a thick guy like me, the Backbone introduction was not good enough and most importantly it didn&amp;#8217;t answer when and why should I use backbone.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;Backbone is a great JavaScript framework, I am sure most developers would have heard about it. I spent some time learning Backbone and want to share the little I have learned so far.&lt;/p&gt;
+
+&lt;p&gt;When you go to the backbone.js &lt;a href='http://backbonejs.org'&gt;page&lt;/a&gt; it gives you a very nice view of Backbone&amp;#8217;s api and a very small introduction. This was a problem was for a thick guy like me, the Backbone introduction was not good enough and most importantly it didn&amp;#8217;t answer when and why should I use backbone.&lt;/p&gt;
+
+&lt;p&gt;After some Google searches, I learned that Backbone is good for organizing your JavaScript. As web developers we tend to do a lot of jQuery these days and more often than not jQuery can be pretty clean and decent. So why does one need Backbone? To answer this question lets build a small application in pure jQuery and then in Backbone + jQuery to see when and where Backbone helps.&lt;/p&gt;
+
+&lt;p&gt;Our app is very simple. I have made a Rails application and scaffolded a model called User with fields of name, age etc. For those of you who are not familiar with Rails, basically I have created CRUD operations on a model User and exposed them RESTfully.&lt;/p&gt;
+
+&lt;p&gt;I then created a few entries for the User model so that I have some data. Now to get started using jQuery, I built a form which has autocomplete so that it shows me the list of users as I type in a few characters in a text field. See image -&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='jQuery UI Autocomplete' src='/images/autocomplete.png' /&gt; &lt;img alt='jQuery UI Autocomplete' src='/images/autocomplete_selected.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have used jQuery, jQueryUI and underscore.js libraries to do this. Here is the code -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1&amp;gt;Find Users&amp;lt;/h1&amp;gt;
+&amp;lt;form action=&amp;quot;find&amp;quot; method=&amp;quot;get&amp;quot;&amp;gt;
+  &amp;lt;input type=&amp;quot;text&amp;quot; placeholder=&amp;quot;Enter Name&amp;quot; id=&amp;quot;user-input&amp;quot;/&amp;gt;
+&amp;lt;/form&amp;gt;
+&amp;lt;div id=&amp;quot;user-selection&amp;quot; style=&amp;quot;margin-top:10px;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+&amp;lt;script&amp;gt;
+  $(function() {
+    function getNames() {
+      var users = $.ajax({url : &amp;quot;/users.json&amp;quot;, async: false});
+      var names = _.map(JSON.parse(users.responseText), function(user){return user.name});
+      return names;
+    }
+    
+    var names = getNames();
+    
+    $(&amp;quot;#user-input&amp;quot;).autocomplete({
+      source : names,
+      minLength : 2,
+      select: function(event, ui){
+        $(&amp;quot;#user-selection&amp;quot;).html(&amp;quot;Selected: &amp;quot; + ui.item.value);
+      }
+    });
+  });
+&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we are basically using jQuery UI&amp;#8217;s autocomplete function and passing it the data source as a variable named &amp;#8220;names&amp;#8221;, which we populate through an AJAX call (with Rails we get the server code free when we scaffold). Since the /users.json call retuns other associated data in the JSON we need to clean it up (it contains other fields such as age, last_updated_at etc.).&lt;/p&gt;
+
+&lt;p&gt;So we use the very good underscore.js library to convert this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[{&amp;quot;name&amp;quot;:&amp;quot;rocky&amp;quot;, &amp;quot;age:32&amp;quot;, ...}, {&amp;quot;name&amp;quot;:&amp;quot;annie&amp;quot;, &amp;quot;age:31&amp;quot;, ...} ...] &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[&amp;quot;rocky&amp;quot;, &amp;quot;annie&amp;quot; ...] &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;using the &lt;a href='http://underscorejs.org/#map'&gt;&amp;#8220;map&amp;#8221;&lt;/a&gt; function. Please note that this is not the most efficient method for autocomplete as we are using AJAX to load all users in a JSON in one go but for our little experiment we will keep it this way.&lt;/p&gt;
+
+&lt;p&gt;Finally when the user makes a selection we give some feedback and display the selected value in a div using jQuery.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Now lets use Backbone to rewrite this code. With Backbone we get a MVC kind of structure to our application. Here is the new code&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1&amp;gt;Find Users&amp;lt;/h1&amp;gt;
+&amp;lt;form action=&amp;quot;find&amp;quot; method=&amp;quot;get&amp;quot;&amp;gt;
+  &amp;lt;input type=&amp;quot;text&amp;quot; placeholder=&amp;quot;Enter Name&amp;quot; id=&amp;quot;user-input&amp;quot;/&amp;gt;
+&amp;lt;/form&amp;gt;
+&amp;lt;div id=&amp;quot;user-selection&amp;quot; style=&amp;quot;margin-top:10px;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+&amp;lt;script&amp;gt;
+  $(function() {
+    var User = Backbone.Model.extend({}); //Line 9
+
+    var UserList = Backbone.Collection.extend({ //Line 11
+      model: User,
+      url: &amp;#39;/users.json&amp;#39;,
+      parse: function(response) {
+        return response;
+      }
+    });
+
+    var SelectionView = Backbone.View.extend({ //Line 19
+      el : $(&amp;#39;#user-selection&amp;#39;),
+      render: function() {
+        $(this.el).html(&amp;quot;You Selected : &amp;quot; + this.model.get(&amp;#39;name&amp;#39;)); //Line 22
+        return this;
+      },
+    });
+
+    var users = new UserList(); //Line 26
+    users.fetch({async: false});
+    var userNames = users.pluck(&amp;quot;name&amp;quot;);
+
+    $(&amp;quot;#user-input&amp;quot;).autocomplete({ //Line 30
+      source : userNames,
+      minLength : 2,
+      select: function(event, ui){ //Line 33
+        var selectedModel = users.where({name: ui.item.value})[0];
+        var view = new SelectionView({model: selectedModel});
+        view.render();
+      }
+    });
+  });
+&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Don&amp;#8217;t worry if this looks too complicated. In 5 minutes, you will understand everything.&lt;/p&gt;
+
+&lt;p&gt;Firstly, there is no change in HTML. I have delibrately kept it that way.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Lets start at line 9 - As evident our Model in MVC is User. We just declare a basic - Backbone Model.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Line 11 - Backbone added a Collections object to MVC because most of the time we are dealing with a collection of Models. Here extend a Collection, give it the model User as it will be a collection of model User we declared above. We give it a &amp;#8216;url&amp;#8217; from where this collection will be loaded and we provide a &amp;#8216;parse&amp;#8217; function. This parse is called whenever we fetch data from the server which we do on line 27 and saves us any JSON cleanup.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Line 19 - We declare a view here. For now ignore the code in there.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Line 26 to 28 - Intialize the collection, load the data through AJAX and pluck the &amp;#8220;name&amp;#8221; field out from JSON. In our pure jQuery implementation we used underscore&amp;#8217;s &amp;#8220;map&amp;#8221; for this.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Line 30 to 33 - No change from our pure jQuery implementation.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Line 34 - Here using Collection.where function we fetch the model that was selected. The user selects a string so we have to do this.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Line 35 - We instantiate our view and assign it the selected model.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Line 37 - We render our view.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let&amp;#8217;s now analyze our render function on line 22. this.model.get(&amp;#8216;name&amp;#8217;) will give you the selected model&amp;#8217;s name. We create a string by appending it with &amp;#8220;You Selected : &amp;#8220;.&lt;/p&gt;
+
+&lt;p&gt;We all know what $(&amp;#8220;#some-id&amp;#8221;).html() will do. So what is &amp;#8220;el&amp;#8221;? Basically, all Backbone Views have an el property which is the DOM element it is binded to. If not specified it is a &amp;#8216;div&amp;#8217;. So we have binded our View to a div using a jQuery selector.&lt;/p&gt;
+
+&lt;p&gt;Talking of views we have manually set a string to be our HTML, this is ok for now but for more HTML Backbone also provides you with &amp;#8220;templates&amp;#8221; that can be compiled and added to your Views.&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s it, now our code is better and much more modular. I can see that you may not be impressed. In my example there is not a huge benefit by using Backbone. But imagine an app that loads multiple models on a page, uses AJAX to sync them and maybe listens to events and executes callbacks, all this leads to spaghetti code which is ugly and unmaintainable. That is where the benefit of MVC will kick in.&lt;/p&gt;
+
+&lt;p&gt;Also, if I had taken a bigger example it would have been difficult to explain it in one blog post. Probably that is why you don&amp;#8217;t see many simple examples of Backbone on the web.&lt;/p&gt;
+
+&lt;p&gt;We really have scratched the surface of Backbone here. For example, since our event was triggered by autocomplete we could not programmatically bind it for re-rending the view. But in case of clicking a button or a link (which are the most common events on the web) we could have easily saved some code by declartively binding the click of a button to a view&amp;#8217;s rendering.&lt;/p&gt;
+
+&lt;p&gt;I hope I have given you a small introduction to get started with Backbone. Please leave your comments for a better blog post next time.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Video of my talk with @arunagw at RubyConf India 2012</title>
+    <link rel="alternate" href="/2012/05/21/video_rubyconf_india.html"/>
+    <id>/2012/05/21/video_rubyconf_india.html</id>
+    <published>2012-05-21T00:00:00Z</published>
+    <updated>2012-05-21T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;object height='315' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='560' /&gt;&lt;/object&gt;</summary>
+    <content type="html">&lt;object height='315' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='560' /&gt;&lt;/object&gt;</content>
+  </entry>
+  <entry>
+    <title>Setting up Solr</title>
+    <link rel="alternate" href="/2012/05/08/setting_up_solr.html"/>
+    <id>/2012/05/08/setting_up_solr.html</id>
+    <published>2012-05-08T00:00:00Z</published>
+    <updated>2012-05-08T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;Few of my Ruby friends have a hard time setting up Solr for their Prod / EC2 servers. Solr is a Java web application and also come with a Jetty distribution so that you can just do -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;java -jar SOLR_DOWNLOAD/example/start.jar&lt;/code&gt;&lt;/pre&gt;
+</summary>
+    <content type="html">&lt;p&gt;Few of my Ruby friends have a hard time setting up Solr for their Prod / EC2 servers. Solr is a Java web application and also come with a Jetty distribution so that you can just do -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;java -jar SOLR_DOWNLOAD/example/start.jar&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This however is not recommended for production as this is just running Solr on the bundled Jetty and Solr Admin is unsecured.&lt;/p&gt;
+
+&lt;p&gt;To setup a clean and secure Solr instance, I usually do the following -&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Copy the $SOLR_DOWNLOAD/example/solr directory somewhere else. For example $HOME/config/solr. This is now your solr config directory.&lt;/li&gt;
+
+&lt;li&gt;Download Tomcat and add the following line to $TOMCAT_HOME/bin/catalina.sh &lt;pre&gt;CATALINA_OPTS="-Dsolr.solr.home=/home/rockyj/conf/solr"&lt;/pre&gt; This basically sets the solr.solr.home Java environment variable.&lt;/li&gt;
+
+&lt;li&gt;Copy the solr.war (you may need to rename this) from your SOLR_DOWNLOAD/dist to $TOMCAT_HOME/webapps.&lt;/li&gt;
+
+&lt;li&gt;Start Tomcat &lt;pre&gt;$TOMCAT_HOME/bin/startup.sh&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;Go to http://localhost:8080/solr. You should see the Solr home page with the link to Admin page. The Admin is unsecured right now. The basic Solr installation works now.&lt;/li&gt;
+
+&lt;li&gt;Shutdown Tomcat.&lt;/li&gt;
+
+&lt;li&gt;Let us now add a Solr core. Solr core allow you to use a single Solr webapp with many configurations and indexes for different aplications, each with their own config and schema.&lt;/li&gt;
+
+&lt;li&gt;In your $HOME/config/solr/solr.xml file edit the cores tag like this - &lt;pre&gt;
+   &amp;lt;cores adminPath="/admin/cores" defaultCoreName="collection1"&amp;gt;
+     &amp;lt;core name="collection1" instanceDir="." /&amp;gt;
+     &amp;lt;core name="core1" instanceDir="./core1" /&amp;gt;
+   &amp;lt;/cores&amp;gt;&lt;/pre&gt; This creates a new core which will look for its config in $HOME/config/solr/core1/ (in our case). The default core will be called &amp;#8220;collection1&amp;#8221; and our new core is &amp;#8220;core1&amp;#8221;.&lt;/li&gt;
+
+&lt;li&gt;Now create a directory in your $HOME/config/solr called &amp;#8220;core1&amp;#8221; and copy the &amp;#8220;conf&amp;#8221; directory from $HOME/config/solr into the &amp;#8220;core1&amp;#8221; directory. Create an empty directory called &amp;#8220;data&amp;#8221; as well in &amp;#8220;core1&amp;#8221;.&lt;/li&gt;
+
+&lt;li&gt;Now your new core is all setup. Restart Tomcat and check the admin page, you should see a new core listed there.&lt;/li&gt;
+
+&lt;li&gt;Let us secure the admin page then. We will do this the standard Java way. In your $TOMCAT_HOME/webapps/solr/WEB-INF/web.xml add - &lt;pre&gt;
+  &amp;lt;security-constraint&amp;gt;
+    &amp;lt;web-resource-collection&amp;gt;
+      &amp;lt;web-resource-name&amp;gt;Solr Admin&amp;lt;/web-resource-name&amp;gt;
+      &amp;lt;url-pattern&amp;gt;/admin/*&amp;lt;/url-pattern&amp;gt;
+      &amp;lt;url-pattern&amp;gt;/collection1/admin/*&amp;lt;/url-pattern&amp;gt;
+      &amp;lt;url-pattern&amp;gt;/core1/admin/*&amp;lt;/url-pattern&amp;gt;
+    &amp;lt;/web-resource-collection&amp;gt;
+    &amp;lt;auth-constraint&amp;gt;
+      &amp;lt;role-name&amp;gt;tomcat&amp;lt;/role-name&amp;gt;
+    &amp;lt;/auth-constraint&amp;gt;
+  &amp;lt;/security-constraint&amp;gt;
+  &amp;lt;login-config&amp;gt;
+    &amp;lt;auth-method&amp;gt;BASIC&amp;lt;/auth-method&amp;gt;
+    &amp;lt;realm-name&amp;gt;default&amp;lt;/realm-name&amp;gt;
+  &amp;lt;/login-config&amp;gt;
+&lt;/pre&gt; Here we are basically securing url patterns (the admin pages) with HTTP BASIC and providing access to user &amp;#8220;tomcat&amp;#8221;.&lt;/li&gt;
+
+&lt;li&gt;To activate the &amp;#8220;tomcat&amp;#8221; user, uncomment the tags in $TOMCAT_HOME/conf/tomcat-users.xml. You can change both the username and password there.&lt;/li&gt;
+
+&lt;li&gt;That&amp;#8217;s it, once Tomcat is restarted, the admin urls should pop up a HTTP BASIC auth window.&lt;/li&gt;
+
+&lt;li&gt;Finally don&amp;#8217;t forget to setup your firewall and block Tomcat&amp;#8217;s port 8080. For Ubuntu I highly recommend the ultra simple &amp;#8220;UFW&amp;#8221;.&lt;/li&gt;
+&lt;/ol&gt;</content>
+  </entry>
+  <entry>
+    <title>Old JBoss Video</title>
+    <link rel="alternate" href="/2012/03/27/old_jboss_video.html"/>
+    <id>/2012/03/27/old_jboss_video.html</id>
+    <published>2012-03-27T00:00:00Z</published>
+    <updated>2012-03-27T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;Found this old &amp;#8220;Migrating to JBoss&amp;#8221; video I did a long time back. Good old days :)&lt;/p&gt;
+&lt;object height='315' width='420'&gt;&lt;param name='movie' value='http://www.youtube.com/v/gIybgjCnGZg?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/gIybgjCnGZg?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='420' /&gt;&lt;/object&gt;</summary>
+    <content type="html">&lt;p&gt;Found this old &amp;#8220;Migrating to JBoss&amp;#8221; video I did a long time back. Good old days :)&lt;/p&gt;
+&lt;object height='315' width='420'&gt;&lt;param name='movie' value='http://www.youtube.com/v/gIybgjCnGZg?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/gIybgjCnGZg?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='420' /&gt;&lt;/object&gt;</content>
+  </entry>
+</feed>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocky Jaiswal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="container">
+        <h1>
+          <a class="head" href="/">Still Learning ...</a>
+        </h1>
+        <p class="sub-title">Musings of an agile developer</p>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <div class="row">
+        <div class="span12">
+          <div id="main" role="main">
+            <article>
+              <h2>
+                  <span class="color-orange">Using RVM on Ubuntu to install (multiple versions of) Ruby</span> 
+                  <span>Apr 14 2011</span>
+              </h2>
+              
+              <div class="post">
+                <p>Recently I got a new laptop and as usual I installed Ubuntu on it, although for the last year or so I was using <a href='http://www.pclinuxos.com/' target='_blank'>PCLinuxOS</a> it felt good to go back to an old friend. The first job at hand was to install Ruby on it.</p>
+
+<p>I wanted to install Ruby 1.9.2 since it is the latest and recommended version. However in Synaptic I could only find Ruby 1.8.7 (very stable) and Ruby 1.9.1 (not recommended). Then I read about RVM (Ruby Version Manager) and thought I would give it a spin.</p>
+
+<p>To install RVM you first need Git, as RVM downloads the source code from Github and builds from there. So head over to Synaptic and install Git.</p>
+
+<p>Before you install RVM (and I learned this from after a lot of tries) also install some other packages -</p>
+
+<p><strong>sudo apt-get install curl gcc g++ build-essential libssl-dev libreadline5-dev zlib1g-dev linux-headers-generic libsqlite3-dev</strong></p>
+
+<p>If you do not do this you can still install RVM but if you try and run IRB it complains about Readline and some other stuff.</p>
+
+<p>Next, as given in RVM&#8217;s <a href='https://rvm.beginrescueend.com/' target='_blank'>website</a> run -</p>
+
+<p><strong>$ bash &#60; &#60;(curl -s https://rvm.beginrescueend.com/install/rvm)</strong></p>
+
+<p>This will download and compile RVM and may take a few minutes.</p>
+
+<p>Once RVM is installed, run -</p>
+
+<p><strong>. &#8220;$HOME/.rvm/scripts/rvm&#8221;</strong></p>
+
+<p>This will &#8220;Source&#8221; the RVM script and load the rvm command as a function.</p>
+
+<p>Now simply run -</p>
+
+<p><strong>rvm install 1.9.2</strong></p>
+
+<p>This will install 1.9.2 version of Ruby.</p>
+
+<p>You can also install another version by simply typing -</p>
+
+<p><strong>rvm install 1.8.7</strong></p>
+
+<p>And once you are done, just say -</p>
+
+<p><strong>rvm use 1.9.2</strong> or <strong>rvm use 1.8.7</strong></p>
+
+<p>And accordingly the Ruby environment will be loaded. You can check the version by just typing</p>
+
+<p><strong>ruby -v</strong></p>
+
+<p>To make a Ruby version default (will save you the use command) run</p>
+
+<p><strong>rvm &#8211;default use 1.9.2</strong> # This is a double hyphen/dash</p>
+
+<p>With this whenever you source the rvm script, Ruby 1.9.2 will be loaded automatically.</p>
+
+<p>Last step is sourcing the rvm script (. &#8220;$HOME/.rvm/scripts/rvm&#8221;) automatically every time you log in. Ideally you should be able to put this in your bash_login script but I tried that and it didn&#8217;t work. Anyone who has met success with this can comment on this post, it would a great help. Otherwise you just have to make a habit of running <strong>. &#8220;$HOME/.rvm/scripts/rvm&#8221;</strong> before you want to use Ruby.</p>
+
+<p>To install the latest version of Rails or some other gems you would first need to update your gem system, you can do this by typing -</p>
+
+<p><strong>gem update &#8211;system</strong># This is a double hyphen/dash</p>
+
+<p>Now you are good to go crazy with Ruby on your new system!</p>
+              </div>
+
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

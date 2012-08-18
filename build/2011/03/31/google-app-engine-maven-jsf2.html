@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocky Jaiswal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="container">
+        <h1>
+          <a class="head" href="/">Still Learning ...</a>
+        </h1>
+        <p class="sub-title">Musings of an agile developer</p>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <div class="row">
+        <div class="span12">
+          <div id="main" role="main">
+            <article>
+              <h2>
+                  <span class="color-orange">Google App Engine + Maven + JSF2</span> 
+                  <span>Mar 31 2011</span>
+              </h2>
+              
+              <div class="post">
+                <p>I have tried to put all the keywords in the title of this blog, hoping that it will turn some heads. Google App Engine (GAE) provides a great hosting platform for open source apps written in Java/Python. So if you have no qualms about hosting you Java applications on a public server then you have no better choice than GAE.</p>
+
+<p>The only catch however is, that GAE does not support certain APIs (see the white-list here - <a href='http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html' target='_blank'>http://code.google.com/intl/de/appengine/docs/java/jrewhitelist.html</a>). This restriction makes it difficult to host certain apps / frameworks.</p>
+
+<p>GAE provides the infrastructure, a modified Jetty server included in the GAE SDK (<a href='http://code.google.com/appengine/downloads.html' target='_blank'>http://code.google.com/appengine/downloads.html</a>) though which you can test your app. If it runs on the local GAE Jetty server then it will also run on GAE itself. The project structure that Google asks you to create for uploading an app is also quite typical (unless you use Ant) which brings me to my next point.</p>
+
+<p>Maven is my favorite build tool, it would really take something for me to move on to Ant now. So I tried to create my application using Maven and then test it locally on GAE&#8217;s Jetty and finally upload it to GAE. After a little search I found the Maven GAE plugin (<a href='http://code.google.com/p/maven-gae-plugin/'>http://code.google.com/p/maven-gae-plugin/</a>).</p>
+
+<p>Below is my pom.xml to make this plugin work -</p>
+
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;net.rocky&lt;/groupId&gt;
+    &lt;artifactId&gt;rocky-gae-app&lt;/artifactId&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+    &lt;version&gt;1&lt;/version&gt;
+    &lt;name&gt;rocky-gae-app&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;java.net&lt;/id&gt;
+            &lt;url&gt;http://download.java.net/maven/2&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+
+    &lt;pluginRepositories&gt;
+        &lt;pluginRepository&gt;
+            &lt;id&gt;maven-gae-plugin-repo&lt;/id&gt;
+            &lt;name&gt;maven-gae-plugin repository&lt;/name&gt;
+            &lt;url&gt;http://maven-gae-plugin.googlecode.com/svn/repository&lt;/url&gt;
+        &lt;/pluginRepository&gt;
+    &lt;/pluginRepositories&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+            &lt;version&gt;2.5&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+            &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
+            &lt;version&gt;2.1&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.sun.faces&lt;/groupId&gt;
+            &lt;artifactId&gt;jsf-api&lt;/artifactId&gt;
+            &lt;version&gt;2.0.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.sun.faces&lt;/groupId&gt;
+            &lt;artifactId&gt;jsf-impl&lt;/artifactId&gt;
+            &lt;version&gt;2.0.2&lt;/version&gt;
+            &lt;classifier&gt;gae&lt;/classifier&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.glassfish.web&lt;/groupId&gt;
+            &lt;artifactId&gt;el-impl&lt;/artifactId&gt;
+            &lt;version&gt;2.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.8.1&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.0.2&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;1.6&lt;/source&gt;
+                    &lt;target&gt;1.6&lt;/target&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;net.kindleit&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-gae-plugin&lt;/artifactId&gt;
+                &lt;version&gt;0.6.0&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;sdkDir&gt;/home/rockyj/01rocky/02apps/appengine-java-sdk-1.3.5&lt;/sdkDir&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+        &lt;finalName&gt;rocky-gae-app&lt;/finalName&gt;
+    &lt;/build&gt;
+    
+&lt;/project&gt;</code></pre>
+
+<p>I have included the whole pom as there is hardly anything I can miss here. The GAE plugin is not in maven central so we need to include the plugin repository, the dependencies are pretty standard except one (which I will explain in a moment) and the plugin itself needs the configuration to know where you have the GAE SDK.</p>
+
+<p>As I mentioned earlier, some classes are blacklisted on the GAE so your default jsf-impl.jar (Mojarra) wil not work on GAE. You will need a modified jar which you can download from here (<a href='http://code.google.com/p/joshjcarrier/source/browse/trunk/Sun%20JSF%20GAE/jsf-impl-gae.jar'>http://code.google.com/p/joshjcarrier/source/browse/trunk/Sun%20JSF%20GAE/jsf-impl-gae.jar</a>), if you have a Nexus repo you can install the modified jar there or install the jar in you local repository manually. Also as seen in the pom, for resolving EL (Expression Language) you need el-impl.jar, GAE does not support EL unlike Tomcat.</p>
+
+<p>To make JSF work you need the following entries in your web.xml -</p>
+
+<pre><code>&lt;!-- Seems like GAE 1.2.6 cannot handle server side session management. At least for JSF 2.0.1 --&gt; 
+&lt;context-param&gt; 
+  &lt;param-name&gt;javax.faces.STATE_SAVING_METHOD&lt;/param-name&gt; 
+  &lt;param-value&gt;client&lt;/param-value&gt; 
+&lt;/context-param&gt; 
+&lt;!-- Recommendation from GAE pages  --&gt; 
+&lt;context-param&gt; 
+  &lt;param-name&gt;javax.faces.PROJECT_STAGE&lt;/param-name&gt; 
+  &lt;param-value&gt;Production&lt;/param-value&gt; 
+&lt;/context-param&gt;
+&lt;!-- Accommodate Single-Threaded Requirement of Google AppEngine  --&gt;
+&lt;context-param&gt;
+  &lt;param-name&gt;com.sun.faces.enableThreading&lt;/param-name&gt;
+  &lt;param-value&gt;false&lt;/param-value&gt;
+&lt;/context-param&gt;</code></pre>
+
+<p>Finally, in your appengine-web.xml (the GAE configuration file), you need the following entry -</p>
+
+<pre><code>&lt;sessions-enabled&gt;true&lt;/sessions-enabled&gt;</code></pre>
+
+<p>That&#8217;s it. Now you can work on your JSF2 application. To test, all you need to do is : mvn clean gae:run</p>
+
+<p>For uploading the application, I would still recommend using the SDK provided script (otherwise you need a whole lot of other changes). What I do is -</p>
+
+<p>$HOME/01rocky/02apps/appengine-java-sdk-1.3.5/bin/appcfg.sh update /home/rockyj/01rocky/03workspace/scbcd/rocky-gae-app/target/rocky-gae-app/</p>
+
+<p>This means run the GAE script with the param &#8220;update&#8221; and the path to your maven created target folder. If you have signed up for GAE, it will ask your username and password and your app will be uploaded to GAE.</p>
+              </div>
+
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

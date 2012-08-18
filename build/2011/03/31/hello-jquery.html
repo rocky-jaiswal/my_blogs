@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocky Jaiswal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="container">
+        <h1>
+          <a class="head" href="/">Still Learning ...</a>
+        </h1>
+        <p class="sub-title">Musings of an agile developer</p>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <div class="row">
+        <div class="span12">
+          <div id="main" role="main">
+            <article>
+              <h2>
+                  <span class="color-orange">Hello jQuery!</span> 
+                  <span>Mar 31 2011</span>
+              </h2>
+              
+              <div class="post">
+                <p>JavaScript libraries/frameworks have gained a lot of popularity lately. A small though significant reason for the development / adoption of these libraries has been the large number of browsers, even writing a small piece of JavaScript which works on IE6, IE7, IE8, Firefox 2, 3+ and Chrome can be pain, on the other hand inclusion of a library that can work across browsers can ease the development immensely.</p>
+
+<p>A simple Google search will give you many alternatives like prototype, dojo, yui, extjs and jQuery. Though each library is really good at something (like Scriptaculous for animation, extjs for rich UI), I found jQuery to be generally most useful and functionally very rich. In this blog I will discuss the basic usage of jQuery, its syntax and applications, hope you find it useful.</p>
+
+<p><strong>jQuery Setup</strong></p>
+
+<p>jQuery can be downloaded from -</p>
+<a href='http://code.jquery.com/jquery-1.4.1.min.js'>http://code.jquery.com/jquery-1.4.1.min.js</a>
+<p>If you are working on an internet application, you will be better off downloading it from Google <a href=' http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js'>
+http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a></p>
+
+<p>Inclusion of jQuery is adding a standard line in html -</p>
+
+<p>&#60;script language=&#8221;javascript&#8221; src=&#8221;http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js&#8221; /&#62;</p>
+
+<p>That is all it takes to setup jQuery.</p>
+
+<p><strong>Working with jQuery</strong></p>
+
+<p>Almost all jQuery operations can be divided into two parts - Selection and Manipulation.</p>
+
+<p>jQuery allows you to select an HTML element and carry out operations on it. An example of this would be -</p>
+
+<p>$(&#8220;#an-id&#8221;).addClass(&#8220;error&#8221;)</p>
+
+<p>Here we have used jQuery to select an HTML element of id &#8220;an-id&#8221; and add a style class to it. The part before the dot (.) is equivalent to document.getElementById(&#8220;an-id&#8221;) but is much easier to write.</p>
+
+<p>Most of the times you would be carrying out jQuery operations / functions on execution of an event, such as clicking a button etc. The question then arises, when do I register my event handlers. You may do something like &#60;input type=&#8221;button&#8221; onClick=&#8221;..&#8221;&#62; but this is generally not considered good practice, with jQuery who can register your handlers in this way -</p>
+
+<pre><code>    $(document).ready(function(){
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;//Register Handlers
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;$(&quot;#mainLink&quot;).click(function(event){
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;alert(&quot;Thanks for visiting!&quot;);
+    &amp;nbsp;&amp;nbsp;});
+    });</code></pre>
+
+<p>The inclusion of the above lines anywhere in your HTML code is good enough to register your handlers with jQuery. The advantage here is that the code is executed after the DOM has been loaded but before the images have been downloaded.$(&#8230;).</p>
+
+<pre><code>    &lt;strong&gt;Selecting elements with jQuery&lt;/strong&gt;
+
+    &lt;table border=&quot;1&quot;&gt;
+    &lt;tbody&gt;
+    &lt;tr&gt;
+    &lt;td&gt;Selector&lt;/td&gt;
+    &lt;td&gt;Example&lt;/td&gt;
+    &lt;td&gt;Explanation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;#id&lt;/td&gt;
+    &lt;td&gt;$(&quot;#id&quot;)&lt;/td&gt;
+    &lt;td&gt;Selection through a DOM id&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;element&lt;/td&gt;
+    &lt;td&gt;$(&quot;li&quot;)&lt;/td&gt;
+    &lt;td&gt;Returns all
+    &amp;lt;li&amp;gt; elements&amp;lt;/li&amp;gt;
+    &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;.class&lt;/td&gt;
+    &lt;td&gt;$(&quot;.error&quot;)&lt;/td&gt;
+    &lt;td&gt;Returns all elements with &amp;lt;.. class=&quot;error&quot; ...&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;element.class&lt;/td&gt;
+    &lt;td&gt;$(&quot;div.error&quot;)&lt;/td&gt;
+    &lt;td&gt;Returns all elements with &amp;lt;div class=&quot;error&quot; ...&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;elem1 elem2&lt;/td&gt;
+    &lt;td&gt;$(&quot;div.a div.b&quot;)&lt;/td&gt;
+    &lt;td&gt;Returns all elements &amp;lt;div class=&quot;b&quot;&amp;gt; which are inside&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;elem[att=val]&lt;/td&gt;
+    &lt;td&gt;$(&quot;a[href=page1]&quot;)&lt;/td&gt;
+    &lt;td&gt;Returns all elements with &amp;lt;a href=&quot;page1&quot;&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;elem[att^=val]&lt;/td&gt;
+    &lt;td&gt;$(&quot;a[href^=page]&quot;)&lt;/td&gt;
+    &lt;td&gt;Returns all anchor elements with attribute href&#39;s value starting with page (Regex)
+    &lt;/tr&gt;
+    &lt;/tbody&gt;&lt;/table&gt;</code></pre>
+
+<p>Though there are many other types of selectors I have covered the basics here and leave it upto you to explore as per your needs.</p>
+
+<p><strong>Some operations with jQuery</strong></p>
+
+<pre><code>    &lt;table border=&quot;1&quot;&gt;
+    &lt;tbody&gt;
+    &lt;tr&gt;
+    &lt;td&gt;$(...).html(&quot;&amp;lt;b&amp;gt;Hello&amp;lt;/b&amp;gt;&quot;)&lt;/td&gt;
+    &lt;td&gt;Sets the inner HTML to &lt;strong&gt;Hello&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;$(...).addClass(&quot;error&quot;)&lt;/td&gt;
+    &lt;td&gt;Sets the css style to error&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;$(...).attr(&#39;name&#39;, &#39;value&#39;)&lt;/td&gt;
+    &lt;td&gt;Sets the element&#39;s attribute name to value&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;$(...).clone()&lt;/td&gt;
+    &lt;td&gt;Clones / Copies the content of the DOM node&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;$(...).click(clickHandler)&lt;/td&gt;
+    &lt;td&gt;Assigns a event handler to an event
+    $(...).each(function() {
+    $(this).addClass(&#39;&#39;)
+    }); For each element returned by a selection, apply a function (in this example a style class is added)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;&lt;/table&gt;</code></pre>
+
+<p><strong>Ajax with jQuery</strong></p>
+
+<p>jQuery really makes it easy to send AJAX requests and deal with the response. The simplest example would be -</p>
+
+<pre><code>    $.ajax({url: &quot;address&quot;, success: funct1});</code></pre>
+
+<p>The handler function (funct1 above) gets the response text not the response object, the response can be XML, HTML, JSON or text. The function again can use jQuery to manipulate the DOM, for example display the response in a DIV.</p>
+
+<p><strong>jQueryUI</strong></p>
+
+<p>This blog would not be complete without a mention of jQueryUI - <a href='http://jqueryui.com/'>http://jqueryui.com/</a> - jQueryUI builds upon jQuery to provide an effects and interaction API as well as ready to use widgets. Using jQueryUI, it is a breeze to add behaviours like draggable and resizeable to spans/divs. The widgets include a highly customizable date picker among others. Feel free to visit the jQueryUI site to see the demos.</p>
+              </div>
+
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

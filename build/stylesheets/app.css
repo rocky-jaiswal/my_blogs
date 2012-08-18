@@ -1,0 +1,43 @@
+.banner {
+  padding: 10px 0px 4px 0px;
+  font-family: 'Ultra', serif;
+  margin-bottom: 30px;
+  background: #FF4533;
+}
+
+.head {
+  color: #FFFFFF !important;
+}
+
+.banner p {
+  line-height: 27px;
+}
+
+.banner a:hover {
+  text-decoration: none !important;
+}
+
+.summary {
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.summary p{
+  font-size: 1.1em;
+}
+
+.post {
+  text-align: justify;
+}
+
+.post p{
+  font-size: 1.1em;
+}
+
+.color-orange {
+  color: #FF4533 !important;
+}
+
+a {
+  color: #FF4533 !important;
+}

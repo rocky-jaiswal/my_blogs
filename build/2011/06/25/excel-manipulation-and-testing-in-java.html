@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocky Jaiswal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="container">
+        <h1>
+          <a class="head" href="/">Still Learning ...</a>
+        </h1>
+        <p class="sub-title">Musings of an agile developer</p>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <div class="row">
+        <div class="span12">
+          <div id="main" role="main">
+            <article>
+              <h2>
+                  <span class="color-orange">Excel manipulation and testing in Java</span> 
+                  <span>Jun 25 2011</span>
+              </h2>
+              
+              <div class="post">
+                <p>In my current project I am doing a lot of Excel manipulation using Apache POI and Jacob COM libraries. One of the first challenges I faced was to write test cases that could read these Excel files and process them. This wasn&#8217;t rocket science, but I want to blog about this so that a. I can share my approach and b. So that I can use this blog post in case I want to do this in the future.</p>
+
+<p>So my Excel file which I want to test is stored in /src/test/resources as Gantt_XLS.xls in a Maven setup.So here is my test case -</p>
+
+<pre><code>@Test
+public void shouldConvertExcelFile() throws IOException {
+    InputStream inputStream = getClass().getResourceAsStream(&quot;/Gantt_XLS.xls&quot;);
+    File file = convertToFile(inputStream);
+    
+    String outpath = FileUtils.getTempDirectory().getCanonicalPath() + File.separator + UUID.randomUUID().toString();
+    FileUtils.forceMkdir(new File(outpath));
+    
+    excelConverter.doExcelConversion(file, outpath);
+    
+    Assert.assertTrue(fileStatusMap.get(&quot;Gantt_XLS.xls&quot;).equals(FileStatus.CONVERTED_TO_EXCEL));
+}
+
+private File convertToFile(InputStream inputStream) throws IOException {
+    String path = FileUtils.getTempDirectoryPath() + File.separator + UUID.randomUUID().toString() + File.separator;
+    FileUtils.forceMkdir(new File(path));
+    File f = new File(path + &quot;Gantt_XLS.xls&quot;);
+    OutputStream out = new FileOutputStream(f);
+    byte buf[] = new byte[1024];
+    int len;
+    while ((len = inputStream.read(buf)) &gt; 0) {
+        out.write(buf, 0, len);
+    }
+    out.close();
+    inputStream.close();
+    return f;
+}</code></pre>
+
+<p>So in this code, I am reading a file in the test resources folder as a InputStream, writing the stream to a file in a unique directory in my OS&#8217;s temp directory and finally processing the file.</p>
+
+<p>Now, the other task I am trying to do is converting a SpreadsheetML file to a binary Excel file. SpreadsheetML is MS Office Excel 2003 format for storing Excel files in XML format. For this I am using the <a href='http://danadler.com/jacob/' target='_blank'>Jacob COM library</a>.</p>
+
+<pre><code>@Override
+    public boolean doConversionTask() {
+        boolean success = true;
+        try {
+            ActiveXComponent excel = new ActiveXComponent(&quot;Excel.Application&quot;);
+            Dispatch workbook = Dispatch.call(excel.getProperty(&quot;Workbooks&quot;).toDispatch(), &quot;Open&quot;, inFilePath).toDispatch();
+            Dispatch.call(workbook, &quot;SaveAs&quot;, tempFilePath, 43);
+            Dispatch.call(excel.getProperty(&quot;Workbooks&quot;).toDispatch(), &quot;Close&quot;);
+        } catch (Exception e) {
+            log.error(&quot;Error in converting HTML to Excel : &quot; + e.getMessage());
+            success =  false;
+        } finally {
+             excel.invoke(&quot;Quit&quot;, new Variant[]{});
+             ComThread.Release();
+        }
+        return success;
+    }</code></pre>
+
+<p>Hopefully this will help someone out there.</p>
+              </div>
+
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

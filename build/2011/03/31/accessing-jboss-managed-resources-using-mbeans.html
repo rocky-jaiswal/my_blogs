@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocky Jaiswal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="container">
+        <h1>
+          <a class="head" href="/">Still Learning ...</a>
+        </h1>
+        <p class="sub-title">Musings of an agile developer</p>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <div class="row">
+        <div class="span12">
+          <div id="main" role="main">
+            <article>
+              <h2>
+                  <span class="color-orange">Accessing JBoss managed resources using MBeans</span> 
+                  <span>Mar 31 2011</span>
+              </h2>
+              
+              <div class="post">
+                <p>Recently I was working on an application that enables users to view the message count and the message content on all Queues deployed on a JBoss instance. Mainly, this application can be used by administrators to manage JMS Queues, it also provides a simple interface to create / delete queues as well as monitor messages on them.</p>
+
+<p>The challenge was to dynamically retrieve all the Queues deployed on the server and to make this application portable to any JBoss server instance.</p>
+
+<p><strong>The Solution</strong> In JBoss all components/services are Mbeans. An MBean is a Java object that implements one of the standard MBean interfaces and follows the associated design patterns. The MBean for a resource exposes all necessary information and operations that a management application needs to control the resource.</p>
+
+<p>So using the MBeans API you can, let&#8217;s say create a queue at runtime programatically. In the following exercise, we look at the code that will retrieve all JMS Queues deployed on a particular JBoss instance.</p>
+
+<p>An interesting application to note is the <span style='color:#ff0000;'>jmx-console</span> application that is packaged within JBoss. This application kind of does what we want to do. It displays all the MBeans deployed on the server.</p>
+
+<p>To see jmx-console, start the JBoss server on your local machine and go to <span style='color:#0000ff;'>http://localhost:8080/jmx-console</span></p>
+
+<p>Straight away lets start with some code, below is the listing of a Servlet that contains our core logic -</p>
+
+<p><strong>QBrowser.java</strong></p>
+
+<pre><code>package net.rocky.qsoft.web;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.management.JMException;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.rocky.qsoft.model.MBeanData;
+
+import org.jboss.mx.util.MBeanServerLocator;
+
+public class QBrowser extends HttpServlet {
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter writer = resp.getWriter();
+		try {
+			Map&lt;String, List&lt;MBeanData&gt;&gt; domainData = getDomainData(&quot;jboss.messaging.destination:*&quot;);
+
+			for (String key : domainData.keySet()) {
+				writer.print(&quot;&lt;b&gt;Domain Name - &quot; + key + &quot;&lt;/b&gt;&lt;/br&gt;&quot;);
+				List&lt;MBeanData&gt; data = domainData.get(key);
+				for (MBeanData beanData : data) {
+					writer.print(beanData.getNameProperties() + &quot;&lt;/br&gt;&quot;);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private Map&lt;String, List&lt;MBeanData&gt;&gt; getDomainData(String filter) throws JMException {
+		MBeanServer server = getMBeanServer();
+		Map&lt;String, List&lt;MBeanData&gt;&gt; domainDataMap = new TreeMap&lt;String, List&lt;MBeanData&gt;&gt;();
+
+		if (server != null) {
+			ObjectName filterName = null;
+			if (filter != null)
+				filterName = new ObjectName(filter);
+
+			Set&lt;ObjectName&gt; objectNames = server.queryNames(filterName, null);
+
+			for (ObjectName objectName : objectNames) {
+				List&lt;MBeanData&gt; data = null;
+				
+				MBeanData mbeanData = new MBeanData(objectName, server.getMBeanInfo(objectName));
+				String domainName = objectName.getDomain();
+				System.out.println(domainName + &quot;-&gt;&quot; + objectName.toString());
+				
+				if (domainDataMap.containsKey(domainName)){
+					data = (List&lt;MBeanData&gt;) domainDataMap.get(domainName);
+					data.add(mbeanData);
+				}
+				else {
+					data = new ArrayList&lt;MBeanData&gt;();
+					data.add(mbeanData);
+					domainDataMap.put(domainName, data);
+				}
+			}
+		}
+		return domainDataMap;
+	}
+
+	private MBeanServer getMBeanServer() {
+		return MBeanServerLocator.locateJBoss();
+	}
+
+}</code></pre>
+
+<p>The main piece of code here lies in the method <span style='color:#0000ff;'>getMBeanServer()</span>, here we locate a reference to the main JBoss MBean. Thereafter, using the MBean API we retrieve the ObjectNames that match our filter - &#8220;jboss.messaging.destination:<em>&#8221;, this helps us retrieve references only to messaging destinations MBeans (you can use some other filter to retrieve other types of MBeans, or leave filter as null to get all the MBeans).</em></p>
+
+<p>Then we iterate over the returned Set of ObjectNames and create a bean of type MBeanData - containing the ObjectName and the MBeanInfo (which describes the set of attributes and operations which are available for management operations, thus is quite important).</p>
+
+<p>Since all the Queues will have the same domain name, in the value part of the map we have a List of MBeanData. We then iteratively add beans to this list and later print them out.</p>
+
+<p>We create 1 helper classes -</p>
+
+<p><strong>MBeanData.java</strong></p>
+
+<pre><code>package net.rocky.qsoft.model;
+
+import javax.management.MBeanInfo;
+import javax.management.ObjectName;
+
+/**
+ * An mbean ObjectName and MBeanInfo pair that is orderable by ObjectName.
+ *
+ * @author Scott.Stark@jboss.org
+ * @version $Revision: 81038 $
+ */
+public class MBeanData implements Comparable {
+
+	private ObjectName objectName;
+	private MBeanInfo metaData;
+
+	public MBeanData() {
+	}
+
+	public MBeanData(ObjectName objectName, MBeanInfo metaData) {
+		this.objectName = objectName;
+		this.metaData = metaData;
+	}
+
+	/**
+	 * Getter for property objectName.
+	 *
+	 * @return Value of property objectName.
+	 */
+	public ObjectName getObjectName() {
+		return objectName;
+	}
+
+	/**
+	 * Setter for property objectName.
+	 *
+	 * @param objectName
+	 *            New value of property objectName.
+	 */
+	public void setObjectName(ObjectName objectName) {
+		this.objectName = objectName;
+	}
+
+	/**
+	 * Getter for property metaData.
+	 *
+	 * @return Value of property metaData.
+	 */
+	public MBeanInfo getMetaData() {
+		return metaData;
+	}
+
+	/**
+	 * Setter for property metaData.
+	 *
+	 * @param metaData
+	 *            New value of property metaData.
+	 */
+	public void setMetaData(MBeanInfo metaData) {
+		this.metaData = metaData;
+	}
+
+	/**
+	 * @return The ObjectName.toString()
+	 */
+	public String getName() {
+		return objectName.toString();
+	}
+
+	/**
+	 * @return The canonical key properties string
+	 */
+	public String getNameProperties() {
+		return objectName.getCanonicalKeyPropertyListString();
+	}
+
+	/**
+	 * @return The MBeanInfo.getClassName() value
+	 */
+	public String getClassName() {
+		return metaData.getClassName();
+	}
+
+	/**
+	 * Compares MBeanData based on the ObjectName domain name and canonical key
+	 * properties
+	 *
+	 * @param the
+	 *            MBeanData to compare against
+	 * @return &lt; 0 if this is less than o, &gt; 0 if this is greater than o, 0 if
+	 *         equal.
+	 */
+	public int compareTo(Object o) {
+		MBeanData md = (MBeanData) o;
+		String d1 = objectName.getDomain();
+		String d2 = md.objectName.getDomain();
+		int compare = d1.compareTo(d2);
+		if (compare == 0) {
+			String p1 = objectName.getCanonicalKeyPropertyListString();
+			String p2 = md.objectName.getCanonicalKeyPropertyListString();
+			compare = p1.compareTo(p2);
+		}
+		return compare;
+	}
+
+	public boolean equals(Object o) {
+		if (o == null || (o instanceof MBeanData) == false)
+			return false;
+		if (this == o)
+			return true;
+		return (this.compareTo(o) == 0);
+	}
+}</code></pre>
+
+<p>Here&#8217;s my <strong>pom.xml</strong></p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;net.rocky&lt;/groupId&gt;
+  &lt;artifactId&gt;qsoft&lt;/artifactId&gt;
+  &lt;packaging&gt;war&lt;/packaging&gt;
+  &lt;version&gt;1&lt;/version&gt;
+  &lt;name&gt;qsoft Maven Webapp&lt;/name&gt;
+  &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.7&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+    	&lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    	&lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+    	&lt;version&gt;2.5&lt;/version&gt;
+    	&lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss&lt;/groupId&gt;
+      &lt;artifactId&gt;jbossall-client&lt;/artifactId&gt;
+      &lt;version&gt;5.1.0&lt;/version&gt;
+      &lt;scope&gt;system&lt;/scope&gt;
+      &lt;systemPath&gt;/home/rjaiswal/01rocky/02apps/jboss-5.1.0.GA/client/jbossall-client.jar&lt;/systemPath&gt;&lt;!-- Needs to be changed as per user env --&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+  &lt;build&gt;
+    &lt;finalName&gt;qsoft&lt;/finalName&gt;
+    &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;configuration&gt;
+               &lt;source&gt;1.5&lt;/source&gt;
+               &lt;target&gt;1.5&lt;/target&gt;
+            &lt;/configuration&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;</code></pre>
+
+<p>Create the necessary config in web.xml for the Servlet. Do a mvn clean install and deploy the war in JBoss and you are good to go.</p>
+
+<p>Final screen - <img alt='Browse Queues' height='100%' src='http://rockysjavacafe.wordpress.com/files/2009/11/qbrowser2.png' width='100%' /></p>
+
+<p>As can be seen, the MBean DomainName is same for all queues, the name-value though differs and is printed. This code can be further used to retrieve attributes for the individual queue or to execute operations on it. Hope this code helps you get started.</p>
+
+<p><strong>Credits</strong> - JBoss team for providing the source to JMX Console, which helped us get started and <a href='http://www-scf.usc.edu/~meghaj/'>Megha Jain </a> my colleague for working with me on this exercise.</p>
+              </div>
+
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
