@@ -4,14 +4,6 @@
   background: #FF4533;
 }
 
-.head {
-  color: #FFFFFF !important;
-}
-
-.banner p {
-  line-height: 27px;
-}
-
 .banner a:hover {
   text-decoration: none !important;
 }
