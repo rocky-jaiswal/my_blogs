@@ -1,0 +1,26 @@
+<div class="span3">
+  <h2>
+    <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
+    <br/>
+    <a href="/about">About</a>
+  </h2>
+  <hr/>
+  <h2>
+    <a href="http://github.com/rocky-jaiswal" target="_blank">Github</a>
+  </h2>
+  <hr/>
+  <h2>Articles</h2>
+  <ol>
+    <% blog.articles.each do |article| %>
+      <li><a href="<%= article.url %>"><%= article.title %></a> <span><%= article.date.strftime('%b %e') %></span></li>
+    <% end %>
+  </ol>
+  <hr/>
+  <h2>Tags</h2>
+  <ol>
+    <% blog.tags.each do |tag, articles| %>
+      <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
+    <% end %>
+  </ol>
+  <hr/>
+</div>
