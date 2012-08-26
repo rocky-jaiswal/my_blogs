@@ -5,10 +5,154 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2012-08-18T00:00:00Z</updated>
+  <updated>2012-08-26T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Accessing server data from a native Android app</title>
+    <link rel="alternate" href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"/>
+    <id>/2012/08/26/accessing_server_data_from_a_native_android_app.html</id>
+    <published>2012-08-26T00:00:00Z</published>
+    <updated>2012-08-26T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;This was a quite relaxing weekend, there was heavy rain in the Delhi region so there was not much to do. So I picked up a Scala book and read a few chapters. Soon enough, my hands started itching to write some code. I wanted to build something in Scala but ended up experimenting on Android.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;This was a quite relaxing weekend, there was heavy rain in the Delhi region so there was not much to do. So I picked up a Scala book and read a few chapters. Soon enough, my hands started itching to write some code. I wanted to build something in Scala but ended up experimenting on Android.&lt;/p&gt;
+
+&lt;p&gt;Back at work, I finished my first iPad optimized jQuery Mobile and Rails app web application. I am mostly satisfied with the end result but somehow felt that a native app would have provided a better experience to the user. The question then comes is how to make a native app communicate with the server when most of the data needs to be fetched from the server itself.&lt;/p&gt;
+
+&lt;p&gt;So to build on this idea, I started making an Android application that fetches JSON data from a Rails server. To express myself clearly I wanted data to be accessible from a mobile app and a web app, like shown below -&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='Mobile' src='/images/mobby_mobile.png' /&gt; &lt;img alt='Mobile' src='/images/mobby_web.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;The web app is a fully featured Mongoid enabled Rails application for which I have scaffoled a simple book model. I wanted the mobile version to also access the same data (in JSON format) and just display it in a Phonegapped native application. You can already see the end result in the images above. Lets look at the steps required to build this -&lt;/p&gt;
+
+&lt;p&gt;The first and the biggest problem you are bound to face is -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;XMLHttpRequest cannot load http://localhost:3000/books.json. Origin null is not allowed by Access-Control-Allow-Origin.&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is because the Android application is not running on the same server as the Rails application in fact it is not running on any server at all. Rails will interpret the incoming request and reject it as it assumes it is from a malicious source (remember CSRF).&lt;/p&gt;
+
+&lt;p&gt;To solves this problem we have to use &lt;a href='http://en.wikipedia.org/wiki/JSONP'&gt;JSONP&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To organize our mobile application&amp;#8217;s JavaScript code we will use Backbone.js. Here is how the code looks like -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;
+&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
+    &amp;lt;title&amp;gt;Mobby&amp;lt;/title&amp;gt;
+    &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt;
+    &amp;lt;script src=&amp;quot;js/libs/jquery-1.7.1.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&amp;quot;js/libs/cordova-2.0.0.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&amp;quot;js/libs/underscore.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&amp;quot;js/libs/backbone.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&amp;quot;js/libs/bootstrap.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&amp;quot;js/plugins.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&amp;quot;js/app.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;css/bootstrap.css&amp;quot;&amp;gt;
+    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;css/bootstrap-responsive.css&amp;quot;&amp;gt;
+    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;css/style.css&amp;quot;&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;header&amp;gt;
+      &amp;lt;div class=&amp;quot;navbar navbar-fixed-top&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;navbar-inner&amp;quot;&amp;gt;
+          &amp;lt;div class=&amp;quot;container&amp;quot;&amp;gt;
+            &amp;lt;a class=&amp;quot;brand&amp;quot; href=&amp;quot;/&amp;quot;&amp;gt;Mobby&amp;lt;/a&amp;gt;
+          &amp;lt;/div&amp;gt;
+        &amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/header&amp;gt;
+    &amp;lt;div class=&amp;quot;container&amp;quot; style=&amp;quot;padding-top: 50px&amp;quot;&amp;gt;
+      &amp;lt;p&amp;gt;Books&amp;lt;/p&amp;gt;
+      &amp;lt;div id=&amp;quot;book&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;button class=&amp;quot;btn btn-primary&amp;quot; type=&amp;quot;button&amp;quot; id=&amp;quot;btnRefresh&amp;quot; style=&amp;quot;margin-top: 20px&amp;quot;&amp;gt;Refresh&amp;lt;/button&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;  &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the JS code -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(function(){
+
+  var Book = Backbone.Model.extend({
+  });
+
+  var BookList = Backbone.Collection.extend({
+    model : Book, 
+    url: &amp;#39;http://10.0.2.2:3000/books.jsonp?callback=?&amp;#39;, //Line 9
+    parse: function(response) {
+      return response;
+    }
+  });
+
+  var books = new BookList();
+  books.fetch();
+
+  var BookView = Backbone.View.extend({
+    el : $(&amp;#39;#book&amp;#39;),
+    render: function() {
+      var bookList = &amp;#39;&amp;lt;ui&amp;gt;&amp;#39;;
+      _.each(this.model.models, function(book){
+        bookList = bookList + &amp;#39;&amp;lt;li&amp;gt;&amp;#39; + book.get(&amp;#39;title&amp;#39;) + &amp;#39;&amp;lt;\/li&amp;gt;&amp;#39;;
+      });
+      bookList = bookList + &amp;#39;&amp;lt;\/ul&amp;gt;&amp;#39;;
+      $(this.el).html(bookList);
+      return this;
+    }
+  });
+
+  books.on(&amp;quot;reset&amp;quot;, function() {
+    var view = new BookView({model: books});
+    view.render();
+  });
+
+  $(&amp;quot;#btnRefresh&amp;quot;).click(function() {
+    books.fetch();
+  });
+
+  // Wait for Cordova to load
+  document.addEventListener(&amp;quot;deviceready&amp;quot;, onDeviceReady, false);
+
+  // Cordova is loaded and it is now safe to make calls Cordova methods
+  function onDeviceReady() {
+  }
+
+});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is standard Backbone stuff, see my &lt;a href='/2012/05/25/intro_to_backbone_jQuery.html'&gt;older&lt;/a&gt; post to get an introduction to Backbone.&lt;/p&gt;
+
+&lt;p&gt;The important thing is on Line number 9. We are doing 2 things there, firstly using &lt;strong&gt;10.0.2.2&lt;/strong&gt; instead of &lt;strong&gt;localhost&lt;/strong&gt; beause that is how the emulator can access the host machine where the Rails server is running. Secondly, we are not doing a simple JSON request to the Rails server but doing a JSONP request.&lt;/p&gt;
+
+&lt;p&gt;Now, on the Rails side to need to deal with this new type to request and also wrap JSON back in a callback. Doing so for every individual request can be a pain but fear not there is a Gem available for this -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem &amp;#39;rack-jsonp-middleware&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As the name suggests, this is a Rails middleware (consider it as a request filter if you are from the Java world) and to enable it we need to add this in application.rb -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;config.middleware.use Rack::JSONP&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our controller is untouched now -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# GET /books
+# GET /books.json
+def index
+  @books = Book.all
+
+  respond_to do |format|
+    format.html # index.html.erb
+    format.json { render json: @books }
+  end
+end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Rest of the magic is all on Backbone&amp;#8217;s side. Now if we make a change on the web application and hit the &amp;#8220;Refesh&amp;#8221; button on the mobile application we will get the updated data on the mobile view.&lt;/p&gt;
+
+&lt;p&gt;In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sych to the server and using &amp;#8220;Cross-origin Resource Sharing&amp;#8221; which is an essential security feature when accessing site data from multiple interfaces.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Why JavaScript is important</title>
     <link rel="alternate" href="/2012/08/18/why_javascript_is_important.html"/>
@@ -290,76 +434,5 @@
     </author>
     <summary type="html">&lt;object height='315' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='560' /&gt;&lt;/object&gt;</summary>
     <content type="html">&lt;object height='315' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='560' /&gt;&lt;/object&gt;</content>
-  </entry>
-  <entry>
-    <title>Setting up Solr</title>
-    <link rel="alternate" href="/2012/05/08/setting_up_solr.html"/>
-    <id>/2012/05/08/setting_up_solr.html</id>
-    <published>2012-05-08T00:00:00Z</published>
-    <updated>2012-05-08T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;Few of my Ruby friends have a hard time setting up Solr for their Prod / EC2 servers. Solr is a Java web application and also come with a Jetty distribution so that you can just do -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;java -jar SOLR_DOWNLOAD/example/start.jar&lt;/code&gt;&lt;/pre&gt;
-</summary>
-    <content type="html">&lt;p&gt;Few of my Ruby friends have a hard time setting up Solr for their Prod / EC2 servers. Solr is a Java web application and also come with a Jetty distribution so that you can just do -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;java -jar SOLR_DOWNLOAD/example/start.jar&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This however is not recommended for production as this is just running Solr on the bundled Jetty and Solr Admin is unsecured.&lt;/p&gt;
-
-&lt;p&gt;To setup a clean and secure Solr instance, I usually do the following -&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Copy the $SOLR_DOWNLOAD/example/solr directory somewhere else. For example $HOME/config/solr. This is now your solr config directory.&lt;/li&gt;
-
-&lt;li&gt;Download Tomcat and add the following line to $TOMCAT_HOME/bin/catalina.sh &lt;pre&gt;CATALINA_OPTS="-Dsolr.solr.home=/home/rockyj/conf/solr"&lt;/pre&gt; This basically sets the solr.solr.home Java environment variable.&lt;/li&gt;
-
-&lt;li&gt;Copy the solr.war (you may need to rename this) from your SOLR_DOWNLOAD/dist to $TOMCAT_HOME/webapps.&lt;/li&gt;
-
-&lt;li&gt;Start Tomcat &lt;pre&gt;$TOMCAT_HOME/bin/startup.sh&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;Go to http://localhost:8080/solr. You should see the Solr home page with the link to Admin page. The Admin is unsecured right now. The basic Solr installation works now.&lt;/li&gt;
-
-&lt;li&gt;Shutdown Tomcat.&lt;/li&gt;
-
-&lt;li&gt;Let us now add a Solr core. Solr core allow you to use a single Solr webapp with many configurations and indexes for different aplications, each with their own config and schema.&lt;/li&gt;
-
-&lt;li&gt;In your $HOME/config/solr/solr.xml file edit the cores tag like this - &lt;pre&gt;
-   &amp;lt;cores adminPath="/admin/cores" defaultCoreName="collection1"&amp;gt;
-     &amp;lt;core name="collection1" instanceDir="." /&amp;gt;
-     &amp;lt;core name="core1" instanceDir="./core1" /&amp;gt;
-   &amp;lt;/cores&amp;gt;&lt;/pre&gt; This creates a new core which will look for its config in $HOME/config/solr/core1/ (in our case). The default core will be called &amp;#8220;collection1&amp;#8221; and our new core is &amp;#8220;core1&amp;#8221;.&lt;/li&gt;
-
-&lt;li&gt;Now create a directory in your $HOME/config/solr called &amp;#8220;core1&amp;#8221; and copy the &amp;#8220;conf&amp;#8221; directory from $HOME/config/solr into the &amp;#8220;core1&amp;#8221; directory. Create an empty directory called &amp;#8220;data&amp;#8221; as well in &amp;#8220;core1&amp;#8221;.&lt;/li&gt;
-
-&lt;li&gt;Now your new core is all setup. Restart Tomcat and check the admin page, you should see a new core listed there.&lt;/li&gt;
-
-&lt;li&gt;Let us secure the admin page then. We will do this the standard Java way. In your $TOMCAT_HOME/webapps/solr/WEB-INF/web.xml add - &lt;pre&gt;
-  &amp;lt;security-constraint&amp;gt;
-    &amp;lt;web-resource-collection&amp;gt;
-      &amp;lt;web-resource-name&amp;gt;Solr Admin&amp;lt;/web-resource-name&amp;gt;
-      &amp;lt;url-pattern&amp;gt;/admin/*&amp;lt;/url-pattern&amp;gt;
-      &amp;lt;url-pattern&amp;gt;/collection1/admin/*&amp;lt;/url-pattern&amp;gt;
-      &amp;lt;url-pattern&amp;gt;/core1/admin/*&amp;lt;/url-pattern&amp;gt;
-    &amp;lt;/web-resource-collection&amp;gt;
-    &amp;lt;auth-constraint&amp;gt;
-      &amp;lt;role-name&amp;gt;tomcat&amp;lt;/role-name&amp;gt;
-    &amp;lt;/auth-constraint&amp;gt;
-  &amp;lt;/security-constraint&amp;gt;
-  &amp;lt;login-config&amp;gt;
-    &amp;lt;auth-method&amp;gt;BASIC&amp;lt;/auth-method&amp;gt;
-    &amp;lt;realm-name&amp;gt;default&amp;lt;/realm-name&amp;gt;
-  &amp;lt;/login-config&amp;gt;
-&lt;/pre&gt; Here we are basically securing url patterns (the admin pages) with HTTP BASIC and providing access to user &amp;#8220;tomcat&amp;#8221;.&lt;/li&gt;
-
-&lt;li&gt;To activate the &amp;#8220;tomcat&amp;#8221; user, uncomment the tags in $TOMCAT_HOME/conf/tomcat-users.xml. You can change both the username and password there.&lt;/li&gt;
-
-&lt;li&gt;That&amp;#8217;s it, once Tomcat is restarted, the admin urls should pop up a HTTP BASIC auth window.&lt;/li&gt;
-
-&lt;li&gt;Finally don&amp;#8217;t forget to setup your firewall and block Tomcat&amp;#8217;s port 8080. For Ubuntu I highly recommend the ultra simple &amp;#8220;UFW&amp;#8221;.&lt;/li&gt;
-&lt;/ol&gt;</content>
   </entry>
 </feed>
