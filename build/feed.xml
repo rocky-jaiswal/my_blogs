@@ -151,7 +151,7 @@ end&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Rest of the magic is all on Backbone&amp;#8217;s side. Now if we make a change on the web application and hit the &amp;#8220;Refesh&amp;#8221; button on the mobile application we will get the updated data on the mobile view.&lt;/p&gt;
 
-&lt;p&gt;In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sych to the server and using &amp;#8220;Cross-origin Resource Sharing&amp;#8221; which is an essential security feature when accessing site data from multiple interfaces.&lt;/p&gt;</content>
+&lt;p&gt;In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sync to the server and using &amp;#8220;Cross-origin Resource Sharing&amp;#8221; which is an essential security feature when accessing site data from multiple interfaces.&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Why JavaScript is important</title>

@@ -137,4 +137,4 @@ Our controller is untouched now -
 
 Rest of the magic is all on Backbone's side. Now if we make a change on the web application and hit the "Refesh" button on the mobile application we will get the updated data on the mobile view.
 
-In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sych to the server and using "Cross-origin Resource Sharing" which is an essential security feature when accessing site data from multiple interfaces.
+In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sync to the server and using "Cross-origin Resource Sharing" which is an essential security feature when accessing site data from multiple interfaces.
