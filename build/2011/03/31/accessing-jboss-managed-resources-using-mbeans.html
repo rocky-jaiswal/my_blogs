@@ -36,94 +36,94 @@
 
 <p>So using the MBeans API you can, let&#8217;s say create a queue at runtime programatically. In the following exercise, we look at the code that will retrieve all JMS Queues deployed on a particular JBoss instance.</p>
 
-<p>An interesting application to note is the <span style='color:#ff0000;'>jmx-console</span> application that is packaged within JBoss. This application kind of does what we want to do. It displays all the MBeans deployed on the server.</p>
+<p>An interesting application to note is the <strong>jmx-console</strong> application that is packaged within JBoss. This application kind of does what we want to do. It displays all the MBeans deployed on the server.</p>
 
-<p>To see jmx-console, start the JBoss server on your local machine and go to <span style='color:#0000ff;'>http://localhost:8080/jmx-console</span></p>
+<p>To see jmx-console, start the JBoss server on your local machine and go to <strong>http://localhost:8080/jmx-console</strong></p>
 
 <p>Straight away lets start with some code, below is the listing of a Servlet that contains our core logic -</p>
 
 <p><strong>QBrowser.java</strong></p>
 
-<pre><code>package net.rocky.qsoft.web;
+<pre><code>    package net.rocky.qsoft.web;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+    import java.io.IOException;
+    import java.io.PrintWriter;
+    import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Set;
+    import java.util.TreeMap;
 
-import javax.management.JMException;
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+    import javax.management.JMException;
+    import javax.management.MBeanServer;
+    import javax.management.ObjectName;
+    import javax.servlet.ServletException;
+    import javax.servlet.http.HttpServlet;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
 
-import net.rocky.qsoft.model.MBeanData;
+    import net.rocky.qsoft.model.MBeanData;
 
-import org.jboss.mx.util.MBeanServerLocator;
+    import org.jboss.mx.util.MBeanServerLocator;
 
-public class QBrowser extends HttpServlet {
+    public class QBrowser extends HttpServlet {
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PrintWriter writer = resp.getWriter();
-		try {
-			Map&lt;String, List&lt;MBeanData&gt;&gt; domainData = getDomainData(&quot;jboss.messaging.destination:*&quot;);
+    	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    		PrintWriter writer = resp.getWriter();
+    		try {
+    			Map&lt;String, List&lt;MBeanData&gt;&gt; domainData = getDomainData(&quot;jboss.messaging.destination:*&quot;);
 
-			for (String key : domainData.keySet()) {
-				writer.print(&quot;&lt;b&gt;Domain Name - &quot; + key + &quot;&lt;/b&gt;&lt;/br&gt;&quot;);
-				List&lt;MBeanData&gt; data = domainData.get(key);
-				for (MBeanData beanData : data) {
-					writer.print(beanData.getNameProperties() + &quot;&lt;/br&gt;&quot;);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    			for (String key : domainData.keySet()) {
+    				writer.print(&quot;&lt;b&gt;Domain Name - &quot; + key + &quot;&lt;/b&gt;&lt;/br&gt;&quot;);
+    				List&lt;MBeanData&gt; data = domainData.get(key);
+    				for (MBeanData beanData : data) {
+    					writer.print(beanData.getNameProperties() + &quot;&lt;/br&gt;&quot;);
+    				}
+    			}
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
 
-	private Map&lt;String, List&lt;MBeanData&gt;&gt; getDomainData(String filter) throws JMException {
-		MBeanServer server = getMBeanServer();
-		Map&lt;String, List&lt;MBeanData&gt;&gt; domainDataMap = new TreeMap&lt;String, List&lt;MBeanData&gt;&gt;();
+    	private Map&lt;String, List&lt;MBeanData&gt;&gt; getDomainData(String filter) throws JMException {
+    		MBeanServer server = getMBeanServer();
+    		Map&lt;String, List&lt;MBeanData&gt;&gt; domainDataMap = new TreeMap&lt;String, List&lt;MBeanData&gt;&gt;();
 
-		if (server != null) {
-			ObjectName filterName = null;
-			if (filter != null)
-				filterName = new ObjectName(filter);
+    		if (server != null) {
+    			ObjectName filterName = null;
+    			if (filter != null)
+    				filterName = new ObjectName(filter);
 
-			Set&lt;ObjectName&gt; objectNames = server.queryNames(filterName, null);
+    			Set&lt;ObjectName&gt; objectNames = server.queryNames(filterName, null);
 
-			for (ObjectName objectName : objectNames) {
-				List&lt;MBeanData&gt; data = null;
-				
-				MBeanData mbeanData = new MBeanData(objectName, server.getMBeanInfo(objectName));
-				String domainName = objectName.getDomain();
-				System.out.println(domainName + &quot;-&gt;&quot; + objectName.toString());
-				
-				if (domainDataMap.containsKey(domainName)){
-					data = (List&lt;MBeanData&gt;) domainDataMap.get(domainName);
-					data.add(mbeanData);
-				}
-				else {
-					data = new ArrayList&lt;MBeanData&gt;();
-					data.add(mbeanData);
-					domainDataMap.put(domainName, data);
-				}
-			}
-		}
-		return domainDataMap;
-	}
+    			for (ObjectName objectName : objectNames) {
+    				List&lt;MBeanData&gt; data = null;
+    				
+    				MBeanData mbeanData = new MBeanData(objectName, server.getMBeanInfo(objectName));
+    				String domainName = objectName.getDomain();
+    				System.out.println(domainName + &quot;-&gt;&quot; + objectName.toString());
+    				
+    				if (domainDataMap.containsKey(domainName)){
+    					data = (List&lt;MBeanData&gt;) domainDataMap.get(domainName);
+    					data.add(mbeanData);
+    				}
+    				else {
+    					data = new ArrayList&lt;MBeanData&gt;();
+    					data.add(mbeanData);
+    					domainDataMap.put(domainName, data);
+    				}
+    			}
+    		}
+    		return domainDataMap;
+    	}
 
-	private MBeanServer getMBeanServer() {
-		return MBeanServerLocator.locateJBoss();
-	}
+    	private MBeanServer getMBeanServer() {
+    		return MBeanServerLocator.locateJBoss();
+    	}
 
-}</code></pre>
+    }</code></pre>
 
-<p>The main piece of code here lies in the method <span style='color:#0000ff;'>getMBeanServer()</span>, here we locate a reference to the main JBoss MBean. Thereafter, using the MBean API we retrieve the ObjectNames that match our filter - &#8220;jboss.messaging.destination:<em>&#8221;, this helps us retrieve references only to messaging destinations MBeans (you can use some other filter to retrieve other types of MBeans, or leave filter as null to get all the MBeans).</em></p>
+<p>The main piece of code here lies in the method getMBeanServer(), here we locate a reference to the main JBoss MBean. Thereafter, using the MBean API we retrieve the ObjectNames that match our filter - jboss.messaging.destination, this helps us retrieve references only to messaging destinations MBeans, you can use some other filter to retrieve other types of MBeans, or leave filter as null to get all the MBeans.</p>
 
 <p>Then we iterate over the returned Set of ObjectNames and create a bean of type MBeanData - containing the ObjectName and the MBeanInfo (which describes the set of attributes and operations which are available for management operations, thus is quite important).</p>
 
@@ -133,167 +133,167 @@ public class QBrowser extends HttpServlet {
 
 <p><strong>MBeanData.java</strong></p>
 
-<pre><code>package net.rocky.qsoft.model;
+<pre><code>    package net.rocky.qsoft.model;
 
-import javax.management.MBeanInfo;
-import javax.management.ObjectName;
+    import javax.management.MBeanInfo;
+    import javax.management.ObjectName;
 
-/**
- * An mbean ObjectName and MBeanInfo pair that is orderable by ObjectName.
- *
- * @author Scott.Stark@jboss.org
- * @version $Revision: 81038 $
- */
-public class MBeanData implements Comparable {
+    /**
+     * An mbean ObjectName and MBeanInfo pair that is orderable by ObjectName.
+     *
+     * @author Scott.Stark@jboss.org
+     * @version $Revision: 81038 $
+     */
+    public class MBeanData implements Comparable {
 
-	private ObjectName objectName;
-	private MBeanInfo metaData;
+    	private ObjectName objectName;
+    	private MBeanInfo metaData;
 
-	public MBeanData() {
-	}
+    	public MBeanData() {
+    	}
 
-	public MBeanData(ObjectName objectName, MBeanInfo metaData) {
-		this.objectName = objectName;
-		this.metaData = metaData;
-	}
+    	public MBeanData(ObjectName objectName, MBeanInfo metaData) {
+    		this.objectName = objectName;
+    		this.metaData = metaData;
+    	}
 
-	/**
-	 * Getter for property objectName.
-	 *
-	 * @return Value of property objectName.
-	 */
-	public ObjectName getObjectName() {
-		return objectName;
-	}
+    	/**
+    	 * Getter for property objectName.
+    	 *
+    	 * @return Value of property objectName.
+    	 */
+    	public ObjectName getObjectName() {
+    		return objectName;
+    	}
 
-	/**
-	 * Setter for property objectName.
-	 *
-	 * @param objectName
-	 *            New value of property objectName.
-	 */
-	public void setObjectName(ObjectName objectName) {
-		this.objectName = objectName;
-	}
+    	/**
+    	 * Setter for property objectName.
+    	 *
+    	 * @param objectName
+    	 *            New value of property objectName.
+    	 */
+    	public void setObjectName(ObjectName objectName) {
+    		this.objectName = objectName;
+    	}
 
-	/**
-	 * Getter for property metaData.
-	 *
-	 * @return Value of property metaData.
-	 */
-	public MBeanInfo getMetaData() {
-		return metaData;
-	}
+    	/**
+    	 * Getter for property metaData.
+    	 *
+    	 * @return Value of property metaData.
+    	 */
+    	public MBeanInfo getMetaData() {
+    		return metaData;
+    	}
 
-	/**
-	 * Setter for property metaData.
-	 *
-	 * @param metaData
-	 *            New value of property metaData.
-	 */
-	public void setMetaData(MBeanInfo metaData) {
-		this.metaData = metaData;
-	}
+    	/**
+    	 * Setter for property metaData.
+    	 *
+    	 * @param metaData
+    	 *            New value of property metaData.
+    	 */
+    	public void setMetaData(MBeanInfo metaData) {
+    		this.metaData = metaData;
+    	}
 
-	/**
-	 * @return The ObjectName.toString()
-	 */
-	public String getName() {
-		return objectName.toString();
-	}
+    	/**
+    	 * @return The ObjectName.toString()
+    	 */
+    	public String getName() {
+    		return objectName.toString();
+    	}
 
-	/**
-	 * @return The canonical key properties string
-	 */
-	public String getNameProperties() {
-		return objectName.getCanonicalKeyPropertyListString();
-	}
+    	/**
+    	 * @return The canonical key properties string
+    	 */
+    	public String getNameProperties() {
+    		return objectName.getCanonicalKeyPropertyListString();
+    	}
 
-	/**
-	 * @return The MBeanInfo.getClassName() value
-	 */
-	public String getClassName() {
-		return metaData.getClassName();
-	}
+    	/**
+    	 * @return The MBeanInfo.getClassName() value
+    	 */
+    	public String getClassName() {
+    		return metaData.getClassName();
+    	}
 
-	/**
-	 * Compares MBeanData based on the ObjectName domain name and canonical key
-	 * properties
-	 *
-	 * @param the
-	 *            MBeanData to compare against
-	 * @return &lt; 0 if this is less than o, &gt; 0 if this is greater than o, 0 if
-	 *         equal.
-	 */
-	public int compareTo(Object o) {
-		MBeanData md = (MBeanData) o;
-		String d1 = objectName.getDomain();
-		String d2 = md.objectName.getDomain();
-		int compare = d1.compareTo(d2);
-		if (compare == 0) {
-			String p1 = objectName.getCanonicalKeyPropertyListString();
-			String p2 = md.objectName.getCanonicalKeyPropertyListString();
-			compare = p1.compareTo(p2);
-		}
-		return compare;
-	}
+    	/**
+    	 * Compares MBeanData based on the ObjectName domain name and canonical key
+    	 * properties
+    	 *
+    	 * @param the
+    	 *            MBeanData to compare against
+    	 * @return &lt; 0 if this is less than o, &gt; 0 if this is greater than o, 0 if
+    	 *         equal.
+    	 */
+    	public int compareTo(Object o) {
+    		MBeanData md = (MBeanData) o;
+    		String d1 = objectName.getDomain();
+    		String d2 = md.objectName.getDomain();
+    		int compare = d1.compareTo(d2);
+    		if (compare == 0) {
+    			String p1 = objectName.getCanonicalKeyPropertyListString();
+    			String p2 = md.objectName.getCanonicalKeyPropertyListString();
+    			compare = p1.compareTo(p2);
+    		}
+    		return compare;
+    	}
 
-	public boolean equals(Object o) {
-		if (o == null || (o instanceof MBeanData) == false)
-			return false;
-		if (this == o)
-			return true;
-		return (this.compareTo(o) == 0);
-	}
-}</code></pre>
+    	public boolean equals(Object o) {
+    		if (o == null || (o instanceof MBeanData) == false)
+    			return false;
+    		if (this == o)
+    			return true;
+    		return (this.compareTo(o) == 0);
+    	}
+    }</code></pre>
 
 <p>Here&#8217;s my <strong>pom.xml</strong></p>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;groupId&gt;net.rocky&lt;/groupId&gt;
-  &lt;artifactId&gt;qsoft&lt;/artifactId&gt;
-  &lt;packaging&gt;war&lt;/packaging&gt;
-  &lt;version&gt;1&lt;/version&gt;
-  &lt;name&gt;qsoft Maven Webapp&lt;/name&gt;
-  &lt;url&gt;http://maven.apache.org&lt;/url&gt;
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;junit&lt;/groupId&gt;
-      &lt;artifactId&gt;junit&lt;/artifactId&gt;
-      &lt;version&gt;4.7&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-    	&lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-    	&lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
-    	&lt;version&gt;2.5&lt;/version&gt;
-    	&lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.jboss&lt;/groupId&gt;
-      &lt;artifactId&gt;jbossall-client&lt;/artifactId&gt;
-      &lt;version&gt;5.1.0&lt;/version&gt;
-      &lt;scope&gt;system&lt;/scope&gt;
-      &lt;systemPath&gt;/home/rjaiswal/01rocky/02apps/jboss-5.1.0.GA/client/jbossall-client.jar&lt;/systemPath&gt;&lt;!-- Needs to be changed as per user env --&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-  &lt;build&gt;
-    &lt;finalName&gt;qsoft&lt;/finalName&gt;
-    &lt;plugins&gt;
-         &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-            &lt;configuration&gt;
-               &lt;source&gt;1.5&lt;/source&gt;
-               &lt;target&gt;1.5&lt;/target&gt;
-            &lt;/configuration&gt;
-         &lt;/plugin&gt;
-      &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;</code></pre>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+      &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+      &lt;groupId&gt;net.rocky&lt;/groupId&gt;
+      &lt;artifactId&gt;qsoft&lt;/artifactId&gt;
+      &lt;packaging&gt;war&lt;/packaging&gt;
+      &lt;version&gt;1&lt;/version&gt;
+      &lt;name&gt;qsoft Maven Webapp&lt;/name&gt;
+      &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+      &lt;dependencies&gt;
+        &lt;dependency&gt;
+          &lt;groupId&gt;junit&lt;/groupId&gt;
+          &lt;artifactId&gt;junit&lt;/artifactId&gt;
+          &lt;version&gt;4.7&lt;/version&gt;
+          &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+        	&lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        	&lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+        	&lt;version&gt;2.5&lt;/version&gt;
+        	&lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+          &lt;groupId&gt;org.jboss&lt;/groupId&gt;
+          &lt;artifactId&gt;jbossall-client&lt;/artifactId&gt;
+          &lt;version&gt;5.1.0&lt;/version&gt;
+          &lt;scope&gt;system&lt;/scope&gt;
+          &lt;systemPath&gt;/home/rjaiswal/01rocky/02apps/jboss-5.1.0.GA/client/jbossall-client.jar&lt;/systemPath&gt;&lt;!-- Needs to be changed as per user env --&gt;
+        &lt;/dependency&gt;
+      &lt;/dependencies&gt;
+      &lt;build&gt;
+        &lt;finalName&gt;qsoft&lt;/finalName&gt;
+        &lt;plugins&gt;
+             &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;configuration&gt;
+                   &lt;source&gt;1.5&lt;/source&gt;
+                   &lt;target&gt;1.5&lt;/target&gt;
+                &lt;/configuration&gt;
+             &lt;/plugin&gt;
+          &lt;/plugins&gt;
+      &lt;/build&gt;
+    &lt;/project&gt;</code></pre>
 
 <p>Create the necessary config in web.xml for the Servlet. Do a mvn clean install and deploy the war in JBoss and you are good to go.</p>
 
@@ -339,6 +339,8 @@ public class MBeanData implements Comparable {
   <h2>Articles</h2>
   <ol>
     
+      <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java application with Capistrano</a> <span>Sep  1 2012</span></li>
+    
       <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
     
       <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
@@ -363,9 +365,9 @@ public class MBeanData implements Comparable {
     
       <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
     
-      <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
-    
       <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
+    
+      <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
     
       <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
     
@@ -375,9 +377,9 @@ public class MBeanData implements Comparable {
     
       <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
     
-      <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
-    
       <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
+    
+      <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
     
       <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
     
@@ -385,9 +387,9 @@ public class MBeanData implements Comparable {
     
       <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
     
-      <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
-    
       <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
+    
+      <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
     
       <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
     
@@ -397,9 +399,9 @@ public class MBeanData implements Comparable {
     
       <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
     
-      <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
-    
       <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
+    
+      <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
     
       <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
     
@@ -426,15 +428,17 @@ public class MBeanData implements Comparable {
     
       <li><a href="tags/general.html">General (6)</a></li>
     
-      <li><a href="tags/jruby.html">JRuby (6)</a></li>
+      <li><a href="tags/jruby.html">JRuby (7)</a></li>
+    
+      <li><a href="tags/java.html">Java (7)</a></li>
+    
+      <li><a href="tags/capistrano.html">Capistrano (1)</a></li>
     
       <li><a href="tags/git.html">Git (1)</a></li>
     
       <li><a href="tags/javascript.html">JavaScript (4)</a></li>
     
       <li><a href="tags/solr.html">Solr (2)</a></li>
-    
-      <li><a href="tags/java.html">Java (6)</a></li>
     
       <li><a href="tags/jpa.html">JPA (1)</a></li>
     

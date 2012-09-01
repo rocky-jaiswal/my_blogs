@@ -22,16 +22,109 @@
       <div class="row">
         <div class="span9">
           <div id="main" role="main">
-            <h1 class="color-orange">Articles tagged 'Rails'</h1>
+            <article>
+              <h2>
+                  <span class="color-orange">Deploying Java application with Capistrano</span> 
+                  <span>Sep  1 2012</span>
+              </h2>
+              <div class="post">
+                <p>The advantage of learning a few programming languages is that you apply one&#8217;s paradigms to the other. When I was a Java programmer I never gave much thought to deployment. Maven would build a war file, which would be copied to the application server through a shell script or even via the IDE. For remote deployments we would just do the same from the build server via scp. I always found the Maven &#8220;Cargo&#8221; plugin too complicated so let just skip that for now.</p>
 
-  
-    <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <time>May 16</time></li>
-  
-    <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <time>Jun  6</time></li>
-  
-    <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <time>Aug 26</time></li>
-  
+<p>Then I came into the Ruby world and learned (a bit) about Capistrano and was absolutely fascinated by it. It did so much so easily for deployment that using anything else seems pre-historic.</p>
 
+<p>So I started suggesting my Java friends to use Capistrano. This post is my first attempt at deploying a Java EE6 project with Capistrano.</p>
+
+<p>Lets start by creating a Java EE6 project from Maven (or whichever way you like). To keep our lives simple and stay withing the JVM world we will use JRuby (1.7.0 preview 2). If you already have JRuby setup run a &#8220;gem update&#8221; to avoid any pain.</p>
+
+<p>Now just install the Capistrano gem in JRuby by running -</p>
+
+<pre><code>gem install capistrano</code></pre>
+
+<p>Now in the root directory of our JavaEE project run -</p>
+
+<pre><code>capify .</code></pre>
+
+<p>Capistrano will now create some files with some default entries.</p>
+
+<p>Now, we will also use the Tomcat Manager for deployment so read up a bit <a href='http://tomcat.apache.org/tomcat-7.0-doc/manager-howto.html'>here</a> and setup your manager in $TOMCAT_HOME/conf/tomcat-users.xml. Make sure you give the manager <strong>&#8220;manager-script&#8221;</strong> role so that we can do automated command line deployments through the manager.</p>
+
+<p>We&#8217;ll start of by using Capistrano for local deployment, I know that can be easily done through an IDE but we&#8217;ll start off with this and for doing remote deployments it will be just a matter of changing the hostname and paths (and SSH setup of course).</p>
+
+<p>So lets look at the capfile we update in $your-javaee-project/config/deploy.rb</p>
+
+<pre><code>set :application, &quot;jdeployer&quot;
+set :scm, &quot;git&quot;
+set :repository, &quot;git@github.com:rocky-jaiswal/#{application}.git&quot;
+set :branch, &quot;master&quot;
+
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true #Line 7
+
+task :local do
+    roles.clear
+    server &quot;localhost&quot;, :app #Line 11
+    set :user, &quot;rockyj&quot; 
+    set :java_home, &quot;/home/#{user}/jdk1.7.0_05&quot; #Line 13
+    set :tomcat_home, &quot;/home/#{user}/Apps/apache-tomcat-7.0.29&quot;
+    set :tomcat_manager, &quot;manager&quot;
+    set :tomcat_manager_password, &quot;manager&quot;
+    set :maven_home, &quot;/home/#{user}/Apps/apache-maven-3.0.4&quot;
+    set :deploy_to, &quot;/home/#{user}/tmp/#{application}&quot; # Line 18
+    set :use_sudo, false
+    namespace :tomcat do
+      task :deploy do
+        puts &quot;==================Building with Maven======================&quot; #Line 22
+        run &quot;export JAVA_HOME=#{java_home} &amp;&amp; cd #{deploy_to}/current &amp;&amp; #{maven_home}/bin/mvn clean package&quot;
+        puts &quot;==================Undeploy war======================&quot;#Line 24
+        run &quot;curl --user #{tomcat_manager}:#{tomcat_manager_password} http://$CAPISTRANO:HOST$:8080/manager/text/undeploy?path=/#{application}&quot;
+        puts &quot;==================Deploy war to Tomcat======================&quot; #Line 26
+        run &quot;curl --upload-file #{deploy_to}/current/target/#{application}*.war --user #{tomcat_manager}:#{tomcat_manager_password} http://$CAPISTRANO:HOST$:8080/manager/text/deploy?path=/#{application}&quot;
+      end
+    end
+    after &quot;deploy&quot;, &quot;tomcat:deploy&quot; #Line 30
+    after &quot;tomcat:deploy&quot;, &quot;deploy:cleanup&quot; # keep only the last 5 releases
+end </code></pre>
+
+<p>Line 1 - 7 : We are using github as our code repo and the first 7 lines are basic Capistrano setup (nothing much to talk about).</p>
+
+<p>Line 11 - 18 : Then we define a custom task / namespace to keep our experiment isolated. We set the Java, Tomcat and other paths to get the basic setup in place. We will also use Maven to build our app so we specify its path as well. We will build the app in a temporary folder so we set that path as well.</p>
+
+<p>Line 30 : The default Capistrano task is &#8220;deploy&#8221; which will take the updated version of code from git check it out in the specified directory. After the deploy command we will run our own custom commands through Capistrano&#8217;s DSL.</p>
+
+<p>Line 22 - 23 : Now we start using Capistrano&#8217;s DSL and run commands on remote servers via ssh. First we set the right JAVA_HOME and change the directory to where our code is. Then we build our project through Maven. Please note we need to run the commands in the same shell and that is why we do &#8220;command a &amp;&amp; command b&#8221;. We cannot specify commands in separate lines as Capistrano opens a new shell for each command when we run it with the &#8220;run&#8221; method call.</p>
+
+<p>Line 24 - 27 : Next using the Tomcat manager and curl (since Tomcat Manager works on HTTP), we undeploy the existing version of the application and finally deploy the Maven built new version. We use the &#8220;$CAPISTRANO:HOST&#8221; variable to avoid hardcoding and getting the hostname where Capistrano commands are being run.</p>
+
+<p>We will first test this on localhost, so make sure you have your local ssh server running. In Fedora I do -</p>
+
+<pre><code>sudo service sshd start</code></pre>
+
+<p>Finally, make sure you have local SSH keys setup and your Tomcat is running with the manager properly configured. Now finally run this single command to deploy your Java application -</p>
+
+<pre><code>cap local deploy</code></pre>
+
+<p>That is it, since the build is made from github make sure you push your changes out before running this command to see your changes on the browser. This may seem a lot for a local deploy but now just change the &#8220;:server&#8221; hostname to deploy to a server remotely (ofcourse, you may need to change your Maven / JDK paths as well according to your remote server setup). After this you can now deploy a new &#8220;war&#8221; build to a remote server with a single command. You can also write your own custom tasks with Capistrano and sit back and enjoy painless deployments.</p>
+              </div>
+              <hr/>
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
           </div>
         </div>
         <div class="span3">
@@ -191,16 +284,4 @@
       </div>
     </div>
   </body>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-10309067-3']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
 </html>
-

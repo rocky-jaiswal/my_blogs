@@ -6,7 +6,7 @@ date: 26/08/2012
 
 This was a quite relaxing weekend, there was heavy rain in the Delhi region so there was not much to do. So I picked up a Scala book and read a few chapters. Soon enough, my hands started itching to write some code. I wanted to build something in Scala but ended up experimenting on Android.
 
-Back at work, I finished my first iPad optimized jQuery Mobile and Rails app web application. I am mostly satisfied with the end result but somehow felt that a native app would have provided a better experience to the user. The question then comes is how to make a native app communicate with the server when most of the data needs to be fetched from the server itself.
+Back at work, I finished my first iPad optimized jQuery Mobile and Rails web application. I am mostly satisfied with the end result but somehow felt that a native app would have provided a better experience to the user. The question which arises is how to make a native app communicate with the server when most of the data needs to be fetched from the server itself.
 
 So to build on this idea, I started making an Android application that fetches JSON data from a Rails server. To express myself clearly I wanted data to be accessible from a mobile app and a web app, like shown below -
 

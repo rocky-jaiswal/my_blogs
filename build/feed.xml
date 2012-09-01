@@ -5,10 +5,98 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2012-08-26T00:00:00Z</updated>
+  <updated>2012-09-01T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Deploying Java application with Capistrano</title>
+    <link rel="alternate" href="/2012/09/01/deploying_java_apps_with_capistrano.html"/>
+    <id>/2012/09/01/deploying_java_apps_with_capistrano.html</id>
+    <published>2012-09-01T00:00:00Z</published>
+    <updated>2012-09-01T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;The advantage of learning a few programming languages is that you apply one&amp;#8217;s paradigms to the other. When I was a Java programmer I never gave much thought to deployment. Maven would build a war file, which would be copied to the application server through a shell script or even via the IDE. For remote deployments we would just do the same from the build server via scp. I always found the Maven &amp;#8220;Cargo&amp;#8221; plugin too complicated so let just skip that for now.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;The advantage of learning a few programming languages is that you apply one&amp;#8217;s paradigms to the other. When I was a Java programmer I never gave much thought to deployment. Maven would build a war file, which would be copied to the application server through a shell script or even via the IDE. For remote deployments we would just do the same from the build server via scp. I always found the Maven &amp;#8220;Cargo&amp;#8221; plugin too complicated so let just skip that for now.&lt;/p&gt;
+
+&lt;p&gt;Then I came into the Ruby world and learned (a bit) about Capistrano and was absolutely fascinated by it. It did so much so easily for deployment that using anything else seems pre-historic.&lt;/p&gt;
+
+&lt;p&gt;So I started suggesting my Java friends to use Capistrano. This post is my first attempt at deploying a Java EE6 project with Capistrano.&lt;/p&gt;
+
+&lt;p&gt;Lets start by creating a Java EE6 project from Maven (or whichever way you like). To keep our lives simple and stay withing the JVM world we will use JRuby (1.7.0 preview 2). If you already have JRuby setup run a &amp;#8220;gem update&amp;#8221; to avoid any pain.&lt;/p&gt;
+
+&lt;p&gt;Now just install the Capistrano gem in JRuby by running -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install capistrano&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now in the root directory of our JavaEE project run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;capify .&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Capistrano will now create some files with some default entries.&lt;/p&gt;
+
+&lt;p&gt;Now, we will also use the Tomcat Manager for deployment so read up a bit &lt;a href='http://tomcat.apache.org/tomcat-7.0-doc/manager-howto.html'&gt;here&lt;/a&gt; and setup your manager in $TOMCAT_HOME/conf/tomcat-users.xml. Make sure you give the manager &lt;strong&gt;&amp;#8220;manager-script&amp;#8221;&lt;/strong&gt; role so that we can do automated command line deployments through the manager.&lt;/p&gt;
+
+&lt;p&gt;We&amp;#8217;ll start of by using Capistrano for local deployment, I know that can be easily done through an IDE but we&amp;#8217;ll start off with this and for doing remote deployments it will be just a matter of changing the hostname and paths (and SSH setup of course).&lt;/p&gt;
+
+&lt;p&gt;So lets look at the capfile we update in $your-javaee-project/config/deploy.rb&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set :application, &amp;quot;jdeployer&amp;quot;
+set :scm, &amp;quot;git&amp;quot;
+set :repository, &amp;quot;git@github.com:rocky-jaiswal/#{application}.git&amp;quot;
+set :branch, &amp;quot;master&amp;quot;
+
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true #Line 7
+
+task :local do
+    roles.clear
+    server &amp;quot;localhost&amp;quot;, :app #Line 11
+    set :user, &amp;quot;rockyj&amp;quot; 
+    set :java_home, &amp;quot;/home/#{user}/jdk1.7.0_05&amp;quot; #Line 13
+    set :tomcat_home, &amp;quot;/home/#{user}/Apps/apache-tomcat-7.0.29&amp;quot;
+    set :tomcat_manager, &amp;quot;manager&amp;quot;
+    set :tomcat_manager_password, &amp;quot;manager&amp;quot;
+    set :maven_home, &amp;quot;/home/#{user}/Apps/apache-maven-3.0.4&amp;quot;
+    set :deploy_to, &amp;quot;/home/#{user}/tmp/#{application}&amp;quot; # Line 18
+    set :use_sudo, false
+    namespace :tomcat do
+      task :deploy do
+        puts &amp;quot;==================Building with Maven======================&amp;quot; #Line 22
+        run &amp;quot;export JAVA_HOME=#{java_home} &amp;amp;&amp;amp; cd #{deploy_to}/current &amp;amp;&amp;amp; #{maven_home}/bin/mvn clean package&amp;quot;
+        puts &amp;quot;==================Undeploy war======================&amp;quot;#Line 24
+        run &amp;quot;curl --user #{tomcat_manager}:#{tomcat_manager_password} http://$CAPISTRANO:HOST$:8080/manager/text/undeploy?path=/#{application}&amp;quot;
+        puts &amp;quot;==================Deploy war to Tomcat======================&amp;quot; #Line 26
+        run &amp;quot;curl --upload-file #{deploy_to}/current/target/#{application}*.war --user #{tomcat_manager}:#{tomcat_manager_password} http://$CAPISTRANO:HOST$:8080/manager/text/deploy?path=/#{application}&amp;quot;
+      end
+    end
+    after &amp;quot;deploy&amp;quot;, &amp;quot;tomcat:deploy&amp;quot; #Line 30
+    after &amp;quot;tomcat:deploy&amp;quot;, &amp;quot;deploy:cleanup&amp;quot; # keep only the last 5 releases
+end &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Line 1 - 7 : We are using github as our code repo and the first 7 lines are basic Capistrano setup (nothing much to talk about).&lt;/p&gt;
+
+&lt;p&gt;Line 11 - 18 : Then we define a custom task / namespace to keep our experiment isolated. We set the Java, Tomcat and other paths to get the basic setup in place. We will also use Maven to build our app so we specify its path as well. We will build the app in a temporary folder so we set that path as well.&lt;/p&gt;
+
+&lt;p&gt;Line 30 : The default Capistrano task is &amp;#8220;deploy&amp;#8221; which will take the updated version of code from git check it out in the specified directory. After the deploy command we will run our own custom commands through Capistrano&amp;#8217;s DSL.&lt;/p&gt;
+
+&lt;p&gt;Line 22 - 23 : Now we start using Capistrano&amp;#8217;s DSL and run commands on remote servers via ssh. First we set the right JAVA_HOME and change the directory to where our code is. Then we build our project through Maven. Please note we need to run the commands in the same shell and that is why we do &amp;#8220;command a &amp;amp;&amp;amp; command b&amp;#8221;. We cannot specify commands in separate lines as Capistrano opens a new shell for each command when we run it with the &amp;#8220;run&amp;#8221; method call.&lt;/p&gt;
+
+&lt;p&gt;Line 24 - 27 : Next using the Tomcat manager and curl (since Tomcat Manager works on HTTP), we undeploy the existing version of the application and finally deploy the Maven built new version. We use the &amp;#8220;$CAPISTRANO:HOST&amp;#8221; variable to avoid hardcoding and getting the hostname where Capistrano commands are being run.&lt;/p&gt;
+
+&lt;p&gt;We will first test this on localhost, so make sure you have your local ssh server running. In Fedora I do -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo service sshd start&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, make sure you have local SSH keys setup and your Tomcat is running with the manager properly configured. Now finally run this single command to deploy your Java application -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cap local deploy&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is it, since the build is made from github make sure you push your changes out before running this command to see your changes on the browser. This may seem a lot for a local deploy but now just change the &amp;#8220;:server&amp;#8221; hostname to deploy to a server remotely (ofcourse, you may need to change your Maven / JDK paths as well according to your remote server setup). After this you can now deploy a new &amp;#8220;war&amp;#8221; build to a remote server with a single command. You can also write your own custom tasks with Capistrano and sit back and enjoy painless deployments.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Accessing server data from a native Android app</title>
     <link rel="alternate" href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"/>
@@ -22,7 +110,7 @@
 </summary>
     <content type="html">&lt;p&gt;This was a quite relaxing weekend, there was heavy rain in the Delhi region so there was not much to do. So I picked up a Scala book and read a few chapters. Soon enough, my hands started itching to write some code. I wanted to build something in Scala but ended up experimenting on Android.&lt;/p&gt;
 
-&lt;p&gt;Back at work, I finished my first iPad optimized jQuery Mobile and Rails app web application. I am mostly satisfied with the end result but somehow felt that a native app would have provided a better experience to the user. The question then comes is how to make a native app communicate with the server when most of the data needs to be fetched from the server itself.&lt;/p&gt;
+&lt;p&gt;Back at work, I finished my first iPad optimized jQuery Mobile and Rails web application. I am mostly satisfied with the end result but somehow felt that a native app would have provided a better experience to the user. The question which arises is how to make a native app communicate with the server when most of the data needs to be fetched from the server itself.&lt;/p&gt;
 
 &lt;p&gt;So to build on this idea, I started making an Android application that fetches JSON data from a Rails server. To express myself clearly I wanted data to be accessible from a mobile app and a web app, like shown below -&lt;/p&gt;
 
@@ -422,17 +510,5 @@ end&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We really have scratched the surface of Backbone here. For example, since our event was triggered by autocomplete we could not programmatically bind it for re-rending the view. But in case of clicking a button or a link (which are the most common events on the web) we could have easily saved some code by declartively binding the click of a button to a view&amp;#8217;s rendering.&lt;/p&gt;
 
 &lt;p&gt;I hope I have given you a small introduction to get started with Backbone. Please leave your comments for a better blog post next time.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Video of my talk with @arunagw at RubyConf India 2012</title>
-    <link rel="alternate" href="/2012/05/21/video_rubyconf_india.html"/>
-    <id>/2012/05/21/video_rubyconf_india.html</id>
-    <published>2012-05-21T00:00:00Z</published>
-    <updated>2012-05-21T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;object height='315' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='560' /&gt;&lt;/object&gt;</summary>
-    <content type="html">&lt;object height='315' width='560'&gt;&lt;param name='movie' value='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' /&gt;&lt;param name='allowFullScreen' value='true' /&gt;&lt;param name='allowscriptaccess' value='always' /&gt;&lt;embed allowfullscreen='true' allowscriptaccess='always' height='315' src='http://www.youtube.com/v/Yx5PsEaC_48?version=3&amp;amp;hl=en_US' type='application/x-shockwave-flash' width='560' /&gt;&lt;/object&gt;</content>
   </entry>
 </feed>
