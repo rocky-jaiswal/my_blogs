@@ -1,5 +1,5 @@
 --- 
-title: "Deploying Java application with Capistrano"
+title: "Deploying Java applications with Capistrano"
 tags: Java, JRuby, Capistrano
 date: 01/09/2012
 ---

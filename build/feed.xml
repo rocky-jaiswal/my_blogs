@@ -10,7 +10,7 @@
     <name>Blog Author</name>
   </author>
   <entry>
-    <title>Deploying Java application with Capistrano</title>
+    <title>Deploying Java applications with Capistrano</title>
     <link rel="alternate" href="/2012/09/01/deploying_java_apps_with_capistrano.html"/>
     <id>/2012/09/01/deploying_java_apps_with_capistrano.html</id>
     <published>2012-09-01T00:00:00Z</published>
