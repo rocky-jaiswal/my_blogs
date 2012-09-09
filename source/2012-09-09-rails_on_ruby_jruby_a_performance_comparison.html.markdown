@@ -60,9 +60,9 @@ Now lets start the experiment. We will run the experiment on the server in 2 mod
 
 We will also run the "ab" command above a few times so that cache etc is warmed. The results you see below are always for the 5th or 6th run.
 
-Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increaded the DB pool size to 15 so that no bottleneck is created there.
+Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increased the DB pool size to 15 so that no bottleneck is created there.
 
-Finally, we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results - 
+Finally, we kick off our experiment with MRI 1.9.3, Unicorn, 3 workers enabled and concurrency off. Let's see the results - 
 
     RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
 
@@ -99,7 +99,7 @@ Lets enable concurrency and retest -
     Requests per second:    451.77 [#/sec] (mean)
     Time per request:       22.135 [ms] (mean)
 
-Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn's three.
+Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn's three. One can imagine the performance for a clustered puma setup.
 
 Lets try the same tests with [Trinidad](http://thinkincode.net/trinidad/) -
 
@@ -135,7 +135,7 @@ Anyways, here is a summary -
 - Trinidad is almost as fast as Puma.
 - On JRuby servers the response time improves steadily as the server is hit due to JVM optimizations kicking in.
 - With concurrency enabled on Puma / Trinidad watch out for thread safety.
-- If you are looking for pure speed use warbler and Tomcat but you have moved out of the "rack" compliant world then.
+- If you are looking for pure speed use warbler and Tomcat but you have moved out of the rack compliant world then.
 
 Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs is background threads without relying on external processes.
 

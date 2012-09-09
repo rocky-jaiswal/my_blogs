@@ -84,9 +84,9 @@ gem &amp;#39;jquery-rails&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;We will also run the &amp;#8220;ab&amp;#8221; command above a few times so that cache etc is warmed. The results you see below are always for the 5th or 6th run.&lt;/p&gt;
 
-&lt;p&gt;Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increaded the DB pool size to 15 so that no bottleneck is created there.&lt;/p&gt;
+&lt;p&gt;Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increased the DB pool size to 15 so that no bottleneck is created there.&lt;/p&gt;
 
-&lt;p&gt;Finally, we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results -&lt;/p&gt;
+&lt;p&gt;Finally, we kick off our experiment with MRI 1.9.3, Unicorn, 3 workers enabled and concurrency off. Let&amp;#8217;s see the results -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
 
@@ -123,7 +123,7 @@ Time per request:       138.184 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;Requests per second:    451.77 [#/sec] (mean)
 Time per request:       22.135 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&amp;#8217;s three.&lt;/p&gt;
+&lt;p&gt;Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&amp;#8217;s three. One can imagine the performance for a clustered puma setup.&lt;/p&gt;
 
 &lt;p&gt;Lets try the same tests with &lt;a href='http://thinkincode.net/trinidad/'&gt;Trinidad&lt;/a&gt; -&lt;/p&gt;
 
@@ -167,7 +167,7 @@ Time per request:       2.343 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;li&gt;With concurrency enabled on Puma / Trinidad watch out for thread safety.&lt;/li&gt;
 
-&lt;li&gt;If you are looking for pure speed use warbler and Tomcat but you have moved out of the &amp;#8220;rack&amp;#8221; compliant world then.&lt;/li&gt;
+&lt;li&gt;If you are looking for pure speed use warbler and Tomcat but you have moved out of the rack compliant world then.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs is background threads without relying on external processes.&lt;/p&gt;

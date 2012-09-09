@@ -92,9 +92,9 @@ gem &#39;jquery-rails&#39;</code></pre>
 
 <p>We will also run the &#8220;ab&#8221; command above a few times so that cache etc is warmed. The results you see below are always for the 5th or 6th run.</p>
 
-<p>Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increaded the DB pool size to 15 so that no bottleneck is created there.</p>
+<p>Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increased the DB pool size to 15 so that no bottleneck is created there.</p>
 
-<p>Finally, we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results -</p>
+<p>Finally, we kick off our experiment with MRI 1.9.3, Unicorn, 3 workers enabled and concurrency off. Let&#8217;s see the results -</p>
 
 <pre><code>RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
 
@@ -131,7 +131,7 @@ Time per request:       138.184 [ms] (mean)</code></pre>
 <pre><code>Requests per second:    451.77 [#/sec] (mean)
 Time per request:       22.135 [ms] (mean)</code></pre>
 
-<p>Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&#8217;s three.</p>
+<p>Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&#8217;s three. One can imagine the performance for a clustered puma setup.</p>
 
 <p>Lets try the same tests with <a href='http://thinkincode.net/trinidad/'>Trinidad</a> -</p>
 
@@ -175,7 +175,7 @@ Time per request:       2.343 [ms] (mean)</code></pre>
 
 <li>With concurrency enabled on Puma / Trinidad watch out for thread safety.</li>
 
-<li>If you are looking for pure speed use warbler and Tomcat but you have moved out of the &#8220;rack&#8221; compliant world then.</li>
+<li>If you are looking for pure speed use warbler and Tomcat but you have moved out of the rack compliant world then.</li>
 </ul>
 
 <p>Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs is background threads without relying on external processes.</p>
