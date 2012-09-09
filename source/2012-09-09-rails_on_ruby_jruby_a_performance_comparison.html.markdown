@@ -137,9 +137,9 @@ Anyways, here is a summary -
 - With concurrency enabled on Puma / Trinidad watch out for thread safety.
 - If you are looking for pure speed use warbler and Tomcat but you have moved out of the rack compliant world then.
 
-Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs is background threads without relying on external processes.
+Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs in background threads without relying on external processes.
 
-However, with multi-threading enabled thread safety may be hard to get right. If you have a simple application and you design the application with concurrency in mind (immutable classes, thread safe libraries) then go ahead and use JRuby with Puma / Trinidad / Torquebox. Learn more from a great post here - 
+However, with multi-threading enabled, thread safety may be hard to get right. If you have a simple application and you design the application with concurrency in mind (immutable classes, thread safe libraries) then go ahead and use JRuby with Puma / Trinidad / Torquebox. Learn more from a great post here - 
 
 [https://github.com/jruby/jruby/wiki/Concurrency-in-jruby](https://github.com/jruby/jruby/wiki/Concurrency-in-jruby)
 
