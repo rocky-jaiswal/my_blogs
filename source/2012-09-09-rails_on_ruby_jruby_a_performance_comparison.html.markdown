@@ -48,11 +48,11 @@ First, we need to setup a Rails app which can be used with both Ruby and JRuby. 
 
 Nothing out of the ordinary here, only thing is that the gems will be loaded according to the Ruby implementation.
 
-I also scaffolded a generic User model and added a few records to my database. Pointed to the 'root' of my applications to the /users/index page so that the DB is hit for everytime someone opens the homepage of the application. I will also use "ab" (apache benchmark) as my testing tool, I also tried this with JMeter and there was not much difference. My command is -
+I also scaffolded a generic User model and added a few records to my database. Pointed the 'root' of my application to the /users/index page so that the DB is hit everytime someone opens the homepage of the application. I will also use "ab" (apache benchmark) as my testing tool, I also tried this with JMeter and there was not much difference. My command is -
 
     ab -n 100 -c 10 http://localhost:8080/
 
-This means my apps homepage will be hit by 100 requests with 10 concurrent requests at a time, decent enough for performance testing a small app.
+This means my app's homepage will be hit by 100 requests with 10 concurrent requests at a time, decent enough for performance testing a small app.
 
 Now lets start the experiment. We will run the experiment on the server in 2 modes, one by not allowing concurrency and the other by allowing concurrency. See tenderlove's awesome post to understand this more - [http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html](http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html). This is done by commenting / uncommenting this line in production.rb -
 
@@ -62,7 +62,7 @@ We will also run the "ab" command above a few times so that cache etc is warmed.
 
 Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increaded the DB pool size to 15 so that no bottleneck is created there.
 
-Finally we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results - 
+Finally, we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results - 
 
     RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
 

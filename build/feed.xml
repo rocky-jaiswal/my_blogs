@@ -72,11 +72,11 @@ gem &amp;#39;jquery-rails&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Nothing out of the ordinary here, only thing is that the gems will be loaded according to the Ruby implementation.&lt;/p&gt;
 
-&lt;p&gt;I also scaffolded a generic User model and added a few records to my database. Pointed to the &amp;#8216;root&amp;#8217; of my applications to the /users/index page so that the DB is hit for everytime someone opens the homepage of the application. I will also use &amp;#8220;ab&amp;#8221; (apache benchmark) as my testing tool, I also tried this with JMeter and there was not much difference. My command is -&lt;/p&gt;
+&lt;p&gt;I also scaffolded a generic User model and added a few records to my database. Pointed the &amp;#8216;root&amp;#8217; of my application to the /users/index page so that the DB is hit everytime someone opens the homepage of the application. I will also use &amp;#8220;ab&amp;#8221; (apache benchmark) as my testing tool, I also tried this with JMeter and there was not much difference. My command is -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;ab -n 100 -c 10 http://localhost:8080/&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This means my apps homepage will be hit by 100 requests with 10 concurrent requests at a time, decent enough for performance testing a small app.&lt;/p&gt;
+&lt;p&gt;This means my app&amp;#8217;s homepage will be hit by 100 requests with 10 concurrent requests at a time, decent enough for performance testing a small app.&lt;/p&gt;
 
 &lt;p&gt;Now lets start the experiment. We will run the experiment on the server in 2 modes, one by not allowing concurrency and the other by allowing concurrency. See tenderlove&amp;#8217;s awesome post to understand this more - &lt;a href='http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html'&gt;http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html&lt;/a&gt;. This is done by commenting / uncommenting this line in production.rb -&lt;/p&gt;
 
@@ -86,7 +86,7 @@ gem &amp;#39;jquery-rails&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increaded the DB pool size to 15 so that no bottleneck is created there.&lt;/p&gt;
 
-&lt;p&gt;Finally we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results -&lt;/p&gt;
+&lt;p&gt;Finally, we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
 
