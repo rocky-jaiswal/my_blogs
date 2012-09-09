@@ -103,7 +103,7 @@ Time per request:       19.019 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;Requests per second:    109.46 [#/sec] (mean)
 Time per request:       91.360 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Let&amp;#8217;s switch over to JRuby now and use puma as the server, with these JVM options -&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s switch over to JRuby now and use &lt;a href='http://puma.io'&gt;puma&lt;/a&gt; as the server, with these JVM options -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;export JRUBY_OPTS=&amp;quot;-J-XX:ReservedCodeCacheSize=100m -J-Xmn512m -J-Xms2048m -J-Xmx2048m -J-server&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
@@ -125,7 +125,7 @@ Time per request:       22.135 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&amp;#8217;s three.&lt;/p&gt;
 
-&lt;p&gt;Lets try the same tests with Trinidad -&lt;/p&gt;
+&lt;p&gt;Lets try the same tests with &lt;a href='http://thinkincode.net/trinidad/'&gt;Trinidad&lt;/a&gt; -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;RAILS_ENV=production jruby -S bundle exec trinidad -p 8080&lt;/code&gt;&lt;/pre&gt;
 
@@ -139,7 +139,7 @@ Time per request:       34.788 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;Requests per second:    391.74 [#/sec] (mean)
 Time per request:       25.527 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We see an improvment now. Although, Puma is a tad faster.&lt;/p&gt;
+&lt;p&gt;We see an improvment now. Although, Puma is a tad faster (ignorable).&lt;/p&gt;
 
 &lt;p&gt;Lastly with concurrency enabled, we will use the warbler gem to generate a war file and deploy it on standard tomcat.&lt;/p&gt;
 
@@ -161,7 +161,7 @@ Time per request:       2.343 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;li&gt;Puma is fast but only when concurrency is enabled.&lt;/li&gt;
 
-&lt;li&gt;Trinidad is a fast but a tad slower than Puma.&lt;/li&gt;
+&lt;li&gt;Trinidad is almost as fast as Puma.&lt;/li&gt;
 
 &lt;li&gt;On JRuby servers the response time improves steadily as the server is hit due to JVM optimizations kicking in.&lt;/li&gt;
 

@@ -79,7 +79,7 @@ Not much of a difference. This is because MRI uses a GIL and there is no thread 
     Requests per second:    109.46 [#/sec] (mean)
     Time per request:       91.360 [ms] (mean)
 
-Let's switch over to JRuby now and use puma as the server, with these JVM options -
+Let's switch over to JRuby now and use [puma](http://puma.io) as the server, with these JVM options -
 
     export JRUBY_OPTS="-J-XX:ReservedCodeCacheSize=100m -J-Xmn512m -J-Xms2048m -J-Xmx2048m -J-server"
 
@@ -101,7 +101,7 @@ Lets enable concurrency and retest -
 
 Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn's three.
 
-Lets try the same tests with Trinidad -
+Lets try the same tests with [Trinidad](http://thinkincode.net/trinidad/) -
 
     RAILS_ENV=production jruby -S bundle exec trinidad -p 8080
 
@@ -115,7 +115,7 @@ This is a bit slow, lets enable concurrency and retest -
     Requests per second:    391.74 [#/sec] (mean)
     Time per request:       25.527 [ms] (mean)
 
-We see an improvment now. Although, Puma is a tad faster.
+We see an improvment now. Although, Puma is a tad faster (ignorable).
 
 Lastly with concurrency enabled, we will use the warbler gem to generate a war file and deploy it on standard tomcat.
 
@@ -132,7 +132,7 @@ Anyways, here is a summary -
 - There is no effect of enabling concurrency on Unicorn as MRI uses GIL (Global Interpreter Lock).
 - When using Unicorn you don't have to worry about multithreading.
 - Puma is fast but only when concurrency is enabled.
-- Trinidad is a fast but a tad slower than Puma.
+- Trinidad is almost as fast as Puma.
 - On JRuby servers the response time improves steadily as the server is hit due to JVM optimizations kicking in.
 - With concurrency enabled on Puma / Trinidad watch out for thread safety.
 - If you are looking for pure speed use warbler and Tomcat but you have moved out of the "rake" compliant world then.

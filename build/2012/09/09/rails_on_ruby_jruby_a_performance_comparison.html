@@ -111,7 +111,7 @@ Time per request:       19.019 [ms] (mean)</code></pre>
 <pre><code>Requests per second:    109.46 [#/sec] (mean)
 Time per request:       91.360 [ms] (mean)</code></pre>
 
-<p>Let&#8217;s switch over to JRuby now and use puma as the server, with these JVM options -</p>
+<p>Let&#8217;s switch over to JRuby now and use <a href='http://puma.io'>puma</a> as the server, with these JVM options -</p>
 
 <pre><code>export JRUBY_OPTS=&quot;-J-XX:ReservedCodeCacheSize=100m -J-Xmn512m -J-Xms2048m -J-Xmx2048m -J-server&quot;</code></pre>
 
@@ -133,7 +133,7 @@ Time per request:       22.135 [ms] (mean)</code></pre>
 
 <p>Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&#8217;s three.</p>
 
-<p>Lets try the same tests with Trinidad -</p>
+<p>Lets try the same tests with <a href='http://thinkincode.net/trinidad/'>Trinidad</a> -</p>
 
 <pre><code>RAILS_ENV=production jruby -S bundle exec trinidad -p 8080</code></pre>
 
@@ -147,7 +147,7 @@ Time per request:       34.788 [ms] (mean)</code></pre>
 <pre><code>Requests per second:    391.74 [#/sec] (mean)
 Time per request:       25.527 [ms] (mean)</code></pre>
 
-<p>We see an improvment now. Although, Puma is a tad faster.</p>
+<p>We see an improvment now. Although, Puma is a tad faster (ignorable).</p>
 
 <p>Lastly with concurrency enabled, we will use the warbler gem to generate a war file and deploy it on standard tomcat.</p>
 
@@ -169,7 +169,7 @@ Time per request:       2.343 [ms] (mean)</code></pre>
 
 <li>Puma is fast but only when concurrency is enabled.</li>
 
-<li>Trinidad is a fast but a tad slower than Puma.</li>
+<li>Trinidad is almost as fast as Puma.</li>
 
 <li>On JRuby servers the response time improves steadily as the server is hit due to JVM optimizations kicking in.</li>
 
