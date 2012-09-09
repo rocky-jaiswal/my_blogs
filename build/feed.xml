@@ -148,7 +148,7 @@ Time per request:       25.527 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;Requests per second:    4268.76 [#/sec] (mean)
 Time per request:       2.343 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I think we are talking Java level performance here. I don&amp;#8217;t know why there is such a huge difference between Trinidad (which is Tomcat based) and standard Tomcat but it may be due to Trinidad being rake compliant and Tomcat having no such restrictions.&lt;/p&gt;
+&lt;p&gt;I think we are talking Java level performance here. I don&amp;#8217;t know why there is such a huge difference between Trinidad (which is Tomcat based) and standard Tomcat but it may be due to Trinidad being rack compliant and Tomcat having no such restrictions.&lt;/p&gt;
 
 &lt;p&gt;Anyways, here is a summary -&lt;/p&gt;
 
@@ -167,7 +167,7 @@ Time per request:       2.343 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;li&gt;With concurrency enabled on Puma / Trinidad watch out for thread safety.&lt;/li&gt;
 
-&lt;li&gt;If you are looking for pure speed use warbler and Tomcat but you have moved out of the &amp;#8220;rake&amp;#8221; compliant world then.&lt;/li&gt;
+&lt;li&gt;If you are looking for pure speed use warbler and Tomcat but you have moved out of the &amp;#8220;rack&amp;#8221; compliant world then.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs is background threads without relying on external processes.&lt;/p&gt;

@@ -156,7 +156,7 @@ Time per request:       25.527 [ms] (mean)</code></pre>
 <pre><code>Requests per second:    4268.76 [#/sec] (mean)
 Time per request:       2.343 [ms] (mean)</code></pre>
 
-<p>I think we are talking Java level performance here. I don&#8217;t know why there is such a huge difference between Trinidad (which is Tomcat based) and standard Tomcat but it may be due to Trinidad being rake compliant and Tomcat having no such restrictions.</p>
+<p>I think we are talking Java level performance here. I don&#8217;t know why there is such a huge difference between Trinidad (which is Tomcat based) and standard Tomcat but it may be due to Trinidad being rack compliant and Tomcat having no such restrictions.</p>
 
 <p>Anyways, here is a summary -</p>
 
@@ -175,7 +175,7 @@ Time per request:       2.343 [ms] (mean)</code></pre>
 
 <li>With concurrency enabled on Puma / Trinidad watch out for thread safety.</li>
 
-<li>If you are looking for pure speed use warbler and Tomcat but you have moved out of the &#8220;rake&#8221; compliant world then.</li>
+<li>If you are looking for pure speed use warbler and Tomcat but you have moved out of the &#8220;rack&#8221; compliant world then.</li>
 </ul>
 
 <p>Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs is background threads without relying on external processes.</p>
