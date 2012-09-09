@@ -12,7 +12,7 @@ I have been a JRuby fanboy for a while now, in the last few weeks I also saw som
 
 - [http://railscasts.com/episodes/377-trinidad](http://railscasts.com/episodes/377-trinidad)
 
-Now, I am a sucker for performance. I love making performance improvements on applications. So I thought let me run some tests on a simple Rails application on my personal laptop (i7, 8 GB RAM, SSD) and see how well the Ruby implementations and their commonly used servers fair. I will use MRI 1.9.3, JRuby 1.7.0.preview2 and the latest app servers for this experiment.
+Now, I am a sucker for performance. I love making performance improvements on applications. So I thought let me run some tests on a simple Rails application on my personal laptop (i7, 8 GB RAM, SSD) and see how well the Ruby implementations and their commonly used servers fare. I will use MRI 1.9.3, JRuby 1.7.0.preview2 and the latest app servers for this experiment.
 
 These tests need to be taken with a pinch of salt as I am no authority in perfomance testing but still the results are quite interesting.
 
