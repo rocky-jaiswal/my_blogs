@@ -24,11 +24,165 @@
           <div id="main" role="main">
             <article>
               <h2>
-                  <span class="color-orange">Slides of my talk with @arunagw in Ruby Conf India 2012</span> 
-                  <span>Mar 26 2012</span>
+                  <span class="color-orange">Running Rails on Ruby or JRuby - A Performance Comparison</span> 
+                  <span>Sep  9 2012</span>
               </h2>
               <div class="post">
-                <object height='400' width='500'><param name='movie' value='http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=torqueboxpres-120326001153-phpapp01' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='400' src='http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=torqueboxpres-120326001153-phpapp01' type='application/x-shockwave-flash' width='500' /></object>
+                <p>I have been a JRuby fanboy for a while now, in the last few weeks I also saw some really interesting RailsCasts on multi-threading Rails applications and JRuby which piqued me to do some ad-hoc experimentation. I recommend everyone to watch these three episodes -</p>
+
+<ul>
+<li>
+<p><a href='http://railscasts.com/episodes/365-thread-safety'>http://railscasts.com/episodes/365-thread-safety</a></p>
+</li>
+
+<li>
+<p><a href='http://railscasts.com/episodes/376-jruby-basics'>http://railscasts.com/episodes/376-jruby-basics</a></p>
+</li>
+
+<li>
+<p><a href='http://railscasts.com/episodes/377-trinidad'>http://railscasts.com/episodes/377-trinidad</a></p>
+</li>
+</ul>
+
+<p>Now, I am a sucker for performance. I love making performance improvements on applications. So I thought let me run some tests on a simple Rails application on my personal laptop (i7, 8 GB RAM, SSD) and see how well the Ruby implementations and their commonly used servers fair. I will use MRI 1.9.3, JRuby 1.7.0.preview2 and the latest app servers for this experiment.</p>
+
+<p>These tests need to be taken with a pinch of salt as I am no authority in perfomance testing but still the results are quite interesting.</p>
+
+<p>First, we need to setup a Rails app which can be used with both Ruby and JRuby. My Gemfile looks like -</p>
+
+<pre><code>source &#39;https://rubygems.org&#39;
+
+gem &#39;rails&#39;, &#39;3.2.8&#39;
+gem &#39;warbler&#39;
+
+platform :jruby do
+  gem &#39;activerecord-jdbcpostgresql-adapter&#39;
+  gem &#39;jruby-openssl&#39;
+  gem &#39;puma&#39;
+  gem &#39;trinidad&#39;
+  gem &#39;therubyrhino&#39;, group: :assets
+end
+
+platform :ruby do
+  gem &#39;pg&#39;
+  gem &#39;unicorn&#39;
+end
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem &#39;sass-rails&#39;,   &#39;~&gt; 3.2.3&#39;
+  gem &#39;coffee-rails&#39;, &#39;~&gt; 3.2.1&#39;
+  gem &#39;uglifier&#39;, &#39;&gt;= 1.0.3&#39;
+end
+
+gem &#39;jquery-rails&#39;</code></pre>
+
+<p>Nothing out of the ordinary here, only thing is that the gems will be loaded according to the Ruby implementation.</p>
+
+<p>I also scaffolded a generic User model and added a few records to my database. Pointed to the &#8216;root&#8217; of my applications to the /users/index page so that the DB is hit for everytime someone opens the homepage of the application. I will also use &#8220;ab&#8221; (apache benchmark) as my testing tool, I also tried this with JMeter and there was not much difference. My command is -</p>
+
+<pre><code>ab -n 100 -c 10 http://localhost:8080/</code></pre>
+
+<p>This means my apps homepage will be hit by 100 requests with 10 concurrent requests at a time, decent enough for performance testing a small app.</p>
+
+<p>Now lets start the experiment. We will run the experiment on the server in 2 modes, one by not allowing concurrency and the other by allowing concurrency. See tenderlove&#8217;s awesome post to understand this more - <a href='http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html'>http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html</a>. This is done by commenting / uncommenting this line in production.rb -</p>
+
+<pre><code>config.threadsafe!</code></pre>
+
+<p>We will also run the &#8220;ab&#8221; command above a few times so that cache etc is warmed. The results you see below are always for the 5th or 6th run.</p>
+
+<p>Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increaded the DB pool size to 15 so that no bottleneck is created there.</p>
+
+<p>Finally we kick off our experiment with MRI 1.9.3 and Unicorn, 3 workers enabled and concurrency off, lets see the results -</p>
+
+<pre><code>RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
+
+Requests per second:    549.31 [#/sec] (mean)
+Time per request:       18.205 [ms] (mean)</code></pre>
+
+<p>Now lets us allow concurrency (uncomment the &#8220;config.threadsafe!&#8221; line) and re-run the tests -</p>
+
+<pre><code>Requests per second:    525.78 [#/sec] (mean)
+Time per request:       19.019 [ms] (mean)</code></pre>
+
+<p>Not much of a difference. This is because MRI uses a GIL and there is no thread level concurrency in MRI. Also reducing the no of workers reduces the performance drastically, if I use 1 worker -</p>
+
+<pre><code>Requests per second:    109.46 [#/sec] (mean)
+Time per request:       91.360 [ms] (mean)</code></pre>
+
+<p>Let&#8217;s switch over to JRuby now and use puma as the server, with these JVM options -</p>
+
+<pre><code>export JRUBY_OPTS=&quot;-J-XX:ReservedCodeCacheSize=100m -J-Xmn512m -J-Xms2048m -J-Xmx2048m -J-server&quot;</code></pre>
+
+<p>Server can be started by -</p>
+
+<pre><code>RAILS_ENV=production jruby -S bundle exec puma -p 8080</code></pre>
+
+<p>Results with concurrency off -</p>
+
+<pre><code>Requests per second:    72.37 [#/sec] (mean)
+Time per request:       138.184 [ms] (mean)</code></pre>
+
+<p>As you can see this is much much slower than Unicorn.</p>
+
+<p>Lets enable concurrency and retest -</p>
+
+<pre><code>Requests per second:    451.77 [#/sec] (mean)
+Time per request:       22.135 [ms] (mean)</code></pre>
+
+<p>Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&#8217;s three.</p>
+
+<p>Lets try the same tests with Trinidad -</p>
+
+<pre><code>RAILS_ENV=production jruby -S bundle exec trinidad -p 8080</code></pre>
+
+<p>Results with concurrency off -</p>
+
+<pre><code>Requests per second:    287.45 [#/sec] (mean)
+Time per request:       34.788 [ms] (mean)</code></pre>
+
+<p>This is a bit slow, lets enable concurrency and retest -</p>
+
+<pre><code>Requests per second:    391.74 [#/sec] (mean)
+Time per request:       25.527 [ms] (mean)</code></pre>
+
+<p>We see an improvment now. Although, Puma is a tad faster.</p>
+
+<p>Lastly with concurrency enabled, we will use the warbler gem to generate a war file and deploy it on standard tomcat.</p>
+
+<p>The results here are startling -</p>
+
+<pre><code>Requests per second:    4268.76 [#/sec] (mean)
+Time per request:       2.343 [ms] (mean)</code></pre>
+
+<p>I think we are talking Java level performance here. I don&#8217;t know why there is such a huge difference between Trinidad (which is Tomcat based) and standard Tomcat but it may be due to Trinidad being rake compliant and Tomcat having no such restrictions.</p>
+
+<p>Anyways, here is a summary -</p>
+
+<ul>
+<li>Unicorn is fast and performance improves as the number of workers are increased (no surprise!!).</li>
+
+<li>There is no effect of enabling concurrency on Unicorn as MRI uses GIL (Global Interpreter Lock).</li>
+
+<li>When using Unicorn you don&#8217;t have to worry about multithreading.</li>
+
+<li>Puma is fast but only when concurrency is enabled.</li>
+
+<li>Trinidad is a fast but a tad slower than Puma.</li>
+
+<li>On JRuby servers the response time improves steadily as the server is hit due to JVM optimizations kicking in.</li>
+
+<li>With concurrency enabled on Puma / Trinidad watch out for thread safety.</li>
+
+<li>If you are looking for pure speed use warbler and Tomcat but you have moved out of the &#8220;rake&#8221; compliant world then.</li>
+</ul>
+
+<p>Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs is background threads without relying on external processes.</p>
+
+<p>However, with multi-threading enabled thread safety may be hard to get right. If you have a simple application and you design the application with concurrency in mind (immutable classes, thread safe libraries) then go ahead and use JRuby with Puma / Trinidad / Torquebox. Learn more from a great post here -</p>
+
+<p><a href='https://github.com/jruby/jruby/wiki/Concurrency-in-jruby'>https://github.com/jruby/jruby/wiki/Concurrency-in-jruby</a></p>
               </div>
               <hr/>
               <div id="disqus_thread"></div>
