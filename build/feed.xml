@@ -176,7 +176,7 @@ Time per request:       41.422 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;a href='https://github.com/jruby/jruby/wiki/Concurrency-in-jruby'&gt;https://github.com/jruby/jruby/wiki/Concurrency-in-jruby&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Errata (10-Sep) :&lt;/strong&gt; Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to the Ben Browning and Richard Huang!&lt;/p&gt;</content>
+&lt;p&gt;&lt;strong&gt;Errata (10-Sep) :&lt;/strong&gt; Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to Ben Browning and Richard Huang!&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Deploying Java applications with Capistrano</title>
