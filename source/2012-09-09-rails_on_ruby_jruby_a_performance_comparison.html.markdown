@@ -143,5 +143,5 @@ However, with multi-threading enabled, thread safety may be hard to get right. I
 
 [https://github.com/jruby/jruby/wiki/Concurrency-in-jruby](https://github.com/jruby/jruby/wiki/Concurrency-in-jruby)
 
-Errata (10 / Sep) : Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to the Ben Browning and Richard Huang!
+__Errata (10-Sep) :__ Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to the Ben Browning and Richard Huang!
 
