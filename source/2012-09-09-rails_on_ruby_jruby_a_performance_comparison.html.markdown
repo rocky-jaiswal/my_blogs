@@ -117,29 +117,31 @@ This is a bit slow, lets enable concurrency and retest -
 
 We see an improvment now. Although, Puma is a tad faster (ignorable).
 
-Lastly with concurrency enabled, we will use the warbler gem to generate a war file and deploy it on standard tomcat.
+Lastly with we will use the warbler gem to generate a war file and deploy it on standard tomcat with concurrency enabled -
 
-The results here are startling -
+    Requests per second:    241.42 [#/sec] (mean)
+    Time per request:       41.422 [ms] (mean)
 
-    Requests per second:    4268.76 [#/sec] (mean)
-    Time per request:       2.343 [ms] (mean)
+These numbers are a bit higher than Puma and Trinidad.
 
-I think we are talking Java level performance here. I don't know why there is such a huge difference between Trinidad (which is Tomcat based) and standard Tomcat but it may be due to Trinidad being rack compliant and Tomcat having no such restrictions.
-
-Anyways, here is a summary -
+Finally, here is a summary -
 
 - Unicorn is fast and performance improves as the number of workers are increased (no surprise!!). 
 - There is no effect of enabling concurrency on Unicorn as MRI uses GIL (Global Interpreter Lock).
 - When using Unicorn you don't have to worry about multithreading.
 - Puma is fast but only when concurrency is enabled.
 - Trinidad is almost as fast as Puma.
+- A cluster of JRuby optimized servers (Puma / Trinidad) will be lightining fast.
 - On JRuby servers the response time improves steadily as the server is hit due to JVM optimizations kicking in.
 - With concurrency enabled on Puma / Trinidad watch out for thread safety.
-- If you are looking for pure speed use warbler and Tomcat but you have moved out of the rack compliant world then.
+
+I missed testing JRuby with Torquebox which is also a great JRuby server. Maybe I will update the blog later.
 
 Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs in background threads without relying on external processes.
 
 However, with multi-threading enabled, thread safety may be hard to get right. If you have a simple application and you design the application with concurrency in mind (immutable classes, thread safe libraries) then go ahead and use JRuby with Puma / Trinidad / Torquebox. Learn more from a great post here - 
 
 [https://github.com/jruby/jruby/wiki/Concurrency-in-jruby](https://github.com/jruby/jruby/wiki/Concurrency-in-jruby)
+
+Errata (10 / Sep) : Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to the Ben Browning and Richard Huang!
 
