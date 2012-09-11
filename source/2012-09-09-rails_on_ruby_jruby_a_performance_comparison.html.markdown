@@ -143,5 +143,27 @@ However, with multi-threading enabled, thread safety may be hard to get right. I
 
 [https://github.com/jruby/jruby/wiki/Concurrency-in-jruby](https://github.com/jruby/jruby/wiki/Concurrency-in-jruby)
 
-__Errata (10-Sep) :__ Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to Ben Browning and Richard Huang!
+__Errata (10-Sep) :__ 
+
+Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to Ben Browning and Richard Huang!
+
+__Update for Torquebox (11-Sep):__
+
+Ben Browning (the creator of [Torquebox](http://torquebox.org)) suggested that I try these tests on (yet unreleased) torquebox-lite. We just need to add 'torquebox-lite' to our Gemfile for this. I got an error after this but I easily fixed it by adding the line __xa: false__ to my production database.yml config (as we are running the tests on production mode). More info on this here - [http://torquebox.org/documentation/2.1.1/transactions.html#transaction-configuration](http://torquebox.org/documentation/2.1.1/transactions.html#transaction-configuration). 
+
+First with concurrency disabled, let us start a torquebox-lite instance with three runtimes with this simple command -
+
+    RAILS_ENV=production jruby -S bundle exec torquebox-lite -p 8080 --min-runtimes=3 --max-runtimes=3
+
+Even with consurrency disabled, the numbers here are quite good (although memory consumption is slightly on the higher side due to 3 runtimes and JBoss being a bit heavy) -
+
+    Requests per second:    258.86 [#/sec] (mean)
+    Time per request:       38.631 [ms] (mean)
+
+And finally with concurrency enabled and a single torquebox runtime we get -
+
+    Requests per second:    478.19 [#/sec] (mean)
+    Time per request:       20.912 [ms] (mean)
+
+The numbers match or are slightly better than Puma and drop even further as the JVM is warmed. For me, this makes a compelling case for using torquebox / torquebox-lite in production. Torquebox has a rock solid base of JBoss with great performance not to mention other awesome Torquebox features which you can see from my earlier blogs / [slideshare](http://localhost:4567/2012/03/26/ruby_conf_india_with_arunagw.html) presentation.
 
