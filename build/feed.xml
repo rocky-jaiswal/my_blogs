@@ -5,10 +5,274 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2012-09-09T00:00:00Z</updated>
+  <updated>2012-09-15T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Akka with JRuby</title>
+    <link rel="alternate" href="/2012/09/15/akka_with_jruby.html"/>
+    <id>/2012/09/15/akka_with_jruby.html</id>
+    <published>2012-09-15T00:00:00Z</published>
+    <updated>2012-09-15T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;This week I completed my work project and had a spare day to do some experimentation. I dabble sometimes with Scala which I think offers a cool combination of FP, OO and concurrency management. &lt;a href='http://akka.io'&gt;Akka&lt;/a&gt; is a middleware framework which works with Scala (and also Java) and provides an excellent abstraction to manage concurrency. Instead of dealing with threads, thread pools and low level synchronization we manage concurrency with something called as Actors.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;This week I completed my work project and had a spare day to do some experimentation. I dabble sometimes with Scala which I think offers a cool combination of FP, OO and concurrency management. &lt;a href='http://akka.io'&gt;Akka&lt;/a&gt; is a middleware framework which works with Scala (and also Java) and provides an excellent abstraction to manage concurrency. Instead of dealing with threads, thread pools and low level synchronization we manage concurrency with something called as Actors.&lt;/p&gt;
+
+&lt;p&gt;From Akka&amp;#8217;s site - &amp;#8220;Actors are objects which encapsulate state and behavior, they communicate exclusively by exchanging messages which are placed into the recipient’s mailbox. In a sense, actors are the most stringent form of object-oriented programming, but it serves better to view them as &lt;strong&gt;persons&lt;/strong&gt;: while modeling a solution with actors, envision a group of people and assign sub-tasks to them, arrange their functions into an organizational structure and think about how to escalate failure (all with the benefit of not actually dealing with people, which means that we need not concern ourselves with their emotional state or moral issues). The result can then serve as a mental scaffolding for building the software implementation&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;I think this is a great abstraction, dealing with people rather than threads :). To understand more about Akka see &lt;a href='http://www.slideshare.net/jboner/introducing-akka'&gt;this presentation here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In my last blog, I talked about the advantages of using threads and the performace boost they give. I also warned about proper concurrency management when introducing threads to an application. If you need concurrency on a JRuby platform, Akka should be able to help you. After all anything that works on JVM should work on JRuby as well.&lt;/p&gt;
+
+&lt;p&gt;With this in mind I wrote a simple &amp;#8220;Hello World&amp;#8221; in JRuby and Akka. To make this work, download the Akka distribution, create a folder and copy the following jars from the downloaded Akka ditribution in it -&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;akka-actor-xx.jar&lt;/li&gt;
+
+&lt;li&gt;config-xx.jar&lt;/li&gt;
+
+&lt;li&gt;scala-library.jar&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In the same folder create &lt;strong&gt;hello.rb&lt;/strong&gt; like this -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &amp;#39;java&amp;#39;
+require &amp;#39;scala-library.jar&amp;#39;
+require &amp;#39;config-0.3.1.jar&amp;#39;
+require &amp;#39;akka-actor-2.0.3.jar&amp;#39;
+
+java_import &amp;#39;java.io.Serializable&amp;#39;
+java_import &amp;#39;akka.actor.UntypedActor&amp;#39;
+java_import &amp;#39;akka.actor.ActorRef&amp;#39;
+java_import &amp;#39;akka.actor.ActorSystem&amp;#39;
+java_import &amp;#39;akka.actor.Props&amp;#39;
+
+class Greeting 
+  include Serializable
+  
+  attr_reader :who
+
+  def initialize(who)
+    @who = who
+  end
+end
+ 
+class GreetingActor &amp;lt; UntypedActor
+  class &amp;lt;&amp;lt; self
+    alias_method :apply, :new
+    alias_method :create, :new
+  end
+
+  def onReceive(message)
+    puts &amp;quot;Hello &amp;quot; + message.who;
+  end
+end
+ 
+system = ActorSystem.create(&amp;quot;GreetingSystem&amp;quot;);
+props = Props.new(GreetingActor)
+greeter = system.actorOf(props, &amp;quot;greeter&amp;quot;);
+greeter.tell(Greeting.new(&amp;quot;Rocky Jaiswal&amp;quot;));
+
+system.shutdown
+system.await_termination&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is dead simple code, we create an Actor (GreetingActor) by extending &lt;strong&gt;UnTypedActor&lt;/strong&gt; class, provided it an onReceive method which will receive messages, we created an Actor system, setup an Actor and passed it a message and voila we have a &amp;#8220;Hello World&amp;#8221; Akka program.&lt;/p&gt;
+
+&lt;p&gt;Now if you want to do this in a more &amp;#8220;Ruby&amp;#8221; way, there is an excellent lightweight Ruby wrapper around Akka called &lt;a href='https://github.com/iconara/mikka'&gt;Mikka&lt;/a&gt; which will make your life a lot easier. Since I wanted to learn the API more, I did it in the more &amp;#8220;close to the metal&amp;#8221; way (sorry bad joke).&lt;/p&gt;
+
+&lt;p&gt;Now for something more interesting and complicated. For this we will again look at the Akka site &lt;a href='http://doc.akka.io/docs/akka/2.0.1/intro/getting-started-first-java.html'&gt;here&lt;/a&gt; and calculate &amp;#8220;Pi&amp;#8221; with JRuby and Akka. Sounds exciting doesn&amp;#8217;t it.&lt;/p&gt;
+
+&lt;p&gt;The formula we will use is -&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='Pi calculation formula' src='/images/pi-formula.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is splittable so that we can create multiple chunks like (1, -1/3, 1/5) and (-1/7, 1/9, -1/11) and so on where each chunk has a number of elements (three in the example above). As these chunks are individually calculated we just sum up their results.&lt;/p&gt;
+
+&lt;p&gt;To work up the CPU and to get better results our number of chunks can be as high as ten thousand and each chunk can have ten thousand elements. You can go even higher if you want.&lt;/p&gt;
+
+&lt;p&gt;Now we need to setup an Actor system where each worker applies the function to the elements of its chunk and reports back with the results. Depending on your CPU we can create &amp;#8220;n&amp;#8221; number of workers. We can then assign the chunks to the workers one by one.&lt;/p&gt;
+
+&lt;p&gt;Finally when the Master has finished calculating the sum of the results reported by the workers it can notify another Actor that the value of Pi has been calculated.&lt;/p&gt;
+
+&lt;p&gt;So we have three Actors now, the Master or the supervisor Actor, the Worker Actor and finally a Listener Actor which is notified of the final result.&lt;/p&gt;
+
+&lt;p&gt;The Master Actor can recieve two types of messages, a &amp;#8220;calculate&amp;#8221; message which is an indication to commence the calculations and a &amp;#8220;result&amp;#8221; message which is a wrapper around the result calculated by a worker.&lt;/p&gt;
+
+&lt;p&gt;Now let us see the program &lt;strong&gt;pi.rb&lt;/strong&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &amp;#39;java&amp;#39;
+require &amp;#39;scala-library.jar&amp;#39;
+require &amp;#39;config-0.3.1.jar&amp;#39;
+require &amp;#39;akka-actor-2.0.3.jar&amp;#39;
+
+java_import &amp;#39;java.io.Serializable&amp;#39;
+java_import &amp;#39;akka.actor.UntypedActor&amp;#39;
+java_import &amp;#39;akka.actor.ActorRef&amp;#39;
+java_import &amp;#39;akka.actor.ActorSystem&amp;#39;
+java_import &amp;#39;akka.actor.UntypedActorFactory&amp;#39;
+java_import &amp;#39;akka.routing.RoundRobinRouter&amp;#39;
+java_import &amp;#39;akka.actor.Props&amp;#39;
+java_import &amp;#39;java.lang.System&amp;#39;
+java_import &amp;#39;akka.util.Duration&amp;#39;
+java_import &amp;#39;java.util.concurrent.TimeUnit&amp;#39;
+
+#Wrapper for a calculate message
+class Calculate
+end
+
+#Wrapper for a work unit
+class Work 
+  attr_reader :start, :no_of_elements
+
+  def initialize(start, no_of_elements)
+    @start = start
+    @no_of_elements = no_of_elements
+  end
+end
+
+#Wrapper for result
+class Result 
+  attr_reader :value
+
+  def initialize(value)
+    @value = value
+  end
+end
+
+#Wrapper for final result
+class PiApproximation
+  attr_reader :pi, :duration
+
+  def initialize(pi, duration)
+    @pi = pi
+    @duration = duration
+  end
+end
+
+#The Worker
+class Worker &amp;lt; UntypedActor
+  class &amp;lt;&amp;lt; self
+    alias_method :apply, :new
+    alias_method :create, :new
+  end
+
+  def calculate_for_pi(start, no_of_elements)
+    acc = 0.0
+    start_elem = start * no_of_elements
+    end_elem = (start + 1) * no_of_elements - 1
+
+    (start_elem..end_elem).each do |elem|
+      acc = acc + (4.0 * (1 - (elem % 2) * 2) / (2 * elem + 1))
+    end
+    
+    return acc
+  end
+
+  def onReceive(work)
+    result = calculate_for_pi(work.start, work.no_of_elements)
+    getSender().tell(Result.new(result), get_self)
+  end
+end
+
+#Master
+class Master &amp;lt; UntypedActor
+  attr_accessor :start, :no_of_workers, :no_of_chunks, :no_of_elements, :listener, :pi, :no_of_results
+  
+  class &amp;lt;&amp;lt; self
+    alias_method :apply, :new
+    alias_method :create, :new
+  end
+
+  def init_worker
+    props = Props.new(Worker).withRouter(RoundRobinRouter.new(no_of_workers))
+    @worker_router = self.get_context.actorOf(props, &amp;quot;workerRouter&amp;quot;)
+  end
+
+  def onReceive(message)
+    if (message.is_a?(Calculate))
+      (0...@no_of_chunks).each do |number|
+        @worker_router.tell(Work.new(number, @no_of_elements), get_self)
+      end
+    else
+      result = message
+      @pi = @pi + result.value
+      @no_of_results = @no_of_results + 1
+
+      if (@no_of_results == @no_of_chunks)
+        duration = Duration.create(System.currentTimeMillis - @start, TimeUnit::MILLISECONDS)
+        @listener.tell(PiApproximation.new(@pi, duration), get_self)
+        get_context.stop(get_self)
+      end
+    end
+  end
+end
+
+class Listener &amp;lt; UntypedActor
+  class &amp;lt;&amp;lt; self
+    alias_method :apply, :new
+    alias_method :create, :new
+  end
+
+  def onReceive(message)
+    puts &amp;quot;Value of Pi - &amp;quot; + message.pi.to_s
+    puts &amp;quot;Duration of calculation - &amp;quot; + message.duration.to_s
+
+    get_context.system.shutdown
+    #get_context.system.await_termination
+  end
+end
+
+class MasterFactory 
+  include UntypedActorFactory
+
+  def initialize(listener)
+    @@listener = listener
+  end
+
+  def create
+    self.class.create
+  end
+
+  def self.create
+    master = Master.new
+    master.no_of_workers = 8
+    master.no_of_chunks = 10000
+    master.no_of_elements = 10000
+    master.listener = @@listener
+    master.start = System.currentTimeMillis
+    master.pi = 0
+    master.no_of_results = 0
+    master.init_worker
+    return master
+  end
+end
+
+
+system = ActorSystem.create(&amp;quot;PiSystem&amp;quot;)
+listener = system.actorOf(Props.new(Listener), &amp;quot;listener&amp;quot;)
+
+props_2 = Props.new(MasterFactory.new(listener))
+master = system.actorOf(props_2, &amp;quot;master&amp;quot;)
+master.tell(Calculate.new)&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you read my explanation above this code is simple to understand, there is a minor hack or two to make Akka work on JRuby but most of this is self explanatory.&lt;/p&gt;
+
+&lt;p&gt;We can run this and see the output -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ jruby pi.rb 
+Value of Pi - 3.1415926435897883
+Duration of calculation - 5039 milliseconds&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally lets see the effect this has on my i7 CPU&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='akka cpu effect' src='/images/akka_cpu_effect.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see all 8 virtual cores on the i7 CPU have been used with utilization close to 100% at the time the program ran. I think my experiment is successful, sorry for the longish post, I hope you had as much fun reading it as I had making it. Code shown above is available &lt;a href='https://github.com/rocky-jaiswal/akka-experiment'&gt;here&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Running Rails on Ruby or JRuby - A Performance Comparison</title>
     <link rel="alternate" href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html"/>
@@ -515,28 +779,5 @@ end&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Software projects are hard, not only technically but also in terms of team dynamics. Developers meet new team members, work with them for a while and the team is disbanded in six months or so. The whole process repeats itself time and again and is emotinally draining. The best performing teams I have met are the ones where every team member enjoy&amp;#8217;s the others&amp;#8217; company, cracks jokes, pulls pranks on each other and even enjoy the blaring music on their teammates&amp;#8217; laptop. This is very hard to achieve and I think the only one way to create such teams is being cautious during interviews. Try and identify the organization culture you want to develop, put it on your website, identify 5-6 culture related questions that you will ask in interviews. Build teams who can share a similar goal, for example a team where the PO is fine to release a half baked product as soon as possible and a team which wants to deliver to great product but with time will find it hard to work with each other. Agile may help you identify such symptoms but it may be too late to fix them by then.&lt;/p&gt;
 
 &lt;p&gt;I hope you enjoyed reading this blog, feel free to comment on the non-tangibles of Agile which you feel are important but often ignored.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Blog moved to pure HTML5, CSS3</title>
-    <link rel="alternate" href="/2012/05/28/moved_to_html.html"/>
-    <id>/2012/05/28/moved_to_html.html</id>
-    <published>2012-05-28T00:00:00Z</published>
-    <updated>2012-05-28T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;I have recently moved the blog to pure HTML5 and CSS3 (as you can see) from Wordpress. It gives me more control over the layout, look and feel and also helps me express my ideas freely.&lt;/p&gt;
-
-&lt;p&gt;However, the migration is far from complete. Few of my older blog posts might not show up or look funny. I am working to fix this. I am really sorry for the inconvenice.&lt;/p&gt;
-</summary>
-    <content type="html">&lt;p&gt;I have recently moved the blog to pure HTML5 and CSS3 (as you can see) from Wordpress. It gives me more control over the layout, look and feel and also helps me express my ideas freely.&lt;/p&gt;
-
-&lt;p&gt;However, the migration is far from complete. Few of my older blog posts might not show up or look funny. I am working to fix this. I am really sorry for the inconvenice.&lt;/p&gt;
-
-&lt;p&gt;Some of your great comments have also been lost, something which I am again trying to fix.&lt;/p&gt;
-
-&lt;p&gt;On the flip side, the new blog is built with &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, Twitter bootstrap (with a resposive twist) and my own Nginx setup so it should feel much snappier and work on multiple devices. You can check out the source code on &lt;a href='https://github.com/rocky-jaiswal/my_blogs'&gt;github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Thanks for your patience.&lt;/p&gt;</content>
   </entry>
 </feed>
