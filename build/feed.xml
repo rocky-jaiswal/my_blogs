@@ -75,7 +75,7 @@ end&lt;/code&gt;&lt;/pre&gt;
   username: SA
   password:&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Use a similar setup for test and production DBs and we have a Rails app that needs nothing but a JVM to run. Problem solved!&lt;/p&gt;</content>
+&lt;p&gt;Use a similar setup for test and production DBs and we have a Rails app that needs nothing but a JVM to run. Package your gems inside the Rails app for Production and if need be &amp;#8220;warble&amp;#8221; the app or just use Puma / Torquebox. Problem solved!&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Akka with JRuby</title>

@@ -59,4 +59,4 @@ Finally here is our database.yml -
       username: SA
       password:
 
-Use a similar setup for test and production DBs and we have a Rails app that needs nothing but a JVM to run. Problem solved!
+Use a similar setup for test and production DBs and we have a Rails app that needs nothing but a JVM to run. Package your gems inside the Rails app for Production and if need be "warble" the app or just use Puma / Torquebox. Problem solved!
