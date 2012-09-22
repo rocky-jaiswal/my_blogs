@@ -8,9 +8,9 @@ Imagine a scenario where an IT operations team is just comfortable with JVM. You
 
 Don't worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to "JRUBY_HOME" and add "$JRUBY_HOME/bin" to the "PATH". Tell them that at the end of the day its just a jar.
 
-Now, we need a DB that just runs on JVM, so we use [http://hsqldb.org/](http://hsqldb.org/). HSQLDB is a fast, ANSI-SQL comliant DB that runs on JVM.
+Now, we need a DB that just runs on JVM, so we use [http://hsqldb.org/](http://hsqldb.org/). HSQLDB is a fast, ANSI-SQL compliant DB that runs on JVM.
 
-Unzip the downloaded HSQLDB distrib, and start the DB by the following command - 
+Unzip the downloaded HSQLDB distrib, and start the DB with the following command - 
 
     java -cp /home/rockyj/Apps/hsqldb-2.2.9/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:dev --dbname.0 dev
 

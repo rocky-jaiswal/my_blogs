@@ -35,9 +35,9 @@
 
 <p>Don&#8217;t worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to &#8220;JRUBY_HOME&#8221; and add &#8220;$JRUBY_HOME/bin&#8221; to the &#8220;PATH&#8221;. Tell them that at the end of the day its just a jar.</p>
 
-<p>Now, we need a DB that just runs on JVM, so we use <a href='http://hsqldb.org/'>http://hsqldb.org/</a>. HSQLDB is a fast, ANSI-SQL comliant DB that runs on JVM.</p>
+<p>Now, we need a DB that just runs on JVM, so we use <a href='http://hsqldb.org/'>http://hsqldb.org/</a>. HSQLDB is a fast, ANSI-SQL compliant DB that runs on JVM.</p>
 
-<p>Unzip the downloaded HSQLDB distrib, and start the DB by the following command -</p>
+<p>Unzip the downloaded HSQLDB distrib, and start the DB with the following command -</p>
 
 <pre><code>java -cp /home/rockyj/Apps/hsqldb-2.2.9/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:dev --dbname.0 dev</code></pre>
 
