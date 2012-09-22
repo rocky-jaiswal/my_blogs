@@ -33,7 +33,7 @@
               <div class="post">
                 <p>Imagine a scenario where an IT operations team is just comfortable with JVM. You also need to deliver a quick five day project and you know that Rails is just the right framework for it. But you do not have the luxury of installing Ruby or even Sqlite on the server.</p>
 
-<p>Don&#8217;t worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to JRUBY_HOME and add $JRUBY_HOME/bin to the PATH. Tell them that at the end of the day its just a jar.</p>
+<p>Don&#8217;t worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to &#8220;JRUBY_HOME&#8221; and add &#8220;$JRUBY_HOME/bin&#8221; to the &#8220;PATH&#8221;. Tell them that at the end of the day its just a jar.</p>
 
 <p>Now, we need a DB that just runs on JVM, so we use <a href='http://hsqldb.org/'>http://hsqldb.org/</a>. HSQLDB is a fast, ANSI-SQL comliant DB that runs on JVM.</p>
 
@@ -75,7 +75,7 @@ group :test do
   gem &#39;simplecov&#39;
 end</code></pre>
 
-<p>We are using the master branch for &#8216;activerecord-jdbchsqldb-adapter&#8217; as we are using the latest version of HSQLDB server (all AR tests pass for HSQLDB on master with JRuby so we should be safe).</p>
+<p>Main thing to note here is that we are using the master branch for &#8216;activerecord-jdbchsqldb-adapter&#8217; as we are using the latest version of HSQLDB server (all AR tests pass for HSQLDB on master with JRuby so we should be safe).</p>
 
 <p>Finally here is our database.yml -</p>
 

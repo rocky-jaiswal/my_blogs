@@ -22,7 +22,7 @@
 </summary>
     <content type="html">&lt;p&gt;Imagine a scenario where an IT operations team is just comfortable with JVM. You also need to deliver a quick five day project and you know that Rails is just the right framework for it. But you do not have the luxury of installing Ruby or even Sqlite on the server.&lt;/p&gt;
 
-&lt;p&gt;Don&amp;#8217;t worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to JRUBY_HOME and add $JRUBY_HOME/bin to the PATH. Tell them that at the end of the day its just a jar.&lt;/p&gt;
+&lt;p&gt;Don&amp;#8217;t worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to &amp;#8220;JRUBY_HOME&amp;#8221; and add &amp;#8220;$JRUBY_HOME/bin&amp;#8221; to the &amp;#8220;PATH&amp;#8221;. Tell them that at the end of the day its just a jar.&lt;/p&gt;
 
 &lt;p&gt;Now, we need a DB that just runs on JVM, so we use &lt;a href='http://hsqldb.org/'&gt;http://hsqldb.org/&lt;/a&gt;. HSQLDB is a fast, ANSI-SQL comliant DB that runs on JVM.&lt;/p&gt;
 
@@ -64,7 +64,7 @@ group :test do
   gem &amp;#39;simplecov&amp;#39;
 end&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We are using the master branch for &amp;#8216;activerecord-jdbchsqldb-adapter&amp;#8217; as we are using the latest version of HSQLDB server (all AR tests pass for HSQLDB on master with JRuby so we should be safe).&lt;/p&gt;
+&lt;p&gt;Main thing to note here is that we are using the master branch for &amp;#8216;activerecord-jdbchsqldb-adapter&amp;#8217; as we are using the latest version of HSQLDB server (all AR tests pass for HSQLDB on master with JRuby so we should be safe).&lt;/p&gt;
 
 &lt;p&gt;Finally here is our database.yml -&lt;/p&gt;
 
