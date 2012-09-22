@@ -25,12 +25,92 @@
       <div class="row">
         <div class="span9">
           <div id="main" role="main">
-            <h1 class="color-orange">Articles tagged 'Programming'</h1>
+            <article>
+              <h2 style="padding-bottom: 10px;">
+                  <span class="color-orange">Rails on only JVM</span> 
+                  <span>Sep 22 2012</span>
+              </h2>
+              <div class="post">
+                <p>Imagine a scenario where an IT operations team is just comfortable with JVM. You also need to deliver a quick five day project and you know that Rails is just the right framework for it. But you do not have the luxury of installing Ruby or even Sqlite on the server.</p>
 
-  
-    <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <time>Jul  4</time></li>
-  
+<p>Don&#8217;t worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to JRUBY_HOME and add $JRUBY_HOME/bin to the PATH. Tell them that at the end of the day its just a jar.</p>
 
+<p>Now, we need a DB that just runs on JVM, so we use <a href='http://hsqldb.org/'>http://hsqldb.org/</a>. HSQLDB is a fast, ANSI-SQL comliant DB that runs on JVM.</p>
+
+<p>Unzip the downloaded HSQLDB distrib, and start the DB by the following command -</p>
+
+<pre><code>java -cp /home/rockyj/Apps/hsqldb-2.2.9/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:dev --dbname.0 dev</code></pre>
+
+<p><em>Change the classpath according to your machine. We have named this DB as &#8220;dev&#8221;.</em></p>
+
+<p>Now for our Rails app, we can have the following Gemfile -</p>
+
+<pre><code>source &#39;https://rubygems.org&#39;
+
+gem &#39;rails&#39;, &#39;3.2.8&#39;
+gem &#39;jquery-rails&#39;
+gem &#39;anjlab-bootstrap-rails&#39;, :require =&gt; &#39;bootstrap-rails&#39;
+gem &#39;simple_form&#39;
+
+gem &#39;activerecord-jdbchsqldb-adapter&#39;, :git =&gt; &quot;https://github.com/jruby/activerecord-jdbc-adapter&quot;
+gem &#39;jruby-openssl&#39;
+gem &#39;puma&#39;
+
+group :assets do
+  gem &#39;sass-rails&#39;,   &#39;~&gt; 3.2.3&#39;
+  gem &#39;coffee-rails&#39;, &#39;~&gt; 3.2.1&#39;
+  gem &#39;uglifier&#39;, &#39;&gt;= 1.0.3&#39;
+  gem &#39;therubyrhino&#39;
+end
+
+group :test, :development do
+  gem &#39;rspec-rails&#39;, &#39;~&gt; 2.0&#39;
+end
+
+group :test do
+  gem &#39;cucumber-rails&#39;, :require =&gt; false
+  gem &#39;database_cleaner&#39;
+  gem &#39;factory_girl_rails&#39;
+  gem &#39;launchy&#39;
+  gem &#39;simplecov&#39;
+end</code></pre>
+
+<p>We are using the master branch for &#8216;activerecord-jdbchsqldb-adapter&#8217; as we are using the latest version of HSQLDB server (all AR tests pass for HSQLDB on master with JRuby so we should be safe).</p>
+
+<p>Finally here is our database.yml -</p>
+
+<pre><code>development:
+  adapter: jdbc
+  driver: org.hsqldb.jdbcDriver
+  url: jdbc:hsqldb:hsql://localhost/dev
+  username: SA
+  password:</code></pre>
+
+<p>Use a similar setup for test and production DBs and we have a Rails app that needs nothing but a JVM to run. Problem solved!</p>
+              </div>
+              <hr/>
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                  $(function(){
+                    hljs.initHighlightingOnLoad();
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  });
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
           </div>
         </div>
         <div class="span3">
@@ -200,16 +280,4 @@
       </div>
     </div>
   </body>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-10309067-3']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
 </html>
-
