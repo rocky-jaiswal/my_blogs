@@ -5,10 +5,125 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2012-09-22T00:00:00Z</updated>
+  <updated>2012-10-15T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Why does JavaScript require Require.js</title>
+    <link rel="alternate" href="/2012/10/15/why_does_js_require_requirejs.html"/>
+    <id>/2012/10/15/why_does_js_require_requirejs.html</id>
+    <published>2012-10-15T00:00:00Z</published>
+    <updated>2012-10-15T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;I simply moved on, but I also realized that as we are writing more and more JavaScript these days, we need to organize it better. In OO languages such as Java and Ruby we organize code by putting it in classes and maybe having a policy of one class per file, then we load the classes in other classes via dependency loading mechanisms built into the language (like import / require).&lt;/p&gt;
+
+&lt;p&gt;JavaScript although being OO has no classes, via CoffeeScript we can still create classes in JavaScript by leveraging the prototype mechanism in JavaScript (but that is perhaps another blog topic) but as our JS code gets bigger how do I organize it and manage dependencies. So I started searching the web for ways to do so. My search led me &lt;a href='http://addyosmani.com/largescalejavascript'&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To summarize the article, one of the most common ways to orgainize JS code is through object literals - //apple.js var apple = { type: &amp;#8220;macintosh&amp;#8221;, color: &amp;#8220;red&amp;#8221;, getInfo: function () { return this.color + &amp;#8217; &amp;#8217; + this.type + &amp;#8217; apple&amp;#8217;; } } //console.log(apple.color)&lt;/p&gt;
+
+&lt;p&gt;Put a literal in a file and load it in your html. This is the stating point for most developers. Another popular mechanism which kind of builds upon this is Modules -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var basketModule = (function() {
+  var basket = []; //private
+  return { //exposed to public
+    addItem: function(values) {
+      basket.push(values);
+    },
+    getItemCount: function() {
+      return basket.length;
+    },
+    getTotal: function(){
+      var q = this.getItemCount(),p=0;
+      while(q--){
+        p+= basket[q].price; 
+      }
+      return p;
+    }
+  }
+}());&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The advantage of the module pattern is that unlike literals you can expose certain things (what is returned) while some things can be private (like the basket array in example above).&lt;/p&gt;
+
+&lt;p&gt;Cool so we have some basic ways to organize our JavaScript, however how do we load these JavaScripts and how do we manage the dependencies. Usually we do it this way -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&amp;quot;Module1.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;Module2.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;Module3.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;Module4.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;Module5.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;Module8.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;!-- want to use 6 in 8... --&amp;gt;
+&amp;lt;script src=&amp;quot;Module6.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;Module7.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;Module8.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;app.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is horrible, we load the JavaScript files in HTML and manually order them. If tomorrow things change we have to manually change the order or add or remove files. This is definitely not the way to build good software. Rails asset pipelining tries to solve this but there is still no way to manage JS dependencies.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Require.js&lt;/strong&gt; addresses this exact problem.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='https://github.com/amdjs/amdjs-api/wiki/AMD'&gt;AMD&lt;/a&gt; is a specification which JavaScript developers created and proposed so that the JavaScript dependency management and loading problem is addressed across all JS libraries. Require.js is an impelementation of this specification. We create modules like above but we follow certain syntax to load the dependencies -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//my shirt.js now has some dependencies, a cart and inventory
+//module in the same directory as shirt.js
+define([&amp;quot;./cart&amp;quot;, &amp;quot;./inventory&amp;quot;], function(cart, inventory) {
+    //return an object to define the &amp;quot;my/shirt&amp;quot; module.
+    return {
+      color: &amp;quot;blue&amp;quot;,
+      size: &amp;quot;large&amp;quot;,
+      addToCart: function() {
+        inventory.decrement(this);
+        cart.add(this);
+      }
+    }
+  }
+);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;define() is the main function require.js provides, we use it to define a module, we first pass an array of dependencies for the module then a function to define the module. We also follow the one module per file policy&lt;/p&gt;
+
+&lt;p&gt;Another simple example (in CoffeeScript) would be to place the following code in a file common.coffee&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;define [], -&amp;gt;
+
+  # What is the enter key constant?
+  ENTER_KEY: 13&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now whenever you want to use the &amp;#8220;common&amp;#8221; module just include it as a dependency (like cart in example above).&lt;/p&gt;
+
+&lt;p&gt;Finally in our HTML we need to just reference one JavaScript file (please see comments in code below) -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;head&amp;gt;
+    &amp;lt;title&amp;gt;My Sample Project&amp;lt;/title&amp;gt;
+    &amp;lt;!-- data-main attribute tells require.js to load scripts/main.js after require.js loads. --&amp;gt;
+    &amp;lt;script data-main=&amp;quot;scripts/main&amp;quot; src=&amp;quot;scripts/require.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In your main.js file you can use require() function to load the JavaScripts. Example Backbone setup -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require([
+  &amp;#39;views/app&amp;#39;,
+  &amp;#39;routers/router&amp;#39;
+], function( AppView, Workspace ) {
+  // Initialize routing and start Backbone.history()
+  new Workspace();
+  Backbone.history.start();
+
+  // Initialize the application view
+  new AppView();
+});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is it! After this the other modules will load their dependencies on their own (since they are &amp;#8220;defined&amp;#8221; via require.js).&lt;/p&gt;
+
+&lt;p&gt;Finally since some libs are not using define() like jQuery / Backbone how do we load them. The answer lies in &lt;a href='http://requirejs.org/docs/api.html#config-shim'&gt;shims&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For a sample project that uses Require.js, Backbone.js, jQuery and CoffeeScript see - &lt;a href='https://github.com/rocky-jaiswal/todo-js'&gt;this&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Rails on only JVM</title>
     <link rel="alternate" href="/2012/09/22/rails_on_only_jvm.html"/>
@@ -763,34 +878,5 @@ end&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Rest of the magic is all on Backbone&amp;#8217;s side. Now if we make a change on the web application and hit the &amp;#8220;Refesh&amp;#8221; button on the mobile application we will get the updated data on the mobile view.&lt;/p&gt;
 
 &lt;p&gt;In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sync to the server and using &amp;#8220;Cross-origin Resource Sharing&amp;#8221; which is an essential security feature when accessing site data from multiple interfaces.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Why JavaScript is important</title>
-    <link rel="alternate" href="/2012/08/18/why_javascript_is_important.html"/>
-    <id>/2012/08/18/why_javascript_is_important.html</id>
-    <published>2012-08-18T00:00:00Z</published>
-    <updated>2012-08-18T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;In a couple of months I will be completing a decade professionally in the IT / ICT field. Its been a great journey and I have much to learn. I am happy that I have been able to stick to technology and my love for programming increases each day. I have also seen a lot of technologies come and go in these years, some have been surprisingly pleasantly and some have left a bad taste in the mouth.&lt;/p&gt;
-</summary>
-    <content type="html">&lt;p&gt;In a couple of months I will be completing a decade professionally in the IT / ICT field. Its been a great journey and I have much to learn. I am happy that I have been able to stick to technology and my love for programming increases each day. I have also seen a lot of technologies come and go in these years, some have been surprisingly pleasantly and some have left a bad taste in the mouth.&lt;/p&gt;
-
-&lt;p&gt;Java was the first language that I really understood and appreciated. It&amp;#8217;s statically typed, complied to a bytecode and offers great performance second only to C. With Java I felt that there were hundreds of ways to tweak things, you could start threads from a thread pool, synchronize them with locks when are where you wished. But with this great power also came great repossibilty, one had to spend time to understand concurrency, thread safety and most of the times these important aspects were ignored. Java still is a great language and the JVM is still the place to go when you are looking for stability and performance.&lt;/p&gt;
-
-&lt;p&gt;Then I learned Rails, this was the complete opposite of Java. Built on a dynamic, meta-programming-happy language - Ruby, it offered one and only one way to build app. This was a good thing and bad. Good because the design decisions Rails took were (and still are) great. RESTful MVC architecture with a great ORM, there is nothing better really. Rails is THE framework to go if you want to build modern websites quickly and efficiently. Of course, Ruby isn&amp;#8217;t the fastest langauge on the planet, but it is improving and JRuby will kick ass in near future.&lt;/p&gt;
-
-&lt;p&gt;Then came node.js and changed the way we develop websites. node.js is fast and by fast I mean blazing fast. node.js doesn&amp;#8217;t have threads and uses JavaScript fully to create a event-driven and asynchronous architecture. I have heard stories of two clustered node.js servers handling traffic of large dot coms. There are a lot of articles on the web which can help you with node.js but I want to emphasise on the point why every developer worth his / her salt needs to learn JavaScript.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The rise of mobile -&lt;/strong&gt; Every site now built needs a mobile version. As a result a lot of web applications will use Responsive Design and push logic on the client side. The server, I believe, will become a mere provider of data. I think this approach is also a decent design paradigm. The complex calculations can be done on server of course and the client only needs the processed JSON from server for a dynamic display. As the code on the client side increases one needs a framework to manage it or live with sphagetti JavaScript code, which is a maintenance hell.&lt;/p&gt;
-
-&lt;p&gt;To organize code on the client side we need frameworks like Backbone.js, Ember.js and Angular.js. These framework require solid knowledge of JavaScript so irrespective of the server side technology JavaScript knowledge is a must.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Push is the future -&lt;/strong&gt; Modern sites are using Push more and more. Which means the user does not have to refresh the page to fetch new data, the server can &amp;#8220;push&amp;#8221; the data to the client. This requires use of HTML5&amp;#8217;s websockets. Node.js and socket.io are the best suited technologies for this (both of course are written in JavaScript). A single node.js instance due to its event driven and ansynchronous nature can push data to multiple client easily. This would not scale on a comparitively slower frameworks like Rails. Clojure, Scala and Vert.ex make push possible but none of them have been proven themseles so far like node.js.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;JavaScript is everywhere -&lt;/strong&gt; There is only one technology to work with when working on the browser i.e. JavaScript. We all know MVC is great, wouldn&amp;#8217;t it be awesome if as soon as I change my model on server the client is updated (without the user hitting refresh), this requires two things - push of data from server and manipulation of UI on browser. Well, JavaScript is THE ONLY language that can do this things. Meteor.js is already making this possible and there are other frameworks in line (all on JavaScript).&lt;/p&gt;
-
-&lt;p&gt;Well that is why I am not wasting any time improving my JavaScript.&lt;/p&gt;</content>
   </entry>
 </feed>
