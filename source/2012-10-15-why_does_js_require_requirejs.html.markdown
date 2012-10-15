@@ -11,6 +11,7 @@ I simply moved on, but I also realized that as we are writing more and more Java
 JavaScript although being OO has no classes, via CoffeeScript we can still create classes in JavaScript by leveraging the prototype mechanism in JavaScript (but that is perhaps another blog topic) but as our JS code gets bigger how do I organize it and manage dependencies. So I started searching the web for ways to do so. My search led me [here](http://addyosmani.com/largescalejavascript).
 
 To summarize the article, one of the most common ways to orgainize JS code is through object literals -
+   
     //apple.js
     var apple = {
       type: "macintosh",

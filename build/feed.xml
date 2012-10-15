@@ -26,7 +26,17 @@
 
 &lt;p&gt;JavaScript although being OO has no classes, via CoffeeScript we can still create classes in JavaScript by leveraging the prototype mechanism in JavaScript (but that is perhaps another blog topic) but as our JS code gets bigger how do I organize it and manage dependencies. So I started searching the web for ways to do so. My search led me &lt;a href='http://addyosmani.com/largescalejavascript'&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;To summarize the article, one of the most common ways to orgainize JS code is through object literals - //apple.js var apple = { type: &amp;#8220;macintosh&amp;#8221;, color: &amp;#8220;red&amp;#8221;, getInfo: function () { return this.color + &amp;#8217; &amp;#8217; + this.type + &amp;#8217; apple&amp;#8217;; } } //console.log(apple.color)&lt;/p&gt;
+&lt;p&gt;To summarize the article, one of the most common ways to orgainize JS code is through object literals -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//apple.js
+var apple = {
+  type: &amp;quot;macintosh&amp;quot;,
+  color: &amp;quot;red&amp;quot;,
+  getInfo: function () {
+      return this.color + &amp;#39; &amp;#39; + this.type + &amp;#39; apple&amp;#39;;
+  }
+}
+//console.log(apple.color)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Put a literal in a file and load it in your html. This is the stating point for most developers. Another popular mechanism which kind of builds upon this is Modules -&lt;/p&gt;
 
