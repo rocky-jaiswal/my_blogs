@@ -5,10 +5,89 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2012-10-15T00:00:00Z</updated>
+  <updated>2012-12-02T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Serving Rails from Windows</title>
+    <link rel="alternate" href="/2012/12/02/serving_rails_from_windows.html"/>
+    <id>/2012/12/02/serving_rails_from_windows.html</id>
+    <published>2012-12-02T00:00:00Z</published>
+    <updated>2012-12-02T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;I was asked to meet quite a &amp;#8220;non-standard&amp;#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing this was relatively simple, I decided to blog about it in case it helps anyone.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;I was asked to meet quite a &amp;#8220;non-standard&amp;#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing this was relatively simple, I decided to blog about it in case it helps anyone.&lt;/p&gt;
+
+&lt;p&gt;I decided to go with JRuby as anything that works on JVM theoretically should run on any OS. So I got hold of a clean Windows machine and installed -&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JDK 1.7&lt;/li&gt;
+
+&lt;li&gt;Postgres-9.1&lt;/li&gt;
+
+&lt;li&gt;Apache Tomcat 7&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you want to run the build on the Windows machine, you would also need -&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JRuby 1.7&lt;/li&gt;
+
+&lt;li&gt;Git 1.8 for Windows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now if your application is a simple Rails application you don&amp;#8217;t have to worry too much, any gem written in Ruby would work well on JRuby. Some gems written in C do not work well on JRuby however JRuby has good alternatives for these too, so just check the gems you are using if they have any C extensions (this is rare so I will not go into details). Since we also want to switch to JDBC drivers for JRuby, I added the following to my Gemfile -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#JRuby specific gems
+platform :jruby do
+  gem &amp;#39;activerecord-jdbcpostgresql-adapter&amp;#39;, :git =&amp;gt; &amp;#39;https://github.com/jruby/activerecord-jdbc-adapter&amp;#39;
+  gem &amp;#39;jruby-openssl&amp;#39;
+  gem &amp;#39;jruby-pageant&amp;#39;
+  gem &amp;#39;warbler&amp;#39;
+end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are building the application on Windows, you should have Git and JRuby on the server. Open the git bash terminal and run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install bundler
+git clone &amp;lt;your repo here&amp;gt;
+bundle install&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This should run fine. Note the &amp;#8216;jruby-pageant&amp;#8217; gem we added to the Gemfile, this was one special gem I installed to get the application working on Windows.&lt;/p&gt;
+
+&lt;p&gt;Now run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle exec warble config&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will generate a warble.rb file in you application&amp;#8217;s config folder. This file has numerous config options, read it to understand more but usually I just change two values -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Set JRuby to run in 1.9 mode.
+config.webxml.jruby.compat.version = &amp;quot;1.9&amp;quot;
+
+# Value of RAILS_ENV for the webapp -- default as shown below
+config.webxml.rails.env = ENV[&amp;#39;RAILS_ENV&amp;#39;] || &amp;#39;production&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is self explanatory stuff. You can also create a custom environment to deploy to Windows if you want.&lt;/p&gt;
+
+&lt;p&gt;Now run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle exec rake assets:precompile
+bundle exec warble&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will compile your Rails assets and generate a (application-name).war file in your project with all files in the right place. For the non Java folks a .war file is a web archive file that is like a compressed folder that can be copied and deployed to a JEE application server.&lt;/p&gt;
+
+&lt;p&gt;Assuming you have created the DB with the database.yml settings for the production environment, now go to your Tomcat installation directory and within that look for the &amp;#8220;webapps&amp;#8221; directory.&lt;/p&gt;
+
+&lt;p&gt;To keep our lives simple delete the ROOT folder in this directory and copy the .war we created as ROOT.war here. We do this so that the routes we created in our Rails app do not have to deal with an extra context path if we deploy the app with any other name. ROOT folder in webapps maps to the path &amp;#8220;http://localhost:8080/&amp;#8221; so our application&amp;#8217;s routes remain intact. Please note that if you do not want to build the application on Windows this is the only step you need to do.&lt;/p&gt;
+
+&lt;p&gt;Run the apache-tomcat/bin/startup script from your favoured terminal and checkout the logs created in apache-tomcat/logs folder. In case you have missed anything the catalina.out logs will tell you the problem.&lt;/p&gt;
+
+&lt;p&gt;You can create a proxy for tomcat using Apache HTTP server if you want. Tomcat specific config like the port on which it is running can be found in apache-tomcat/conf/server.xml.&lt;/p&gt;
+
+&lt;p&gt;Also the above steps can be put in a script that can be run from cygwin. That is it, this is all you need to serve a Rails application from Windows. To my surprise I found that the response times were also very good.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Why does JavaScript require Require.js</title>
     <link rel="alternate" href="/2012/10/15/why_does_js_require_requirejs.html"/>
@@ -18,8 +97,7 @@
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;
 
 &lt;p&gt;I simply moved on, but I also realized that as we are writing more and more JavaScript these days, we need to organize it better. In OO languages such as Java and Ruby we organize code by putting it in classes and maybe having a policy of one class per file, then we load the classes in other classes via dependency loading mechanisms built into the language (like import / require).&lt;/p&gt;
@@ -143,8 +221,7 @@ define([&amp;quot;./cart&amp;quot;, &amp;quot;./inventory&amp;quot;], function(c
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;Imagine a scenario where an IT operations team is just comfortable with JVM. You also need to deliver a quick five day project and you know that Rails is just the right framework for it. But you do not have the luxury of installing Ruby or even Sqlite on the server.&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;Imagine a scenario where an IT operations team is just comfortable with JVM. You also need to deliver a quick five day project and you know that Rails is just the right framework for it. But you do not have the luxury of installing Ruby or even Sqlite on the server.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;Imagine a scenario where an IT operations team is just comfortable with JVM. You also need to deliver a quick five day project and you know that Rails is just the right framework for it. But you do not have the luxury of installing Ruby or even Sqlite on the server.&lt;/p&gt;
 
 &lt;p&gt;Don&amp;#8217;t worry you have JRuby to your resque. You can just ask IT to download the JRuby distribution and set the path to &amp;#8220;JRUBY_HOME&amp;#8221; and add &amp;#8220;$JRUBY_HOME/bin&amp;#8221; to the &amp;#8220;PATH&amp;#8221;. Tell them that at the end of the day its just a jar.&lt;/p&gt;
@@ -211,8 +288,7 @@ end&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;This week I completed my work project and had a spare day to do some experimentation. I dabble sometimes with Scala which I think offers a cool combination of FP, OO and concurrency management. &lt;a href='http://akka.io'&gt;Akka&lt;/a&gt; is a middleware framework which works with Scala (and also Java) and provides an excellent abstraction to manage concurrency. Instead of dealing with threads, thread pools and low level synchronization we manage concurrency with something called as Actors.&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;This week I completed my work project and had a spare day to do some experimentation. I dabble sometimes with Scala which I think offers a cool combination of FP, OO and concurrency management. &lt;a href='http://akka.io'&gt;Akka&lt;/a&gt; is a middleware framework which works with Scala (and also Java) and provides an excellent abstraction to manage concurrency. Instead of dealing with threads, thread pools and low level synchronization we manage concurrency with something called as Actors.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;This week I completed my work project and had a spare day to do some experimentation. I dabble sometimes with Scala which I think offers a cool combination of FP, OO and concurrency management. &lt;a href='http://akka.io'&gt;Akka&lt;/a&gt; is a middleware framework which works with Scala (and also Java) and provides an excellent abstraction to manage concurrency. Instead of dealing with threads, thread pools and low level synchronization we manage concurrency with something called as Actors.&lt;/p&gt;
 
 &lt;p&gt;From Akka&amp;#8217;s site - &amp;#8220;Actors are objects which encapsulate state and behavior, they communicate exclusively by exchanging messages which are placed into the recipient’s mailbox. In a sense, actors are the most stringent form of object-oriented programming, but it serves better to view them as &lt;strong&gt;persons&lt;/strong&gt;: while modeling a solution with actors, envision a group of people and assign sub-tasks to them, arrange their functions into an organizational structure and think about how to escalate failure (all with the benefit of not actually dealing with people, which means that we need not concern ourselves with their emotional state or moral issues). The result can then serve as a mental scaffolding for building the software implementation&amp;#8221;.&lt;/p&gt;
@@ -475,8 +551,7 @@ Duration of calculation - 5039 milliseconds&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;I have been a JRuby fanboy for a while now, in the last few weeks I also saw some really interesting RailsCasts on multi-threading Rails applications and JRuby which piqued me to do some ad-hoc experimentation. I recommend everyone to watch these three episodes -&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;I have been a JRuby fanboy for a while now, in the last few weeks I also saw some really interesting RailsCasts on multi-threading Rails applications and JRuby which piqued me to do some ad-hoc experimentation. I recommend everyone to watch these three episodes -&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;I have been a JRuby fanboy for a while now, in the last few weeks I also saw some really interesting RailsCasts on multi-threading Rails applications and JRuby which piqued me to do some ad-hoc experimentation. I recommend everyone to watch these three episodes -&lt;/p&gt;
 
 &lt;ul&gt;
@@ -666,8 +741,7 @@ Time per request:       20.912 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;The advantage of learning a few programming languages is that you apply one&amp;#8217;s paradigms to the other. When I was a Java programmer I never gave much thought to deployment. Maven would build a war file, which would be copied to the application server through a shell script or even via the IDE. For remote deployments we would just do the same from the build server via scp. I always found the Maven &amp;#8220;Cargo&amp;#8221; plugin too complicated so let just skip that for now.&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;The advantage of learning a few programming languages is that you apply one&amp;#8217;s paradigms to the other. When I was a Java programmer I never gave much thought to deployment. Maven would build a war file, which would be copied to the application server through a shell script or even via the IDE. For remote deployments we would just do the same from the build server via scp. I always found the Maven &amp;#8220;Cargo&amp;#8221; plugin too complicated so let just skip that for now.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;The advantage of learning a few programming languages is that you apply one&amp;#8217;s paradigms to the other. When I was a Java programmer I never gave much thought to deployment. Maven would build a war file, which would be copied to the application server through a shell script or even via the IDE. For remote deployments we would just do the same from the build server via scp. I always found the Maven &amp;#8220;Cargo&amp;#8221; plugin too complicated so let just skip that for now.&lt;/p&gt;
 
 &lt;p&gt;Then I came into the Ruby world and learned (a bit) about Capistrano and was absolutely fascinated by it. It did so much so easily for deployment that using anything else seems pre-historic.&lt;/p&gt;
@@ -744,149 +818,5 @@ end &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;cap local deploy&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;That is it, since the build is made from github make sure you push your changes out before running this command to see your changes on the browser. This may seem a lot for a local deploy but now just change the &amp;#8220;:server&amp;#8221; hostname to deploy to a server remotely (ofcourse, you may need to change your Maven / JDK paths as well according to your remote server setup). After this you can now deploy a new &amp;#8220;war&amp;#8221; build to a remote server with a single command. You can also write your own custom tasks with Capistrano and sit back and enjoy painless deployments.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Accessing server data from a native Android app</title>
-    <link rel="alternate" href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"/>
-    <id>/2012/08/26/accessing_server_data_from_a_native_android_app.html</id>
-    <published>2012-08-26T00:00:00Z</published>
-    <updated>2012-08-26T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;This was a quite relaxing weekend, there was heavy rain in the Delhi region so there was not much to do. So I picked up a Scala book and read a few chapters. Soon enough, my hands started itching to write some code. I wanted to build something in Scala but ended up experimenting on Android.&lt;/p&gt;
-</summary>
-    <content type="html">&lt;p&gt;This was a quite relaxing weekend, there was heavy rain in the Delhi region so there was not much to do. So I picked up a Scala book and read a few chapters. Soon enough, my hands started itching to write some code. I wanted to build something in Scala but ended up experimenting on Android.&lt;/p&gt;
-
-&lt;p&gt;Back at work, I finished my first iPad optimized jQuery Mobile and Rails web application. I am mostly satisfied with the end result but somehow felt that a native app would have provided a better experience to the user. The question which arises is how to make a native app communicate with the server when most of the data needs to be fetched from the server itself.&lt;/p&gt;
-
-&lt;p&gt;So to build on this idea, I started making an Android application that fetches JSON data from a Rails server. To express myself clearly I wanted data to be accessible from a mobile app and a web app, like shown below -&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt='Mobile' src='/images/mobby_mobile.png' /&gt; &lt;img alt='Mobile' src='/images/mobby_web.png' /&gt;&lt;/p&gt;
-
-&lt;p&gt;The web app is a fully featured Mongoid enabled Rails application for which I have scaffoled a simple book model. I wanted the mobile version to also access the same data (in JSON format) and just display it in a Phonegapped native application. You can already see the end result in the images above. Lets look at the steps required to build this -&lt;/p&gt;
-
-&lt;p&gt;The first and the biggest problem you are bound to face is -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;XMLHttpRequest cannot load http://localhost:3000/books.json. Origin null is not allowed by Access-Control-Allow-Origin.&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is because the Android application is not running on the same server as the Rails application in fact it is not running on any server at all. Rails will interpret the incoming request and reject it as it assumes it is from a malicious source (remember CSRF).&lt;/p&gt;
-
-&lt;p&gt;To solves this problem we have to use &lt;a href='http://en.wikipedia.org/wiki/JSONP'&gt;JSONP&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To organize our mobile application&amp;#8217;s JavaScript code we will use Backbone.js. Here is how the code looks like -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;
-&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;
-    &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
-    &amp;lt;title&amp;gt;Mobby&amp;lt;/title&amp;gt;
-    &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt;
-    &amp;lt;script src=&amp;quot;js/libs/jquery-1.7.1.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;js/libs/cordova-2.0.0.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;js/libs/underscore.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;js/libs/backbone.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;js/libs/bootstrap.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;js/plugins.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;js/app.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;css/bootstrap.css&amp;quot;&amp;gt;
-    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;css/bootstrap-responsive.css&amp;quot;&amp;gt;
-    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;css/style.css&amp;quot;&amp;gt;
-  &amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;header&amp;gt;
-      &amp;lt;div class=&amp;quot;navbar navbar-fixed-top&amp;quot;&amp;gt;
-        &amp;lt;div class=&amp;quot;navbar-inner&amp;quot;&amp;gt;
-          &amp;lt;div class=&amp;quot;container&amp;quot;&amp;gt;
-            &amp;lt;a class=&amp;quot;brand&amp;quot; href=&amp;quot;/&amp;quot;&amp;gt;Mobby&amp;lt;/a&amp;gt;
-          &amp;lt;/div&amp;gt;
-        &amp;lt;/div&amp;gt;
-      &amp;lt;/div&amp;gt;
-    &amp;lt;/header&amp;gt;
-    &amp;lt;div class=&amp;quot;container&amp;quot; style=&amp;quot;padding-top: 50px&amp;quot;&amp;gt;
-      &amp;lt;p&amp;gt;Books&amp;lt;/p&amp;gt;
-      &amp;lt;div id=&amp;quot;book&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-      &amp;lt;button class=&amp;quot;btn btn-primary&amp;quot; type=&amp;quot;button&amp;quot; id=&amp;quot;btnRefresh&amp;quot; style=&amp;quot;margin-top: 20px&amp;quot;&amp;gt;Refresh&amp;lt;/button&amp;gt;
-    &amp;lt;/div&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;  &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And the JS code -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(function(){
-
-  var Book = Backbone.Model.extend({
-  });
-
-  var BookList = Backbone.Collection.extend({
-    model : Book, 
-    url: &amp;#39;http://10.0.2.2:3000/books.jsonp?callback=?&amp;#39;, //Line 9
-    parse: function(response) {
-      return response;
-    }
-  });
-
-  var books = new BookList();
-  books.fetch();
-
-  var BookView = Backbone.View.extend({
-    el : $(&amp;#39;#book&amp;#39;),
-    render: function() {
-      var bookList = &amp;#39;&amp;lt;ui&amp;gt;&amp;#39;;
-      _.each(this.model.models, function(book){
-        bookList = bookList + &amp;#39;&amp;lt;li&amp;gt;&amp;#39; + book.get(&amp;#39;title&amp;#39;) + &amp;#39;&amp;lt;\/li&amp;gt;&amp;#39;;
-      });
-      bookList = bookList + &amp;#39;&amp;lt;\/ul&amp;gt;&amp;#39;;
-      $(this.el).html(bookList);
-      return this;
-    }
-  });
-
-  books.on(&amp;quot;reset&amp;quot;, function() {
-    var view = new BookView({model: books});
-    view.render();
-  });
-
-  $(&amp;quot;#btnRefresh&amp;quot;).click(function() {
-    books.fetch();
-  });
-
-  // Wait for Cordova to load
-  document.addEventListener(&amp;quot;deviceready&amp;quot;, onDeviceReady, false);
-
-  // Cordova is loaded and it is now safe to make calls Cordova methods
-  function onDeviceReady() {
-  }
-
-});&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is standard Backbone stuff, see my &lt;a href='/2012/05/25/intro_to_backbone_jQuery.html'&gt;older&lt;/a&gt; post to get an introduction to Backbone.&lt;/p&gt;
-
-&lt;p&gt;The important thing is on Line number 9. We are doing 2 things there, firstly using &lt;strong&gt;10.0.2.2&lt;/strong&gt; instead of &lt;strong&gt;localhost&lt;/strong&gt; beause that is how the emulator can access the host machine where the Rails server is running. Secondly, we are not doing a simple JSON request to the Rails server but doing a JSONP request.&lt;/p&gt;
-
-&lt;p&gt;Now, on the Rails side to need to deal with this new type to request and also wrap JSON back in a callback. Doing so for every individual request can be a pain but fear not there is a Gem available for this -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gem &amp;#39;rack-jsonp-middleware&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As the name suggests, this is a Rails middleware (consider it as a request filter if you are from the Java world) and to enable it we need to add this in application.rb -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;config.middleware.use Rack::JSONP&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Our controller is untouched now -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# GET /books
-# GET /books.json
-def index
-  @books = Book.all
-
-  respond_to do |format|
-    format.html # index.html.erb
-    format.json { render json: @books }
-  end
-end&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Rest of the magic is all on Backbone&amp;#8217;s side. Now if we make a change on the web application and hit the &amp;#8220;Refesh&amp;#8221; button on the mobile application we will get the updated data on the mobile view.&lt;/p&gt;
-
-&lt;p&gt;In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sync to the server and using &amp;#8220;Cross-origin Resource Sharing&amp;#8221; which is an essential security feature when accessing site data from multiple interfaces.&lt;/p&gt;</content>
   </entry>
 </feed>

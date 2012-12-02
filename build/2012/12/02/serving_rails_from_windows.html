@@ -25,12 +25,104 @@
       <div class="row">
         <div class="span9">
           <div id="main" role="main">
-            <h1 class="color-orange">Articles tagged 'Maven'</h1>
+            <article>
+              <h2 style="padding-bottom: 10px;">
+                  <span class="color-orange">Serving Rails from Windows</span> 
+                  <span>Dec  2 2012</span>
+              </h2>
+              <div class="post">
+                <p>I was asked to meet quite a &#8220;non-standard&#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing this was relatively simple, I decided to blog about it in case it helps anyone.</p>
 
-  
-    <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <time>Mar 31</time></li>
-  
+<p>I decided to go with JRuby as anything that works on JVM theoretically should run on any OS. So I got hold of a clean Windows machine and installed -</p>
 
+<ul>
+<li>JDK 1.7</li>
+
+<li>Postgres-9.1</li>
+
+<li>Apache Tomcat 7</li>
+</ul>
+
+<p>If you want to run the build on the Windows machine, you would also need -</p>
+
+<ul>
+<li>JRuby 1.7</li>
+
+<li>Git 1.8 for Windows</li>
+</ul>
+
+<p>Now if your application is a simple Rails application you don&#8217;t have to worry too much, any gem written in Ruby would work well on JRuby. Some gems written in C do not work well on JRuby however JRuby has good alternatives for these too, so just check the gems you are using if they have any C extensions (this is rare so I will not go into details). Since we also want to switch to JDBC drivers for JRuby, I added the following to my Gemfile -</p>
+
+<pre><code>#JRuby specific gems
+platform :jruby do
+  gem &#39;activerecord-jdbcpostgresql-adapter&#39;, :git =&gt; &#39;https://github.com/jruby/activerecord-jdbc-adapter&#39;
+  gem &#39;jruby-openssl&#39;
+  gem &#39;jruby-pageant&#39;
+  gem &#39;warbler&#39;
+end</code></pre>
+
+<p>If you are building the application on Windows, you should have Git and JRuby on the server. Open the git bash terminal and run -</p>
+
+<pre><code>gem install bundler
+git clone &lt;your repo here&gt;
+bundle install</code></pre>
+
+<p>This should run fine. Note the &#8216;jruby-pageant&#8217; gem we added to the Gemfile, this was one special gem I installed to get the application working on Windows.</p>
+
+<p>Now run -</p>
+
+<pre><code>bundle exec warble config</code></pre>
+
+<p>This will generate a warble.rb file in you application&#8217;s config folder. This file has numerous config options, read it to understand more but usually I just change two values -</p>
+
+<pre><code># Set JRuby to run in 1.9 mode.
+config.webxml.jruby.compat.version = &quot;1.9&quot;
+
+# Value of RAILS_ENV for the webapp -- default as shown below
+config.webxml.rails.env = ENV[&#39;RAILS_ENV&#39;] || &#39;production&#39;</code></pre>
+
+<p>This is self explanatory stuff. You can also create a custom environment to deploy to Windows if you want.</p>
+
+<p>Now run -</p>
+
+<pre><code>bundle exec rake assets:precompile
+bundle exec warble</code></pre>
+
+<p>This will compile your Rails assets and generate a (application-name).war file in your project with all files in the right place. For the non Java folks a .war file is a web archive file that is like a compressed folder that can be copied and deployed to a JEE application server.</p>
+
+<p>Assuming you have created the DB with the database.yml settings for the production environment, now go to your Tomcat installation directory and within that look for the &#8220;webapps&#8221; directory.</p>
+
+<p>To keep our lives simple delete the ROOT folder in this directory and copy the .war we created as ROOT.war here. We do this so that the routes we created in our Rails app do not have to deal with an extra context path if we deploy the app with any other name. ROOT folder in webapps maps to the path &#8220;http://localhost:8080/&#8221; so our application&#8217;s routes remain intact. Please note that if you do not want to build the application on Windows this is the only step you need to do.</p>
+
+<p>Run the apache-tomcat/bin/startup script from your favoured terminal and checkout the logs created in apache-tomcat/logs folder. In case you have missed anything the catalina.out logs will tell you the problem.</p>
+
+<p>You can create a proxy for tomcat using Apache HTTP server if you want. Tomcat specific config like the port on which it is running can be found in apache-tomcat/conf/server.xml.</p>
+
+<p>Also the above steps can be put in a script that can be run from cygwin. That is it, this is all you need to serve a Rails application from Windows. To my surprise I found that the response times were also very good.</p>
+              </div>
+              <hr/>
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                  $(function(){
+                    hljs.initHighlightingOnLoad();
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  });
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
           </div>
         </div>
         <div class="span3">
@@ -221,4 +313,3 @@
     </div>
   </body>
 </html>
-
