@@ -4,7 +4,7 @@ tags: Backbone, JavaScript, CoffeeScript
 date: 13/12/2012
 ---
 
-As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. "Why learn one language that produces another when you can write the end product directly"? Also, my head could do without another set of syntax and rules to learn.
+As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. "Why learn one language that produces another when you can write the end product directly?" Also, my head could do without another set of syntax and rules to learn.
 
 However, when I started writing code for [Backbone.js](http://backbonejs.org/) a few months back, it dawned on me that CoffeeScript is a beautiful language and makes writing Backbone.js apps a much more pleasant experience.
 

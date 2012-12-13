@@ -18,8 +18,8 @@
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces another when you can write the end product directly&amp;#8221;? Also, my head could do without another set of syntax and rules to learn.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces another when you can write the end product directly&amp;#8221;? Also, my head could do without another set of syntax and rules to learn.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces another when you can write the end product directly?&amp;#8221; Also, my head could do without another set of syntax and rules to learn.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces another when you can write the end product directly?&amp;#8221; Also, my head could do without another set of syntax and rules to learn.&lt;/p&gt;
 
 &lt;p&gt;However, when I started writing code for &lt;a href='http://backbonejs.org/'&gt;Backbone.js&lt;/a&gt; a few months back, it dawned on me that CoffeeScript is a beautiful language and makes writing Backbone.js apps a much more pleasant experience.&lt;/p&gt;
 
