@@ -25,18 +25,186 @@
       <div class="row">
         <div class="span9">
           <div id="main" role="main">
-            <h1>Archive for
-  
-    Apr 11 2011
-  
-</h1>
+            <article>
+              <h2 style="padding-bottom: 10px;">
+                  <span class="color-orange">Backbone.js and CoffeeScript - A Perfect Match</span> 
+                  <span>Dec 13 2012</span>
+              </h2>
+              <div class="post">
+                <p>As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &#8220;Why learn one language that produces another when you can write the end product directly&#8221;? Also, my head could do without another set of syntax and rules to learn.</p>
 
-<ul>
-  
-  <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11</span></li>
-   
-</ul>
+<p>However, when I started writing code for <a href='http://backbonejs.org/'>Backbone.js</a> a few months back, it dawned on me that CoffeeScript is a beautiful language and makes writing Backbone.js apps a much more pleasant experience.</p>
 
+<p>But first of all, why did I need Backbone.js? I was happy writing jQuery, it was solving all my problems but then the interface and the callbacks got more complex and one day my JavaScript file had more than 200 lines of code. I was pretty sure this was going to be a maintenance headache no matter how well I name my functions and how many comments I add. So I refactored the code to Backbone.js and had a handful of small, cleanly coded files that were easy to test and modify. So that&#8217;s that, a one line answer - we use Backbone.js to keep our JavaScript code clean.</p>
+
+<p>Let&#8217;s take a simple example, assume you have a button, clicking on which makes an AJAX call and displays the result from the AJAX call back in a div. This is a simple use case for a Backbone.js.</p>
+
+<p>The JavaScript and Backbone.js code for this may look like -</p>
+
+<pre><code>//&lt;div id=&quot;container&quot;&gt;
+  //&lt;input type=&quot;button&quot; id=&quot;btn1&quot; value=&quot;Go!&quot;&gt;&lt;/input&gt;
+//&lt;/div&gt;
+//&lt;span id=&quot;message&quot;&gt;&lt;/span&gt;
+
+$(function(){
+
+  var ButtonBarView = Backbone.View.extend({
+
+    el: &#39;#container&#39;,
+
+    events: {
+      &quot;click #btn1&quot;:  &quot;makeAjaxCall&quot;
+    },
+
+    makeAjaxCall: function(){
+      console.log(&quot;making an ajax call ...&quot;);
+      this.options.messageView.render(&quot;result from ajax call&quot;);
+    }
+
+  });
+
+  var MessageView = Backbone.View.extend({
+
+    el: &#39;#message&#39;,
+
+    render: function(message){
+      var html = &quot;&lt;h3&gt;&quot; + message + &quot;&lt;/h3&gt;&quot;;
+      this.$el.html(html); 
+    }
+
+  });
+
+  var messageView = new MessageView();
+  var buttonBarView = new ButtonBarView({messageView: messageView});
+
+});</code></pre>
+
+<p>Nothing much to explain here, we could have done the same thing using just jQuery but things go awry when there are ten such buttons on the screen each with its own AJAX call and DOM to update.</p>
+
+<p>In the example above we create two Backbone views, on an event on the first one we render the second with the returned message.</p>
+
+<p>Same thing written in CoffeeScript looks like this -</p>
+
+<pre><code>$ -&gt;
+
+  class ButtonBarView extends Backbone.View
+
+    el: &#39;#container&#39;
+
+    events: 
+      &quot;click #btn1&quot;:  &quot;makeAjaxCall&quot;
+
+    makeAjaxCall: -&gt;
+      console.log(&quot;making an ajax call ...&quot;)
+      @options.messageView.render(&quot;result from ajax call&quot;)
+
+
+  class MessageView extends Backbone.View
+
+    el: &#39;#message&#39;
+
+    render: (message) -&gt;
+      html = &quot;&lt;h3&gt;&quot; + message + &quot;&lt;/h3&gt;&quot;
+      $(@el).html(html)
+
+  messageView = new MessageView()
+  buttonBarView = new ButtonBarView({messageView: messageView})</code></pre>
+
+<p>To me the CoffeeScript code looks much more understandable and cleaner. But wait, do we see a &#8220;class&#8221; in the CoffeeScript code! How is that possible? And how does the &#8220;class&#8221; in CoffeeScript convert the code to the one written in JavaScript? Exploring this made me realize CoffeeScript&#8217;s beauty and brevity.</p>
+
+<p>To answer the first question, we need to understand a bit of JavaScript and CoffeeScript magic. JavaScript is an object oriented language but does not have classes, it uses the prototypal inheritance mechanism to extend objects. CoffeeScript uses this mechanism to give us classes, for example -</p>
+
+<p>This code -</p>
+
+<pre><code>class Person
+
+  constructor: (@name) -&gt;
+
+  printName: -&gt;
+    console.log(&quot;Name: &quot; + @name)
+
+#rocky = new Person(&quot;Rocky&quot;)
+#rocky.printName(); </code></pre>
+
+<p>Gets converted to something like this in JavaScript -</p>
+
+<pre><code>var Person = (function() {
+
+  function Person(name) {
+    this.name = name;
+  }
+
+  Person.prototype.printName = function() {
+    return console.log(&quot;Name: &quot; + this.name);
+  };
+
+  return Person;
+
+})();</code></pre>
+
+<p>What this does is it returns us a &#8220;constructor&#8221; callback which can be used with the <strong>new</strong> keyword to create objects. CoffeeScript also uses JavaScript&#8217;s prototype mechanism to add methods to our object. However, the end user creates classes and methods like they do in their server side code. This is an AWESOME CoffeeScript feature that had me completely floored.</p>
+
+<p>Now the second question, how does this -</p>
+
+<pre><code>class MessageView extends Backbone.View</code></pre>
+
+<p>relate to this -</p>
+
+<pre><code>var MessageView = Backbone.View.extend({})</code></pre>
+
+<p>To answer this lets see what happens to the CoffeeScript code when it gets converted to JavaScript -</p>
+
+<pre><code>var __hasProp = {}.hasOwnProperty,
+__extends = function(child, parent) { 
+  for (var key in parent) { 
+    if (__hasProp.call(parent, key)) child[key] = parent[key]; 
+  } 
+  function ctor() { this.constructor = child; } 
+  ctor.prototype = parent.prototype; 
+  child.prototype = new ctor(); 
+  child.__super__ = parent.prototype; 
+  return child; 
+};
+
+var MessageView = (function(_super) {
+
+  __extends(MessageView, _super);
+
+  function MessageView() {
+    return MessageView.__super__.constructor.apply(this, arguments);
+  }
+
+  return MessageView;
+
+})(Backbone.View);</code></pre>
+
+<p>Once again JavaScript has no built in inheritance support so we fake it using it&#8217;s functional and prototypical features. The <strong>extends</strong> function generated and called by CoffeeScript behind the scene enables us to &#8220;extend&#8221; our class from Backbone&#8217;s View.</p>
+
+<p>The end result is that Backbone code written in CoffeeScript is much more easier on the eye. In turn Backbone makes our JavaScript code much easier to maintain. So the combination of the two gives us code that is simple, clean and easy to maintain which is every developer&#8217;s dream come true :)</p>
+              </div>
+              <hr/>
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                  $(function(){
+                    hljs.initHighlightingOnLoad();
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  });
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
           </div>
         </div>
         <div class="span3">
@@ -229,4 +397,3 @@
     </div>
   </body>
 </html>
-
