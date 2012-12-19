@@ -86,7 +86,6 @@ $(function(){
       console.log(&amp;quot;making an ajax call ...&amp;quot;)
       @options.messageView.render(&amp;quot;result from ajax call&amp;quot;)
 
-
   class MessageView extends Backbone.View
 
     el: &amp;#39;#message&amp;#39;

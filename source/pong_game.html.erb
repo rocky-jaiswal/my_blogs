@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="javascripts/paper.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+      var halfLine = new Path();
+      halfLine.strokeColor = '#CCCCCC';
+      halfLine.add(new Point(275, 10));
+      halfLine.add(new Point(275, 390));
+
+      var score1 = 0;
+      var score1c = new PointText(new Point(138, 20));
+      score1c.strokeColor = '#CCCCCC';
+      score1c.content = "0";
+
+      var score2 = 0;
+      var score2c = new PointText(new Point(413, 20));
+      score2c.strokeColor = '#CCCCCC';
+      score2c.content = "0";
+
+      var rectangle1 = new Rectangle(new Point(10, 10), new Point(25, 100));
+      var path1 = new Path.Rectangle(rectangle1);
+      path1.fillColor = '#FF4533';
+
+      var rectangle2 = new Rectangle(new Point(525, 100), new Point(540, 190));
+      var path2 = new Path.Rectangle(rectangle2);
+      path2.fillColor = '#FF4533';
+
+      var ball = new Path.Circle(new Point(275, 200), 8);
+      ball.fillColor = '#FF4533';
+      ball.strokeColor = '#000000';
+      ball.strokeWidth = 1;
+
+      var position1 = rectangle1.y;
+      var position2 = rectangle2.y;
+      var down = true;
+      var ballDown = true;
+      var bounceUp = false;
+      
+      function onFrame(event) {
+        path1.position.y = position1;
+        
+        if(position1 < 350 && down)
+          position1 = position1 + 4;
+
+        if(position1 > 50 && !down)
+          position1 = position1 - 4;
+
+        if(position1 >= 350 && down)
+          down = false;
+
+        if(position1 <= 50 && !down)
+          down = true;
+
+        if(ball.position.y <= 395 && ballDown)
+          if (bounceUp)
+            ball.position = {x: ball.position.x + 3, y: ball.position.y + 3}
+          else
+            ball.position = {x: ball.position.x - 3, y: ball.position.y + 3}
+
+        if(ball.position.y > 5 && !ballDown)
+          if (bounceUp)
+            ball.position = {x: ball.position.x - 3, y: ball.position.y - 3}
+          else
+            ball.position = {x: ball.position.x + 3, y: ball.position.y - 3}
+
+        if(ball.position.y > 394 && ballDown){
+          ballDown = false;
+          bounceUp = !bounceUp;
+        }
+
+        if(ball.position.y <= 6 && !ballDown){
+          ballDown = true;
+          bounceUp = !bounceUp;
+        }
+
+        if(ball.position.x <= 29 && collides(ball, path1)){
+          bounceUp = !bounceUp;
+        }
+
+        if(ball.position.x >= 521 && collides(ball, path2)){
+          bounceUp = !bounceUp;
+        }
+
+        if(ball.position.x < 10 || ball.position.x > 540){
+          if(ball.position.x < 10){
+            score1 = score1 + 1;
+            score1c.content = score1;
+          }
+          if(ball.position.x > 540){
+            score2 = score2 + 1;
+            score2c.content = score2;
+          }
+          ball.position = new Point(275, 200);
+        }
+      }
+
+      function collides(ball, path) {
+        if(ball.position.y >= path.position.y - 45 && ball.position.y <= path.position.y + 45)
+          return true;
+        else
+          return false;
+      }
+
+      function onKeyDown(event) {
+        if(event.key === 's' && path2.position.y < 350) {
+          path2.position.y = path2.position.y + 5;
+        }
+
+        if(event.key === 'a' && path2.position.y > 50) {
+          path2.position.y = path2.position.y - 5;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Pong (Beta)</h3>
+    <p class="text-info">Use "a" and "s" key to play</p>
+    <canvas id="myCanvas" width="550" height="400" style="border: 1px solid black;"></canvas>
+  </body>
+</html>

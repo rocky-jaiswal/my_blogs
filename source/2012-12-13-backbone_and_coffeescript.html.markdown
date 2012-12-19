@@ -71,7 +71,6 @@ Same thing written in CoffeeScript looks like this -
           console.log("making an ajax call ...")
           @options.messageView.render("result from ajax call")
 
-
       class MessageView extends Backbone.View
 
         el: '#message'
