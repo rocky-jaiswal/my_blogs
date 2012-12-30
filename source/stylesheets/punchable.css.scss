@@ -1,0 +1,9 @@
+@import "punchy";
+
+.punchable {
+  @include punchy(#C43A3A);
+  margin-left: 8%;
+  width: 150px !important; 
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+}
