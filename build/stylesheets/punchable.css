@@ -1,5 +1,5 @@
 /* line 3, punchable.css.scss */
-.punchable {
+.punchable1 {
   display: inline-block;
   background: #c43a3a;
   border-top: 1px solid #b02626;
@@ -25,12 +25,11 @@
   text-decoration: none;
   width: 225px;
   -webkit-background-clip: padding-box;
-  margin-left: 8%;
   width: 150px !important;
   text-transform: uppercase;
   color: #FFFFFF !important; }
   /* line 58, _punchy.scss */
-  .punchable:hover:not(:disabled) {
+  .punchable1:hover:not(:disabled) {
     -webkit-box-shadow: inset 0 0px 16px 1px #ff7676, 0px 1px 0 #380000, 0 6px 0px #460000, 0 8px 4px 1px #380000;
     -moz-box-shadow: inset 0 0px 16px 1px #ff7676, 0px 1px 0 #380000, 0 6px 0px #460000, 0 8px 4px 1px #380000;
     -ms-box-shadow: inset 0 0px 16px 1px #ff7676, 0px 1px 0 #380000, 0 6px 0px #460000, 0 8px 4px 1px #380000;
@@ -39,11 +38,158 @@
     cursor: pointer;
     text-decoration: none; }
   /* line 68, _punchy.scss */
-  .punchable:active:not(:disabled) {
+  .punchable1:active:not(:disabled) {
     -webkit-box-shadow: inset 0 1px 10px 1px #ff7676, 0 1px 0 #380000, 0 2px 0 #460000, 0 4px 3px 0 #380000;
     -moz-box-shadow: inset 0 1px 10px 1px #ff7676, 0 1px 0 #380000, 0 2px 0 #460000, 0 4px 3px 0 #380000;
     -ms-box-shadow: inset 0 1px 10px 1px #ff7676, 0 1px 0 #380000, 0 2px 0 #460000, 0 4px 3px 0 #380000;
     -o-box-shadow: inset 0 1px 10px 1px #ff7676, 0 1px 0 #380000, 0 2px 0 #460000, 0 4px 3px 0 #380000;
     box-shadow: inset 0 1px 10px 1px #ff7676, 0 1px 0 #380000, 0 2px 0 #460000, 0 4px 3px 0 #380000;
+    margin-top: 5px;
+    margin-bottom: 10px; }
+
+/* line 10, punchable.css.scss */
+.punchable2 {
+  display: inline-block;
+  background: #3b3fb9;
+  border-top: 1px solid #272ba5;
+  border-right: 1px solid #00003f;
+  border-bottom: 1px solid #00003f;
+  border-left: 1px solid #00003f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 10px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+  -moz-box-shadow: inset 0 1px 10px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+  -ms-box-shadow: inset 0 1px 10px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+  -o-box-shadow: inset 0 1px 10px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+  box-shadow: inset 0 1px 10px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 15px;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  text-shadow: 0px -1px 1px #1e2d4d;
+  text-decoration: none;
+  width: 225px;
+  -webkit-background-clip: padding-box;
+  width: 150px !important;
+  text-transform: uppercase;
+  color: #FFFFFF !important; }
+  /* line 58, _punchy.scss */
+  .punchable2:hover:not(:disabled) {
+    -webkit-box-shadow: inset 0 0px 16px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+    -moz-box-shadow: inset 0 0px 16px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+    -ms-box-shadow: inset 0 0px 16px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+    -o-box-shadow: inset 0 0px 16px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+    box-shadow: inset 0 0px 16px 1px #777bf5, 0px 1px 0 #000047, 0 6px 0px #00003f, 0 8px 4px 1px #000047;
+    cursor: pointer;
+    text-decoration: none; }
+  /* line 68, _punchy.scss */
+  .punchable2:active:not(:disabled) {
+    -webkit-box-shadow: inset 0 1px 10px 1px #777bf5, 0 1px 0 #000047, 0 2px 0 #00003f, 0 4px 3px 0 #000047;
+    -moz-box-shadow: inset 0 1px 10px 1px #777bf5, 0 1px 0 #000047, 0 2px 0 #00003f, 0 4px 3px 0 #000047;
+    -ms-box-shadow: inset 0 1px 10px 1px #777bf5, 0 1px 0 #000047, 0 2px 0 #00003f, 0 4px 3px 0 #000047;
+    -o-box-shadow: inset 0 1px 10px 1px #777bf5, 0 1px 0 #000047, 0 2px 0 #00003f, 0 4px 3px 0 #000047;
+    box-shadow: inset 0 1px 10px 1px #777bf5, 0 1px 0 #000047, 0 2px 0 #00003f, 0 4px 3px 0 #000047;
+    margin-top: 5px;
+    margin-bottom: 10px; }
+
+/* line 17, punchable.css.scss */
+.punchable3 {
+  display: inline-block;
+  background: #00c03a;
+  border-top: 1px solid #00ac26;
+  border-right: 1px solid #004100;
+  border-bottom: 1px solid #004100;
+  border-left: 1px solid #004100;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 10px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+  -moz-box-shadow: inset 0 1px 10px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+  -ms-box-shadow: inset 0 1px 10px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+  -o-box-shadow: inset 0 1px 10px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+  box-shadow: inset 0 1px 10px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 15px;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  text-shadow: 0px -1px 1px #1e2d4d;
+  text-decoration: none;
+  width: 225px;
+  -webkit-background-clip: padding-box;
+  width: 150px !important;
+  text-transform: uppercase;
+  color: #FFFFFF !important; }
+  /* line 58, _punchy.scss */
+  .punchable3:hover:not(:disabled) {
+    -webkit-box-shadow: inset 0 0px 16px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+    -moz-box-shadow: inset 0 0px 16px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+    -ms-box-shadow: inset 0 0px 16px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+    -o-box-shadow: inset 0 0px 16px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+    box-shadow: inset 0 0px 16px 1px #3cfc76, 0px 1px 0 #003300, 0 6px 0px #004100, 0 8px 4px 1px #003300;
+    cursor: pointer;
+    text-decoration: none; }
+  /* line 68, _punchy.scss */
+  .punchable3:active:not(:disabled) {
+    -webkit-box-shadow: inset 0 1px 10px 1px #3cfc76, 0 1px 0 #003300, 0 2px 0 #004100, 0 4px 3px 0 #003300;
+    -moz-box-shadow: inset 0 1px 10px 1px #3cfc76, 0 1px 0 #003300, 0 2px 0 #004100, 0 4px 3px 0 #003300;
+    -ms-box-shadow: inset 0 1px 10px 1px #3cfc76, 0 1px 0 #003300, 0 2px 0 #004100, 0 4px 3px 0 #003300;
+    -o-box-shadow: inset 0 1px 10px 1px #3cfc76, 0 1px 0 #003300, 0 2px 0 #004100, 0 4px 3px 0 #003300;
+    box-shadow: inset 0 1px 10px 1px #3cfc76, 0 1px 0 #003300, 0 2px 0 #004100, 0 4px 3px 0 #003300;
+    margin-top: 5px;
+    margin-bottom: 10px; }
+
+/* line 24, punchable.css.scss */
+.punchable4 {
+  display: inline-block;
+  background: #c00089;
+  border-top: 1px solid #ac0075;
+  border-right: 1px solid #42000f;
+  border-bottom: 1px solid #42000f;
+  border-left: 1px solid #42000f;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+  -moz-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+  -ms-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+  -o-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+  box-shadow: inset 0 1px 10px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 15px;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  text-shadow: 0px -1px 1px #1e2d4d;
+  text-decoration: none;
+  width: 225px;
+  -webkit-background-clip: padding-box;
+  width: 150px !important;
+  text-transform: uppercase;
+  color: #FFFFFF !important; }
+  /* line 58, _punchy.scss */
+  .punchable4:hover:not(:disabled) {
+    -webkit-box-shadow: inset 0 0px 16px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+    -moz-box-shadow: inset 0 0px 16px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+    -ms-box-shadow: inset 0 0px 16px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+    -o-box-shadow: inset 0 0px 16px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+    box-shadow: inset 0 0px 16px 1px #fc3cc5, 0px 1px 0 #340017, 0 6px 0px #42000f, 0 8px 4px 1px #340017;
+    cursor: pointer;
+    text-decoration: none; }
+  /* line 68, _punchy.scss */
+  .punchable4:active:not(:disabled) {
+    -webkit-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0 1px 0 #340017, 0 2px 0 #42000f, 0 4px 3px 0 #340017;
+    -moz-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0 1px 0 #340017, 0 2px 0 #42000f, 0 4px 3px 0 #340017;
+    -ms-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0 1px 0 #340017, 0 2px 0 #42000f, 0 4px 3px 0 #340017;
+    -o-box-shadow: inset 0 1px 10px 1px #fc3cc5, 0 1px 0 #340017, 0 2px 0 #42000f, 0 4px 3px 0 #340017;
+    box-shadow: inset 0 1px 10px 1px #fc3cc5, 0 1px 0 #340017, 0 2px 0 #42000f, 0 4px 3px 0 #340017;
     margin-top: 5px;
     margin-bottom: 10px; }

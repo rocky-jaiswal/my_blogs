@@ -1,8 +1,28 @@
 @import "punchy";
 
-.punchable {
+.punchable1 {
   @include punchy(#C43A3A);
-  margin-left: 8%;
+  width: 150px !important; 
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+}
+
+.punchable2 {
+  @include punchy(#3B3FB9);
+  width: 150px !important; 
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+}
+
+.punchable3 {
+  @include punchy(#00C03A);
+  width: 150px !important; 
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+}
+
+.punchable4 {
+  @include punchy(#C00089);
   width: 150px !important; 
   text-transform: uppercase;
   color: #FFFFFF !important;
