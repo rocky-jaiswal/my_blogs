@@ -48,7 +48,7 @@
 &lt;p&gt;The message is received by the server.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;I wanted processing to be asynchronous from here on so I chose Torquebox. Torquebox provides HornetQ (a JMS implementation) and the message is posted on a Topic (if you remember Queues &amp;amp; Topic from messaging systems :) )&lt;/li&gt;
+&lt;li&gt;I wanted processing to be asynchronous from here on so I chose Torquebox. Torquebox provides HornetQ (a JMS implementation) and the message is posted on a Topic (if you remember Queues &amp;amp; Topics from messaging systems :) )&lt;/li&gt;
 
 &lt;li&gt;There are two consumers for this topic. Consumer one takes the message and inserts it into a MongoDB collection while consumer two posts the message on Redis PubSub channel.&lt;/li&gt;
 

@@ -20,7 +20,7 @@ Lets get started, the applications works as follows -
 2. Users can create chatrooms and invite other users for a chat. The user and chat room data is stored in MySql.
 3. When in a chat room, user sends a message via an AJAX POST request.
 4. The message is received by the server.
-  - I wanted processing to be asynchronous from here on so I chose Torquebox. Torquebox provides HornetQ (a JMS implementation) and the message is posted on a Topic (if you remember Queues & Topic from messaging systems :) )
+  - I wanted processing to be asynchronous from here on so I chose Torquebox. Torquebox provides HornetQ (a JMS implementation) and the message is posted on a Topic (if you remember Queues & Topics from messaging systems :) )
   - There are two consumers for this topic. Consumer one takes the message and inserts it into a MongoDB collection while consumer two posts the message on Redis PubSub channel.
   - The advantage of this setup is that these two tasks are done asynchronously and in parallel.
   - While MongoDB will give me the chat history when I need it, Redis notifies my Node.js application that a new message has arrived. 
