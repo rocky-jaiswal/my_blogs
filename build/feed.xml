@@ -5,10 +5,90 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2012-12-13T00:00:00Z</updated>
+  <updated>2013-03-22T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Integrating Rails and Node.js via Redis</title>
+    <link rel="alternate" href="/2013/03/22/integrating_node_and_rails_with_redis.html"/>
+    <id>/2013/03/22/integrating_node_and_rails_with_redis.html</id>
+    <published>2013-03-22T00:00:00Z</published>
+    <updated>2013-03-22T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;It&amp;#8217;s been a while since I blogged, not really for the lack of content but rather the lack of time. I travelled to beautiful Berlin in Jan-Feb and was also doing the Coursera course &lt;a href='https://www.coursera.org/course/algo'&gt;https://www.coursera.org/course/algo&lt;/a&gt; which pretty much ate up all my weekends. Well here is a pic of beautiful Berlin pretty close to where I worked.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;It&amp;#8217;s been a while since I blogged, not really for the lack of content but rather the lack of time. I travelled to beautiful Berlin in Jan-Feb and was also doing the Coursera course &lt;a href='https://www.coursera.org/course/algo'&gt;https://www.coursera.org/course/algo&lt;/a&gt; which pretty much ate up all my weekends. Well here is a pic of beautiful Berlin pretty close to where I worked.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='Berlin' src='/images/berlin.jpg' /&gt;&lt;/p&gt;
+
+&lt;p&gt;Berlin was awesome and I had a great time there but I moved back to India a couple of weeks back and also completed my Coursera course. Finally had some free time this week, so here goes.&lt;/p&gt;
+
+&lt;p&gt;I had been exploring Node.js earlier and found it blazingly fast but couldn&amp;#8217;t really use it as my main backend. However I wanted to use Node&amp;#8217;s websocket capabilites while using Rails for my main application so I started exploring how to integrate the two. Redis has a pretty good PubSub mechanism which is pretty fast and stable so I looked into Redis as the intermediatory between Node and Rails and built a real-time chat application.&lt;/p&gt;
+
+&lt;p&gt;You may wonder, why build a chat application and why use Rails? Well not to start any arguments, &lt;strong&gt;I&lt;/strong&gt; think Rails is an excellent framework, it has a great ecosystem and helps build web applications at a great pace. JRuby also solves the Ruby slowness problem to a large extent. Node.js on the other hand is excellent for websocket communication so I chose both of them. I built a Chat application because it provides a mix of real-time and standard request-response communication. While the chat is real-time, user registration, room creation etc. works well on Rails.&lt;/p&gt;
+
+&lt;p&gt;Lets get started, the applications works as follows -&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Users register and login with a Rails application.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Users can create chatrooms and invite other users for a chat. The user and chat room data is stored in MySql.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;When in a chat room, user sends a message via an AJAX POST request.&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;The message is received by the server.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I wanted processing to be asynchronous from here on so I chose Torquebox. Torquebox provides HornetQ (a JMS implementation) and the message is posted on a Topic (if you remember Queues &amp;amp; Topic from messaging systems :) )&lt;/li&gt;
+
+&lt;li&gt;There are two consumers for this topic. Consumer one takes the message and inserts it into a MongoDB collection while consumer two posts the message on Redis PubSub channel.&lt;/li&gt;
+
+&lt;li&gt;The advantage of this setup is that these two tasks are done asynchronously and in parallel.&lt;/li&gt;
+
+&lt;li&gt;While MongoDB will give me the chat history when I need it, Redis notifies my Node.js application that a new message has arrived.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Once message is posted on the Redis PubSub channel, it is picked up by the Node.js application (listening on the Redis channels) and based on the channel (each chatroom has its own PubSub channel) socket.io raises an event on the chatroom&amp;#8217;s websocket channel.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Two channels here, one for Redis PubSub and one for websocket communication.&lt;/li&gt;
+
+&lt;li&gt;Also we don&amp;#8217;t want users in chatroom 1 listening to messages on chatroom 2.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;On the client side the message is received via the websocket push, parsed and displayed on the HTML DOM.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Pictorially this can be represented as -&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='chatapp_arch' src='/images/chatapp_arch.jpg' /&gt;&lt;/p&gt;
+
+&lt;p&gt;The application looks like -&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='chatapp1' src='/images/chatapp1.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='chatapp2' src='/images/chatapp2.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well what do we have in the end? We have a pretty basic Rails app that has Node&amp;#8217;s awesome real-time capabilities, is scalable (JRuby, Torquebox, HornetQ, Redis) and most importantly scratches my itch.&lt;/p&gt;
+
+&lt;p&gt;For client side I also used Backbone.js and Require.js to keep things clean. Finally the source code is here - &lt;a href='https://github.com/rocky-jaiswal/chatapp'&gt;https://github.com/rocky-jaiswal/chatapp&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Please note this is not in perfect shape in any way. The user invitation is very basic (only for existing users) and most components (Redis, Torquebox, Node, MongoDB, HornetQ) need to be clustered to provide fault tolerance. But I hope this will provide a nice base for anyone who is looking to utilize the development speed of Rails and the real-time awesomeness of Node.js.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Backbone.js and CoffeeScript - A Perfect Match</title>
     <link rel="alternate" href="/2012/12/13/backbone_and_coffeescript.html"/>
@@ -701,195 +781,5 @@ Duration of calculation - 5039 milliseconds&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img alt='akka cpu effect' src='/images/akka_cpu_effect.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;As you can see all 8 virtual cores on the i7 CPU have been used with utilization close to 100% at the time the program ran. I think my experiment is successful, sorry for the longish post, I hope you had as much fun reading it as I had making it. Code shown above is available &lt;a href='https://github.com/rocky-jaiswal/akka-experiment'&gt;here&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Running Rails on Ruby or JRuby - A Performance Comparison</title>
-    <link rel="alternate" href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html"/>
-    <id>/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html</id>
-    <published>2012-09-09T00:00:00Z</published>
-    <updated>2012-09-09T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;I have been a JRuby fanboy for a while now, in the last few weeks I also saw some really interesting RailsCasts on multi-threading Rails applications and JRuby which piqued me to do some ad-hoc experimentation. I recommend everyone to watch these three episodes -&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I have been a JRuby fanboy for a while now, in the last few weeks I also saw some really interesting RailsCasts on multi-threading Rails applications and JRuby which piqued me to do some ad-hoc experimentation. I recommend everyone to watch these three episodes -&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href='http://railscasts.com/episodes/365-thread-safety'&gt;http://railscasts.com/episodes/365-thread-safety&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li&gt;
-&lt;p&gt;&lt;a href='http://railscasts.com/episodes/376-jruby-basics'&gt;http://railscasts.com/episodes/376-jruby-basics&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li&gt;
-&lt;p&gt;&lt;a href='http://railscasts.com/episodes/377-trinidad'&gt;http://railscasts.com/episodes/377-trinidad&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Now, I am a sucker for performance. I love making performance improvements on applications. So I thought let me run some tests on a simple Rails application on my personal laptop (i7, 8 GB RAM, SSD) and see how well the Ruby implementations and their commonly used servers fare. I will use MRI 1.9.3, JRuby 1.7.0.preview2 and the latest app servers for this experiment.&lt;/p&gt;
-
-&lt;p&gt;These tests need to be taken with a pinch of salt as I am no authority in perfomance testing but still the results are quite interesting.&lt;/p&gt;
-
-&lt;p&gt;First, we need to setup a Rails app which can be used with both Ruby and JRuby. My Gemfile looks like -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;source &amp;#39;https://rubygems.org&amp;#39;
-
-gem &amp;#39;rails&amp;#39;, &amp;#39;3.2.8&amp;#39;
-gem &amp;#39;warbler&amp;#39;
-
-platform :jruby do
-  gem &amp;#39;activerecord-jdbcpostgresql-adapter&amp;#39;
-  gem &amp;#39;jruby-openssl&amp;#39;
-  gem &amp;#39;puma&amp;#39;
-  gem &amp;#39;trinidad&amp;#39;
-  gem &amp;#39;therubyrhino&amp;#39;, group: :assets
-end
-
-platform :ruby do
-  gem &amp;#39;pg&amp;#39;
-  gem &amp;#39;unicorn&amp;#39;
-end
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem &amp;#39;sass-rails&amp;#39;,   &amp;#39;~&amp;gt; 3.2.3&amp;#39;
-  gem &amp;#39;coffee-rails&amp;#39;, &amp;#39;~&amp;gt; 3.2.1&amp;#39;
-  gem &amp;#39;uglifier&amp;#39;, &amp;#39;&amp;gt;= 1.0.3&amp;#39;
-end
-
-gem &amp;#39;jquery-rails&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Nothing out of the ordinary here, only thing is that the gems will be loaded according to the Ruby implementation.&lt;/p&gt;
-
-&lt;p&gt;I also scaffolded a generic User model and added a few records to my database. Pointed the &amp;#8216;root&amp;#8217; of my application to the /users/index page so that the DB is hit everytime someone opens the homepage of the application. I will also use &amp;#8220;ab&amp;#8221; (apache benchmark) as my testing tool, I also tried this with JMeter and there was not much difference. My command is -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ab -n 100 -c 10 http://localhost:8080/&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This means my app&amp;#8217;s homepage will be hit by 100 requests with 10 concurrent requests at a time, decent enough for performance testing a small app.&lt;/p&gt;
-
-&lt;p&gt;Now lets start the experiment. We will run the experiment on the server in 2 modes, one by not allowing concurrency and the other by allowing concurrency. See tenderlove&amp;#8217;s awesome post to understand this more - &lt;a href='http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html'&gt;http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html&lt;/a&gt;. This is done by commenting / uncommenting this line in production.rb -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;config.threadsafe!&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We will also run the &amp;#8220;ab&amp;#8221; command above a few times so that cache etc is warmed. The results you see below are always for the 5th or 6th run.&lt;/p&gt;
-
-&lt;p&gt;Also, we will precompile our assets and serve them from the app server only. We will run the tests in production mode. I have also increased the DB pool size to 15 so that no bottleneck is created there.&lt;/p&gt;
-
-&lt;p&gt;Finally, we kick off our experiment with MRI 1.9.3, Unicorn, 3 workers enabled and concurrency off. Let&amp;#8217;s see the results -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
-
-Requests per second:    549.31 [#/sec] (mean)
-Time per request:       18.205 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now lets us allow concurrency (uncomment the &amp;#8220;config.threadsafe!&amp;#8221; line) and re-run the tests -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    525.78 [#/sec] (mean)
-Time per request:       19.019 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Not much of a difference. This is because MRI uses a GIL and there is no thread level concurrency in MRI. Also reducing the no of workers reduces the performance drastically, if I use 1 worker -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    109.46 [#/sec] (mean)
-Time per request:       91.360 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;#8217;s switch over to JRuby now and use &lt;a href='http://puma.io'&gt;puma&lt;/a&gt; as the server, with these JVM options -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export JRUBY_OPTS=&amp;quot;-J-XX:ReservedCodeCacheSize=100m -J-Xmn512m -J-Xms2048m -J-Xmx2048m -J-server&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Server can be started by -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;RAILS_ENV=production jruby -S bundle exec puma -p 8080&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Results with concurrency off -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    72.37 [#/sec] (mean)
-Time per request:       138.184 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As you can see this is much much slower than Unicorn.&lt;/p&gt;
-
-&lt;p&gt;Lets enable concurrency and retest -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    451.77 [#/sec] (mean)
-Time per request:       22.135 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now we see a huge performance boost, we are getting similar results as Unicorn even though we are running just one server process as opposed to Unicorn&amp;#8217;s three. One can imagine the performance for a clustered puma setup.&lt;/p&gt;
-
-&lt;p&gt;Lets try the same tests with &lt;a href='http://thinkincode.net/trinidad/'&gt;Trinidad&lt;/a&gt; -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;RAILS_ENV=production jruby -S bundle exec trinidad -p 8080&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Results with concurrency off -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    287.45 [#/sec] (mean)
-Time per request:       34.788 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a bit slow, lets enable concurrency and retest -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    391.74 [#/sec] (mean)
-Time per request:       25.527 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We see an improvment now. Although, Puma is a tad faster (ignorable).&lt;/p&gt;
-
-&lt;p&gt;Lastly with we will use the warbler gem to generate a war file and deploy it on standard tomcat with concurrency enabled -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    241.42 [#/sec] (mean)
-Time per request:       41.422 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These numbers are a bit higher than Puma and Trinidad.&lt;/p&gt;
-
-&lt;p&gt;Finally, here is a summary -&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Unicorn is fast and performance improves as the number of workers are increased (no surprise!!).&lt;/li&gt;
-
-&lt;li&gt;There is no effect of enabling concurrency on Unicorn as MRI uses GIL (Global Interpreter Lock).&lt;/li&gt;
-
-&lt;li&gt;When using Unicorn you don&amp;#8217;t have to worry about multithreading.&lt;/li&gt;
-
-&lt;li&gt;Puma is fast but only when concurrency is enabled.&lt;/li&gt;
-
-&lt;li&gt;Trinidad is almost as fast as Puma.&lt;/li&gt;
-
-&lt;li&gt;A cluster of JRuby optimized servers (Puma / Trinidad) will be lightining fast.&lt;/li&gt;
-
-&lt;li&gt;On JRuby servers the response time improves steadily as the server is hit due to JVM optimizations kicking in.&lt;/li&gt;
-
-&lt;li&gt;With concurrency enabled on Puma / Trinidad watch out for thread safety.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I missed testing JRuby with Torquebox which is also a great JRuby server. Maybe I will update the blog later.&lt;/p&gt;
-
-&lt;p&gt;Also, with JVM / JRuby / multi-threading, there is big advantage of running jobs in background threads without relying on external processes.&lt;/p&gt;
-
-&lt;p&gt;However, with multi-threading enabled, thread safety may be hard to get right. If you have a simple application and you design the application with concurrency in mind (immutable classes, thread safe libraries) then go ahead and use JRuby with Puma / Trinidad / Torquebox. Learn more from a great post here -&lt;/p&gt;
-
-&lt;p&gt;&lt;a href='https://github.com/jruby/jruby/wiki/Concurrency-in-jruby'&gt;https://github.com/jruby/jruby/wiki/Concurrency-in-jruby&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Errata (10-Sep) :&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Earlier I tested tomcat with the path http://localhost:8080/testy, this did not hit the application as expected and I reported some wrong numbers. I am really sorry for the error, the url should have been http://localhost:8080/testy/ (with a slash at the end). The numbers / findings have now been updated. Big thanks to Ben Browning and Richard Huang!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Update for Torquebox (11-Sep):&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Ben Browning (the creator of &lt;a href='http://torquebox.org'&gt;Torquebox&lt;/a&gt;) suggested that I try these tests on (yet unreleased) torquebox-lite. We just need to add &amp;#8216;torquebox-lite&amp;#8217; to our Gemfile for this. I got an error after this but I easily fixed it by adding the line &lt;strong&gt;xa: false&lt;/strong&gt; to my production database.yml config (as we are running the tests on production mode). More info on this here - &lt;a href='http://torquebox.org/documentation/2.1.1/transactions.html#transaction-configuration'&gt;http://torquebox.org/documentation/2.1.1/transactions.html#transaction-configuration&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;First with concurrency disabled, let us start a torquebox-lite instance with three runtimes with this simple command -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;RAILS_ENV=production jruby -S bundle exec torquebox-lite -p 8080 --min-runtimes=3 --max-runtimes=3&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Even with consurrency disabled, the numbers here are quite good (although memory consumption is slightly on the higher side due to 3 runtimes and JBoss being a bit heavy) -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    258.86 [#/sec] (mean)
-Time per request:       38.631 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And finally with concurrency enabled and a single torquebox runtime we get -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Requests per second:    478.19 [#/sec] (mean)
-Time per request:       20.912 [ms] (mean)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The numbers match or are slightly better than Puma and drop even further as the JVM is warmed. For me, this makes a compelling case for using torquebox / torquebox-lite in production. Torquebox has a rock solid base of JBoss with great performance not to mention other awesome Torquebox features which you can see from my earlier blogs / &lt;a href='http://localhost:4567/2012/03/26/ruby_conf_india_with_arunagw.html'&gt;slideshare&lt;/a&gt; presentation.&lt;/p&gt;</content>
   </entry>
 </feed>
