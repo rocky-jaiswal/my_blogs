@@ -38,7 +38,7 @@ Now on our client side, which is running on the Node.js server (and can later be
 
 And for the Backbone View -
 
-    define ["jquery", "underscore", "backbone", ], ($, _, Backbone) ->
+    define ["jquery", "underscore", "backbone"], ($, _, Backbone) ->
       'use strict'
       
       class RemoteView extends Backbone.View

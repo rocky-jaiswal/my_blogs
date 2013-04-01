@@ -53,7 +53,7 @@
 
 &lt;p&gt;And for the Backbone View -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;define [&amp;quot;jquery&amp;quot;, &amp;quot;underscore&amp;quot;, &amp;quot;backbone&amp;quot;, ], ($, _, Backbone) -&amp;gt;
+&lt;pre&gt;&lt;code&gt;define [&amp;quot;jquery&amp;quot;, &amp;quot;underscore&amp;quot;, &amp;quot;backbone&amp;quot;], ($, _, Backbone) -&amp;gt;
   &amp;#39;use strict&amp;#39;
   
   class RemoteView extends Backbone.View
