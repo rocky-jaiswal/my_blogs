@@ -14,19 +14,21 @@
     <a href="/videos">Videos</a>
   </h2>
   <hr/>
-  <h2>Articles</h2>
-  <ol>
-    <% blog.articles.each do |article| %>
-      <li><a href="<%= article.url %>"><%= article.title %></a> <span><%= article.date.strftime('%b %e %Y') %></span></li>
-    <% end %>
-  </ol>
-  <hr/>
-  <h2>Tags</h2>
-  <ol>
-    <% blog.tags.each do |tag, articles| %>
-      <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
-    <% end %>
-  </ol>
+  <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
+  <div class="posts">
+    <ol>
+      <% blog.articles.each do |article| %>
+        <li><a href="<%= article.url %>"><%= article.title %></a> <span><%= article.date.strftime('%b %e %Y') %></span></li>
+      <% end %>
+    </ol>
+  </div>
+  <div class="tags">
+    <ol>
+      <% blog.tags.each do |tag, articles| %>
+        <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
+      <% end %>
+    </ol>
+  </div>
   <hr/>
 </div>
 <script type="text/javascript">
@@ -39,4 +41,15 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+  $(function() {
+    $('.tags').hide();
+    $("#show-tags").click(function() {
+      $('.tags').toggle();
+      $('.posts').toggle();
+    });
+    $("#show-posts").click(function() {
+      $('.tags').toggle();
+      $('.posts').toggle();
+    });
+  });
 </script>

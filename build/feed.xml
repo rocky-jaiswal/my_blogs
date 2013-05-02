@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Blog Name</title>
-  <subtitle>Blog subtitle</subtitle>
-  <id>http://blog.url.com/</id>
-  <link href="http://blog.url.com/"/>
-  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <title>Still Learning</title>
+  <subtitle>Thoughts of an Agile Developer</subtitle>
+  <id>http://rockyj.in</id>
+  <link href="http://rockyj.in"/>
+  <link href="http://rockyj.in/feed.xml" rel="self"/>
   <updated>2013-04-08T00:00:00Z</updated>
   <author>
-    <name>Blog Author</name>
+    <name>Rocky Jaiswal</name>
   </author>
   <entry>
     <title>Puppet in a rush</title>
@@ -16,9 +16,9 @@
     <published>2013-04-08T00:00:00Z</published>
     <updated>2013-04-08T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first 3 months spent on discussions and so called &amp;#8220;requirement gathering&amp;#8221;. Now, with good developers on board we try to start programming from day two or three and try to deliver a working solution within the first month of project kickoff.&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first...&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first 3 months spent on discussions and so called &amp;#8220;requirement gathering&amp;#8221;. Now, with good developers on board we try to start programming from day two or three and try to deliver a working solution within the first month of project kickoff.&lt;/p&gt;
 
 &lt;p&gt;Within the last year itself, I did more projects on and off work than I can remember and each project carried its own development, testing and production environment. While trying to be agile yet robust, managing environments can be a pain. That is why I decided to look into &lt;a href='http://puppetlabs.com/'&gt;Puppet&lt;/a&gt; and gave it high priority on my list of things to learn in 2013.&lt;/p&gt;
@@ -140,9 +140,9 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
     <published>2013-04-01T00:00:00Z</published>
     <updated>2013-04-01T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href='/2012/08/26/accessing_server_data_from_a_native_android_app.html'&gt;here&lt;/a&gt; and it&amp;#8217;s about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a web application and a &amp;#8220;native&amp;#8221; mobile application (atleast one that works well on tablets).&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it&amp;#8217;s about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a...&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href='/2012/08/26/accessing_server_data_from_a_native_android_app.html'&gt;here&lt;/a&gt; and it&amp;#8217;s about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a web application and a &amp;#8220;native&amp;#8221; mobile application (atleast one that works well on tablets).&lt;/p&gt;
 
 &lt;p&gt;Building web applications that also work on tablets can be done in many ways but over a period of time I have realized it&amp;#8217;s good to create separate applications for server side and client side logic. While the server side serves JSON (and talks to the data store) the client side takes care of rendering the UI.&lt;/p&gt;
@@ -242,9 +242,9 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
     <published>2013-03-22T00:00:00Z</published>
     <updated>2013-03-22T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;It&amp;#8217;s been a while since I blogged, not really for the lack of content but rather the lack of time. I travelled to beautiful Berlin in Jan-Feb and was also doing the Coursera course &lt;a href='https://www.coursera.org/course/algo'&gt;https://www.coursera.org/course/algo&lt;/a&gt; which pretty much ate up all my weekends. Well here is a pic of beautiful Berlin pretty close to where I worked.&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;It&amp;#8217;s been a while since I blogged, not really for the lack of content but rather the lack of time. I travelled to beautiful Berlin in Jan-Feb and was also doing the Coursera course &lt;a href="https://www.coursera.org/course/algo"&gt;https://www.coursera.org/course/algo&lt;/a&gt; which pretty much ate up all my...&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;It&amp;#8217;s been a while since I blogged, not really for the lack of content but rather the lack of time. I travelled to beautiful Berlin in Jan-Feb and was also doing the Coursera course &lt;a href='https://www.coursera.org/course/algo'&gt;https://www.coursera.org/course/algo&lt;/a&gt; which pretty much ate up all my weekends. Well here is a pic of beautiful Berlin pretty close to where I worked.&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt='Berlin' src='/images/berlin.jpg' /&gt;&lt;/p&gt;
@@ -322,9 +322,9 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
     <published>2012-12-13T00:00:00Z</published>
     <updated>2012-12-13T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces another when you can write the end product directly?&amp;#8221; Also, my head could do without another set of syntax and rules to learn.&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces...&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces another when you can write the end product directly?&amp;#8221; Also, my head could do without another set of syntax and rules to learn.&lt;/p&gt;
 
 &lt;p&gt;However, when I started writing code for &lt;a href='http://backbonejs.org/'&gt;Backbone.js&lt;/a&gt; a few months back, it dawned on me that CoffeeScript is a beautiful language and makes writing Backbone.js apps a much more pleasant experience.&lt;/p&gt;
@@ -482,9 +482,9 @@ var MessageView = (function(_super) {
     <published>2012-12-02T00:00:00Z</published>
     <updated>2012-12-02T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;I was asked to meet quite a &amp;#8220;non-standard&amp;#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing this was relatively simple, I decided to blog about it in case it helps anyone.&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;I was asked to meet quite a &amp;#8220;non-standard&amp;#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing...&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;I was asked to meet quite a &amp;#8220;non-standard&amp;#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing this was relatively simple, I decided to blog about it in case it helps anyone.&lt;/p&gt;
 
 &lt;p&gt;I decided to go with JRuby as anything that works on JVM theoretically should run on any OS. So I got hold of a clean Windows machine and installed -&lt;/p&gt;
@@ -561,9 +561,9 @@ bundle exec warble&lt;/code&gt;&lt;/pre&gt;
     <published>2012-10-15T00:00:00Z</published>
     <updated>2012-10-15T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href="http://requirejs.org/"&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my...&lt;/strong&gt;&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;
 
 &lt;p&gt;I simply moved on, but I also realized that as we are writing more and more JavaScript these days, we need to organize it better. In OO languages such as Java and Ruby we organize code by putting it in classes and maybe having a policy of one class per file, then we load the classes in other classes via dependency loading mechanisms built into the language (like import / require).&lt;/p&gt;
