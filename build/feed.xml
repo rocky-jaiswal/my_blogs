@@ -5,10 +5,89 @@
   <id>http://rockyj.in</id>
   <link href="http://rockyj.in"/>
   <link href="http://rockyj.in/feed.xml" rel="self"/>
-  <updated>2013-04-08T00:00:00Z</updated>
+  <updated>2013-05-02T00:00:00Z</updated>
   <author>
     <name>Rocky Jaiswal</name>
   </author>
+  <entry>
+    <title>Ajaxify a Form with Backbone</title>
+    <link rel="alternate" href="http://rockyj.in/2013/05/02/ajaxify_with_backbone.html"/>
+    <id>/2013/05/02/ajaxify_with_backbone.html</id>
+    <published>2013-05-02T00:00:00Z</published>
+    <updated>2013-05-02T00:00:00Z</updated>
+    <author>
+      <name>Rocky Jaiswal</name>
+    </author>
+    <summary type="html">&lt;p&gt;I have been working a lot with &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It&amp;#8217;s make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually...&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;I have been working a lot with &lt;a href='http://yeoman.io'&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It&amp;#8217;s make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually searching and downloading a JavaScript library it is so run &amp;#8220;bower install &amp;#8211;save jquery-form&amp;#8221; and you are done.&lt;/p&gt;
+
+&lt;p&gt;Anyways, in this short blog, I want to share a neat trick that I tried to submit forms via AJAX in a web application. We will be using a few libraries for this most important of which is the &lt;a href='http://malsup.com/jquery/form/'&gt;jquery form plugin&lt;/a&gt; which enables us to submit forms via AJAX.&lt;/p&gt;
+
+&lt;p&gt;I have a form lets say, which I want to AJAXify -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;app-home&amp;quot;&amp;gt;
+  &amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;large-4 columns&amp;quot;&amp;gt;
+      &amp;lt;form action=&amp;quot;/greet&amp;quot; method=&amp;quot;POST&amp;quot; id=&amp;quot;greeting-form&amp;quot; data-ajax=&amp;quot;true&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;text&amp;quot; placeholder=&amp;quot;Your name please&amp;quot; name=&amp;quot;username&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;Say Hello&amp;quot; class=&amp;quot;btn button&amp;quot;&amp;gt;
+      &amp;lt;/form&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Normally the flow looks like the images below -&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='Ajax-1' src='/images/ajax-1.png' /&gt; &lt;img alt='Ajax-2' src='/images/ajax-2.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now with the help of a little bit of Backbone and jQuery Form plugin I can easily turn this into an AJAX enabled form -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;define [&amp;quot;backbone&amp;quot;, &amp;quot;text!apps/home/templates/greetresponse.hbs&amp;quot;], (Backbone, responseTemplate) -&amp;gt;
+  &amp;#39;use strict&amp;#39;
+  
+  class GreetingView extends Backbone.View
+    
+    el: &amp;quot;#app-home&amp;quot;
+
+    events:
+      &amp;quot;submit #greeting-form&amp;quot;  :  &amp;quot;handleSubmit&amp;quot;
+
+    template: Handlebars.compile(responseTemplate)
+
+    handleSubmit: (e) -&amp;gt;
+      $form = $(e.currentTarget)
+      if $form.data(&amp;quot;ajax&amp;quot;)
+        e.preventDefault()
+        $form.ajaxSubmit(success: @handleResponse, error: @handleError)
+
+    handleResponse: (response, status, xhr, form) =&amp;gt;
+      $(@el).html(@template(response))
+
+    handleError: (respon![Automate](/images/automate.gif &amp;quot;Automate&amp;quot;)se) =&amp;gt;
+      alert response.responseText&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let me explain the code, behind the scenes we have initialized our Backbone View shown above and binded the &amp;#8220;handleSubmit&amp;#8221; function to the form submit event.&lt;/p&gt;
+
+&lt;p&gt;The handleSubmit function checks if the form has the &amp;#8220;data-ajax&amp;#8221; attribute and using the jQuery form plugin&amp;#8217;s API submits the form via AJAX.&lt;/p&gt;
+
+&lt;p&gt;The server side code can look something like -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def greet
+  if request.xhr?
+    render :json =&amp;gt; {:name =&amp;gt; params[:username]}.to_json and return
+  else
+    @name = params[:username]
+  end
+end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The advantage of this approach is that the application will work even if JavaScript is disabled and also we can easily turn off AJAX by setting the &amp;#8220;data-ajax&amp;#8221; attribute to false in HTML, no JavaScript needs to change anywhere.&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s it using this simple method you can AJAXify your forms easily.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Code is available on &lt;a href='https://github.com/rocky-jaiswal/templateapp'&gt;Github&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Puppet in a rush</title>
     <link rel="alternate" href="http://rockyj.in/2013/04/08/puppet_in_a_rush.html"/>
@@ -553,129 +632,5 @@ bundle exec warble&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can create a proxy for tomcat using Apache HTTP server if you want. Tomcat specific config like the port on which it is running can be found in apache-tomcat/conf/server.xml.&lt;/p&gt;
 
 &lt;p&gt;Also the above steps can be put in a script that can be run from cygwin. That is it, this is all you need to serve a Rails application from Windows. To my surprise I found that the response times were also very good.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Why does JavaScript require Require.js</title>
-    <link rel="alternate" href="http://rockyj.in/2012/10/15/why_does_js_require_requirejs.html"/>
-    <id>/2012/10/15/why_does_js_require_requirejs.html</id>
-    <published>2012-10-15T00:00:00Z</published>
-    <updated>2012-10-15T00:00:00Z</updated>
-    <author>
-      <name>Rocky Jaiswal</name>
-    </author>
-    <summary type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href="http://requirejs.org/"&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my...&lt;/strong&gt;&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;Around a week back I started learning about Require.js after someone recommened it to me. When I looked at the &lt;a href='http://requirejs.org/'&gt;website&lt;/a&gt; I was not very impressed. My initial reaction was &amp;#8221;&lt;strong&gt;what is require.js trying to solve / why should I use it / how will it make my life better?&lt;/strong&gt;&amp;#8221;&lt;/p&gt;
-
-&lt;p&gt;I simply moved on, but I also realized that as we are writing more and more JavaScript these days, we need to organize it better. In OO languages such as Java and Ruby we organize code by putting it in classes and maybe having a policy of one class per file, then we load the classes in other classes via dependency loading mechanisms built into the language (like import / require).&lt;/p&gt;
-
-&lt;p&gt;JavaScript although being OO has no classes, via CoffeeScript we can still create classes in JavaScript by leveraging the prototype mechanism in JavaScript (but that is perhaps another blog topic) but as our JS code gets bigger how do I organize it and manage dependencies. So I started searching the web for ways to do so. My search led me &lt;a href='http://addyosmani.com/largescalejavascript'&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To summarize the article, one of the most common ways to orgainize JS code is through object literals -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//apple.js
-var apple = {
-  type: &amp;quot;macintosh&amp;quot;,
-  color: &amp;quot;red&amp;quot;,
-  getInfo: function () {
-      return this.color + &amp;#39; &amp;#39; + this.type + &amp;#39; apple&amp;#39;;
-  }
-}
-//console.log(apple.color)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Put a literal in a file and load it in your html. This is the stating point for most developers. Another popular mechanism which kind of builds upon this is Modules -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var basketModule = (function() {
-  var basket = []; //private
-  return { //exposed to public
-    addItem: function(values) {
-      basket.push(values);
-    },
-    getItemCount: function() {
-      return basket.length;
-    },
-    getTotal: function(){
-      var q = this.getItemCount(),p=0;
-      while(q--){
-        p+= basket[q].price; 
-      }
-      return p;
-    }
-  }
-}());&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The advantage of the module pattern is that unlike literals you can expose certain things (what is returned) while some things can be private (like the basket array in example above).&lt;/p&gt;
-
-&lt;p&gt;Cool so we have some basic ways to organize our JavaScript, however how do we load these JavaScripts and how do we manage the dependencies. Usually we do it this way -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&amp;quot;Module1.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;Module2.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;Module3.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;Module4.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;Module5.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;Module8.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;!-- want to use 6 in 8... --&amp;gt;
-&amp;lt;script src=&amp;quot;Module6.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;Module7.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;Module8.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;app.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is horrible, we load the JavaScript files in HTML and manually order them. If tomorrow things change we have to manually change the order or add or remove files. This is definitely not the way to build good software. Rails asset pipelining tries to solve this but there is still no way to manage JS dependencies.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Require.js&lt;/strong&gt; addresses this exact problem.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href='https://github.com/amdjs/amdjs-api/wiki/AMD'&gt;AMD&lt;/a&gt; is a specification which JavaScript developers created and proposed so that the JavaScript dependency management and loading problem is addressed across all JS libraries. Require.js is an impelementation of this specification. We create modules like above but we follow certain syntax to load the dependencies -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//my shirt.js now has some dependencies, a cart and inventory
-//module in the same directory as shirt.js
-define([&amp;quot;./cart&amp;quot;, &amp;quot;./inventory&amp;quot;], function(cart, inventory) {
-    //return an object to define the &amp;quot;my/shirt&amp;quot; module.
-    return {
-      color: &amp;quot;blue&amp;quot;,
-      size: &amp;quot;large&amp;quot;,
-      addToCart: function() {
-        inventory.decrement(this);
-        cart.add(this);
-      }
-    }
-  }
-);&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;define() is the main function require.js provides, we use it to define a module, we first pass an array of dependencies for the module then a function to define the module. We also follow the one module per file policy&lt;/p&gt;
-
-&lt;p&gt;Another simple example (in CoffeeScript) would be to place the following code in a file common.coffee&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;define [], -&amp;gt;
-
-  # What is the enter key constant?
-  ENTER_KEY: 13&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now whenever you want to use the &amp;#8220;common&amp;#8221; module just include it as a dependency (like cart in example above).&lt;/p&gt;
-
-&lt;p&gt;Finally in our HTML we need to just reference one JavaScript file (please see comments in code below) -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;head&amp;gt;
-    &amp;lt;title&amp;gt;My Sample Project&amp;lt;/title&amp;gt;
-    &amp;lt;!-- data-main attribute tells require.js to load scripts/main.js after require.js loads. --&amp;gt;
-    &amp;lt;script data-main=&amp;quot;scripts/main&amp;quot; src=&amp;quot;scripts/require.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;/head&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In your main.js file you can use require() function to load the JavaScripts. Example Backbone setup -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;require([
-  &amp;#39;views/app&amp;#39;,
-  &amp;#39;routers/router&amp;#39;
-], function( AppView, Workspace ) {
-  // Initialize routing and start Backbone.history()
-  new Workspace();
-  Backbone.history.start();
-
-  // Initialize the application view
-  new AppView();
-});&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;That is it! After this the other modules will load their dependencies on their own (since they are &amp;#8220;defined&amp;#8221; via require.js).&lt;/p&gt;
-
-&lt;p&gt;Finally since some libs are not using define() like jQuery / Backbone how do we load them. The answer lies in &lt;a href='http://requirejs.org/docs/api.html#config-shim'&gt;shims&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;For a sample project that uses Require.js, Backbone.js, jQuery and CoffeeScript see - &lt;a href='https://github.com/rocky-jaiswal/todo-js'&gt;this&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
