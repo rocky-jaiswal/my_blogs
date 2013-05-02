@@ -11,7 +11,7 @@
   </author>
   <entry>
     <title>Puppet in a rush</title>
-    <link rel="alternate" href="/2013/04/08/puppet_in_a_rush.html"/>
+    <link rel="alternate" href="http://rockyj.in/2013/04/08/puppet_in_a_rush.html"/>
     <id>/2013/04/08/puppet_in_a_rush.html</id>
     <published>2013-04-08T00:00:00Z</published>
     <updated>2013-04-08T00:00:00Z</updated>
@@ -135,7 +135,7 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
   </entry>
   <entry>
     <title>Building Single Page Applications and CORS</title>
-    <link rel="alternate" href="/2013/04/01/building_single_page_applications_and_cors.html"/>
+    <link rel="alternate" href="http://rockyj.in/2013/04/01/building_single_page_applications_and_cors.html"/>
     <id>/2013/04/01/building_single_page_applications_and_cors.html</id>
     <published>2013-04-01T00:00:00Z</published>
     <updated>2013-04-01T00:00:00Z</updated>
@@ -237,7 +237,7 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
   </entry>
   <entry>
     <title>Integrating Rails and Node.js via Redis</title>
-    <link rel="alternate" href="/2013/03/22/integrating_node_and_rails_with_redis.html"/>
+    <link rel="alternate" href="http://rockyj.in/2013/03/22/integrating_node_and_rails_with_redis.html"/>
     <id>/2013/03/22/integrating_node_and_rails_with_redis.html</id>
     <published>2013-03-22T00:00:00Z</published>
     <updated>2013-03-22T00:00:00Z</updated>
@@ -317,7 +317,7 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
   </entry>
   <entry>
     <title>Backbone.js and CoffeeScript - A Perfect Match</title>
-    <link rel="alternate" href="/2012/12/13/backbone_and_coffeescript.html"/>
+    <link rel="alternate" href="http://rockyj.in/2012/12/13/backbone_and_coffeescript.html"/>
     <id>/2012/12/13/backbone_and_coffeescript.html</id>
     <published>2012-12-13T00:00:00Z</published>
     <updated>2012-12-13T00:00:00Z</updated>
@@ -477,7 +477,7 @@ var MessageView = (function(_super) {
   </entry>
   <entry>
     <title>Serving Rails from Windows</title>
-    <link rel="alternate" href="/2012/12/02/serving_rails_from_windows.html"/>
+    <link rel="alternate" href="http://rockyj.in/2012/12/02/serving_rails_from_windows.html"/>
     <id>/2012/12/02/serving_rails_from_windows.html</id>
     <published>2012-12-02T00:00:00Z</published>
     <updated>2012-12-02T00:00:00Z</updated>
@@ -556,7 +556,7 @@ bundle exec warble&lt;/code&gt;&lt;/pre&gt;
   </entry>
   <entry>
     <title>Why does JavaScript require Require.js</title>
-    <link rel="alternate" href="/2012/10/15/why_does_js_require_requirejs.html"/>
+    <link rel="alternate" href="http://rockyj.in/2012/10/15/why_does_js_require_requirejs.html"/>
     <id>/2012/10/15/why_does_js_require_requirejs.html</id>
     <published>2012-10-15T00:00:00Z</published>
     <updated>2012-10-15T00:00:00Z</updated>
