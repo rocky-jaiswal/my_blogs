@@ -4,9 +4,9 @@ tags: JavaScript, Backbone
 date: 02/05/2013
 ---
 
-I have been working a lot with [Yeoman](http://yeoman.io) lately and find it to be absolutely fabulous. It's make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually searching and downloading a JavaScript library it is so run "bower install --save jquery-form" and you are done.
+I have been working a lot with [Yeoman](http://yeoman.io) lately and find it to be absolutely fabulous. It's make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually searching and downloading a JavaScript library it is so refreshing to run "bower install --save jquery-form" and you are done.
 
-Anyways, in this short blog, I want to share a neat trick that I tried to submit forms via AJAX in a web application. We will be using a few libraries for this most important of which is the [jquery form plugin](http://malsup.com/jquery/form/) which enables us to submit forms via AJAX.
+Anyways, in this short blog, I want to share a neat trick that I adopted to submit forms via AJAX in a web application. We will be using a few libraries for this most important of which is the [jquery form plugin](http://malsup.com/jquery/form/) which enables us to submit forms via AJAX.
 
 I have a form lets say, which I want to AJAXify -
 
