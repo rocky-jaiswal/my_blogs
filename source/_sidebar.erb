@@ -1,36 +1,39 @@
-<div class="span3">
-  <h2>
-    <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
-    <br/>
-    <a href="/about">About</a>
-  </h2>
-  <hr/>
-  <h2>
-    <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
-    <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
-  </h2>
-  <hr/>
-  <h2>
-    <a href="/videos">Videos</a>
-  </h2>
-  <hr/>
-  <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
-  <div class="posts">
-    <ol>
-      <% blog.articles.each do |article| %>
-        <li><a href="<%= article.url %>"><%= article.title %></a> <span><%= article.date.strftime('%b %e %Y') %></span></li>
-      <% end %>
-    </ol>
+<div id="sidebar">
+  <div class="span3">
+    <h2>
+      <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
+      <br/>
+      <a href="/about">About</a>
+    </h2>
+    <hr/>
+    <h2>
+      <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
+      <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
+    </h2>
+    <hr/>
+    <h2>
+      <a href="/videos">Videos</a>
+    </h2>
+    <hr/>
+    <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
+    <div class="posts">
+      <ol>
+        <% blog.articles.each do |article| %>
+          <li><a href="<%= article.url %>"><%= article.title %></a> <span><%= article.date.strftime('%b %e %Y') %></span></li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="tags">
+      <ol>
+        <% blog.tags.each do |tag, articles| %>
+          <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
+        <% end %>
+      </ol>
+    </div>
+    <hr/>
   </div>
-  <div class="tags">
-    <ol>
-      <% blog.tags.each do |tag, articles| %>
-        <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
-      <% end %>
-    </ol>
-  </div>
-  <hr/>
 </div>
+
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-10309067-3']);
@@ -41,6 +44,7 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+  
   $(function() {
     $('.tags').hide();
     $("#show-tags").click(function() {

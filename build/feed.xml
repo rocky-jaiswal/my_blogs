@@ -5,10 +5,86 @@
   <id>http://rockyj.in</id>
   <link href="http://rockyj.in"/>
   <link href="http://rockyj.in/feed.xml" rel="self"/>
-  <updated>2013-05-02T00:00:00Z</updated>
+  <updated>2013-05-03T00:00:00Z</updated>
   <author>
     <name>Rocky Jaiswal</name>
   </author>
+  <entry>
+    <title>What motivates programmers</title>
+    <link rel="alternate" href="http://rockyj.in/2013/05/03/what_motivates_programmers.html"/>
+    <id>/2013/05/03/what_motivates_programmers.html</id>
+    <published>2013-05-03T00:00:00Z</published>
+    <updated>2013-05-03T00:00:00Z</updated>
+    <author>
+      <name>Rocky Jaiswal</name>
+    </author>
+    <summary type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It&amp;#8217;s is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project.&lt;/p&gt;
+
+&lt;p&gt;I have been in the software...&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It&amp;#8217;s is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project.&lt;/p&gt;
+
+&lt;p&gt;I have been in the software development industry for more than a decade now and having seen some highs and lows, one of the most important question that comes up is - &lt;strong&gt;&amp;#8220;How do I make sure that the programmers in my team are happy / motivated / doing their best?&amp;#8221;&lt;/strong&gt; This question is by far one of the most important questions that a Product Owner or a Startup founder or an Enterprise CTO faces.&lt;/p&gt;
+
+&lt;p&gt;For me also it is a make or break question, if the programmers are not motivated then you can kiss the product / project goodbye. No process (Agile / Scrum / XP) and no monitoring can help you if the programmers lose interest in the project and are demotivated.&lt;/p&gt;
+
+&lt;p&gt;In fact, Scrum assumes that programmers are motivated so that they give honest estimates, report impediments in a timely manner and spend time wisely. Without motivated programmers Scrum is a failure before even being implemented. Even if the &amp;#8220;carrot or stick&amp;#8221; policy is implemented, programmers are smart enough to manipulate the system so that either they are not detected or do just enough to appease the management. Also, code quality takes a nosedive once you have demotivated programmers working on the team.&lt;/p&gt;
+
+&lt;p&gt;So how do we solve this problem. Let me share what motivates me and maybe it will ring true for other programmers as well.&lt;/p&gt;
+
+&lt;h3 id='autonomy_mastery_and_purpose'&gt;Autonomy, Mastery and Purpose&lt;/h3&gt;
+
+&lt;p&gt;If you are not in the mood of reading and find this article utterly uninspiring, watch this one video and you are done - &lt;a href='http://www.youtube.com/watch?v=u6XAPnuFjJc'&gt;http://www.youtube.com/watch?v=u6XAPnuFjJc&lt;/a&gt;. Essentially, the video says that knowledge workers (programmers in our case) work for three things - Autonomy, Mastery and Purpose. We will see how to apply these principles in software projects (and some other practices) in the points below.&lt;/p&gt;
+
+&lt;p&gt;One of the most important thing that the video says (which is easy to miss) is to &amp;#8220;move money out of the equation&amp;#8221;. Enough said.&lt;/p&gt;
+
+&lt;h3 id='make_the_project_the_programmers_baby'&gt;Make the project the programmer&amp;#8217;s baby&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Allow Freedom&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Personally, I have been very happy and motivated in project where - I have joined from the beginning which makes me have a say in the choice of technology / framework or even a library. This also enables me to understand why a certain decision has to be been taken / had been taken.&lt;/p&gt;
+
+&lt;p&gt;Essentially, what I am saying is that if the programmer understands the project well and feels that his opinion matters and is valued by the team, he feels motivated to work on it. In a project, each team member should be able to express his opinion freely, discuss the pros / cons of the choices he has made and feel comfortable when taking decision on their own because they know they will either not be questioned or they can make everyone understand. &amp;#8220;Move fast and break things&amp;#8221; is a motto Facebook adopts because they want to give everyone the freedom to do things on their own without worrying about consequences.&lt;/p&gt;
+
+&lt;p&gt;While is not possible to join every project from it&amp;#8217;s inception but whenever I joined a project midway I was happier when the team listened to my proposals even if they were stupid.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Explain Impact&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Another way to make a project a project a programmer&amp;#8217;s baby is to make him / her understand the project&amp;#8217;s impact. If a programmer knows that the project has great impact for the organization / intended market they are automatically motivated to do it. From my experience I have that even silly projects can have great impacts. A Twitter clone for the enterprise can drive a cultural change, even an online poker planning game can improve the sprint planning session of numerous teams. Programmers always want to say &amp;#8220;hey I built this!&amp;#8221; and if they see value in their creation they will invest in it wholeheartedly.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Give importance&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Also, programmers should have a say in the implementation of stories. I have seen many times that programmers lose interest when the user asks for something which they feel will downgrade the quality / experience of the product. As programmers are asked to implement features that they don&amp;#8217;t believe in they lose interest in the project, it is no longer their baby, it belongs to someone else and they are mere &amp;#8220;workers&amp;#8221;. A good question to always ask is - &amp;#8220;How would you do it&amp;#8221;. There can also be genuine cases where a feature is needed which the programmers really don&amp;#8217;t buy into. In this case, it is worth investing time to understand what the programmers think and reach a consensus.&lt;/p&gt;
+
+&lt;h3 id='team_formation'&gt;Team Formation&lt;/h3&gt;
+
+&lt;p&gt;I have seen &amp;#8220;star teams&amp;#8221; who are just happy to work with one another that the project quality and execution speed is boosted incrementally. One simple rule to build star teams is to keep them small (3-6 team members) and co-located (preferably), less people mean less communication overhead and ease of understanding each other. Star teams in my experience also diverse. One of the most important thing a team needs to have is mutual respect, senior developer should respect junior developers and everyone&amp;#8217;s opinion should matter. This makes a programmer feel wanted and committed to the team&amp;#8217;s goal. In essence treat everyone as equal and be good to each other, this will go a long way. Scrum also promotes this theory rather than the old hierarchical architect, team leader, module leader and team members setup.&lt;/p&gt;
+
+&lt;h3 id='release_often_and_celebrate_the_release'&gt;Release often and celebrate the release&lt;/h3&gt;
+
+&lt;p&gt;The title says it all. A good way to demotivate programmers is to not use their software. This takes out the &amp;#8220;Purpose and Impact&amp;#8221; out of the equation and the programmer feels like a headless zombie.&lt;/p&gt;
+
+&lt;p&gt;It is also important to celebrate releases, what is the point of releasing software if the team feels no change and just continues as normal. The human mind is motivated for &amp;#8220;happy experiences&amp;#8221; for example one can say let&amp;#8217;s release this week so that we can redo the amazing dinner we had last time. If you are on a tight budget, people can still be rewarded with some time-off to work on personal projects or a trip to the movies.&lt;/p&gt;
+
+&lt;h3 id='slack'&gt;Slack&lt;/h3&gt;
+
+&lt;p&gt;I am reading the book &amp;#8220;Slack&amp;#8221; from Tom DeMarco and it has some great advice. Over the years work places have become more efficient, we look for ruthlessly improving efficiency in even the smallest of areas. I have even worked in organizations which removed paper towels from restrooms to reduce waste and costs (let&amp;#8217;s not go there).&lt;/p&gt;
+
+&lt;p&gt;Anyways, Tom DeMarco says that Slack is important. If everyone is 100% busy all the time, decision making is slow because no one has the time to sit down or think. Without Slack there is no room for creativity, agility and other important things that are required in today&amp;#8217;s fast changing world (read the Nokia story of engineers not allowed to work on a touch based interface pre iPhone era).&lt;/p&gt;
+
+&lt;p&gt;I feel motivated in projects where I have sometime for personal learning and experimentation. If the project is always on fire the programmers will always be looking for exit doors.&lt;/p&gt;
+
+&lt;h3 id='let_it_flow_and_reward_quality'&gt;Let it flow and reward quality&lt;/h3&gt;
+
+&lt;p&gt;&amp;#8220;Oh you need a server, please fill this 20 page form and give us one month&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;&amp;#8220;We have a half day meeting today on how to improve the recruitment process efficiency&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;These are know productivity killers. We all know programmers work in a state of &lt;a href='http://goo.gl/uosRw'&gt;flow&lt;/a&gt;. Organization should aim for environments where &amp;#8220;flow&amp;#8221; is easily achievable and hard to break.&lt;/p&gt;
+
+&lt;p&gt;Finally, one things programmers crave is peer recognition. To motivate programmers I would reward great code and aim to share the knowledge within the organization. A programmer feels happy when is learning and when he feels that he is working with peers who match his intellect or are better than him.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;That&amp;#8217;s it, I as a programmer will be extremely happy to work in organizations where all / most of these points are values. Hope you enjoyed reading this. Please share your opinion and what motivates you as a programmer in the comments below.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Ajaxify a Form with Backbone</title>
     <link rel="alternate" href="http://rockyj.in/2013/05/02/ajaxify_with_backbone.html"/>
@@ -82,7 +158,7 @@ end&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The advantage of this approach is that the application will work even if JavaScript is disabled and also we can easily turn off AJAX by setting the &amp;#8220;data-ajax&amp;#8221; attribute to false in HTML, no JavaScript needs to change anywhere.&lt;/p&gt;
 
-&lt;p&gt;That&amp;#8217;s it using this simple method you can AJAXify your forms easily.&lt;/p&gt;
+&lt;p&gt;That&amp;#8217;s it, using this simple method you can AJAXify your forms easily.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Code is available on &lt;a href='https://github.com/rocky-jaiswal/templateapp'&gt;Github&lt;/a&gt;.&lt;/li&gt;
@@ -553,84 +629,5 @@ var MessageView = (function(_super) {
 &lt;p&gt;Once again JavaScript has no built in inheritance support so we fake it using it&amp;#8217;s functional and prototypical features. The &lt;strong&gt;extends&lt;/strong&gt; function generated and called by CoffeeScript behind the scene enables us to &amp;#8220;extend&amp;#8221; our class from Backbone&amp;#8217;s View.&lt;/p&gt;
 
 &lt;p&gt;The end result is that Backbone code written in CoffeeScript is much more easier on the eye. In turn Backbone makes our JavaScript code much easier to maintain. So the combination of the two gives us code that is simple, clean and easy to maintain which is every developer&amp;#8217;s dream come true :)&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Serving Rails from Windows</title>
-    <link rel="alternate" href="http://rockyj.in/2012/12/02/serving_rails_from_windows.html"/>
-    <id>/2012/12/02/serving_rails_from_windows.html</id>
-    <published>2012-12-02T00:00:00Z</published>
-    <updated>2012-12-02T00:00:00Z</updated>
-    <author>
-      <name>Rocky Jaiswal</name>
-    </author>
-    <summary type="html">&lt;p&gt;I was asked to meet quite a &amp;#8220;non-standard&amp;#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I was asked to meet quite a &amp;#8220;non-standard&amp;#8221; requirement lately - the client wanted me to serve a Rails application from a Windows server. The application was not very complicated and has only a handful of users so I agreed to give it a shot. While doing this was relatively simple, I decided to blog about it in case it helps anyone.&lt;/p&gt;
-
-&lt;p&gt;I decided to go with JRuby as anything that works on JVM theoretically should run on any OS. So I got hold of a clean Windows machine and installed -&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JDK 1.7&lt;/li&gt;
-
-&lt;li&gt;Postgres-9.1&lt;/li&gt;
-
-&lt;li&gt;Apache Tomcat 7&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If you want to run the build on the Windows machine, you would also need -&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JRuby 1.7&lt;/li&gt;
-
-&lt;li&gt;Git 1.8 for Windows&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Now if your application is a simple Rails application you don&amp;#8217;t have to worry too much, any gem written in Ruby would work well on JRuby. Some gems written in C do not work well on JRuby however JRuby has good alternatives for these too, so just check the gems you are using if they have any C extensions (this is rare so I will not go into details). Since we also want to switch to JDBC drivers for JRuby, I added the following to my Gemfile -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#JRuby specific gems
-platform :jruby do
-  gem &amp;#39;activerecord-jdbcpostgresql-adapter&amp;#39;, :git =&amp;gt; &amp;#39;https://github.com/jruby/activerecord-jdbc-adapter&amp;#39;
-  gem &amp;#39;jruby-openssl&amp;#39;
-  gem &amp;#39;jruby-pageant&amp;#39;
-  gem &amp;#39;warbler&amp;#39;
-end&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you are building the application on Windows, you should have Git and JRuby on the server. Open the git bash terminal and run -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gem install bundler
-git clone &amp;lt;your repo here&amp;gt;
-bundle install&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This should run fine. Note the &amp;#8216;jruby-pageant&amp;#8217; gem we added to the Gemfile, this was one special gem I installed to get the application working on Windows.&lt;/p&gt;
-
-&lt;p&gt;Now run -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bundle exec warble config&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will generate a warble.rb file in you application&amp;#8217;s config folder. This file has numerous config options, read it to understand more but usually I just change two values -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Set JRuby to run in 1.9 mode.
-config.webxml.jruby.compat.version = &amp;quot;1.9&amp;quot;
-
-# Value of RAILS_ENV for the webapp -- default as shown below
-config.webxml.rails.env = ENV[&amp;#39;RAILS_ENV&amp;#39;] || &amp;#39;production&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is self explanatory stuff. You can also create a custom environment to deploy to Windows if you want.&lt;/p&gt;
-
-&lt;p&gt;Now run -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bundle exec rake assets:precompile
-bundle exec warble&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will compile your Rails assets and generate a (application-name).war file in your project with all files in the right place. For the non Java folks a .war file is a web archive file that is like a compressed folder that can be copied and deployed to a JEE application server.&lt;/p&gt;
-
-&lt;p&gt;Assuming you have created the DB with the database.yml settings for the production environment, now go to your Tomcat installation directory and within that look for the &amp;#8220;webapps&amp;#8221; directory.&lt;/p&gt;
-
-&lt;p&gt;To keep our lives simple delete the ROOT folder in this directory and copy the .war we created as ROOT.war here. We do this so that the routes we created in our Rails app do not have to deal with an extra context path if we deploy the app with any other name. ROOT folder in webapps maps to the path &amp;#8220;http://localhost:8080/&amp;#8221; so our application&amp;#8217;s routes remain intact. Please note that if you do not want to build the application on Windows this is the only step you need to do.&lt;/p&gt;
-
-&lt;p&gt;Run the apache-tomcat/bin/startup script from your favoured terminal and checkout the logs created in apache-tomcat/logs folder. In case you have missed anything the catalina.out logs will tell you the problem.&lt;/p&gt;
-
-&lt;p&gt;You can create a proxy for tomcat using Apache HTTP server if you want. Tomcat specific config like the port on which it is running can be found in apache-tomcat/conf/server.xml.&lt;/p&gt;
-
-&lt;p&gt;Also the above steps can be put in a script that can be run from cygwin. That is it, this is all you need to serve a Rails application from Windows. To my surprise I found that the response times were also very good.&lt;/p&gt;</content>
   </entry>
 </feed>

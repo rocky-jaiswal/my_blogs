@@ -1,3 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Droid Serif';
+  margin-bottom: 10px;
+}
+
 .banner {
   padding: 10px 0px 8px 0px;
   margin-bottom: 30px;
@@ -6,6 +13,14 @@
 
 .banner a:hover {
   text-decoration: none !important;
+}
+
+#main {
+  padding-top: 60px;
+}
+
+#sidebar {
+  padding-top: 60px;
 }
 
 .summary {

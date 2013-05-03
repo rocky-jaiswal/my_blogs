@@ -69,6 +69,6 @@ The server side code can look something like -
 
 The advantage of this approach is that the application will work even if JavaScript is disabled and also we can easily turn off AJAX by setting the "data-ajax" attribute to false in HTML, no JavaScript needs to change anywhere.
 
-That's it using this simple method you can AJAXify your forms easily.
+That's it, using this simple method you can AJAXify your forms easily.
 
 * Code is available on [Github](https://github.com/rocky-jaiswal/templateapp).
