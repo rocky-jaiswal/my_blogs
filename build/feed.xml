@@ -55,7 +55,7 @@
 sudo npm install -g grunt-cli
 sudo npm install -g bower&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If you are on Mac you may / maynot need the &amp;#8220;sudo&amp;#8221; command prefix.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;As pointed in comments below - Please do not used sudo unless you know what you are doing. &lt;em&gt;You may need to modify your $PATH to get the &amp;#8220;yo&amp;#8221;, &amp;#8220;grunt&amp;#8221; commands.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;To generate a backbone.js based application with Yo, we need to install the &amp;#8220;backbone-generator&amp;#8221;&lt;/p&gt;
 
