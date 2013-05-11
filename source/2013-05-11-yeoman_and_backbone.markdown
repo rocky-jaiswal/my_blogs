@@ -4,7 +4,7 @@ tags: JavaScript, Backbone
 date: 11/05/2013
 ---
 
-In my last few blogs I talked a bit about [Yeoman](http://yeoman.io). For me, working with Yeoman has been a great pleasure so in this blog I will talk a bit about building a quick single page HTML5 application with Yeoman and [Backbone.js](http://backbonejs.org/).
+In my last few blogs I talked a bit about [Yeoman](http://yeoman.io). For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and [Backbone.js](http://backbonejs.org/).
 
 The software we need for this exercise are -
 

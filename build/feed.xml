@@ -18,10 +18,10 @@
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a great pleasure so in this blog I will talk a bit about building a quick single page HTML5 application with Yeoman and &lt;a href="http://backbonejs.org/"&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href="http://backbonejs.org/"&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;The software we need for this...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href='http://yeoman.io'&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a great pleasure so in this blog I will talk a bit about building a quick single page HTML5 application with Yeoman and &lt;a href='http://backbonejs.org/'&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The software we need for this exercise...&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href='http://yeoman.io'&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href='http://backbonejs.org/'&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The software we need for this exercise are -&lt;/p&gt;
 
