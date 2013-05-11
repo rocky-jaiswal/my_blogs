@@ -26,18 +26,172 @@
       <div class="row">
         <div class="span9">
           <div id="main" role="main">
-            <h1>Archive for
-  
-    May  8 2012
-  
-</h1>
+            <article>
+              <h2 style="padding-bottom: 10px;">
+                  <span class="color-orange">Building HTML5 Apps with Yeoman and Backbone</span> 
+                  <span>May 11 2013</span>
+              </h2>
+              <div class="post">
+                <p>In my last few blogs I talked a bit about <a href='http://yeoman.io'>Yeoman</a>. For me, working with Yeoman has been a great pleasure so in this blog I will talk a bit about building a quick single page HTML5 application with Yeoman and <a href='http://backbonejs.org/'>Backbone.js</a>.</p>
+
+<p>The software we need for this exercise are -</p>
 
 <ul>
-  
-  <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8</span></li>
-   
+<li>Node.js</li>
+
+<li>NPM</li>
+
+<li>Ruby</li>
+
+<li>Sass and Compass Gems for Ruby</li>
 </ul>
 
+<p>Before we start a few words about Yeoman.</p>
+
+<p><img alt='Yeoman' src='https://raw.github.com/yeoman/yeoman.io/gh-pages/media/toolset.png' /></p>
+
+<p>If I were to explain Yeoman in a few words, it is a collection of three tools -</p>
+
+<ul>
+<li>Yo : for scaffolding apps</li>
+
+<li>Grunt: The JavaScript build tool</li>
+
+<li>Bower: Package / dependency management for client side JavaScript libs</li>
+</ul>
+
+<p>So without further ado, let us install these tools -</p>
+
+<pre><code>sudo npm install -g yo
+sudo npm install -g grunt-cli
+sudo npm install -g bower</code></pre>
+
+<p>If you are on Mac you may / maynot need the &#8220;sudo&#8221; command prefix.</p>
+
+<p>To generate a backbone.js based application with Yo, we need to install the &#8220;backbone-generator&#8221;</p>
+
+<pre><code>sudo npm install -g generator-backbone</code></pre>
+
+<p>There are a few community driven generators (for angular as well) you may want to check them out.</p>
+
+<p>Now let us generate our project</p>
+
+<pre><code>mkdir &lt;my-app-name&gt;
+cd &lt;my-app-name&gt;
+yo backbone --template-framework=handlebars</code></pre>
+
+<p>Select &#8220;Y&#8221; for Require.js support and Twitter Bootstrap with sass. And finally inside your application directory run -</p>
+
+<pre><code>npm install
+bower install</code></pre>
+
+<p>To install all the npm (e.g. mocha) and bower packages (e.g. jquery) needed.</p>
+
+<p>That&#8217;s it. If your machine and network behaved well, you should have everything setup and you can now run -</p>
+
+<pre><code>grunt server</code></pre>
+
+<p>The default app which says &#8220;Allo! Allo!&#8221; should be working now.</p>
+
+<p>Great! We now have the default application up and working. You can go crazy from here or if you want you can read on a bit.</p>
+
+<p>If you look at the index.html file, you can see that require.js loads the main.js file as the main JavaScript file (what a coincidence!) from which other JS files are loaded as required.</p>
+
+<p>If you are a CoffeeScript lover like me you can convert the main.js file to main.coffee (using http://js2coffee.org maybe) to make it much more readable.</p>
+
+<p>Next for our backbone setup, we can create the backbone folder structure in our scripts folder somewhat like this -</p>
+
+<pre><code>- scripts
+  - app
+    - models
+    - collections
+    - router
+    - templates
+    - views</code></pre>
+
+<p>Since we will be using Handlebars.js for our client side templates, you need to run -</p>
+
+<pre><code>bower install --save handlebars</code></pre>
+
+<p>That&#8217;s it, Bower will download and install Handlebars.js in an appropriate location. Add the path for handlebars in the main.coffee file so that it can be used with Require.js. I have install &#8220;jquery-form&#8221; as well, so my main.coffee looks something like this -</p>
+
+<pre><code>#global require
+&quot;use strict&quot;
+
+require.config
+  shim:
+    underscore:
+      exports: &quot;_&quot;
+
+    backbone:
+      deps: [&quot;underscore&quot;, &quot;jquery&quot;]
+      exports: &quot;Backbone&quot;
+
+    bootstrap:
+      deps: [&quot;jquery&quot;]
+      exports: &quot;jquery&quot;
+
+    handlebars:
+      exports: &quot;Handlebars&quot;
+
+  paths:
+    jquery: &quot;../bower_components/jquery/jquery&quot;
+    jquery_form: &quot;../bower_components/jquery-form/jquery.form&quot;
+    backbone: &quot;../bower_components/backbone-amd/backbone&quot;
+    underscore: &quot;../bower_components/underscore-amd/underscore&quot;
+    bootstrap: &quot;vendor/bootstrap&quot;
+    text: &quot;../bower_components/requirejs-text/text&quot;
+    handlebars: &quot;../bower_components/handlebars.js/handlebars&quot;
+
+require [&quot;backbone&quot;, &quot;app/router/router&quot;], (Backbone, AppRouter) -&gt;
+  router = new AppRouter()
+  Backbone.history.start()</code></pre>
+
+<p>That&#8217;s it! From here you can build your standard Backbone + Require.js application.</p>
+
+<p>One of the main advantages of using Require.js with Yeoman is that once you run -</p>
+
+<pre><code>grunt</code></pre>
+
+<p>It will create an awesome minified, unified, uglified build for you inside the dist/ directory which you can use in production. The final build has one css and one JS file for the entire application which is awesome.</p>
+
+<p>Also, Grunt provides all the tools needed to test our application while building it(Karma, Mocha, Chai etc.).</p>
+
+<p>One gotcha, by default Grunt will copile coffeescript files in script/ directory but not the coffee files in the sub-directories. To enable compilation of these files change the following lines in Gruntfile.js -</p>
+
+<pre><code>//in watch/coffee config from - files: [&#39;&lt;%= yeoman.app %&gt;/scripts/{,*/}*.coffee&#39;], to
+files: [&#39;&lt;%= yeoman.app %&gt;/scripts/**/*.coffee&#39;],
+
+//and in coffee/dist/files from src: &#39;*.coffee&#39;, to
+src: &#39;**/*.coffee&#39;,</code></pre>
+
+<p>That&#8217;s it. You have now a great Yeoman + Backbone setup. Code away!</p>
+
+<p>Sample project with this setup is available on <a href='https://github.com/rocky-jaiswal/confi'>Github</a>.</p>
+              </div>
+              <hr/>
+              <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                  $(function(){
+                    hljs.initHighlightingOnLoad();
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  });
+                </script>
+                <noscript>
+                  Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+                <a href="http://disqus.com" class="dsq-brlink">
+                  blog comments powered by <span class="logo-disqus">Disqus</span>
+                </a>
+            </article>
           </div>
         </div>
         <div id="sidebar">
@@ -271,4 +425,3 @@
     </div>
   </body>
 </html>
-

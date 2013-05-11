@@ -5,10 +5,159 @@
   <id>http://rockyj.in</id>
   <link href="http://rockyj.in"/>
   <link href="http://rockyj.in/feed.xml" rel="self"/>
-  <updated>2013-05-03T00:00:00Z</updated>
+  <updated>2013-05-11T00:00:00Z</updated>
   <author>
     <name>Rocky Jaiswal</name>
   </author>
+  <entry>
+    <title>Building HTML5 Apps with Yeoman and Backbone</title>
+    <link rel="alternate" href="http://rockyj.in/2013/05/11/yeoman_and_backbone.html"/>
+    <id>/2013/05/11/yeoman_and_backbone.html</id>
+    <published>2013-05-11T00:00:00Z</published>
+    <updated>2013-05-11T00:00:00Z</updated>
+    <author>
+      <name>Rocky Jaiswal</name>
+    </author>
+    <summary type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a great pleasure so in this blog I will talk a bit about building a quick single page HTML5 application with Yeoman and &lt;a href="http://backbonejs.org/"&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The software we need for this...&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href='http://yeoman.io'&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a great pleasure so in this blog I will talk a bit about building a quick single page HTML5 application with Yeoman and &lt;a href='http://backbonejs.org/'&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The software we need for this exercise are -&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Node.js&lt;/li&gt;
+
+&lt;li&gt;NPM&lt;/li&gt;
+
+&lt;li&gt;Ruby&lt;/li&gt;
+
+&lt;li&gt;Sass and Compass Gems for Ruby&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Before we start a few words about Yeoman.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='Yeoman' src='https://raw.github.com/yeoman/yeoman.io/gh-pages/media/toolset.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;If I were to explain Yeoman in a few words, it is a collection of three tools -&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Yo : for scaffolding apps&lt;/li&gt;
+
+&lt;li&gt;Grunt: The JavaScript build tool&lt;/li&gt;
+
+&lt;li&gt;Bower: Package / dependency management for client side JavaScript libs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So without further ado, let us install these tools -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo npm install -g yo
+sudo npm install -g grunt-cli
+sudo npm install -g bower&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are on Mac you may / maynot need the &amp;#8220;sudo&amp;#8221; command prefix.&lt;/p&gt;
+
+&lt;p&gt;To generate a backbone.js based application with Yo, we need to install the &amp;#8220;backbone-generator&amp;#8221;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo npm install -g generator-backbone&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are a few community driven generators (for angular as well) you may want to check them out.&lt;/p&gt;
+
+&lt;p&gt;Now let us generate our project&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir &amp;lt;my-app-name&amp;gt;
+cd &amp;lt;my-app-name&amp;gt;
+yo backbone --template-framework=handlebars&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Select &amp;#8220;Y&amp;#8221; for Require.js support and Twitter Bootstrap with sass. And finally inside your application directory run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install
+bower install&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To install all the npm (e.g. mocha) and bower packages (e.g. jquery) needed.&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s it. If your machine and network behaved well, you should have everything setup and you can now run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt server&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The default app which says &amp;#8220;Allo! Allo!&amp;#8221; should be working now.&lt;/p&gt;
+
+&lt;p&gt;Great! We now have the default application up and working. You can go crazy from here or if you want you can read on a bit.&lt;/p&gt;
+
+&lt;p&gt;If you look at the index.html file, you can see that require.js loads the main.js file as the main JavaScript file (what a coincidence!) from which other JS files are loaded as required.&lt;/p&gt;
+
+&lt;p&gt;If you are a CoffeeScript lover like me you can convert the main.js file to main.coffee (using http://js2coffee.org maybe) to make it much more readable.&lt;/p&gt;
+
+&lt;p&gt;Next for our backbone setup, we can create the backbone folder structure in our scripts folder somewhat like this -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- scripts
+  - app
+    - models
+    - collections
+    - router
+    - templates
+    - views&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Since we will be using Handlebars.js for our client side templates, you need to run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bower install --save handlebars&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;#8217;s it, Bower will download and install Handlebars.js in an appropriate location. Add the path for handlebars in the main.coffee file so that it can be used with Require.js. I have install &amp;#8220;jquery-form&amp;#8221; as well, so my main.coffee looks something like this -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#global require
+&amp;quot;use strict&amp;quot;
+
+require.config
+  shim:
+    underscore:
+      exports: &amp;quot;_&amp;quot;
+
+    backbone:
+      deps: [&amp;quot;underscore&amp;quot;, &amp;quot;jquery&amp;quot;]
+      exports: &amp;quot;Backbone&amp;quot;
+
+    bootstrap:
+      deps: [&amp;quot;jquery&amp;quot;]
+      exports: &amp;quot;jquery&amp;quot;
+
+    handlebars:
+      exports: &amp;quot;Handlebars&amp;quot;
+
+  paths:
+    jquery: &amp;quot;../bower_components/jquery/jquery&amp;quot;
+    jquery_form: &amp;quot;../bower_components/jquery-form/jquery.form&amp;quot;
+    backbone: &amp;quot;../bower_components/backbone-amd/backbone&amp;quot;
+    underscore: &amp;quot;../bower_components/underscore-amd/underscore&amp;quot;
+    bootstrap: &amp;quot;vendor/bootstrap&amp;quot;
+    text: &amp;quot;../bower_components/requirejs-text/text&amp;quot;
+    handlebars: &amp;quot;../bower_components/handlebars.js/handlebars&amp;quot;
+
+require [&amp;quot;backbone&amp;quot;, &amp;quot;app/router/router&amp;quot;], (Backbone, AppRouter) -&amp;gt;
+  router = new AppRouter()
+  Backbone.history.start()&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;#8217;s it! From here you can build your standard Backbone + Require.js application.&lt;/p&gt;
+
+&lt;p&gt;One of the main advantages of using Require.js with Yeoman is that once you run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It will create an awesome minified, unified, uglified build for you inside the dist/ directory which you can use in production. The final build has one css and one JS file for the entire application which is awesome.&lt;/p&gt;
+
+&lt;p&gt;Also, Grunt provides all the tools needed to test our application while building it(Karma, Mocha, Chai etc.).&lt;/p&gt;
+
+&lt;p&gt;One gotcha, by default Grunt will copile coffeescript files in script/ directory but not the coffee files in the sub-directories. To enable compilation of these files change the following lines in Gruntfile.js -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//in watch/coffee config from - files: [&amp;#39;&amp;lt;%= yeoman.app %&amp;gt;/scripts/{,*/}*.coffee&amp;#39;], to
+files: [&amp;#39;&amp;lt;%= yeoman.app %&amp;gt;/scripts/**/*.coffee&amp;#39;],
+
+//and in coffee/dist/files from src: &amp;#39;*.coffee&amp;#39;, to
+src: &amp;#39;**/*.coffee&amp;#39;,&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;#8217;s it. You have now a great Yeoman + Backbone setup. Code away!&lt;/p&gt;
+
+&lt;p&gt;Sample project with this setup is available on &lt;a href='https://github.com/rocky-jaiswal/confi'&gt;Github&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>What motivates programmers</title>
     <link rel="alternate" href="http://rockyj.in/2013/05/03/what_motivates_programmers.html"/>
@@ -469,165 +618,5 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For client side I also used Backbone.js and Require.js to keep things clean. Finally the source code is here - &lt;a href='https://github.com/rocky-jaiswal/chatapp'&gt;https://github.com/rocky-jaiswal/chatapp&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Please note this is not in perfect shape in any way. The user invitation is very basic (only for existing users) and most components (Redis, Torquebox, Node, MongoDB, HornetQ) need to be clustered to provide fault tolerance. But I hope this will provide a nice base for anyone who is looking to utilize the development speed of Rails and the real-time awesomeness of Node.js.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Backbone.js and CoffeeScript - A Perfect Match</title>
-    <link rel="alternate" href="http://rockyj.in/2012/12/13/backbone_and_coffeescript.html"/>
-    <id>/2012/12/13/backbone_and_coffeescript.html</id>
-    <published>2012-12-13T00:00:00Z</published>
-    <updated>2012-12-13T00:00:00Z</updated>
-    <author>
-      <name>Rocky Jaiswal</name>
-    </author>
-    <summary type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;As I started learning more about JavaScript I was very impressed with CoffeeScript. It felt like JavaScript done right! But with time, as my JavaScript concepts improved I was a bit reluctant to write CoffeeScript. &amp;#8220;Why learn one language that produces another when you can write the end product directly?&amp;#8221; Also, my head could do without another set of syntax and rules to learn.&lt;/p&gt;
-
-&lt;p&gt;However, when I started writing code for &lt;a href='http://backbonejs.org/'&gt;Backbone.js&lt;/a&gt; a few months back, it dawned on me that CoffeeScript is a beautiful language and makes writing Backbone.js apps a much more pleasant experience.&lt;/p&gt;
-
-&lt;p&gt;But first of all, why did I need Backbone.js? I was happy writing jQuery, it was solving all my problems but then the interface and the callbacks got more complex and one day my JavaScript file had more than 200 lines of code. I was pretty sure this was going to be a maintenance headache no matter how well I name my functions and how many comments I add. So I refactored the code to Backbone.js and had a handful of small, cleanly coded files that were easy to test and modify. So that&amp;#8217;s that, a one line answer - we use Backbone.js to keep our JavaScript code clean.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;#8217;s take a simple example, assume you have a button, clicking on which makes an AJAX call and displays the result from the AJAX call back in a div. This is a simple use case for a Backbone.js.&lt;/p&gt;
-
-&lt;p&gt;The JavaScript and Backbone.js code for this may look like -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//&amp;lt;div id=&amp;quot;container&amp;quot;&amp;gt;
-  //&amp;lt;input type=&amp;quot;button&amp;quot; id=&amp;quot;btn1&amp;quot; value=&amp;quot;Go!&amp;quot;&amp;gt;&amp;lt;/input&amp;gt;
-//&amp;lt;/div&amp;gt;
-//&amp;lt;span id=&amp;quot;message&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
-
-$(function(){
-
-  var ButtonBarView = Backbone.View.extend({
-
-    el: &amp;#39;#container&amp;#39;,
-
-    events: {
-      &amp;quot;click #btn1&amp;quot;:  &amp;quot;makeAjaxCall&amp;quot;
-    },
-
-    makeAjaxCall: function(){
-      console.log(&amp;quot;making an ajax call ...&amp;quot;);
-      this.options.messageView.render(&amp;quot;result from ajax call&amp;quot;);
-    }
-
-  });
-
-  var MessageView = Backbone.View.extend({
-
-    el: &amp;#39;#message&amp;#39;,
-
-    render: function(message){
-      var html = &amp;quot;&amp;lt;h3&amp;gt;&amp;quot; + message + &amp;quot;&amp;lt;/h3&amp;gt;&amp;quot;;
-      this.$el.html(html); 
-    }
-
-  });
-
-  var messageView = new MessageView();
-  var buttonBarView = new ButtonBarView({messageView: messageView});
-
-});&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Nothing much to explain here, we could have done the same thing using just jQuery but things go awry when there are ten such buttons on the screen each with its own AJAX call and DOM to update.&lt;/p&gt;
-
-&lt;p&gt;In the example above we create two Backbone views, on an event on the first one we render the second with the returned message.&lt;/p&gt;
-
-&lt;p&gt;Same thing written in CoffeeScript looks like this -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ -&amp;gt;
-
-  class ButtonBarView extends Backbone.View
-
-    el: &amp;#39;#container&amp;#39;
-
-    events: 
-      &amp;quot;click #btn1&amp;quot;:  &amp;quot;makeAjaxCall&amp;quot;
-
-    makeAjaxCall: -&amp;gt;
-      console.log(&amp;quot;making an ajax call ...&amp;quot;)
-      @options.messageView.render(&amp;quot;result from ajax call&amp;quot;)
-
-  class MessageView extends Backbone.View
-
-    el: &amp;#39;#message&amp;#39;
-
-    render: (message) -&amp;gt;
-      html = &amp;quot;&amp;lt;h3&amp;gt;&amp;quot; + message + &amp;quot;&amp;lt;/h3&amp;gt;&amp;quot;
-      $(@el).html(html)
-
-  messageView = new MessageView()
-  buttonBarView = new ButtonBarView({messageView: messageView})&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To me the CoffeeScript code looks much more understandable and cleaner. But wait, do we see a &amp;#8220;class&amp;#8221; in the CoffeeScript code! How is that possible? And how does the &amp;#8220;class&amp;#8221; in CoffeeScript convert the code to the one written in JavaScript? Exploring this made me realize CoffeeScript&amp;#8217;s beauty and brevity.&lt;/p&gt;
-
-&lt;p&gt;To answer the first question, we need to understand a bit of JavaScript and CoffeeScript magic. JavaScript is an object oriented language but does not have classes, it uses the prototypal inheritance mechanism to extend objects. CoffeeScript uses this mechanism to give us classes, for example -&lt;/p&gt;
-
-&lt;p&gt;This code -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Person
-
-  constructor: (@name) -&amp;gt;
-
-  printName: -&amp;gt;
-    console.log(&amp;quot;Name: &amp;quot; + @name)
-
-#rocky = new Person(&amp;quot;Rocky&amp;quot;)
-#rocky.printName(); &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Gets converted to something like this in JavaScript -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var Person = (function() {
-
-  function Person(name) {
-    this.name = name;
-  }
-
-  Person.prototype.printName = function() {
-    return console.log(&amp;quot;Name: &amp;quot; + this.name);
-  };
-
-  return Person;
-
-})();&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;What this does is it returns us a &amp;#8220;constructor&amp;#8221; callback which can be used with the &lt;strong&gt;new&lt;/strong&gt; keyword to create objects. CoffeeScript also uses JavaScript&amp;#8217;s prototype mechanism to add methods to our object. However, the end user creates classes and methods like they do in their server side code. This is an AWESOME CoffeeScript feature that had me completely floored.&lt;/p&gt;
-
-&lt;p&gt;Now the second question, how does this -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class MessageView extends Backbone.View&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;relate to this -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var MessageView = Backbone.View.extend({})&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To answer this lets see what happens to the CoffeeScript code when it gets converted to JavaScript -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var __hasProp = {}.hasOwnProperty,
-__extends = function(child, parent) { 
-  for (var key in parent) { 
-    if (__hasProp.call(parent, key)) child[key] = parent[key]; 
-  } 
-  function ctor() { this.constructor = child; } 
-  ctor.prototype = parent.prototype; 
-  child.prototype = new ctor(); 
-  child.__super__ = parent.prototype; 
-  return child; 
-};
-
-var MessageView = (function(_super) {
-
-  __extends(MessageView, _super);
-
-  function MessageView() {
-    return MessageView.__super__.constructor.apply(this, arguments);
-  }
-
-  return MessageView;
-
-})(Backbone.View);&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once again JavaScript has no built in inheritance support so we fake it using it&amp;#8217;s functional and prototypical features. The &lt;strong&gt;extends&lt;/strong&gt; function generated and called by CoffeeScript behind the scene enables us to &amp;#8220;extend&amp;#8221; our class from Backbone&amp;#8217;s View.&lt;/p&gt;
-
-&lt;p&gt;The end result is that Backbone code written in CoffeeScript is much more easier on the eye. In turn Backbone makes our JavaScript code much easier to maintain. So the combination of the two gives us code that is simple, clean and easy to maintain which is every developer&amp;#8217;s dream come true :)&lt;/p&gt;</content>
   </entry>
 </feed>
