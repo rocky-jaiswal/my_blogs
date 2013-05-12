@@ -25,15 +25,13 @@ If I were to explain Yeoman in a few words, it is a collection of three tools -
 
 So without further ado, let us install these tools -
 
-    sudo npm install -g yo
-    sudo npm install -g grunt-cli
-    sudo npm install -g bower
+    npm install -g yo grunt-cli bower
 
-__As pointed in comments below - Please do not used sudo unless you know what you are doing. *You may need to modify your $PATH to get the "yo", "grunt" commands.*__
+__As pointed in comments below - Please do not used sudo unless you know what you are doing. *You may need to modify your $PATH to get the "yo", "grunt" and "bower" commands.*__
 
 To generate a backbone.js based application with Yo, we need to install the "backbone-generator"
 
-    sudo npm install -g generator-backbone
+    npm install -g generator-backbone
 
 There are a few community driven generators (for angular as well) you may want to check them out.
 
@@ -45,8 +43,7 @@ Now let us generate our project
 
 Select "Y" for Require.js support and Twitter Bootstrap with sass. And finally inside your application directory run -
 
-    npm install
-    bower install
+    npm install & bower install
 
 To install all the npm (e.g. mocha) and bower packages (e.g. jquery) needed.
 
@@ -118,9 +115,9 @@ One of the main advantages of using Require.js with Yeoman is that once you run 
 
 It will create an awesome minified, unified, uglified build for you inside the dist/ directory which you can use in production. The final build has one css and one JS file for the entire application which is awesome.
 
-Also, Grunt provides all the tools needed to test our application while building it(Karma, Mocha, Chai etc.).
+Also, Grunt provides all the tools needed to test our application while building it (Karma, Mocha, Chai etc.).
 
-One gotcha, by default Grunt will copile coffeescript files in script/ directory but not the coffee files in the sub-directories. To enable compilation of these files change the following lines in Gruntfile.js -
+One gotcha, by default Grunt will compile coffeescript files in script/ directory but not the coffee files in the sub-directories (by default it will only compile files in the first subfolder, one level down although this is enough for most and will be much faster). To enable compilation of these files change the following lines in Gruntfile.js -
 
     //in watch/coffee config from - files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'], to
     files: ['<%= yeoman.app %>/scripts/**/*.coffee'],
