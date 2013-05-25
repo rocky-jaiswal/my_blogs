@@ -89,7 +89,7 @@ That's it, Bower will download and install Handlebars.js in an appropriate locat
 
         bootstrap:
           deps: ["jquery"]
-          exports: "jquery"
+          exports: "Bootstrap"
 
         handlebars:
           exports: "Handlebars"
