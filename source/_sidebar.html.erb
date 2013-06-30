@@ -14,7 +14,7 @@
     <a href="/videos">Videos</a>
   </h3>
   <hr/>
-  <h3><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h3>
+  <h3><a id="show-posts" href="#">Posts</a> / <a id="show-tags" href="#">Tags</a></h3>
   <div class="posts">
     <ol>
       <% blog.articles.each do |article| %>
@@ -46,12 +46,12 @@
   $(function() {
     $('.tags').hide();
     $("#show-tags").click(function() {
-      $('.tags').toggle();
-      $('.posts').toggle();
+      $('.tags').show();
+      $('.posts').hide();
     });
     $("#show-posts").click(function() {
-      $('.tags').toggle();
-      $('.posts').toggle();
+      $('.tags').hide();
+      $('.posts').show();
     });
   });
 </script>

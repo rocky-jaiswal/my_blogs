@@ -1,0 +1,13 @@
+doctype
+html
+  = partial "head"
+  body
+    = partial "banner"
+    #main.container role="main"
+      .row
+        .span9
+          #main role="main"
+            = yield
+        .span3
+          = partial "sidebar"
+

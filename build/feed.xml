@@ -18,7 +18,7 @@
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;A couple of good things happened this week, I got a MacBook Pro (Retina Display) from my generous employer (which I setup promptly after the recent pain Linux distros have been giving me) and I got an underground car parking at work. At 45 degrees, ...</summary>
+    <summary type="html">&lt;p&gt;A couple of good things happened this week, I got a MacBook Pro (Retina Display) from my generous employer (which I setup promptly after the recent pain Linux distros have been giving me) and I got an underground car parking at work. At 45 degrees, walking back to my car from my office was no easy feat and I am glad  ...</summary>
     <content type="html">&lt;p&gt;A couple of good things happened this week, I got a MacBook Pro (Retina Display) from my generous employer (which I setup promptly after the recent pain Linux distros have been giving me) and I got an underground car parking at work. At 45 degrees, walking back to my car from my office was no easy feat and I am glad that now I've got a cool car (literally) waiting for me when I head home.&lt;/p&gt;
 
 &lt;p&gt;Also, I have been lucky enough to work on Angular.js for the last two weeks. Initially I was a bit apprehensive to work on it since I have been learning some Backbone.js lately, but then I gave Angular.js one more shot and have been really happy with it.&lt;/p&gt;
@@ -121,7 +121,9 @@ childElem.addClass(animation);
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href="http:// ...</summary>
+    <summary type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href="http://backbonejs.org/"&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The software we need for thi ...</summary>
     <content type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href="http://backbonejs.org/"&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The software we need for this exercise are -&lt;/p&gt;
@@ -273,7 +275,7 @@ src: '**/*.coffee',
     </author>
     <summary type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It's is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project. &lt;/p&gt;
 
-&lt;p&gt;I have been i ...</summary>
+&lt;p&gt;I have been in the software development industry for more than a decade now and hav ...</summary>
     <content type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It's is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project. &lt;/p&gt;
 
 &lt;p&gt;I have been in the software development industry for more than a decade now and having seen some highs and lows, one of the most important question that comes up is - &lt;strong&gt;"How do I make sure that the programmers in my team are happy / motivated / doing their best?"&lt;/strong&gt; This question is by far one of the most important questions that a Product Owner or a Startup founder or an Enterprise CTO faces. &lt;/p&gt;
@@ -344,7 +346,7 @@ src: '**/*.coffee',
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;I have been working a lot with &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It's make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application  ...</summary>
+    <summary type="html">&lt;p&gt;I have been working a lot with &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It's make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually searching and downloading a JavaScrip ...</summary>
     <content type="html">&lt;p&gt;I have been working a lot with &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It's make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually searching and downloading a JavaScript library it is so refreshing to run "bower install –save jquery-form" and you are done.&lt;/p&gt;
 
 &lt;p&gt;Anyways, in this short blog, I want to share a neat trick that I adopted to submit forms via AJAX in a web application. We will be using a few libraries for this most important of which is the &lt;a href="http://malsup.com/jquery/form/"&gt;jquery form plugin&lt;/a&gt; which enables us to submit forms via AJAX.&lt;/p&gt;
@@ -428,7 +430,7 @@ end
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the fir ...</summary>
+    <summary type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first 3 months spent on discussions and so called "requirement gathering" ...</summary>
     <content type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first 3 months spent on discussions and so called "requirement gathering". Now, with good developers on board we try to start programming from day two or three and try to deliver a working solution within the first month of project kickoff. &lt;/p&gt;
 
 &lt;p&gt;Within the last year itself, I did more projects on and off work than I can remember and each project carried its own development, testing and production environment. While trying to be agile yet robust, managing environments can be a pain. That is why I decided to look into &lt;a href="http://puppetlabs.com/"&gt;Puppet&lt;/a&gt; and gave it high priority on my list of things to learn in 2013.&lt;/p&gt;
@@ -557,7 +559,7 @@ $ ./setup.sh
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it's about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it  ...</summary>
+    <summary type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it's about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now  ...</summary>
     <content type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it's about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a web application and a "native" mobile application (atleast one that works well on tablets).&lt;/p&gt;
 
 &lt;p&gt;Building web applications that also work on tablets can be done in many ways but over a period of time I have realized it's good to create separate applications for server side and client side logic. While the server side serves JSON (and talks to the data store) the client side takes care of rendering the UI. &lt;/p&gt;
