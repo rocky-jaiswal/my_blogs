@@ -9,11 +9,11 @@
           <div id="main" role="main">
             <article>
               <h2 style="padding-bottom: 10px;">
-                  <span class="highlighted"><%= current_article.title %></span> 
-                  <span><%= current_article.date.strftime('%b %e %Y') %></span>
+                  <span class="highlighted"><%= current_article.try(:title) %></span> 
+                  <span><%= current_article.date.strftime('%b %e %Y') if current_article %></span>
               </h2>
               <div class="post">
-                <%= current_article.body %>
+                <%= current_article.body if current_article %>
               </div>
               <hr/>
               <div id="disqus_thread"></div>
