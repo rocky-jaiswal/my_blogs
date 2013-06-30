@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8" />
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/github.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/punchable.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="/javascripts/jquery.js" type="text/javascript"></script>
-  <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+  <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
   <script src="/javascripts/highlight.pack.js" type="text/javascript"></script>
 </head>
   <body>
@@ -28,7 +28,7 @@
           <div id="main" role="main">
             <article>
               <h2 style="padding-bottom: 10px;">
-                  <span class="color-orange">Accessing server data from a native Android app</span> 
+                  <span class="highlighted">Accessing server data from a native Android app</span> 
                   <span>Aug 26 2012</span>
               </h2>
               <div class="post">
@@ -38,54 +38,57 @@
 
 <p>So to build on this idea, I started making an Android application that fetches JSON data from a Rails server. To express myself clearly I wanted data to be accessible from a mobile app and a web app, like shown below -</p>
 
-<p><img alt='Mobile' src='/images/mobby_mobile.png' /> <img alt='Mobile' src='/images/mobby_web.png' /></p>
+<p><img src="/images/mobby_mobile.png" alt="Mobile" title="Mobile Version" />
+<img src="/images/mobby_web.png" alt="Mobile" title="Web Version" /></p>
 
 <p>The web app is a fully featured Mongoid enabled Rails application for which I have scaffoled a simple book model. I wanted the mobile version to also access the same data (in JSON format) and just display it in a Phonegapped native application. You can already see the end result in the images above. Lets look at the steps required to build this -</p>
 
 <p>The first and the biggest problem you are bound to face is -</p>
 
-<pre><code>XMLHttpRequest cannot load http://localhost:3000/books.json. Origin null is not allowed by Access-Control-Allow-Origin.</code></pre>
+<pre><code>XMLHttpRequest cannot load http://localhost:3000/books.json. Origin null is not allowed by Access-Control-Allow-Origin.
+</code></pre>
 
 <p>This is because the Android application is not running on the same server as the Rails application in fact it is not running on any server at all. Rails will interpret the incoming request and reject it as it assumes it is from a malicious source (remember CSRF).</p>
 
-<p>To solves this problem we have to use <a href='http://en.wikipedia.org/wiki/JSONP'>JSONP</a>.</p>
+<p>To solves this problem we have to use <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>. </p>
 
-<p>To organize our mobile application&#8217;s JavaScript code we will use Backbone.js. Here is how the code looks like -</p>
+<p>To organize our mobile application's JavaScript code we will use Backbone.js. Here is how the code looks like -</p>
 
 <pre><code>&lt;!doctype html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta charset="utf-8"&gt;
     &lt;title&gt;Mobby&lt;/title&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;script src=&quot;js/libs/jquery-1.7.1.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;js/libs/cordova-2.0.0.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;js/libs/underscore.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;js/libs/backbone.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;js/libs/bootstrap.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;js/plugins.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;js/app.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/bootstrap.css&quot;&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/bootstrap-responsive.css&quot;&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;script src="js/libs/jquery-1.7.1.js"&gt;&lt;/script&gt;
+    &lt;script src="js/libs/cordova-2.0.0.js"&gt;&lt;/script&gt;
+    &lt;script src="js/libs/underscore.js"&gt;&lt;/script&gt;
+    &lt;script src="js/libs/backbone.js"&gt;&lt;/script&gt;
+    &lt;script src="js/libs/bootstrap.js"&gt;&lt;/script&gt;
+    &lt;script src="js/plugins.js"&gt;&lt;/script&gt;
+    &lt;script src="js/app.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.css"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap-responsive.css"&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;header&gt;
-      &lt;div class=&quot;navbar navbar-fixed-top&quot;&gt;
-        &lt;div class=&quot;navbar-inner&quot;&gt;
-          &lt;div class=&quot;container&quot;&gt;
-            &lt;a class=&quot;brand&quot; href=&quot;/&quot;&gt;Mobby&lt;/a&gt;
+      &lt;div class="navbar navbar-fixed-top"&gt;
+        &lt;div class="navbar-inner"&gt;
+          &lt;div class="container"&gt;
+            &lt;a class="brand" href="/"&gt;Mobby&lt;/a&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/header&gt;
-    &lt;div class=&quot;container&quot; style=&quot;padding-top: 50px&quot;&gt;
+    &lt;div class="container" style="padding-top: 50px"&gt;
       &lt;p&gt;Books&lt;/p&gt;
-      &lt;div id=&quot;book&quot;&gt;&lt;/div&gt;
-      &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot; id=&quot;btnRefresh&quot; style=&quot;margin-top: 20px&quot;&gt;Refresh&lt;/button&gt;
+      &lt;div id="book"&gt;&lt;/div&gt;
+      &lt;button class="btn btn-primary" type="button" id="btnRefresh" style="margin-top: 20px"&gt;Refresh&lt;/button&gt;
     &lt;/div&gt;
   &lt;/body&gt;
-&lt;/html&gt;  </code></pre>
+&lt;/html&gt;  
+</code></pre>
 
 <p>And the JS code -</p>
 
@@ -96,7 +99,7 @@
 
   var BookList = Backbone.Collection.extend({
     model : Book, 
-    url: &#39;http://10.0.2.2:3000/books.jsonp?callback=?&#39;, //Line 9
+    url: 'http://10.0.2.2:3000/books.jsonp?callback=?', //Line 9
     parse: function(response) {
       return response;
     }
@@ -106,47 +109,50 @@
   books.fetch();
 
   var BookView = Backbone.View.extend({
-    el : $(&#39;#book&#39;),
+    el : $('#book'),
     render: function() {
-      var bookList = &#39;&lt;ui&gt;&#39;;
+      var bookList = '&lt;ui&gt;';
       _.each(this.model.models, function(book){
-        bookList = bookList + &#39;&lt;li&gt;&#39; + book.get(&#39;title&#39;) + &#39;&lt;\/li&gt;&#39;;
+        bookList = bookList + '&lt;li&gt;' + book.get('title') + '&lt;\/li&gt;';
       });
-      bookList = bookList + &#39;&lt;\/ul&gt;&#39;;
+      bookList = bookList + '&lt;\/ul&gt;';
       $(this.el).html(bookList);
       return this;
     }
   });
 
-  books.on(&quot;reset&quot;, function() {
+  books.on("reset", function() {
     var view = new BookView({model: books});
     view.render();
   });
 
-  $(&quot;#btnRefresh&quot;).click(function() {
+  $("#btnRefresh").click(function() {
     books.fetch();
   });
 
   // Wait for Cordova to load
-  document.addEventListener(&quot;deviceready&quot;, onDeviceReady, false);
+  document.addEventListener("deviceready", onDeviceReady, false);
 
   // Cordova is loaded and it is now safe to make calls Cordova methods
   function onDeviceReady() {
   }
 
-});</code></pre>
+});
+</code></pre>
 
-<p>This is standard Backbone stuff, see my <a href='/2012/05/25/intro_to_backbone_jQuery.html'>older</a> post to get an introduction to Backbone.</p>
+<p>This is standard Backbone stuff, see my <a href="/2012/05/25/intro_to_backbone_jQuery.html">older</a> post to get an introduction to Backbone. </p>
 
 <p>The important thing is on Line number 9. We are doing 2 things there, firstly using <strong>10.0.2.2</strong> instead of <strong>localhost</strong> beause that is how the emulator can access the host machine where the Rails server is running. Secondly, we are not doing a simple JSON request to the Rails server but doing a JSONP request.</p>
 
 <p>Now, on the Rails side to need to deal with this new type to request and also wrap JSON back in a callback. Doing so for every individual request can be a pain but fear not there is a Gem available for this -</p>
 
-<pre><code>gem &#39;rack-jsonp-middleware&#39;</code></pre>
+<pre><code>gem 'rack-jsonp-middleware'
+</code></pre>
 
 <p>As the name suggests, this is a Rails middleware (consider it as a request filter if you are from the Java world) and to enable it we need to add this in application.rb -</p>
 
-<pre><code>config.middleware.use Rack::JSONP</code></pre>
+<pre><code>config.middleware.use Rack::JSONP
+</code></pre>
 
 <p>Our controller is untouched now -</p>
 
@@ -159,11 +165,13 @@ def index
     format.html # index.html.erb
     format.json { render json: @books }
   end
-end</code></pre>
+end
+</code></pre>
 
-<p>Rest of the magic is all on Backbone&#8217;s side. Now if we make a change on the web application and hit the &#8220;Refesh&#8221; button on the mobile application we will get the updated data on the mobile view.</p>
+<p>Rest of the magic is all on Backbone's side. Now if we make a change on the web application and hit the "Refesh" button on the mobile application we will get the updated data on the mobile view.</p>
 
-<p>In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sync to the server and using &#8220;Cross-origin Resource Sharing&#8221; which is an essential security feature when accessing site data from multiple interfaces.</p>
+<p>In my next blog (hopefully) I will cover editing of data on the mobile even when you are offline with eventual sync to the server and using "Cross-origin Resource Sharing" which is an essential security feature when accessing site data from multiple interfaces.</p>
+
               </div>
               <hr/>
               <div id="disqus_thread"></div>
@@ -190,212 +198,211 @@ end</code></pre>
             </article>
           </div>
         </div>
-        <div id="sidebar">
-  <div class="span3">
-    <h2>
-      <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
-      <br/>
-      <a href="/about">About</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
-      <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="/videos">Videos</a>
-    </h2>
-    <hr/>
-    <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
-    <div class="posts">
-      <ol>
-        
-          <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
-        
-          <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
-        
-          <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
-        
-          <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
-        
-          <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
-        
-          <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
-        
-          <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
-        
-          <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
-        
-          <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
-        
-          <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
-        
-          <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
-        
-          <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
-        
-          <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
-        
-          <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
-        
-          <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
-        
-          <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
-        
-          <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
-        
-          <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
-        
-          <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
-        
-          <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
-        
-          <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
-        
-          <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
-        
-          <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
-        
-          <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
-        
-          <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
-        
-          <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
-        
-          <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
-        
-          <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
-        
-          <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
-        
-          <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
-        
-          <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
-        
-          <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
-        
-          <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
-        
-          <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
-        
-          <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
-        
-          <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
-        
-          <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
-        
-          <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
-        
-          <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
-        
-      </ol>
-    </div>
-    <div class="tags">
-      <ol>
-        
-          <li><a href="/tags/git.html">Git (1)</a></li>
-        
-          <li><a href="/tags/agile.html">Agile (8)</a></li>
-        
-          <li><a href="/tags/jboss.html">JBoss (2)</a></li>
-        
-          <li><a href="/tags/jruby.html">JRuby (11)</a></li>
-        
-          <li><a href="/tags/cloud.html">Cloud (1)</a></li>
-        
-          <li><a href="/tags/java.html">Java (9)</a></li>
-        
-          <li><a href="/tags/maven.html">Maven (1)</a></li>
-        
-          <li><a href="/tags/jquery.html">jQuery (1)</a></li>
-        
-          <li><a href="/tags/jpa.html">JPA (1)</a></li>
-        
-          <li><a href="/tags/spring.html">Spring (2)</a></li>
-        
-          <li><a href="/tags/ruby.html">Ruby (8)</a></li>
-        
-          <li><a href="/tags/general.html">General (7)</a></li>
-        
-          <li><a href="/tags/rails.html">Rails (6)</a></li>
-        
-          <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
-        
-          <li><a href="/tags/linux.html">Linux (1)</a></li>
-        
-          <li><a href="/tags/programming.html">Programming (1)</a></li>
-        
-          <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
-        
-          <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
-        
-          <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
-        
-          <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
-        
-          <li><a href="/tags/solr.html">Solr (2)</a></li>
-        
-          <li><a href="/tags/jboss.html">Jboss (1)</a></li>
-        
-          <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
-        
-          <li><a href="/tags/backbone.html">Backbone (6)</a></li>
-        
-          <li><a href="/tags/android.html">Android (1)</a></li>
-        
-          <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
-        
-          <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
-        
-          <li><a href="/tags/scala.html">Scala (2)</a></li>
-        
-          <li><a href="/tags/akka.html">Akka (1)</a></li>
-        
-          <li><a href="/tags/node-js.html">Node.js (1)</a></li>
-        
-          <li><a href="/tags/require-js.html">Require.js (2)</a></li>
-        
-          <li><a href="/tags/play.html">Play (1)</a></li>
-        
-          <li><a href="/tags/puppet.html">Puppet (1)</a></li>
-        
-          <li><a href="/tags/devops.html">DevOps (1)</a></li>
-        
-          <li><a href="/tags/scrum.html">Scrum (1)</a></li>
-        
-          <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
-        
-      </ol>
-    </div>
-    <hr/>
+        <div class="span3">
+          <div id="sidebar">
+  <h3>
+    <!--<img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>-->
+    <br/>
+    <a href="/about">About</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
+    <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="/videos">Videos</a>
+  </h3>
+  <hr/>
+  <h3><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h3>
+  <div class="posts">
+    <ol>
+      
+        <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
+      
+        <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
+      
+        <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
+      
+        <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
+      
+        <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
+      
+        <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
+      
+        <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
+      
+        <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
+      
+        <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
+      
+        <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
+      
+        <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
+      
+        <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
+      
+        <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
+      
+        <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
+      
+        <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
+      
+        <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
+      
+        <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
+      
+        <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
+      
+        <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
+      
+        <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
+      
+        <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
+      
+        <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
+      
+        <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
+      
+        <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
+      
+        <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
+      
+        <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
+      
+        <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
+      
+        <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
+      
+        <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
+      
+        <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
+      
+        <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
+      
+        <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
+      
+        <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
+      
+        <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
+      
+        <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
+      
+        <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
+      
+        <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
+      
+        <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
+      
+        <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
+      
+    </ol>
   </div>
+  <div class="tags">
+    <ol>
+      
+        <li><a href="/tags/git.html">Git (1)</a></li>
+      
+        <li><a href="/tags/agile.html">Agile (8)</a></li>
+      
+        <li><a href="/tags/jboss.html">JBoss (2)</a></li>
+      
+        <li><a href="/tags/jruby.html">JRuby (11)</a></li>
+      
+        <li><a href="/tags/cloud.html">Cloud (1)</a></li>
+      
+        <li><a href="/tags/java.html">Java (9)</a></li>
+      
+        <li><a href="/tags/maven.html">Maven (1)</a></li>
+      
+        <li><a href="/tags/jquery.html">jQuery (1)</a></li>
+      
+        <li><a href="/tags/jpa.html">JPA (1)</a></li>
+      
+        <li><a href="/tags/spring.html">Spring (2)</a></li>
+      
+        <li><a href="/tags/ruby.html">Ruby (8)</a></li>
+      
+        <li><a href="/tags/general.html">General (7)</a></li>
+      
+        <li><a href="/tags/rails.html">Rails (6)</a></li>
+      
+        <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
+      
+        <li><a href="/tags/linux.html">Linux (1)</a></li>
+      
+        <li><a href="/tags/programming.html">Programming (1)</a></li>
+      
+        <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
+      
+        <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
+      
+        <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
+      
+        <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
+      
+        <li><a href="/tags/solr.html">Solr (2)</a></li>
+      
+        <li><a href="/tags/jboss.html">Jboss (1)</a></li>
+      
+        <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
+      
+        <li><a href="/tags/backbone.html">Backbone (6)</a></li>
+      
+        <li><a href="/tags/android.html">Android (1)</a></li>
+      
+        <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
+      
+        <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
+      
+        <li><a href="/tags/scala.html">Scala (2)</a></li>
+      
+        <li><a href="/tags/akka.html">Akka (1)</a></li>
+      
+        <li><a href="/tags/node-js.html">Node.js (1)</a></li>
+      
+        <li><a href="/tags/require-js.html">Require.js (2)</a></li>
+      
+        <li><a href="/tags/play.html">Play (1)</a></li>
+      
+        <li><a href="/tags/puppet.html">Puppet (1)</a></li>
+      
+        <li><a href="/tags/devops.html">DevOps (1)</a></li>
+      
+        <li><a href="/tags/scrum.html">Scrum (1)</a></li>
+      
+        <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
+      
+    </ol>
+  </div>
+  <hr/>
 </div>
 
 <script type="text/javascript">
@@ -421,6 +428,7 @@ end</code></pre>
     });
   });
 </script>
+        </div>
       </div>
     </div>
   </body>

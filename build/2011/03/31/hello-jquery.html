@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8" />
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/github.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/punchable.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="/javascripts/jquery.js" type="text/javascript"></script>
-  <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+  <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
   <script src="/javascripts/highlight.pack.js" type="text/javascript"></script>
 </head>
   <body>
@@ -28,7 +28,7 @@
           <div id="main" role="main">
             <article>
               <h2 style="padding-bottom: 10px;">
-                  <span class="color-orange">Hello jQuery!</span> 
+                  <span class="highlighted">Hello jQuery!</span> 
                   <span>Mar 31 2011</span>
               </h2>
               <div class="post">
@@ -39,13 +39,17 @@
 <p><strong>jQuery Setup</strong></p>
 
 <p>jQuery can be downloaded from -</p>
-<a href='http://code.jquery.com/jquery-1.4.1.min.js'>http://code.jquery.com/jquery-1.4.1.min.js</a>
-<p>If you are working on an internet application, you will be better off downloading it from Google <a href=' http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js'>
+
+<p><a href="http://code.jquery.com/jquery-1.4.1.min.js">http://code.jquery.com/jquery-1.4.1.min.js</a></p>
+
+<p>If you are working on an internet application, you will be better off downloading it from Google
+<a href=" http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js">
 http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a></p>
 
 <p>Inclusion of jQuery is adding a standard line in html -</p>
 
-<pre><code>    &lt;script language=&quot;javascript&quot; src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js&quot; /&gt;</code></pre>
+<pre><code>    &lt;script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" /&gt;
+</code></pre>
 
 <p>That is all it takes to setup jQuery.</p>
 
@@ -55,24 +59,26 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a></p>
 
 <p>jQuery allows you to select an HTML element and carry out operations on it. An example of this would be -</p>
 
-<pre><code>    $(&quot;#an-id&quot;).addClass(&quot;error&quot;)</code></pre>
+<pre><code>    $("#an-id").addClass("error")
+</code></pre>
 
-<p>Here we have used jQuery to select an HTML element of id &#8220;an-id&#8221; and add a style class to it. The part before the dot (.) is equivalent to document.getElementById(&#8220;an-id&#8221;) but is much easier to write.</p>
+<p>Here we have used jQuery to select an HTML element of id "an-id" and add a style class to it. The part before the dot (.) is equivalent to document.getElementById("an-id") but is much easier to write.</p>
 
-<p>Most of the times you would be carrying out jQuery operations / functions on execution of an event, such as clicking a button etc. The question then arises, when do I register my event handlers. You may do something like &#60;input type=&#8221;button&#8221; onClick=&#8221;..&#8221;&#62; but this is generally not considered good practice, with jQuery who can register your handlers in this way -</p>
+<p>Most of the times you would be carrying out jQuery operations / functions on execution of an event, such as clicking a button etc. The question then arises, when do I register my event handlers. You may do something like &lt;input type="button" onClick=".."&gt; but this is generally not considered good practice, with jQuery who can register your handlers in this way -</p>
 
 <pre><code>    $(document).ready(function(){
     &amp;nbsp;&amp;nbsp;&amp;nbsp;//Register Handlers
-    &amp;nbsp;&amp;nbsp;&amp;nbsp;$(&quot;#mainLink&quot;).click(function(event){
-    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;alert(&quot;Thanks for visiting!&quot;);
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;$("#mainLink").click(function(event){
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;alert("Thanks for visiting!");
     &amp;nbsp;&amp;nbsp;});
-    });</code></pre>
+    });
+</code></pre>
 
-<p>The inclusion of the above lines anywhere in your HTML code is good enough to register your handlers with jQuery. The advantage here is that the code is executed after the DOM has been loaded but before the images have been downloaded.$(&#8230;).</p>
+<p>The inclusion of the above lines anywhere in your HTML code is good enough to register your handlers with jQuery. The advantage here is that the code is executed after the DOM has been loaded but before the images have been downloaded.$(…).</p>
 
 <pre><code>    &lt;strong&gt;Selecting elements with jQuery&lt;/strong&gt;
 
-    &lt;table border=&quot;1&quot;&gt;
+    &lt;table border="1"&gt;
     &lt;tbody&gt;
     &lt;tr&gt;
     &lt;td&gt;Selector&lt;/td&gt;
@@ -81,60 +87,61 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a></p>
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;#id&lt;/td&gt;
-    &lt;td&gt;$(&quot;#id&quot;)&lt;/td&gt;
+    &lt;td&gt;$("#id")&lt;/td&gt;
     &lt;td&gt;Selection through a DOM id&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;element&lt;/td&gt;
-    &lt;td&gt;$(&quot;li&quot;)&lt;/td&gt;
+    &lt;td&gt;$("li")&lt;/td&gt;
     &lt;td&gt;Returns all
     &amp;lt;li&amp;gt; elements&amp;lt;/li&amp;gt;
     &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;.class&lt;/td&gt;
-    &lt;td&gt;$(&quot;.error&quot;)&lt;/td&gt;
-    &lt;td&gt;Returns all elements with &amp;lt;.. class=&quot;error&quot; ...&lt;/td&gt;
+    &lt;td&gt;$(".error")&lt;/td&gt;
+    &lt;td&gt;Returns all elements with &amp;lt;.. class="error" ...&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;element.class&lt;/td&gt;
-    &lt;td&gt;$(&quot;div.error&quot;)&lt;/td&gt;
-    &lt;td&gt;Returns all elements with &amp;lt;div class=&quot;error&quot; ...&lt;/td&gt;
+    &lt;td&gt;$("div.error")&lt;/td&gt;
+    &lt;td&gt;Returns all elements with &amp;lt;div class="error" ...&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;elem1 elem2&lt;/td&gt;
-    &lt;td&gt;$(&quot;div.a div.b&quot;)&lt;/td&gt;
-    &lt;td&gt;Returns all elements &amp;lt;div class=&quot;b&quot;&amp;gt; which are inside&lt;/td&gt;
+    &lt;td&gt;$("div.a div.b")&lt;/td&gt;
+    &lt;td&gt;Returns all elements &amp;lt;div class="b"&amp;gt; which are inside&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;elem[att=val]&lt;/td&gt;
-    &lt;td&gt;$(&quot;a[href=page1]&quot;)&lt;/td&gt;
-    &lt;td&gt;Returns all elements with &amp;lt;a href=&quot;page1&quot;&amp;gt;&lt;/td&gt;
+    &lt;td&gt;$("a[href=page1]")&lt;/td&gt;
+    &lt;td&gt;Returns all elements with &amp;lt;a href="page1"&amp;gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;elem[att^=val]&lt;/td&gt;
-    &lt;td&gt;$(&quot;a[href^=page]&quot;)&lt;/td&gt;
-    &lt;td&gt;Returns all anchor elements with attribute href&#39;s value starting with page (Regex)
+    &lt;td&gt;$("a[href^=page]")&lt;/td&gt;
+    &lt;td&gt;Returns all anchor elements with attribute href's value starting with page (Regex)
     &lt;/tr&gt;
-    &lt;/tbody&gt;&lt;/table&gt;</code></pre>
+    &lt;/tbody&gt;&lt;/table&gt;
+</code></pre>
 
 <p>Though there are many other types of selectors I have covered the basics here and leave it upto you to explore as per your needs.</p>
 
 <p><strong>Some operations with jQuery</strong></p>
 
-<pre><code>    &lt;table border=&quot;1&quot;&gt;
+<pre><code>    &lt;table border="1"&gt;
     &lt;tbody&gt;
     &lt;tr&gt;
-    &lt;td&gt;$(...).html(&quot;&amp;lt;b&amp;gt;Hello&amp;lt;/b&amp;gt;&quot;)&lt;/td&gt;
+    &lt;td&gt;$(...).html("&amp;lt;b&amp;gt;Hello&amp;lt;/b&amp;gt;")&lt;/td&gt;
     &lt;td&gt;Sets the inner HTML to &lt;strong&gt;Hello&lt;/strong&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-    &lt;td&gt;$(...).addClass(&quot;error&quot;)&lt;/td&gt;
+    &lt;td&gt;$(...).addClass("error")&lt;/td&gt;
     &lt;td&gt;Sets the css style to error&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-    &lt;td&gt;$(...).attr(&#39;name&#39;, &#39;value&#39;)&lt;/td&gt;
-    &lt;td&gt;Sets the element&#39;s attribute name to value&lt;/td&gt;
+    &lt;td&gt;$(...).attr('name', 'value')&lt;/td&gt;
+    &lt;td&gt;Sets the element's attribute name to value&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
     &lt;td&gt;$(...).clone()&lt;/td&gt;
@@ -144,22 +151,25 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a></p>
     &lt;td&gt;$(...).click(clickHandler)&lt;/td&gt;
     &lt;td&gt;Assigns a event handler to an event
     $(...).each(function() {
-    $(this).addClass(&#39;&#39;)
+    $(this).addClass('')
     }); For each element returned by a selection, apply a function (in this example a style class is added)&lt;/td&gt;
     &lt;/tr&gt;
-    &lt;/tbody&gt;&lt;/table&gt;</code></pre>
+    &lt;/tbody&gt;&lt;/table&gt;
+</code></pre>
 
 <p><strong>Ajax with jQuery</strong></p>
 
 <p>jQuery really makes it easy to send AJAX requests and deal with the response. The simplest example would be -</p>
 
-<pre><code>    $.ajax({url: &quot;address&quot;, success: funct1});</code></pre>
+<pre><code>    $.ajax({url: "address", success: funct1});
+</code></pre>
 
 <p>The handler function (funct1 above) gets the response text not the response object, the response can be XML, HTML, JSON or text. The function again can use jQuery to manipulate the DOM, for example display the response in a DIV.</p>
 
 <p><strong>jQueryUI</strong></p>
 
-<p>This blog would not be complete without a mention of jQueryUI - <a href='http://jqueryui.com/'>http://jqueryui.com/</a> - jQueryUI builds upon jQuery to provide an effects and interaction API as well as ready to use widgets. Using jQueryUI, it is a breeze to add behaviours like draggable and resizeable to spans/divs. The widgets include a highly customizable date picker among others. Feel free to visit the jQueryUI site to see the demos.</p>
+<p>This blog would not be complete without a mention of jQueryUI - <a href="http://jqueryui.com/">http://jqueryui.com/</a> - jQueryUI builds upon jQuery to provide an effects and interaction API as well as ready to use widgets. Using jQueryUI, it is a breeze to add behaviours like draggable and resizeable to spans/divs. The widgets include a highly customizable date picker among others. Feel free to visit the jQueryUI site to see the demos.</p>
+
               </div>
               <hr/>
               <div id="disqus_thread"></div>
@@ -186,212 +196,211 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a></p>
             </article>
           </div>
         </div>
-        <div id="sidebar">
-  <div class="span3">
-    <h2>
-      <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
-      <br/>
-      <a href="/about">About</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
-      <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="/videos">Videos</a>
-    </h2>
-    <hr/>
-    <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
-    <div class="posts">
-      <ol>
-        
-          <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
-        
-          <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
-        
-          <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
-        
-          <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
-        
-          <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
-        
-          <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
-        
-          <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
-        
-          <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
-        
-          <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
-        
-          <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
-        
-          <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
-        
-          <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
-        
-          <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
-        
-          <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
-        
-          <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
-        
-          <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
-        
-          <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
-        
-          <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
-        
-          <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
-        
-          <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
-        
-          <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
-        
-          <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
-        
-          <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
-        
-          <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
-        
-          <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
-        
-          <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
-        
-          <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
-        
-          <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
-        
-          <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
-        
-          <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
-        
-          <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
-        
-          <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
-        
-          <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
-        
-          <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
-        
-          <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
-        
-          <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
-        
-          <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
-        
-          <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
-        
-          <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
-        
-      </ol>
-    </div>
-    <div class="tags">
-      <ol>
-        
-          <li><a href="/tags/git.html">Git (1)</a></li>
-        
-          <li><a href="/tags/agile.html">Agile (8)</a></li>
-        
-          <li><a href="/tags/jboss.html">JBoss (2)</a></li>
-        
-          <li><a href="/tags/jruby.html">JRuby (11)</a></li>
-        
-          <li><a href="/tags/cloud.html">Cloud (1)</a></li>
-        
-          <li><a href="/tags/java.html">Java (9)</a></li>
-        
-          <li><a href="/tags/maven.html">Maven (1)</a></li>
-        
-          <li><a href="/tags/jquery.html">jQuery (1)</a></li>
-        
-          <li><a href="/tags/jpa.html">JPA (1)</a></li>
-        
-          <li><a href="/tags/spring.html">Spring (2)</a></li>
-        
-          <li><a href="/tags/ruby.html">Ruby (8)</a></li>
-        
-          <li><a href="/tags/general.html">General (7)</a></li>
-        
-          <li><a href="/tags/rails.html">Rails (6)</a></li>
-        
-          <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
-        
-          <li><a href="/tags/linux.html">Linux (1)</a></li>
-        
-          <li><a href="/tags/programming.html">Programming (1)</a></li>
-        
-          <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
-        
-          <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
-        
-          <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
-        
-          <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
-        
-          <li><a href="/tags/solr.html">Solr (2)</a></li>
-        
-          <li><a href="/tags/jboss.html">Jboss (1)</a></li>
-        
-          <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
-        
-          <li><a href="/tags/backbone.html">Backbone (6)</a></li>
-        
-          <li><a href="/tags/android.html">Android (1)</a></li>
-        
-          <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
-        
-          <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
-        
-          <li><a href="/tags/scala.html">Scala (2)</a></li>
-        
-          <li><a href="/tags/akka.html">Akka (1)</a></li>
-        
-          <li><a href="/tags/node-js.html">Node.js (1)</a></li>
-        
-          <li><a href="/tags/require-js.html">Require.js (2)</a></li>
-        
-          <li><a href="/tags/play.html">Play (1)</a></li>
-        
-          <li><a href="/tags/puppet.html">Puppet (1)</a></li>
-        
-          <li><a href="/tags/devops.html">DevOps (1)</a></li>
-        
-          <li><a href="/tags/scrum.html">Scrum (1)</a></li>
-        
-          <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
-        
-      </ol>
-    </div>
-    <hr/>
+        <div class="span3">
+          <div id="sidebar">
+  <h3>
+    <!--<img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>-->
+    <br/>
+    <a href="/about">About</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
+    <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="/videos">Videos</a>
+  </h3>
+  <hr/>
+  <h3><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h3>
+  <div class="posts">
+    <ol>
+      
+        <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
+      
+        <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
+      
+        <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
+      
+        <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
+      
+        <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
+      
+        <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
+      
+        <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
+      
+        <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
+      
+        <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
+      
+        <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
+      
+        <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
+      
+        <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
+      
+        <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
+      
+        <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
+      
+        <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
+      
+        <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
+      
+        <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
+      
+        <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
+      
+        <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
+      
+        <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
+      
+        <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
+      
+        <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
+      
+        <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
+      
+        <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
+      
+        <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
+      
+        <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
+      
+        <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
+      
+        <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
+      
+        <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
+      
+        <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
+      
+        <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
+      
+        <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
+      
+        <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
+      
+        <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
+      
+        <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
+      
+        <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
+      
+        <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
+      
+        <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
+      
+        <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
+      
+    </ol>
   </div>
+  <div class="tags">
+    <ol>
+      
+        <li><a href="/tags/git.html">Git (1)</a></li>
+      
+        <li><a href="/tags/agile.html">Agile (8)</a></li>
+      
+        <li><a href="/tags/jboss.html">JBoss (2)</a></li>
+      
+        <li><a href="/tags/jruby.html">JRuby (11)</a></li>
+      
+        <li><a href="/tags/cloud.html">Cloud (1)</a></li>
+      
+        <li><a href="/tags/java.html">Java (9)</a></li>
+      
+        <li><a href="/tags/maven.html">Maven (1)</a></li>
+      
+        <li><a href="/tags/jquery.html">jQuery (1)</a></li>
+      
+        <li><a href="/tags/jpa.html">JPA (1)</a></li>
+      
+        <li><a href="/tags/spring.html">Spring (2)</a></li>
+      
+        <li><a href="/tags/ruby.html">Ruby (8)</a></li>
+      
+        <li><a href="/tags/general.html">General (7)</a></li>
+      
+        <li><a href="/tags/rails.html">Rails (6)</a></li>
+      
+        <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
+      
+        <li><a href="/tags/linux.html">Linux (1)</a></li>
+      
+        <li><a href="/tags/programming.html">Programming (1)</a></li>
+      
+        <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
+      
+        <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
+      
+        <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
+      
+        <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
+      
+        <li><a href="/tags/solr.html">Solr (2)</a></li>
+      
+        <li><a href="/tags/jboss.html">Jboss (1)</a></li>
+      
+        <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
+      
+        <li><a href="/tags/backbone.html">Backbone (6)</a></li>
+      
+        <li><a href="/tags/android.html">Android (1)</a></li>
+      
+        <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
+      
+        <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
+      
+        <li><a href="/tags/scala.html">Scala (2)</a></li>
+      
+        <li><a href="/tags/akka.html">Akka (1)</a></li>
+      
+        <li><a href="/tags/node-js.html">Node.js (1)</a></li>
+      
+        <li><a href="/tags/require-js.html">Require.js (2)</a></li>
+      
+        <li><a href="/tags/play.html">Play (1)</a></li>
+      
+        <li><a href="/tags/puppet.html">Puppet (1)</a></li>
+      
+        <li><a href="/tags/devops.html">DevOps (1)</a></li>
+      
+        <li><a href="/tags/scrum.html">Scrum (1)</a></li>
+      
+        <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
+      
+    </ol>
+  </div>
+  <hr/>
 </div>
 
 <script type="text/javascript">
@@ -417,6 +426,7 @@ http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js</a></p>
     });
   });
 </script>
+        </div>
       </div>
     </div>
   </body>

@@ -1,7 +1,7 @@
 xml.instruct!
 xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
   xml.title "Still Learning"
-  xml.subtitle "Thoughts of an Agile Developer"
+  xml.subtitle "Musings of an Agile Developer"
   xml.id "http://rockyj.in"
   xml.link "href" => "http://rockyj.in"
   xml.link "href" => "http://rockyj.in/feed.xml", "rel" => "self"

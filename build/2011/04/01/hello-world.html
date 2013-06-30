@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8" />
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/github.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/punchable.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="/javascripts/jquery.js" type="text/javascript"></script>
-  <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+  <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
   <script src="/javascripts/highlight.pack.js" type="text/javascript"></script>
 </head>
   <body>
@@ -28,63 +28,63 @@
           <div id="main" role="main">
             <article>
               <h2 style="padding-bottom: 10px;">
-                  <span class="color-orange">Integrating JRuby and Java to create a mini rules engine</span> 
+                  <span class="highlighted">Integrating JRuby and Java to create a mini rules engine</span> 
                   <span>Apr  1 2011</span>
               </h2>
               <div class="post">
-                <p>Ruby is a beautiful language, but that is just me saying it. A thing of beauty has to be experienced on its own by someone. A major reason behind the slow adoption of Ruby in the enterprise is infrastructure / installation and speed. Although, personally I have never seen Ruby as slow (specially 1.9), but asking someone to run Ruby code on his/her machine is a problem as they need to install Ruby and other associated &#8216;gems&#8217; used by my program. Enter <a href='http://www.jruby.org' target='_blank'>JRuby</a> - it is a 100% pure Java implementation of the Ruby Programming Language, so in effect you can run a JRuby program on any machine that has a JVM. Just include a jar and you are good to go.</p>
+                <p>Ruby is a beautiful language, but that is just me saying it. A thing of beauty has to be experienced on its own by someone. A major reason behind the slow adoption of Ruby in the enterprise is infrastructure / installation and speed. Although, personally I have never seen Ruby as slow (specially 1.9), but asking someone to run Ruby code on his/her machine is a problem as they need to install Ruby and other associated 'gems' used by my program. Enter <a href="http://www.jruby.org" target="_blank">JRuby</a> - it is a 100% pure Java implementation of the Ruby Programming Language, so in effect you can run a JRuby program on any machine that has a JVM. Just include a jar and you are good to go.</p>
 
-<p>JRuby also integrates very easily with Java (both run on JVM) and helps you solve some pain areas in Java. I used it today in my project to dynamically (Ruby being a dynamic and interpreted language) generate and execute rules. Imagine a scenario on a website where you want to find a Customer&#8217;s class from the loyalty points he has in his account. So lets say, if the customer has upto 1000 loyalty points he is &#8220;BRONZE&#8221; member, between 1000 and 2000 he is &#8220;SILVER&#8221; member and so on and so forth.</p>
+<p>JRuby also integrates very easily with Java (both run on JVM) and helps you solve some pain areas in Java. I used it today in my project to dynamically (Ruby being a dynamic and interpreted language) generate and execute rules. Imagine a scenario on a website where you want to find a Customer's class from the loyalty points he has in his account. So lets say, if the customer has upto 1000 loyalty points he is "BRONZE" member, between 1000 and 2000 he is "SILVER" member and so on and so forth.</p>
 
-<p>If this is done in pure Java, you can create these rules in your code but you cannot implement changes easily. For example, adding a new customer class will involve code change and server restart. Using a database, properties files or a rules engine will still not offer you a lot and will be difficult to setup and maintain and one can be assured that they will need to restart the server sooner or later as rules become complex.</p>
+<p>If this is done in pure Java, you can create these rules in your code but you cannot implement changes easily. For example, adding a new customer class will involve code change and server restart. Using a database, properties files or a rules engine will still not offer you a lot and will be difficult to setup and maintain and one can be assured that they will need to restart the server sooner or later as rules become complex. </p>
 
 <p>However, if we implement this logic in JRuby we will have reasonably clean code and logic can be delegated to a clean and dynamic language like Ruby which even a business manager can maintain.</p>
 
-<p>So lets get started. First let us add the JRuby jar to our project (through Maven) -</p>
+<p>So lets get started. First let us add the JRuby jar to our project (through Maven) - </p>
 
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;org.jruby&lt;/groupId&gt;
     &lt;artifactId&gt;jruby-complete&lt;/artifactId&gt;
     &lt;version&gt;1.5.6&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 
 <p>Now, let us create a simple Ruby script that will contain the logic -</p>
 
 <pre><code>class CustomerClassSelector
   def choose_class(points)
-    return &quot;BRONZE&quot; if (0..999).include?(points)
-    return &quot;SILVER&quot; if (1000..1999).include?(points)
-    return &quot;GOLD&quot; if (2000..2999).include?(points)
-    return &quot;PLATINUM&quot;
+    return "BRONZE" if (0..999).include?(points)
+    return "SILVER" if (1000..1999).include?(points)
+    return "GOLD" if (2000..2999).include?(points)
+    return "PLATINUM"
   end 
-end</code></pre>
+end
+</code></pre>
 
-<p>Save it as customer_class_selector.rb at a place where your project config lies. The code itself is pretty easy to understand even if you don&#8217;t know Ruby syntax. The &#8220;(0..999)&#8221; is a Range in Ruby and it has a method &#8220;include?(param)&#8221; that returns true if the param lies in the Range.</p>
+<p>Save it as customer_class_selector.rb at a place where your project config lies. The code itself is pretty easy to understand even if you don't know Ruby syntax. The "(0..999)" is a Range in Ruby and it has a method "include?(param)" that returns true if the param lies in the Range.</p>
 
 <p>Now for calling this code from Java -</p>
 
 <pre><code>String getCustomerClass(int loyaltyPoints) {
 	ScriptingContainer container = new ScriptingContainer(LocalContextScope.THREADSAFE);
-	container.setLoadPaths(Arrays.asList(&quot;/home/rocky/mysite/config&quot;));
-	container.runScriptlet(&quot;require &#39;customer_class_selector&#39;&quot;);
-	Object greeter = container.runScriptlet(&quot;CustomerClassSelector.new&quot;);
-	String customerClass = container.callMethod(greeter, &quot;choose_class&quot;, loyaltyPoints, String.class);
+	container.setLoadPaths(Arrays.asList("/home/rocky/mysite/config"));
+	container.runScriptlet("require 'customer_class_selector'");
+	Object greeter = container.runScriptlet("CustomerClassSelector.new");
+	String customerClass = container.callMethod(greeter, "choose_class", loyaltyPoints, String.class);
 	return customerClass;
-}</code></pre>
+}
+</code></pre>
 
 <ul>
-<li>In this method, we initiate a Scripting container (package org.jruby.embed) that is available through our Maven dependency / jar added above. We pass it an argument so that container is not loaded as a singleton and the script is run every time its invoked.</li>
-
-<li>Then through this container we load the path where JRuby scripts / libraries are (like classpath in Java).</li>
-
-<li>We then load the scriptlet we saved earlier.</li>
-
-<li>Next we intantiate the class defined in the Ruby script above.</li>
-
-<li>Finally, we call the method choose_class passing the loyalty points and registering the return value type as String.</li>
+  <li>In this method, we initiate a Scripting container (package org.jruby.embed) that is available through our Maven dependency / jar added above. We pass it an argument so that container is not loaded as a singleton and the script is run every time its invoked.</li>
+  <li>Then through this container we load the path where JRuby scripts / libraries are (like classpath in Java).</li>
+  <li>We then load the scriptlet we saved earlier.</li>
+  <li>Next we intantiate the class defined in the Ruby script above.</li>
+  <li>Finally, we call the method choose_class passing the loyalty points and registering the return value type as String.</li>
 </ul>
 
-<p>We now can play with the rules inside the Ruby script as much as we want. Anyone can change the Ranges and add/remove Customer classes but we will never need to restart our web application or modify the Java code. That is the power of dynamic languages in action! Simple and powerful, ain&#8217;t it :).</p>
+<p>We now can play with the rules inside the Ruby script as much as we want. Anyone can change the Ranges and add/remove Customer classes but we will never need to restart our web application or modify the Java code. That is the power of dynamic languages in action! Simple and powerful, ain't it :).</p>
+
               </div>
               <hr/>
               <div id="disqus_thread"></div>
@@ -111,212 +111,211 @@ end</code></pre>
             </article>
           </div>
         </div>
-        <div id="sidebar">
-  <div class="span3">
-    <h2>
-      <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
-      <br/>
-      <a href="/about">About</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
-      <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="/videos">Videos</a>
-    </h2>
-    <hr/>
-    <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
-    <div class="posts">
-      <ol>
-        
-          <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
-        
-          <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
-        
-          <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
-        
-          <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
-        
-          <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
-        
-          <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
-        
-          <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
-        
-          <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
-        
-          <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
-        
-          <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
-        
-          <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
-        
-          <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
-        
-          <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
-        
-          <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
-        
-          <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
-        
-          <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
-        
-          <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
-        
-          <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
-        
-          <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
-        
-          <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
-        
-          <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
-        
-          <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
-        
-          <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
-        
-          <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
-        
-          <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
-        
-          <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
-        
-          <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
-        
-          <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
-        
-          <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
-        
-          <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
-        
-          <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
-        
-          <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
-        
-          <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
-        
-          <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
-        
-          <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
-        
-          <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
-        
-          <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
-        
-          <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
-        
-          <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
-        
-      </ol>
-    </div>
-    <div class="tags">
-      <ol>
-        
-          <li><a href="/tags/git.html">Git (1)</a></li>
-        
-          <li><a href="/tags/agile.html">Agile (8)</a></li>
-        
-          <li><a href="/tags/jboss.html">JBoss (2)</a></li>
-        
-          <li><a href="/tags/jruby.html">JRuby (11)</a></li>
-        
-          <li><a href="/tags/cloud.html">Cloud (1)</a></li>
-        
-          <li><a href="/tags/java.html">Java (9)</a></li>
-        
-          <li><a href="/tags/maven.html">Maven (1)</a></li>
-        
-          <li><a href="/tags/jquery.html">jQuery (1)</a></li>
-        
-          <li><a href="/tags/jpa.html">JPA (1)</a></li>
-        
-          <li><a href="/tags/spring.html">Spring (2)</a></li>
-        
-          <li><a href="/tags/ruby.html">Ruby (8)</a></li>
-        
-          <li><a href="/tags/general.html">General (7)</a></li>
-        
-          <li><a href="/tags/rails.html">Rails (6)</a></li>
-        
-          <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
-        
-          <li><a href="/tags/linux.html">Linux (1)</a></li>
-        
-          <li><a href="/tags/programming.html">Programming (1)</a></li>
-        
-          <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
-        
-          <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
-        
-          <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
-        
-          <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
-        
-          <li><a href="/tags/solr.html">Solr (2)</a></li>
-        
-          <li><a href="/tags/jboss.html">Jboss (1)</a></li>
-        
-          <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
-        
-          <li><a href="/tags/backbone.html">Backbone (6)</a></li>
-        
-          <li><a href="/tags/android.html">Android (1)</a></li>
-        
-          <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
-        
-          <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
-        
-          <li><a href="/tags/scala.html">Scala (2)</a></li>
-        
-          <li><a href="/tags/akka.html">Akka (1)</a></li>
-        
-          <li><a href="/tags/node-js.html">Node.js (1)</a></li>
-        
-          <li><a href="/tags/require-js.html">Require.js (2)</a></li>
-        
-          <li><a href="/tags/play.html">Play (1)</a></li>
-        
-          <li><a href="/tags/puppet.html">Puppet (1)</a></li>
-        
-          <li><a href="/tags/devops.html">DevOps (1)</a></li>
-        
-          <li><a href="/tags/scrum.html">Scrum (1)</a></li>
-        
-          <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
-        
-      </ol>
-    </div>
-    <hr/>
+        <div class="span3">
+          <div id="sidebar">
+  <h3>
+    <!--<img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>-->
+    <br/>
+    <a href="/about">About</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
+    <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="/videos">Videos</a>
+  </h3>
+  <hr/>
+  <h3><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h3>
+  <div class="posts">
+    <ol>
+      
+        <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
+      
+        <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
+      
+        <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
+      
+        <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
+      
+        <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
+      
+        <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
+      
+        <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
+      
+        <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
+      
+        <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
+      
+        <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
+      
+        <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
+      
+        <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
+      
+        <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
+      
+        <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
+      
+        <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
+      
+        <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
+      
+        <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
+      
+        <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
+      
+        <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
+      
+        <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
+      
+        <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
+      
+        <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
+      
+        <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
+      
+        <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
+      
+        <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
+      
+        <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
+      
+        <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
+      
+        <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
+      
+        <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
+      
+        <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
+      
+        <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
+      
+        <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
+      
+        <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
+      
+        <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
+      
+        <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
+      
+        <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
+      
+        <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
+      
+        <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
+      
+        <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
+      
+    </ol>
   </div>
+  <div class="tags">
+    <ol>
+      
+        <li><a href="/tags/git.html">Git (1)</a></li>
+      
+        <li><a href="/tags/agile.html">Agile (8)</a></li>
+      
+        <li><a href="/tags/jboss.html">JBoss (2)</a></li>
+      
+        <li><a href="/tags/jruby.html">JRuby (11)</a></li>
+      
+        <li><a href="/tags/cloud.html">Cloud (1)</a></li>
+      
+        <li><a href="/tags/java.html">Java (9)</a></li>
+      
+        <li><a href="/tags/maven.html">Maven (1)</a></li>
+      
+        <li><a href="/tags/jquery.html">jQuery (1)</a></li>
+      
+        <li><a href="/tags/jpa.html">JPA (1)</a></li>
+      
+        <li><a href="/tags/spring.html">Spring (2)</a></li>
+      
+        <li><a href="/tags/ruby.html">Ruby (8)</a></li>
+      
+        <li><a href="/tags/general.html">General (7)</a></li>
+      
+        <li><a href="/tags/rails.html">Rails (6)</a></li>
+      
+        <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
+      
+        <li><a href="/tags/linux.html">Linux (1)</a></li>
+      
+        <li><a href="/tags/programming.html">Programming (1)</a></li>
+      
+        <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
+      
+        <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
+      
+        <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
+      
+        <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
+      
+        <li><a href="/tags/solr.html">Solr (2)</a></li>
+      
+        <li><a href="/tags/jboss.html">Jboss (1)</a></li>
+      
+        <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
+      
+        <li><a href="/tags/backbone.html">Backbone (6)</a></li>
+      
+        <li><a href="/tags/android.html">Android (1)</a></li>
+      
+        <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
+      
+        <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
+      
+        <li><a href="/tags/scala.html">Scala (2)</a></li>
+      
+        <li><a href="/tags/akka.html">Akka (1)</a></li>
+      
+        <li><a href="/tags/node-js.html">Node.js (1)</a></li>
+      
+        <li><a href="/tags/require-js.html">Require.js (2)</a></li>
+      
+        <li><a href="/tags/play.html">Play (1)</a></li>
+      
+        <li><a href="/tags/puppet.html">Puppet (1)</a></li>
+      
+        <li><a href="/tags/devops.html">DevOps (1)</a></li>
+      
+        <li><a href="/tags/scrum.html">Scrum (1)</a></li>
+      
+        <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
+      
+    </ol>
+  </div>
+  <hr/>
 </div>
 
 <script type="text/javascript">
@@ -342,6 +341,7 @@ end</code></pre>
     });
   });
 </script>
+        </div>
       </div>
     </div>
   </body>

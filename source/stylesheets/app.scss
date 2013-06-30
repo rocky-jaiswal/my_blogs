@@ -1,5 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
 
+$main-color: #2980b9;
+$gray: #ecf0f1;
+
+body {
+  background-color: $gray;
+}
+
 h1, h2, h3, h4, h5 {
   font-family: "Roboto Slab";
   margin-bottom: 10px;
@@ -8,7 +15,7 @@ h1, h2, h3, h4, h5 {
 .banner {
   padding: 10px 0px 8px 0px;
   margin-bottom: 30px;
-  background: #FF4533;
+  background: $main-color;
 }
 
 .banner a:hover {
@@ -20,7 +27,7 @@ h1, h2, h3, h4, h5 {
 }
 
 #sidebar {
-  padding-top: 60px;
+  padding-top: 15px;
 }
 
 .summary {
@@ -28,7 +35,7 @@ h1, h2, h3, h4, h5 {
   text-align: justify;
 }
 
-.summary p{
+.summary p {
   font-size: 1.1em;
 }
 
@@ -36,18 +43,28 @@ h1, h2, h3, h4, h5 {
   text-align: justify;
 }
 
-.post p{
+.post p {
   font-size: 1.1em;
 }
 
-.color-orange {
-  color: #FF4533 !important;
+.highlighted {
+  color: $main-color !important;
 }
 
 a {
-  color: #FF4533 !important;
+  color: $main-color !important;
 }
 
 ul li {
   font-size: 1.1em;
+}
+
+hr {
+  border-bottom: 1px solid #ccc;
+}
+
+pre {
+  code {
+    background: white;
+  }
 }

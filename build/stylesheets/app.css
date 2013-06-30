@@ -1,53 +1,64 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
+/* line 6, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
+body {
+  background-color: #ecf0f1; }
 
+/* line 10, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 h1, h2, h3, h4, h5 {
   font-family: "Roboto Slab";
-  margin-bottom: 10px;
-}
+  margin-bottom: 10px; }
 
+/* line 15, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 .banner {
   padding: 10px 0px 8px 0px;
   margin-bottom: 30px;
-  background: #FF4533;
-}
+  background: #2980b9; }
 
+/* line 21, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 .banner a:hover {
-  text-decoration: none !important;
-}
+  text-decoration: none !important; }
 
+/* line 25, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 #main {
-  padding-top: 60px;
-}
+  padding-top: 60px; }
 
+/* line 29, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 #sidebar {
-  padding-top: 60px;
-}
+  padding-top: 15px; }
 
+/* line 33, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 .summary {
   margin-bottom: 10px;
-  text-align: justify;
-}
+  text-align: justify; }
 
-.summary p{
-  font-size: 1.1em;
-}
+/* line 38, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
+.summary p {
+  font-size: 1.1em; }
 
+/* line 42, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 .post {
-  text-align: justify;
-}
+  text-align: justify; }
 
-.post p{
-  font-size: 1.1em;
-}
+/* line 46, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
+.post p {
+  font-size: 1.1em; }
 
-.color-orange {
-  color: #FF4533 !important;
-}
+/* line 50, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
+.highlighted {
+  color: #2980b9 !important; }
 
+/* line 54, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 a {
-  color: #FF4533 !important;
-}
+  color: #2980b9 !important; }
 
+/* line 58, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
 ul li {
-  font-size: 1.1em;
-}
+  font-size: 1.1em; }
+
+/* line 62, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
+hr {
+  border-bottom: 1px solid #ccc; }
+
+/* line 67, /Users/rockyj/Workspace/Projects/07-html5/my_blogs/source/stylesheets/app.scss */
+pre code {
+  background: white; }

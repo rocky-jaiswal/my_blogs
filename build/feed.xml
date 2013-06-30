@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Still Learning</title>
-  <subtitle>Thoughts of an Agile Developer</subtitle>
+  <subtitle>Musings of an Agile Developer</subtitle>
   <id>http://rockyj.in</id>
   <link href="http://rockyj.in"/>
   <link href="http://rockyj.in/feed.xml" rel="self"/>
@@ -18,37 +18,38 @@
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;A couple of good things happened this week, I got a MacBook Pro (Retina Display) from my generous employer (which I setup promptly after the recent pain Linux distros have been giving me) and I got an underground car parking at work. At 45 degrees...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;A couple of good things happened this week, I got a MacBook Pro (Retina Display) from my generous employer (which I setup promptly after the recent pain Linux distros have been giving me) and I got an underground car parking at work. At 45 degrees, walking back to my car from my office was no easy feat and I am glad that now I&amp;#8217;ve got a cool car (literally) waiting for me when I head home.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;A couple of good things happened this week, I got a MacBook Pro (Retina Display) from my generous employer (which I setup promptly after the recent pain Linux distros have been giving me) and I got an underground car parking at work. At 45 degrees, ...</summary>
+    <content type="html">&lt;p&gt;A couple of good things happened this week, I got a MacBook Pro (Retina Display) from my generous employer (which I setup promptly after the recent pain Linux distros have been giving me) and I got an underground car parking at work. At 45 degrees, walking back to my car from my office was no easy feat and I am glad that now I've got a cool car (literally) waiting for me when I head home.&lt;/p&gt;
 
 &lt;p&gt;Also, I have been lucky enough to work on Angular.js for the last two weeks. Initially I was a bit apprehensive to work on it since I have been learning some Backbone.js lately, but then I gave Angular.js one more shot and have been really happy with it.&lt;/p&gt;
 
 &lt;p&gt;Since I am a CoffeeScript admirer and Backbone.js played really well with CoffeeScript I tried a bit to make Angular.js also work with CoffeeScript. Technically, anything in JavaScript can be converted to CoffeeScript, but I wanted to write Angular code in a more CoffeeScripty way. So below are a few hacks to write your Angular.js code with CoffeeScript.&lt;/p&gt;
 
-&lt;h3 id='angularjs_and_coffeescript'&gt;Angular.js and CoffeeScript&lt;/h3&gt;
+&lt;h3 id="angularjs-and-coffeescript"&gt;Angular.js and CoffeeScript&lt;/h3&gt;
 
-&lt;h4 id='controllers'&gt;Controllers&lt;/h4&gt;
+&lt;h4 id="controllers"&gt;Controllers&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;quot;use strict&amp;quot;
+&lt;pre&gt;&lt;code&gt;"use strict"
 
 class NavigationCtrl
 
   constructor: (@$scope, @$location, @$routeParams, @storageService) -&amp;gt;
-    if @storageService.get(&amp;quot;token&amp;quot;)
+    if @storageService.get("token")
       @$scope.logout = @logout
     else
-      @$location.url(&amp;quot;login&amp;quot;)
+      @$location.url("login")
 
   logout: =&amp;gt;
     @storageService.clear()
-    @$location.url(&amp;quot;/&amp;quot;)
+    @$location.url("/")
 
-NavigationCtrl.$inject = [&amp;quot;$scope&amp;quot;, &amp;quot;$location&amp;quot;, &amp;quot;$routeParams&amp;quot;, &amp;quot;storageService&amp;quot;]
-angular.module(&amp;quot;webApp&amp;quot;).controller &amp;quot;NavigationCtrl&amp;quot;, NavigationCtrl&lt;/code&gt;&lt;/pre&gt;
+NavigationCtrl.$inject = ["$scope", "$location", "$routeParams", "storageService"]
+angular.module("webApp").controller "NavigationCtrl", NavigationCtrl
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id='services__factory'&gt;Services / Factory&lt;/h4&gt;
+&lt;h4 id="services--factory"&gt;Services / Factory&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;quot;use strict&amp;quot;
+&lt;pre&gt;&lt;code&gt;"use strict"
 
 class StorageService
 
@@ -62,12 +63,13 @@ class StorageService
     localStorage.clear()
 
 
-angular.module &amp;quot;webApp.service&amp;quot;, [], ($provide) -&amp;gt;
-  $provide.factory &amp;quot;storageService&amp;quot;, -&amp;gt; new StorageService()&lt;/code&gt;&lt;/pre&gt;
+angular.module "webApp.service", [], ($provide) -&amp;gt;
+  $provide.factory "storageService", -&amp;gt; new StorageService()
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id='directives'&gt;Directives&lt;/h4&gt;
+&lt;h4 id="directives"&gt;Directives&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;quot;use strict&amp;quot;
+&lt;pre&gt;&lt;code&gt;"use strict"
 
 class MyCurrentTime
 
@@ -75,35 +77,40 @@ class MyCurrentTime
     link : (scope, element, attrs) -&amp;gt;
       element.html new Date()
 
-angular.module(&amp;quot;webApp&amp;quot;).directive &amp;quot;myCurrentTime&amp;quot;, MyCurrentTime.options&lt;/code&gt;&lt;/pre&gt;
+angular.module("webApp").directive "myCurrentTime", MyCurrentTime.options
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I am reasonably pleased with the controller and service code. However, the directive code feels very hackish, this is also partly because to the complex nature of directives and the sheer no of options they have.&lt;/p&gt;
 
-&lt;h3 id='animate_a_view_with_angular_10x'&gt;Animate a view with Angular 1.0.x&lt;/h3&gt;
+&lt;h3 id="animate-a-view-with-angular-10x"&gt;Animate a view with Angular 1.0.x&lt;/h3&gt;
 
-&lt;p&gt;Apart from CoffeeScript, I also wanted to do some cool animations. While Angular 1.1.x (unstable) branch supports animations and I really wanted to use them but I had to stick with the stable 1.0.x branch for my project so I kinda hacked my own directive to load a view / page with an animation.&lt;/p&gt;
+&lt;p&gt;Apart from CoffeeScript, I also wanted to do some cool animations. While Angular 1.1.x (unstable) branch supports animations and I really wanted to use them but I had to stick with the stable 1.0.x branch for my project so I kinda hacked my own directive to load a view / page with an animation. &lt;/p&gt;
 
-&lt;p&gt;I used &lt;a href='http://daneden.me/animate/'&gt;animate.css&lt;/a&gt; for effects and tried creating a simple directive. After some research I found that I could extend the ngView directive to load with the views with an animation.&lt;/p&gt;
+&lt;p&gt;I used &lt;a href="http://daneden.me/animate/"&gt;animate.css&lt;/a&gt; for effects and tried creating a simple directive. After some research I found that I could extend the ngView directive to load with the views with an animation.&lt;/p&gt;
 
-&lt;p&gt;Looking at the code &lt;a href='https://raw.github.com/angular/angular.js/v1.0.6/src/ng/directive/ngView.js'&gt;here&lt;/a&gt; I found the part where the HTML was being set (line 130) and from here on copied the code into my own directive added these lines after it -&lt;/p&gt;
+&lt;p&gt;Looking at the code &lt;a href="https://raw.github.com/angular/angular.js/v1.0.6/src/ng/directive/ngView.js"&gt;here&lt;/a&gt; I found the part where the HTML was being set (line 130) and from here on copied the code into my own directive added these lines after it -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;element.html(template);
 //animate it!
-var animation = &amp;#39;animated fadeInRight&amp;#39;;
+var animation = 'animated fadeInRight';
 var childElem = angular.element(element.children()[0]);
 if(childElem.hasClass(animation))
   childElem.removeClass(animation);
-childElem.addClass(animation);&lt;/code&gt;&lt;/pre&gt;
+childElem.addClass(animation);
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Well, it worked! My page loaded with an animation, all you need is that your partials be wrapped in a div (i.e. one parent element). So I bundled this as my own directive and replaced -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;container-fluid&amp;quot; data-ng-view&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class="container-fluid" data-ng-view&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;with&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;container-fluid&amp;quot; data-my-animated-view&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class="container-fluid" data-my-animated-view&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;That&amp;#8217;s it. Hope these hacks help someone. Have a nice day.&lt;/p&gt;</content>
+&lt;p&gt;That's it. Hope these hacks help someone. Have a nice day.&lt;/p&gt;
+</content>
   </entry>
   <entry>
     <title>Building HTML5 Apps with Yeoman and Backbone</title>
@@ -114,46 +121,41 @@ childElem.addClass(animation);&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href="http://backbonejs.org/"&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The software we need for this exercise...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href='http://yeoman.io'&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href='http://backbonejs.org/'&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href="http:// ...</summary>
+    <content type="html">&lt;p&gt;In my last few blogs I talked a bit about &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt;. For me, working with Yeoman has been a real pleasure, so in this blog I will talk about building a small single page HTML5 application with Yeoman and &lt;a href="http://backbonejs.org/"&gt;Backbone.js&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The software we need for this exercise are -&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Node.js&lt;/li&gt;
-
-&lt;li&gt;NPM&lt;/li&gt;
-
-&lt;li&gt;Ruby&lt;/li&gt;
-
-&lt;li&gt;Sass and Compass Gems for Ruby&lt;/li&gt;
+  &lt;li&gt;Node.js&lt;/li&gt;
+  &lt;li&gt;NPM&lt;/li&gt;
+  &lt;li&gt;Ruby&lt;/li&gt;
+  &lt;li&gt;Sass and Compass Gems for Ruby&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Before we start a few words about Yeoman.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='Yeoman' src='https://raw.github.com/yeoman/yeoman.io/gh-pages/media/toolset.png' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://raw.github.com/yeoman/yeoman.io/gh-pages/media/toolset.png" alt="Yeoman" title="Yeoman" /&gt;&lt;/p&gt;
 
 &lt;p&gt;If I were to explain Yeoman in a few words, it is a collection of three tools -&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Yo : for scaffolding apps&lt;/li&gt;
-
-&lt;li&gt;Grunt: The JavaScript build tool&lt;/li&gt;
-
-&lt;li&gt;Bower: Package / dependency management for client side JavaScript libs&lt;/li&gt;
+  &lt;li&gt;Yo : for scaffolding apps&lt;/li&gt;
+  &lt;li&gt;Grunt: The JavaScript build tool&lt;/li&gt;
+  &lt;li&gt;Bower: Package / dependency management for client side JavaScript libs&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;So without further ado, let us install these tools -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g yo grunt-cli bower&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g yo grunt-cli bower
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;As pointed in comments below - Please do not used sudo unless you know what you are doing. &lt;em&gt;You may need to modify your $PATH to get the &amp;#8220;yo&amp;#8221;, &amp;#8220;grunt&amp;#8221; and &amp;#8220;bower&amp;#8221; commands.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;As pointed in comments below - Please do not used sudo unless you know what you are doing. &lt;em&gt;You may need to modify your $PATH to get the "yo", "grunt" and "bower" commands.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;To generate a backbone.js based application with Yo, we need to install the &amp;#8220;backbone-generator&amp;#8221;&lt;/p&gt;
+&lt;p&gt;To generate a backbone.js based application with Yo, we need to install the "backbone-generator"&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g generator-backbone&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g generator-backbone
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;There are a few community driven generators (for angular as well) you may want to check them out.&lt;/p&gt;
 
@@ -161,19 +163,22 @@ childElem.addClass(animation);&lt;/code&gt;&lt;/pre&gt;
 
 &lt;pre&gt;&lt;code&gt;mkdir &amp;lt;my-app-name&amp;gt;
 cd &amp;lt;my-app-name&amp;gt;
-yo backbone --template-framework=handlebars&lt;/code&gt;&lt;/pre&gt;
+yo backbone --template-framework=handlebars
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Select &amp;#8220;Y&amp;#8221; for Require.js support and Twitter Bootstrap with sass. And finally inside your application directory run -&lt;/p&gt;
+&lt;p&gt;Select "Y" for Require.js support and Twitter Bootstrap with sass. And finally inside your application directory run -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install &amp;amp; bower install&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;npm install &amp;amp; bower install
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;To install all the npm (e.g. mocha) and bower packages (e.g. jquery) needed.&lt;/p&gt;
 
-&lt;p&gt;That&amp;#8217;s it. If your machine and network behaved well, you should have everything setup and you can now run -&lt;/p&gt;
+&lt;p&gt;That's it. If your machine and network behaved well, you should have everything setup and you can now run -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;grunt server&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;grunt server
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The default app which says &amp;#8220;Allo! Allo!&amp;#8221; should be working now.&lt;/p&gt;
+&lt;p&gt;The default app which says "Allo! Allo!" should be working now.&lt;/p&gt;
 
 &lt;p&gt;Great! We now have the default application up and working. You can go crazy from here or if you want you can read on a bit.&lt;/p&gt;
 
@@ -189,51 +194,55 @@ yo backbone --template-framework=handlebars&lt;/code&gt;&lt;/pre&gt;
     - collections
     - router
     - templates
-    - views&lt;/code&gt;&lt;/pre&gt;
+    - views
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Since we will be using Handlebars.js for our client side templates, you need to run -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;bower install --save handlebars&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;bower install --save handlebars
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;That&amp;#8217;s it, Bower will download and install Handlebars.js in an appropriate location. Add the path for handlebars in the main.coffee file so that it can be used with Require.js. I have install &amp;#8220;jquery-form&amp;#8221; as well, so my main.coffee looks something like this -&lt;/p&gt;
+&lt;p&gt;That's it, Bower will download and install Handlebars.js in an appropriate location. Add the path for handlebars in the main.coffee file so that it can be used with Require.js. I have install "jquery-form" as well, so my main.coffee looks something like this -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;#global require
-&amp;quot;use strict&amp;quot;
+"use strict"
 
 require.config
   shim:
     underscore:
-      exports: &amp;quot;_&amp;quot;
+      exports: "_"
 
     backbone:
-      deps: [&amp;quot;underscore&amp;quot;, &amp;quot;jquery&amp;quot;]
-      exports: &amp;quot;Backbone&amp;quot;
+      deps: ["underscore", "jquery"]
+      exports: "Backbone"
 
     bootstrap:
-      deps: [&amp;quot;jquery&amp;quot;]
-      exports: &amp;quot;Bootstrap&amp;quot;
+      deps: ["jquery"]
+      exports: "Bootstrap"
 
     handlebars:
-      exports: &amp;quot;Handlebars&amp;quot;
+      exports: "Handlebars"
 
   paths:
-    jquery: &amp;quot;../bower_components/jquery/jquery&amp;quot;
-    jquery_form: &amp;quot;../bower_components/jquery-form/jquery.form&amp;quot;
-    backbone: &amp;quot;../bower_components/backbone-amd/backbone&amp;quot;
-    underscore: &amp;quot;../bower_components/underscore-amd/underscore&amp;quot;
-    bootstrap: &amp;quot;vendor/bootstrap&amp;quot;
-    text: &amp;quot;../bower_components/requirejs-text/text&amp;quot;
-    handlebars: &amp;quot;../bower_components/handlebars.js/handlebars&amp;quot;
+    jquery: "../bower_components/jquery/jquery"
+    jquery_form: "../bower_components/jquery-form/jquery.form"
+    backbone: "../bower_components/backbone-amd/backbone"
+    underscore: "../bower_components/underscore-amd/underscore"
+    bootstrap: "vendor/bootstrap"
+    text: "../bower_components/requirejs-text/text"
+    handlebars: "../bower_components/handlebars.js/handlebars"
 
-require [&amp;quot;backbone&amp;quot;, &amp;quot;app/router/router&amp;quot;], (Backbone, AppRouter) -&amp;gt;
+require ["backbone", "app/router/router"], (Backbone, AppRouter) -&amp;gt;
   router = new AppRouter()
-  Backbone.history.start()&lt;/code&gt;&lt;/pre&gt;
+  Backbone.history.start()
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;That&amp;#8217;s it! From here you can build your standard Backbone + Require.js application.&lt;/p&gt;
+&lt;p&gt;That's it! From here you can build your standard Backbone + Require.js application.&lt;/p&gt;
 
 &lt;p&gt;One of the main advantages of using Require.js with Yeoman is that once you run -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;grunt&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;grunt
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It will create an awesome minified, unified, uglified build for you inside the dist/ directory which you can use in production. The final build has one css and one JS file for the entire application which is awesome.&lt;/p&gt;
 
@@ -241,15 +250,17 @@ require [&amp;quot;backbone&amp;quot;, &amp;quot;app/router/router&amp;quot;], (
 
 &lt;p&gt;One gotcha, by default Grunt will compile coffeescript files in script/ directory but not the coffee files in the sub-directories (by default it will only compile files in the first subfolder, one level down although this is enough for most and will be much faster). To enable compilation of these files change the following lines in Gruntfile.js -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;//in watch/coffee config from - files: [&amp;#39;&amp;lt;%= yeoman.app %&amp;gt;/scripts/{,*/}*.coffee&amp;#39;], to
-files: [&amp;#39;&amp;lt;%= yeoman.app %&amp;gt;/scripts/**/*.coffee&amp;#39;],
+&lt;pre&gt;&lt;code&gt;//in watch/coffee config from - files: ['&amp;lt;%= yeoman.app %&amp;gt;/scripts/{,*/}*.coffee'], to
+files: ['&amp;lt;%= yeoman.app %&amp;gt;/scripts/**/*.coffee'],
 
-//and in coffee/dist/files from src: &amp;#39;*.coffee&amp;#39;, to
-src: &amp;#39;**/*.coffee&amp;#39;,&lt;/code&gt;&lt;/pre&gt;
+//and in coffee/dist/files from src: '*.coffee', to
+src: '**/*.coffee',
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;That&amp;#8217;s it. You have now a great Yeoman + Backbone setup. Code away!&lt;/p&gt;
+&lt;p&gt;That's it. You have now a great Yeoman + Backbone setup. Code away!&lt;/p&gt;
 
-&lt;p&gt;Sample project with this setup is available on &lt;a href='https://github.com/rocky-jaiswal/confi'&gt;Github&lt;/a&gt;.&lt;/p&gt;</content>
+&lt;p&gt;Sample project with this setup is available on &lt;a href="https://github.com/rocky-jaiswal/confi"&gt;Github&lt;/a&gt;.&lt;/p&gt;
+</content>
   </entry>
   <entry>
     <title>What motivates programmers</title>
@@ -260,72 +271,69 @@ src: &amp;#39;**/*.coffee&amp;#39;,&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It&amp;#8217;s is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It's is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project. &lt;/p&gt;
 
-&lt;p&gt;I have been in the software...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It&amp;#8217;s is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project.&lt;/p&gt;
+&lt;p&gt;I have been i ...</summary>
+    <content type="html">&lt;p&gt;The title of this blog post may sound authoritative but it is far from it. It's is just a set of observations which I have picked up from my own experiences and introspection when I felt motivated or demotivated on a project. &lt;/p&gt;
 
-&lt;p&gt;I have been in the software development industry for more than a decade now and having seen some highs and lows, one of the most important question that comes up is - &lt;strong&gt;&amp;#8220;How do I make sure that the programmers in my team are happy / motivated / doing their best?&amp;#8221;&lt;/strong&gt; This question is by far one of the most important questions that a Product Owner or a Startup founder or an Enterprise CTO faces.&lt;/p&gt;
+&lt;p&gt;I have been in the software development industry for more than a decade now and having seen some highs and lows, one of the most important question that comes up is - &lt;strong&gt;"How do I make sure that the programmers in my team are happy / motivated / doing their best?"&lt;/strong&gt; This question is by far one of the most important questions that a Product Owner or a Startup founder or an Enterprise CTO faces. &lt;/p&gt;
 
-&lt;p&gt;For me also it is a make or break question, if the programmers are not motivated then you can kiss the product / project goodbye. No process (Agile / Scrum / XP) and no monitoring can help you if the programmers lose interest in the project and are demotivated.&lt;/p&gt;
+&lt;p&gt;For me also it is a make or break question, if the programmers are not motivated then you can kiss the product / project goodbye. No process (Agile / Scrum / XP) and no monitoring can help you if the programmers lose interest in the project and are demotivated. &lt;/p&gt;
 
-&lt;p&gt;In fact, Scrum assumes that programmers are motivated so that they give honest estimates, report impediments in a timely manner and spend time wisely. Without motivated programmers Scrum is a failure before even being implemented. Even if the &amp;#8220;carrot or stick&amp;#8221; policy is implemented, programmers are smart enough to manipulate the system so that either they are not detected or do just enough to appease the management. Also, code quality takes a nosedive once you have demotivated programmers working on the team.&lt;/p&gt;
+&lt;p&gt;In fact, Scrum assumes that programmers are motivated so that they give honest estimates, report impediments in a timely manner and spend time wisely. Without motivated programmers Scrum is a failure before even being implemented. Even if the "carrot or stick" policy is implemented, programmers are smart enough to manipulate the system so that either they are not detected or do just enough to appease the management. Also, code quality takes a nosedive once you have demotivated programmers working on the team.&lt;/p&gt;
 
 &lt;p&gt;So how do we solve this problem. Let me share what motivates me and maybe it will ring true for other programmers as well.&lt;/p&gt;
 
-&lt;h3 id='autonomy_mastery_and_purpose'&gt;Autonomy, Mastery and Purpose&lt;/h3&gt;
+&lt;h3 id="autonomy-mastery-and-purpose"&gt;Autonomy, Mastery and Purpose&lt;/h3&gt;
+&lt;p&gt;If you are not in the mood of reading and find this article utterly uninspiring, watch this one video and you are done - &lt;a href="http://www.youtube.com/watch?v=u6XAPnuFjJc"&gt;http://www.youtube.com/watch?v=u6XAPnuFjJc&lt;/a&gt;. Essentially, the video says that knowledge workers (programmers in our case) work for three things - Autonomy, Mastery and Purpose. We will see how to apply these principles in software projects (and some other practices) in the points below.&lt;/p&gt;
 
-&lt;p&gt;If you are not in the mood of reading and find this article utterly uninspiring, watch this one video and you are done - &lt;a href='http://www.youtube.com/watch?v=u6XAPnuFjJc'&gt;http://www.youtube.com/watch?v=u6XAPnuFjJc&lt;/a&gt;. Essentially, the video says that knowledge workers (programmers in our case) work for three things - Autonomy, Mastery and Purpose. We will see how to apply these principles in software projects (and some other practices) in the points below.&lt;/p&gt;
+&lt;p&gt;One of the most important thing that the video says (which is easy to miss) is to "move money out of the equation". Enough said.&lt;/p&gt;
 
-&lt;p&gt;One of the most important thing that the video says (which is easy to miss) is to &amp;#8220;move money out of the equation&amp;#8221;. Enough said.&lt;/p&gt;
-
-&lt;h3 id='make_the_project_the_programmers_baby'&gt;Make the project the programmer&amp;#8217;s baby&lt;/h3&gt;
-
+&lt;h3 id="make-the-project-the-programmers-baby"&gt;Make the project the programmer's baby&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Allow Freedom&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Personally, I have been very happy and motivated in project where - I have joined from the beginning which makes me have a say in the choice of technology / framework or even a library. This also enables me to understand why a certain decision has to be been taken / had been taken.&lt;/p&gt;
 
-&lt;p&gt;Essentially, what I am saying is that if the programmer understands the project well and feels that his opinion matters and is valued by the team, he feels motivated to work on it. In a project, each team member should be able to express his opinion freely, discuss the pros / cons of the choices he has made and feel comfortable when taking decision on their own because they know they will either not be questioned or they can make everyone understand. &amp;#8220;Move fast and break things&amp;#8221; is a motto Facebook adopts because they want to give everyone the freedom to do things on their own without worrying about consequences.&lt;/p&gt;
+&lt;p&gt;Essentially, what I am saying is that if the programmer understands the project well and feels that his opinion matters and is valued by the team, he feels motivated to work on it. In a project, each team member should be able to express his opinion freely, discuss the pros / cons of the choices he has made and feel comfortable when taking decision on their own because they know they will either not be questioned or they can make everyone understand. "Move fast and break things" is a motto Facebook adopts because they want to give everyone the freedom to do things on their own without worrying about consequences.&lt;/p&gt;
 
-&lt;p&gt;While is not possible to join every project from it&amp;#8217;s inception but whenever I joined a project midway I was happier when the team listened to my proposals even if they were stupid.&lt;/p&gt;
+&lt;p&gt;While is not possible to join every project from it's inception but whenever I joined a project midway I was happier when the team listened to my proposals even if they were stupid.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Explain Impact&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Another way to make a project a project a programmer&amp;#8217;s baby is to make him / her understand the project&amp;#8217;s impact. If a programmer knows that the project has great impact for the organization / intended market they are automatically motivated to do it. From my experience I have that even silly projects can have great impacts. A Twitter clone for the enterprise can drive a cultural change, even an online poker planning game can improve the sprint planning session of numerous teams. Programmers always want to say &amp;#8220;hey I built this!&amp;#8221; and if they see value in their creation they will invest in it wholeheartedly.&lt;/p&gt;
+&lt;p&gt;Another way to make a project a project a programmer's baby is to make him / her understand the project's impact. If a programmer knows that the project has great impact for the organization / intended market they are automatically motivated to do it. From my experience I have that even silly projects can have great impacts. A Twitter clone for the enterprise can drive a cultural change, even an online poker planning game can improve the sprint planning session of numerous teams. Programmers always want to say "hey I built this!" and if they see value in their creation they will invest in it wholeheartedly.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Give importance&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Also, programmers should have a say in the implementation of stories. I have seen many times that programmers lose interest when the user asks for something which they feel will downgrade the quality / experience of the product. As programmers are asked to implement features that they don&amp;#8217;t believe in they lose interest in the project, it is no longer their baby, it belongs to someone else and they are mere &amp;#8220;workers&amp;#8221;. A good question to always ask is - &amp;#8220;How would you do it&amp;#8221;. There can also be genuine cases where a feature is needed which the programmers really don&amp;#8217;t buy into. In this case, it is worth investing time to understand what the programmers think and reach a consensus.&lt;/p&gt;
+&lt;p&gt;Also, programmers should have a say in the implementation of stories. I have seen many times that programmers lose interest when the user asks for something which they feel will downgrade the quality / experience of the product. As programmers are asked to implement features that they don't believe in they lose interest in the project, it is no longer their baby, it belongs to someone else and they are mere "workers". A good question to always ask is - "How would you do it". There can also be genuine cases where a feature is needed which the programmers really don't buy into. In this case, it is worth investing time to understand what the programmers think and reach a consensus. &lt;/p&gt;
 
-&lt;h3 id='team_formation'&gt;Team Formation&lt;/h3&gt;
+&lt;h3 id="team-formation"&gt;Team Formation&lt;/h3&gt;
+&lt;p&gt;I have seen "star teams" who are just happy to work with one another that the project quality and execution speed is boosted incrementally. One simple rule to build star teams is to keep them small (3-6 team members) and co-located (preferably), less people mean less communication overhead and ease of understanding each other. Star teams in my experience also diverse. One of the most important thing a team needs to have is mutual respect, senior developer should respect junior developers and everyone's opinion should matter. This makes a programmer feel wanted and committed to the team's goal. In essence treat everyone as equal and be good to each other, this will go a long way. Scrum also promotes this theory rather than the old hierarchical architect, team leader, module leader and team members setup.&lt;/p&gt;
 
-&lt;p&gt;I have seen &amp;#8220;star teams&amp;#8221; who are just happy to work with one another that the project quality and execution speed is boosted incrementally. One simple rule to build star teams is to keep them small (3-6 team members) and co-located (preferably), less people mean less communication overhead and ease of understanding each other. Star teams in my experience also diverse. One of the most important thing a team needs to have is mutual respect, senior developer should respect junior developers and everyone&amp;#8217;s opinion should matter. This makes a programmer feel wanted and committed to the team&amp;#8217;s goal. In essence treat everyone as equal and be good to each other, this will go a long way. Scrum also promotes this theory rather than the old hierarchical architect, team leader, module leader and team members setup.&lt;/p&gt;
+&lt;h3 id="release-often-and-celebrate-the-release"&gt;Release often and celebrate the release&lt;/h3&gt;
+&lt;p&gt;The title says it all. A good way to demotivate programmers is to not use their software. This takes out the "Purpose and Impact" out of the equation and the programmer feels like a headless zombie. &lt;/p&gt;
 
-&lt;h3 id='release_often_and_celebrate_the_release'&gt;Release often and celebrate the release&lt;/h3&gt;
+&lt;p&gt;It is also important to celebrate releases, what is the point of releasing software if the team feels no change and just continues as normal. The human mind is motivated for "happy experiences" for example one can say let's release this week so that we can redo the amazing dinner we had last time. If you are on a tight budget, people can still be rewarded with some time-off to work on personal projects or a trip to the movies.&lt;/p&gt;
 
-&lt;p&gt;The title says it all. A good way to demotivate programmers is to not use their software. This takes out the &amp;#8220;Purpose and Impact&amp;#8221; out of the equation and the programmer feels like a headless zombie.&lt;/p&gt;
+&lt;h3 id="slack"&gt;Slack&lt;/h3&gt;
+&lt;p&gt;I am reading the book "Slack" from Tom DeMarco and it has some great advice. Over the years work places have become more efficient, we look for ruthlessly improving efficiency in even the smallest of areas. I have even worked in organizations which removed paper towels from restrooms to reduce waste and costs (let's not go there).&lt;/p&gt;
 
-&lt;p&gt;It is also important to celebrate releases, what is the point of releasing software if the team feels no change and just continues as normal. The human mind is motivated for &amp;#8220;happy experiences&amp;#8221; for example one can say let&amp;#8217;s release this week so that we can redo the amazing dinner we had last time. If you are on a tight budget, people can still be rewarded with some time-off to work on personal projects or a trip to the movies.&lt;/p&gt;
-
-&lt;h3 id='slack'&gt;Slack&lt;/h3&gt;
-
-&lt;p&gt;I am reading the book &amp;#8220;Slack&amp;#8221; from Tom DeMarco and it has some great advice. Over the years work places have become more efficient, we look for ruthlessly improving efficiency in even the smallest of areas. I have even worked in organizations which removed paper towels from restrooms to reduce waste and costs (let&amp;#8217;s not go there).&lt;/p&gt;
-
-&lt;p&gt;Anyways, Tom DeMarco says that Slack is important. If everyone is 100% busy all the time, decision making is slow because no one has the time to sit down or think. Without Slack there is no room for creativity, agility and other important things that are required in today&amp;#8217;s fast changing world (read the Nokia story of engineers not allowed to work on a touch based interface pre iPhone era).&lt;/p&gt;
+&lt;p&gt;Anyways, Tom DeMarco says that Slack is important. If everyone is 100% busy all the time, decision making is slow because no one has the time to sit down or think. Without Slack there is no room for creativity, agility and other important things that are required in today's fast changing world (read the Nokia story of engineers not allowed to work on a touch based interface pre iPhone era).&lt;/p&gt;
 
 &lt;p&gt;I feel motivated in projects where I have sometime for personal learning and experimentation. If the project is always on fire the programmers will always be looking for exit doors.&lt;/p&gt;
 
-&lt;h3 id='let_it_flow_and_reward_quality'&gt;Let it flow and reward quality&lt;/h3&gt;
+&lt;h3 id="let-it-flow-and-reward-quality"&gt;Let it flow and reward quality&lt;/h3&gt;
+&lt;p&gt;"Oh you need a server, please fill this 20 page form and give us one month". &lt;/p&gt;
 
-&lt;p&gt;&amp;#8220;Oh you need a server, please fill this 20 page form and give us one month&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;"We have a half day meeting today on how to improve the recruitment process efficiency". &lt;/p&gt;
 
-&lt;p&gt;&amp;#8220;We have a half day meeting today on how to improve the recruitment process efficiency&amp;#8221;.&lt;/p&gt;
-
-&lt;p&gt;These are know productivity killers. We all know programmers work in a state of &lt;a href='http://goo.gl/uosRw'&gt;flow&lt;/a&gt;. Organization should aim for environments where &amp;#8220;flow&amp;#8221; is easily achievable and hard to break.&lt;/p&gt;
+&lt;p&gt;These are know productivity killers. We all know programmers work in a state of &lt;a href="http://goo.gl/uosRw"&gt;flow&lt;/a&gt;. Organization should aim for environments where "flow" is easily achievable and hard to break. &lt;/p&gt;
 
 &lt;p&gt;Finally, one things programmers crave is peer recognition. To motivate programmers I would reward great code and aim to share the knowledge within the organization. A programmer feels happy when is learning and when he feels that he is working with peers who match his intellect or are better than him.&lt;/p&gt;
+
 &lt;hr /&gt;
-&lt;p&gt;That&amp;#8217;s it, I as a programmer will be extremely happy to work in organizations where all / most of these points are values. Hope you enjoyed reading this. Please share your opinion and what motivates you as a programmer in the comments below.&lt;/p&gt;</content>
+
+&lt;p&gt;That's it, I as a programmer will be extremely happy to work in organizations where all / most of these points are values. Hope you enjoyed reading this. Please share your opinion and what motivates you as a programmer in the comments below.&lt;/p&gt;
+</content>
   </entry>
   <entry>
     <title>Ajaxify a Form with Backbone</title>
@@ -336,57 +344,60 @@ src: &amp;#39;**/*.coffee&amp;#39;,&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;I have been working a lot with &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It&amp;#8217;s make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I have been working a lot with &lt;a href='http://yeoman.io'&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It&amp;#8217;s make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually searching and downloading a JavaScript library it is so refreshing to run &amp;#8220;bower install &amp;#8211;save jquery-form&amp;#8221; and you are done.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;I have been working a lot with &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It's make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application  ...</summary>
+    <content type="html">&lt;p&gt;I have been working a lot with &lt;a href="http://yeoman.io"&gt;Yeoman&lt;/a&gt; lately and find it to be absolutely fabulous. It's make web development a real joy. With a few simple commands I can have a Backbone, Require.js and Twitter Bootstrap application ready. Also, instead to manually searching and downloading a JavaScript library it is so refreshing to run "bower install –save jquery-form" and you are done.&lt;/p&gt;
 
-&lt;p&gt;Anyways, in this short blog, I want to share a neat trick that I adopted to submit forms via AJAX in a web application. We will be using a few libraries for this most important of which is the &lt;a href='http://malsup.com/jquery/form/'&gt;jquery form plugin&lt;/a&gt; which enables us to submit forms via AJAX.&lt;/p&gt;
+&lt;p&gt;Anyways, in this short blog, I want to share a neat trick that I adopted to submit forms via AJAX in a web application. We will be using a few libraries for this most important of which is the &lt;a href="http://malsup.com/jquery/form/"&gt;jquery form plugin&lt;/a&gt; which enables us to submit forms via AJAX.&lt;/p&gt;
 
 &lt;p&gt;I have a form lets say, which I want to AJAXify -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;app-home&amp;quot;&amp;gt;
-  &amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;
-    &amp;lt;div class=&amp;quot;large-4 columns&amp;quot;&amp;gt;
-      &amp;lt;form action=&amp;quot;/greet&amp;quot; method=&amp;quot;POST&amp;quot; id=&amp;quot;greeting-form&amp;quot; data-ajax=&amp;quot;true&amp;quot;&amp;gt;
-        &amp;lt;input type=&amp;quot;text&amp;quot; placeholder=&amp;quot;Your name please&amp;quot; name=&amp;quot;username&amp;quot;&amp;gt;
-        &amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;Say Hello&amp;quot; class=&amp;quot;btn button&amp;quot;&amp;gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id="app-home"&amp;gt;
+  &amp;lt;div class="row"&amp;gt;
+    &amp;lt;div class="large-4 columns"&amp;gt;
+      &amp;lt;form action="/greet" method="POST" id="greeting-form" data-ajax="true"&amp;gt;
+        &amp;lt;input type="text" placeholder="Your name please" name="username"&amp;gt;
+        &amp;lt;input type="submit" value="Say Hello" class="btn button"&amp;gt;
       &amp;lt;/form&amp;gt;
     &amp;lt;/div&amp;gt;
   &amp;lt;/div&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Normally the flow looks like the images below -&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='Ajax-1' src='/images/ajax-1.png' /&gt; &lt;img alt='Ajax-2' src='/images/ajax-2.png' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/ajax-1.png" alt="Ajax-1" title="Ajax-1" /&gt;
+&lt;img src="/images/ajax-2.png" alt="Ajax-2" title="Ajax-2" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now with the help of a little bit of Backbone and jQuery Form plugin I can easily turn this into an AJAX enabled form -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;define [&amp;quot;backbone&amp;quot;, &amp;quot;text!apps/home/templates/greetresponse.hbs&amp;quot;], (Backbone, responseTemplate) -&amp;gt;
-  &amp;#39;use strict&amp;#39;
+&lt;pre&gt;&lt;code&gt;define ["backbone", "text!apps/home/templates/greetresponse.hbs"], (Backbone, responseTemplate) -&amp;gt;
+  'use strict'
   
   class GreetingView extends Backbone.View
     
-    el: &amp;quot;#app-home&amp;quot;
+    el: "#app-home"
 
     events:
-      &amp;quot;submit #greeting-form&amp;quot;  :  &amp;quot;handleSubmit&amp;quot;
+      "submit #greeting-form"  :  "handleSubmit"
 
     template: Handlebars.compile(responseTemplate)
 
     handleSubmit: (e) -&amp;gt;
       $form = $(e.currentTarget)
-      if $form.data(&amp;quot;ajax&amp;quot;)
+      if $form.data("ajax")
         e.preventDefault()
         $form.ajaxSubmit(success: @handleResponse, error: @handleError)
 
     handleResponse: (response, status, xhr, form) =&amp;gt;
       $(@el).html(@template(response))
 
-    handleError: (respon![Automate](/images/automate.gif &amp;quot;Automate&amp;quot;)se) =&amp;gt;
-      alert response.responseText&lt;/code&gt;&lt;/pre&gt;
+    handleError: (respon![Automate](/images/automate.gif "Automate")se) =&amp;gt;
+      alert response.responseText
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Let me explain the code, behind the scenes we have initialized our Backbone View shown above and binded the &amp;#8220;handleSubmit&amp;#8221; function to the form submit event.&lt;/p&gt;
+&lt;p&gt;Let me explain the code, behind the scenes we have initialized our Backbone View shown above and binded the "handleSubmit" function to the form submit event.&lt;/p&gt;
 
-&lt;p&gt;The handleSubmit function checks if the form has the &amp;#8220;data-ajax&amp;#8221; attribute and using the jQuery form plugin&amp;#8217;s API submits the form via AJAX.&lt;/p&gt;
+&lt;p&gt;The handleSubmit function checks if the form has the "data-ajax" attribute and using the jQuery form plugin's API submits the form via AJAX. &lt;/p&gt;
 
 &lt;p&gt;The server side code can look something like -&lt;/p&gt;
 
@@ -396,15 +407,17 @@ src: &amp;#39;**/*.coffee&amp;#39;,&lt;/code&gt;&lt;/pre&gt;
   else
     @name = params[:username]
   end
-end&lt;/code&gt;&lt;/pre&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The advantage of this approach is that the application will work even if JavaScript is disabled and also we can easily turn off AJAX by setting the &amp;#8220;data-ajax&amp;#8221; attribute to false in HTML, no JavaScript needs to change anywhere.&lt;/p&gt;
+&lt;p&gt;The advantage of this approach is that the application will work even if JavaScript is disabled and also we can easily turn off AJAX by setting the "data-ajax" attribute to false in HTML, no JavaScript needs to change anywhere.&lt;/p&gt;
 
-&lt;p&gt;That&amp;#8217;s it, using this simple method you can AJAXify your forms easily.&lt;/p&gt;
+&lt;p&gt;That's it, using this simple method you can AJAXify your forms easily.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Code is available on &lt;a href='https://github.com/rocky-jaiswal/templateapp'&gt;Github&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content>
+  &lt;li&gt;Code is available on &lt;a href="https://github.com/rocky-jaiswal/templateapp"&gt;Github&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
   </entry>
   <entry>
     <title>Puppet in a rush</title>
@@ -415,51 +428,53 @@ end&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first 3 months spent on discussions and so called &amp;#8220;requirement gathering&amp;#8221;. Now, with good developers on board we try to start programming from day two or three and try to deliver a working solution within the first month of project kickoff.&lt;/p&gt;
+    <summary type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the fir ...</summary>
+    <content type="html">&lt;p&gt;It is a good time to be a programmer now. Barriers are disappearing and technology is evolving not only quickly but also in the right direction. I remember when I started 10 years back, it was common for project to run for 12-18 months with the first 3 months spent on discussions and so called "requirement gathering". Now, with good developers on board we try to start programming from day two or three and try to deliver a working solution within the first month of project kickoff. &lt;/p&gt;
 
-&lt;p&gt;Within the last year itself, I did more projects on and off work than I can remember and each project carried its own development, testing and production environment. While trying to be agile yet robust, managing environments can be a pain. That is why I decided to look into &lt;a href='http://puppetlabs.com/'&gt;Puppet&lt;/a&gt; and gave it high priority on my list of things to learn in 2013.&lt;/p&gt;
+&lt;p&gt;Within the last year itself, I did more projects on and off work than I can remember and each project carried its own development, testing and production environment. While trying to be agile yet robust, managing environments can be a pain. That is why I decided to look into &lt;a href="http://puppetlabs.com/"&gt;Puppet&lt;/a&gt; and gave it high priority on my list of things to learn in 2013.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='Automate' src='/images/automate.gif' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/automate.gif" alt="Automate" title="Automate" /&gt;&lt;/p&gt;
 
 &lt;p&gt;While Puppet is pretty good, I had a hard time with the documentation and when you are an impatient guy like me you want everything served super hot and super quick. So this blog is dedicated to get you up and started with Puppet quickly, later you should learn more using the official documentation.&lt;/p&gt;
 
-&lt;p&gt;First things first, &lt;strong&gt;what is Puppet and why should you use it?&lt;/strong&gt; Puppet is a set of tools which enable you to setup a server by using a easy to write language that Puppet understands. Puppet makes setting up servers / environments super easy, as the Puppet configuration can be just copied and applied on any server. This also helps us in case of server crashes, server migrations etc. Also, it&amp;#8217;s pretty cool to setup a whole server just by running a command from the terminal. While one can also do this via a shell script it won&amp;#8217;t be an &lt;a href='http://en.wikipedia.org/wiki/Idempotence'&gt;idempotent&lt;/a&gt; and reusable solution.&lt;/p&gt;
+&lt;p&gt;First things first, &lt;strong&gt;what is Puppet and why should you use it?&lt;/strong&gt; Puppet is a set of tools which enable you to setup a server by using a easy to write language that Puppet understands. Puppet makes setting up servers / environments super easy, as the Puppet configuration can be just copied and applied on any server. This also helps us in case of server crashes, server migrations etc. Also, it's pretty cool to setup a whole server just by running a command from the terminal. While one can also do this via a shell script it won't be an &lt;a href="http://en.wikipedia.org/wiki/Idempotence"&gt;idempotent&lt;/a&gt; and reusable solution.&lt;/p&gt;
 
-&lt;p&gt;Next, Puppet comes in two flavors Open Source and Enterprise. The names tell the story so I won&amp;#8217;t do the details. Ofcourse, we will be using the open source version. Also Puppet works in two models, standalone and client-server. In the client-server mode, a server monitors and maintains the nodes (other servers) and standalone puppet is well standalone. Most projects work well with the standalone mode and unless you want to run a data center of your own you will do fine with the standalone mode.&lt;/p&gt;
+&lt;p&gt;Next, Puppet comes in two flavors Open Source and Enterprise. The names tell the story so I won't do the details. Ofcourse, we will be using the open source version. Also Puppet works in two models, standalone and client-server. In the client-server mode, a server monitors and maintains the nodes (other servers) and standalone puppet is well standalone. Most projects work well with the standalone mode and unless you want to run a data center of your own you will do fine with the standalone mode.&lt;/p&gt;
 
-&lt;p&gt;Ok, now lets get started with the Puppet lingo. If you come to think of it, a server is a collection of packages, services, files etc. and basically that is what Puppet provides you. These &amp;#8220;things&amp;#8221; are called resources, which we describe using Puppet&amp;#8217;s DSL (lingo / Domain Specific Language). Have a look at this &lt;a href='http://docs.puppetlabs.com/puppet_core_types_cheatsheet.pdf'&gt;cheat sheet&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ok, now lets get started with the Puppet lingo. If you come to think of it, a server is a collection of packages, services, files etc. and basically that is what Puppet provides you. These "things" are called resources, which we describe using Puppet's DSL (lingo / Domain Specific Language). Have a look at this &lt;a href="http://docs.puppetlabs.com/puppet_core_types_cheatsheet.pdf"&gt;cheat sheet&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;As the cheat sheet says, if you know just three resources - package, file and service you can setup a server easily. Using the DSL we describe the desired state of the server. For example, I want Python3 installed, Apache running and a certain file in my home folder. Using the DSL we describe this desired server setup and when we ask Puppet to apply this configuration, Puppet parses the DSL and does the job. You can run the setup as many time as you want without fearing loss of files or data.&lt;/p&gt;
 
-&lt;p&gt;Now, have a look at this &lt;a href='http://docs.puppetlabs.com/learning/ral.html'&gt;page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now, have a look at this &lt;a href="http://docs.puppetlabs.com/learning/ral.html"&gt;page&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;To organize our instructions / DSL we put the code in manifest files (.pp extension) and then apply the configuration using the command -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;puppet apply file1.pp&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;puppet apply file1.pp
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Before we look at some code, we need to understand a couple of more fundamentals namely classes and modules. Classes are a way to organize Puppet code, we put code realated to one aspect in one class. For example, code for Apache setup can be in the apache manifest class. On the other hand, modules are way to distribute code. If you follow Puppet&amp;#8217;s file and folder naming convention we can distribute manifests easily and use modules someone has already created (someone in the world would have installed MySql using Puppet right?) so we don&amp;#8217;t have to write code ourselves. Finally like all languages Puppet DSL has variables and conditionals.&lt;/p&gt;
+&lt;p&gt;Before we look at some code, we need to understand a couple of more fundamentals namely classes and modules. Classes are a way to organize Puppet code, we put code realated to one aspect in one class. For example, code for Apache setup can be in the apache manifest class. On the other hand, modules are way to distribute code. If you follow Puppet's file and folder naming convention we can distribute manifests easily and use modules someone has already created (someone in the world would have installed MySql using Puppet right?) so we don't have to write code ourselves. Finally like all languages Puppet DSL has variables and conditionals. &lt;/p&gt;
 
 &lt;p&gt;With this knowledge, let us look at a simple manifest (java.pp) -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;class dashboard::java {
 
-  package { &amp;quot;openjdk-7-jdk&amp;quot;: 
+  package { "openjdk-7-jdk": 
     ensure  =&amp;gt; present 
   }
 
-  package { &amp;quot;maven&amp;quot;: 
+  package { "maven": 
     ensure  =&amp;gt; present,
-    require =&amp;gt; Package[&amp;quot;openjdk-7-jdk&amp;quot;]
+    require =&amp;gt; Package["openjdk-7-jdk"]
   }
   
-}&lt;/code&gt;&lt;/pre&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;In the code above we define a &amp;#8220;java&amp;#8221; class under the namespace &amp;#8220;dashboard&amp;#8221; that is our project name. We then make sure two packages are installed - openjdk7 and maven. Since maven requires JDK we put that in as a &amp;#8220;requirement&amp;#8221;. There are four metaparameters that let you arrange resources in particular order - before, require, notify, and subscribe. See details &lt;a href='http://docs.puppetlabs.com/learning/ordering.html'&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the code above we define a "java" class under the namespace "dashboard" that is our project name. We then make sure two packages are installed - openjdk7 and maven. Since maven requires JDK we put that in as a "requirement". There are four metaparameters that let you arrange resources in particular order - before, require, notify, and subscribe. See details &lt;a href="http://docs.puppetlabs.com/learning/ordering.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;We can write similar manifest files for PostgreSql or nginx according to the stack we want. A simple google search will reveal pre-written modules which you can download, include and customize.&lt;/p&gt;
 
-&lt;p&gt;Talking of include, we wrote the &amp;#8220;java.pp&amp;#8221; class earlier but how do we run it. Usually we create separate manifests for all aspects we need and then create a main manifest file which includes these classes and we run the main manifest, which could look like -&lt;/p&gt;
+&lt;p&gt;Talking of include, we wrote the "java.pp" class earlier but how do we run it. Usually we create separate manifests for all aspects we need and then create a main manifest file which includes these classes and we run the main manifest, which could look like -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;class dashboard::production {
 
@@ -469,17 +484,19 @@ end&lt;/code&gt;&lt;/pre&gt;
   include dashboard::postgresql
 
   Exec {
-    path =&amp;gt; &amp;quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&amp;quot;,
+    path =&amp;gt; "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
   }
-}&lt;/code&gt;&lt;/pre&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;To run the main manifest we can write a shell script -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;#!/bin/sh
 
-sudo puppet apply --modulepath=modules -v -e &amp;#39;include dashboard::production&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+sudo puppet apply --modulepath=modules -v -e 'include dashboard::production'
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Importantly, a word about modules. See the heading &amp;#8220;Module Structure&amp;#8221; &lt;a href='http://docs.puppetlabs.com/learning/modules1.html'&gt;here&lt;/a&gt;. Simply put, we want a directory structure which follows some convention like this -&lt;/p&gt;
+&lt;p&gt;Importantly, a word about modules. See the heading "Module Structure" &lt;a href="http://docs.puppetlabs.com/learning/modules1.html"&gt;here&lt;/a&gt;. Simply put, we want a directory structure which follows some convention like this - &lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;my_module — **This outermost directory’s name matches the name of the module**
 --&amp;gt; manifests/ — **Contains all of the manifests in the module**
@@ -488,7 +505,8 @@ sudo puppet apply --modulepath=modules -v -e &amp;#39;include dashboard::product
     --&amp;gt; my_defined_type.pp — **Contains a defined type named my_module::my_defined_type**
   --&amp;gt; files/
     --&amp;gt; static/
-      ...&lt;/code&gt;&lt;/pre&gt;
+      ...
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;On our fresh Ubuntu server now we just need to run a few commands -&lt;/p&gt;
 
@@ -508,27 +526,27 @@ $ cd dashboard-devops
 
 $ chmod u+x setup.sh
 
-$ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
+$ ./setup.sh
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The first four commands install the puppet standalone module. Then via git we clone our puppet code and then we run the setup. That&amp;#8217;s it! In a few commands, we have a ready to use server.&lt;/p&gt;
+&lt;p&gt;The first four commands install the puppet standalone module. Then via git we clone our puppet code and then we run the setup. That's it! In a few commands, we have a ready to use server. &lt;/p&gt;
 
 &lt;p&gt;Before signing off, it is important to mention -&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href='http://www.opscode.com/chef/'&gt;Chef&lt;/a&gt; : Puppet&amp;#8217;s main rival. I found the documentation hard to read and find so I went with Puppet but you may want to give it a look.&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li&gt;
-&lt;p&gt;&lt;a href='http://www.vagrantup.com/'&gt;Vagrant&lt;/a&gt; : While Puppet will setup your server, Vagrant will make it super easy to spin up a new VM by running a command at the terminal. Also, Vagrant and Puppet are good friends (i.e. they integrate easily)&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li&gt;
-&lt;p&gt;&lt;a href='https://github.com/capistrano/capistrano'&gt;Capistrano&lt;/a&gt; : You have setup a server via a command line, now you don&amp;#8217;t want to deploy with anything apart from a command line. See my earlier blog post for using Capistrano for Java projects.&lt;/p&gt;
-&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href="http://www.opscode.com/chef/"&gt;Chef&lt;/a&gt; : Puppet's main rival. I found the documentation hard to read and find so I went with Puppet but you may want to give it a look.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href="http://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; : While Puppet will setup your server, Vagrant will make it super easy to spin up a new VM by running a command at the terminal. Also, Vagrant and Puppet are good friends (i.e. they integrate easily)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href="https://github.com/capistrano/capistrano"&gt;Capistrano&lt;/a&gt; : You have setup a server via a command line, now you don't want to deploy with anything apart from a command line. See my earlier blog post for using Capistrano for Java projects.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I made a sample Puppet project which is available on &lt;a href='https://github.com/rocky-jaiswal/dashboard-devops'&gt;github&lt;/a&gt;. Please contribute and fix my mistakes if you find any.&lt;/p&gt;</content>
+&lt;p&gt;I made a sample Puppet project which is available on &lt;a href="https://github.com/rocky-jaiswal/dashboard-devops"&gt;github&lt;/a&gt;. Please contribute and fix my mistakes if you find any.&lt;/p&gt;
+</content>
   </entry>
   <entry>
     <title>Building Single Page Applications and CORS</title>
@@ -539,76 +557,83 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Rocky Jaiswal</name>
     </author>
-    <summary type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it&amp;#8217;s about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href='/2012/08/26/accessing_server_data_from_a_native_android_app.html'&gt;here&lt;/a&gt; and it&amp;#8217;s about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a web application and a &amp;#8220;native&amp;#8221; mobile application (atleast one that works well on tablets).&lt;/p&gt;
+    <summary type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it's about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it  ...</summary>
+    <content type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it's about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a web application and a "native" mobile application (atleast one that works well on tablets).&lt;/p&gt;
 
-&lt;p&gt;Building web applications that also work on tablets can be done in many ways but over a period of time I have realized it&amp;#8217;s good to create separate applications for server side and client side logic. While the server side serves JSON (and talks to the data store) the client side takes care of rendering the UI.&lt;/p&gt;
+&lt;p&gt;Building web applications that also work on tablets can be done in many ways but over a period of time I have realized it's good to create separate applications for server side and client side logic. While the server side serves JSON (and talks to the data store) the client side takes care of rendering the UI. &lt;/p&gt;
 
-&lt;p&gt;While both of these jobs can be done in a single Play / Rails application the advantage of the two component approach is that the client side app can be easily packaged later into a PhoneGap application and served as a native app. It also makes sure that the app is written cleanly and the sepraration of concerns is maintained. Ofcourse, this approach has it&amp;#8217;s disadvantages as it is not a very scalable way to write code but if the requirement is to create simple &amp;#8220;Single Page Applications&amp;#8221; it works well.&lt;/p&gt;
+&lt;p&gt;While both of these jobs can be done in a single Play / Rails application the advantage of the two component approach is that the client side app can be easily packaged later into a PhoneGap application and served as a native app. It also makes sure that the app is written cleanly and the sepraration of concerns is maintained. Ofcourse, this approach has it's disadvantages as it is not a very scalable way to write code but if the requirement is to create simple "Single Page Applications" it works well.&lt;/p&gt;
 
 &lt;p&gt;So in this blog we will talk about such an application which uses Scala + Play on the server side and on the client side we will use my favorite stack of Require.js and Backbone.js.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href='http://yeoman.io'&gt;Yeoman.io&lt;/a&gt; is a collection of tools which makes building client heavy application easy. It takes care of creating, building, minifying our client side code among other things. You can head over to &lt;a href='http://yeoman.io'&gt;Yeoman.io&amp;#8217;s site&lt;/a&gt; to learn to create a simple web application and can easily add libraries like Backbone by running the following command -&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://yeoman.io"&gt;Yeoman.io&lt;/a&gt; is a collection of tools which makes building client heavy application easy. It takes care of creating, building, minifying our client side code among other things. You can head over to &lt;a href="http://yeoman.io"&gt;Yeoman.io's site&lt;/a&gt; to learn to create a simple web application and can easily add libraries like Backbone by running the following command -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;bower install --save backbone&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;bower install --save backbone
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;As evident, adding libraries / components with Yeoman is trivial and the application it builds out the box uses Require.js etc. which makes life easy. Once you run &amp;#8220;grunt server&amp;#8221; it serves your application through a node.js server and developing and testing the app is also simplified due to node.js&amp;#8217;s speed and automatic refresh.&lt;/p&gt;
+&lt;p&gt;As evident, adding libraries / components with Yeoman is trivial and the application it builds out the box uses Require.js etc. which makes life easy. Once you run "grunt server" it serves your application through a node.js server and developing and testing the app is also simplified due to node.js's speed and automatic refresh.&lt;/p&gt;
 
 &lt;p&gt;Moving back to the server side (Play) we want our server to just send over JSON so our controller could look something like -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;def data = Action {
-  Ok(Json.obj(&amp;quot;message&amp;quot; -&amp;gt; (&amp;quot;Hello World!&amp;quot;) )) // Or get data from DB backed model etc.
-}&lt;/code&gt;&lt;/pre&gt;
+  Ok(Json.obj("message" -&amp;gt; ("Hello World!") )) // Or get data from DB backed model etc.
+}
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;With the correct routing added if we go to &lt;strong&gt;http://localhost:9000/data&lt;/strong&gt; we get a JSON greeting (our Play application runs on port 9000).&lt;/p&gt;
 
 &lt;p&gt;Now on our client side, which is running on the Node.js server (and can later be packaged in PhoneGap) we need to access this data and maybe display it. Without going into the details of Backbone we can define our model as -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;define [&amp;quot;jquery&amp;quot;, &amp;quot;underscore&amp;quot;, &amp;quot;backbone&amp;quot;], ($, _, Backbone) -&amp;gt;
-  &amp;#39;use strict&amp;#39;
+&lt;pre&gt;&lt;code&gt;define ["jquery", "underscore", "backbone"], ($, _, Backbone) -&amp;gt;
+  'use strict'
   
   class RemoteModel extends Backbone.Model
 
     url: -&amp;gt;
-      &amp;quot;http://localhost:9000/data&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+      "http://localhost:9000/data"
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And for the Backbone View -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;define [&amp;quot;jquery&amp;quot;, &amp;quot;underscore&amp;quot;, &amp;quot;backbone&amp;quot;], ($, _, Backbone) -&amp;gt;
-  &amp;#39;use strict&amp;#39;
+&lt;pre&gt;&lt;code&gt;define ["jquery", "underscore", "backbone"], ($, _, Backbone) -&amp;gt;
+  'use strict'
   
   class RemoteView extends Backbone.View
     
-    el: &amp;quot;.remote-message&amp;quot;
+    el: ".remote-message"
 
     render: -&amp;gt;
       @model.fetch({async: false})
-      $(@el).html(JSON.stringify @model)&lt;/code&gt;&lt;/pre&gt;
+      $(@el).html(JSON.stringify @model)
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now when we do -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;require([&amp;#39;remoteview&amp;#39;, &amp;#39;remotemodel&amp;#39;, &amp;#39;jquery&amp;#39;, &amp;#39;bootstrap&amp;#39;], function (RemoteView, RemoteModel, $) {
-    &amp;#39;use strict&amp;#39;;
+&lt;pre&gt;&lt;code&gt;require(['remoteview', 'remotemodel', 'jquery', 'bootstrap'], function (RemoteView, RemoteModel, $) {
+    'use strict';
 
     $(function () {
         var model = new RemoteModel();
         new RemoteView({model: model}).render();
     });
-});&lt;/code&gt;&lt;/pre&gt;
+});
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We should see the JSON from the server on our client application. Ofcourse, this won&amp;#8217;t work as the Node.js server is different from the Play server and security policies do now allow cross-origin requests. These restrictions prevent a client-side Web application running from one server from obtaining data retrieved from another server (which is a good thing) but in our case we want this to be allowed.&lt;/p&gt;
+&lt;p&gt;We should see the JSON from the server on our client application. Ofcourse, this won't work as the Node.js server is different from the Play server and security policies do now allow cross-origin requests. These restrictions prevent a client-side Web application running from one server from obtaining data retrieved from another server (which is a good thing) but in our case we want this to be allowed.&lt;/p&gt;
 
-&lt;p&gt;So we head over to &lt;a href='http://www.w3.org/TR/cors/'&gt;W3C site&lt;/a&gt; to see how this can be enabled. All we need to do is to add this header to our Play server&amp;#8217;s response -&lt;/p&gt;
+&lt;p&gt;So we head over to &lt;a href="http://www.w3.org/TR/cors/"&gt;W3C site&lt;/a&gt; to see how this can be enabled. All we need to do is to add this header to our Play server's response -&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;ACCESS_CONTROL_ALLOW_ORIGIN: &amp;quot;http://localhost:8000&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;ACCESS_CONTROL_ALLOW_ORIGIN: "http://localhost:8000"
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We allow requests from &amp;#8220;http://localhost:8000&amp;#8221; since our client side application is running there, in case we have to PhoneGap the app there is no server on the client side so we will need to allow the &amp;#8220;null&amp;#8221; origin as well (trivial to do).&lt;/p&gt;
+&lt;p&gt;We allow requests from "http://localhost:8000" since our client side application is running there, in case we have to PhoneGap the app there is no server on the client side so we will need to allow the "null" origin as well (trivial to do). &lt;/p&gt;
 
 &lt;p&gt;Now to add this header to our Play application, we could do something like this -&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;def data = Action {
-  Ok(Json.obj(&amp;quot;message&amp;quot; -&amp;gt; (&amp;quot;Hello from Play!&amp;quot;) )).withHeaders(ACCESS_CONTROL_ALLOW_ORIGIN -&amp;gt; &amp;quot;http://localhost:8000&amp;quot;)
-}&lt;/code&gt;&lt;/pre&gt;
+  Ok(Json.obj("message" -&amp;gt; ("Hello from Play!") )).withHeaders(ACCESS_CONTROL_ALLOW_ORIGIN -&amp;gt; "http://localhost:8000")
+}
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Of course, adding the header to each and every Action is a pain so we can simply do this in our Global class -&lt;/p&gt;
 
@@ -619,17 +644,19 @@ $ ./setup.sh&lt;/code&gt;&lt;/pre&gt;
    */
   override def doFilter(action: EssentialAction): EssentialAction = EssentialAction { request =&amp;gt;
     action.apply(request).map(_.withHeaders(
-      ACCESS_CONTROL_ALLOW_ORIGIN -&amp;gt; &amp;quot;http://localhost:8000&amp;quot;
+      ACCESS_CONTROL_ALLOW_ORIGIN -&amp;gt; "http://localhost:8000"
     ))
   }
-}&lt;/code&gt;&lt;/pre&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;That&amp;#8217;s it! Our server side JSON can now be used on our client app.&lt;/p&gt;
+&lt;p&gt;That's it! Our server side JSON can now be used on our client app.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='Yeoman and Play' src='/images/yeoman_and_play.png' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/yeoman_and_play.png" alt="Yeoman and Play" title="Yeoman and Play" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now, for the production setup, we can serve our client side application from plain NGINX (after buiding it from Yeoman/Grunt) and the same code can be served in a PhoneGap application as well in case we want a more &amp;#8220;native&amp;#8221; application. The Play server meanwhile serves both these application from a sigle (or clustered) instance and we get awesome &lt;a href='http://www.techempower.com/blog/2013/03/28/framework-benchmarks/'&gt;speed&lt;/a&gt; as well.&lt;/p&gt;
+&lt;p&gt;Now, for the production setup, we can serve our client side application from plain NGINX (after buiding it from Yeoman/Grunt) and the same code can be served in a PhoneGap application as well in case we want a more "native" application. The Play server meanwhile serves both these application from a sigle (or clustered) instance and we get awesome &lt;a href="http://www.techempower.com/blog/2013/03/28/framework-benchmarks/"&gt;speed&lt;/a&gt; as well.&lt;/p&gt;
 
-&lt;p&gt;p.s. Play here can be substituted with Rails as well.&lt;/p&gt;</content>
+&lt;p&gt;p.s. Play here can be substituted with Rails as well.&lt;/p&gt;
+</content>
   </entry>
 </feed>

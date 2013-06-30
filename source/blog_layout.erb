@@ -9,7 +9,7 @@
           <div id="main" role="main">
             <article>
               <h2 style="padding-bottom: 10px;">
-                  <span class="color-orange"><%= current_article.title %></span> 
+                  <span class="highlighted"><%= current_article.title %></span> 
                   <span><%= current_article.date.strftime('%b %e %Y') %></span>
               </h2>
               <div class="post">
@@ -40,7 +40,9 @@
             </article>
           </div>
         </div>
-        <%= partial "sidebar" %>
+        <div class="span3">
+          <%= partial "sidebar" %>
+        </div>
       </div>
     </div>
   </body>

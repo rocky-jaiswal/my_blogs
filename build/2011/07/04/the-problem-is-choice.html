@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8" />
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/github.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/punchable.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="/javascripts/jquery.js" type="text/javascript"></script>
-  <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+  <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
   <script src="/javascripts/highlight.pack.js" type="text/javascript"></script>
 </head>
   <body>
@@ -28,33 +28,33 @@
           <div id="main" role="main">
             <article>
               <h2 style="padding-bottom: 10px;">
-                  <span class="color-orange">The problem is choice</span> 
+                  <span class="highlighted">The problem is choice</span> 
                   <span>Jul  4 2011</span>
               </h2>
               <div class="post">
-                <p>One of my favorite dialog exchange in movies is the one between Neo and the Architect towards the end of <strong>Matrix Reloaded</strong>. Who can forget - &#8221;<a href='http://www.leesmovieinfo.net/special/MatrixReloadedSpeech1.php' target='_blank'>Your life is the sum of a remainder of an unbalanced equation inherent to the programming of the matrix.</a>.&#8221; In this conversation Neo also remarks - &#8220;Choice, the problem is choice.&#8221;</p>
+                <p>One of my favorite dialog exchange in movies is the one between Neo and the Architect towards the end of <strong>Matrix Reloaded</strong>. Who can forget - "<a href="http://www.leesmovieinfo.net/special/MatrixReloadedSpeech1.php" target="_blank">Your life is the sum of a remainder of an unbalanced equation inherent to the programming of the matrix.</a>." In this conversation Neo also remarks - "Choice, the problem is choice."</p>
 
-<p>Last year I was giving a client interview and the client asked me if I would use Stored Procedures for queries or use an abstraction like Hibernate to interact with the database. My answer was Hibernate. We discussed the pros and cons of each option and while we knew that Stored Procs would be a lot faster in comparison to Hibernate queries, Hibernate still enables me to write clean and testable code.</p>
+<p>Last year I was giving a client interview and the client asked me if I would use Stored Procedures for queries or use an abstraction like Hibernate to interact with the database. My answer was Hibernate. We discussed the pros and cons of each option and while we knew that Stored Procs would be a lot faster in comparison to Hibernate queries, Hibernate still enables me to write clean and testable code. </p>
 
-<p>When we write software we are face choices every day, day in and day out. From a simple &#8220;What should I name this method&#8221; to a broader &#8220;Should I use X library or Y&#8221;. In the beginning of a project the choices are even harder, should I use Java or Ruby or .Net or Scala for example.</p>
+<p>When we write software we are face choices every day, day in and day out. From a simple "What should I name this method" to a broader "Should I use X library or Y". In the beginning of a project the choices are even harder, should I use Java or Ruby or .Net or Scala for example. </p>
 
 <p>Personally, based of experience, I now follow a few guidelines when I face these choices -</p>
 
 <p><strong>It is unit testable?</strong></p>
 
-<p>This is one of the most important factors that I consider when choosing one technology over another. Over the years as a software developer I have learned one thing - <strong>the cost of maintaining software is much much higher than developing it</strong>. I am sure after two to three years, someone will be trying to understand the code that I write today and refactor/re-engineer it. Unit tests for my code today will make the future developers&#8217; task infinitely easier than what it would be if my code does not have unit tests. Remember the granularity of unit tests is also the degree of maintainability. Unit testing not only makes the code stable and predictable but also infinitely maintainable.</p>
+<p>This is one of the most important factors that I consider when choosing one technology over another. Over the years as a software developer I have learned one thing - <strong>the cost of maintaining software is much much higher than developing it</strong>. I am sure after two to three years, someone will be trying to understand the code that I write today and refactor/re-engineer it. Unit tests for my code today will make the future developers' task infinitely easier than what it would be if my code does not have unit tests. Remember the granularity of unit tests is also the degree of maintainability. Unit testing not only makes the code stable and predictable but also infinitely maintainable.</p>
 
 <p>This is also one of my major gripes with Stored Procedure. Also if my application logic is lets say half in Java and half in Stored Procedures (and I have done this mistake myself) it would a pain to enhance / bug fix that software.</p>
 
 <p><strong>Use as small a technology stack as possible</strong></p>
 
-<p>If possible and if you are not dealing with huge traffic try to keep the technology stack as minimal as possible. Of course, some programming languages do somethings well, like Adobe Flex for rich UI intensive applications and Scala for high concurrency. So for a highly concurrent and rich web app I can mix and match Scala and Flex. But one should avoid adding more programming languages / software unless one really needs it for a single product.</p>
+<p>If possible and if you are not dealing with huge traffic try to keep the technology stack as minimal as possible. Of course, some programming languages do somethings well, like Adobe Flex for rich UI intensive applications and Scala for high concurrency. So for a highly concurrent and rich web app I can mix and match Scala and Flex. But one should avoid adding more programming languages / software unless one really needs it for a single product. </p>
 
 <p>For example, you may know both Perl and Java and for a product you can create the data loading process in Perl and the web application in Java but imagine what it will take to maintain that project. It will either be just you working on that product till its EOL or your manager will have to hire two guys to maintain it. Maintenance of multi-technology projects is generally a nightmare, it additionally increases complexity while deployment.</p>
 
 <p><strong>No specific software / platform dependency</strong></p>
 
-<p>In the beginning of my career, I developed a mapping applications like Google Maps. At that time IE6 was the only browser used within the enterprise and the rest of the world. Our entire application worked on a Map which was rendered on IE6 and displayed in a proprietary ActiveX plug-in with a JavaScript API. I now believe that this application would either have been binned / re-written / or will be forcing the organization to stick to IE6. This is just after 5 years after the application&#8217;s go-live date.</p>
+<p>In the beginning of my career, I developed a mapping applications like Google Maps. At that time IE6 was the only browser used within the enterprise and the rest of the world. Our entire application worked on a Map which was rendered on IE6 and displayed in a proprietary ActiveX plug-in with a JavaScript API. I now believe that this application would either have been binned / re-written / or will be forcing the organization to stick to IE6. This is just after 5 years after the application's go-live date.</p>
 
 <p>Any technology that we bind our software with will become obsolete in few years for sure. It is always better to write code even if it takes more time in a platform independent way. This is another factor against stored procedures or any database dependent code. What if MS SQL Server raises its license price for a new version and the organization you are working with decides to go with Sybase (for example)? All your Stored Procedures have to be re-written/re-tested on the new database which is a huge cost. Do yourself and your organization a favor and do not stick your code to a single platform.</p>
 
@@ -62,11 +62,12 @@
 
 <p>There are the day-to-day design problems we face. Most of the times we get the choices - I can do X in 2 ways. A is easy to do but not maintainable, B is not so easy to do but will jack my development time by two sprints. I guess I will go with A and get it done with. Some brave developers though will choose B knowing that they may face the wrath of the Product Owner and it will take the whole project back to the design board but I can say it beyond an iota of doubt that one should always choose B.</p>
 
-<p>Bad software isn&#8217;t written in one day. It written when someday one small compromise is made in design to save time and the next day another minor compromise is made in a small cubicle. After two years of software use, the same management who gives you the go ahead to cut corners will say - &#8220;Who wrote this piece of s*** software!!&#8221; Don&#8217;t fall into this trap. You will get only one chance to develop a piece of software on a clean slate, do it in the best possible manner without any compromise. Even one compromise will make the whole product unstable, no chain can be stronger than the weakest link.</p>
+<p>Bad software isn't written in one day. It written when someday one small compromise is made in design to save time and the next day another minor compromise is made in a small cubicle. After two years of software use, the same management who gives you the go ahead to cut corners will say - "Who wrote this piece of s*** software!!" Don't fall into this trap. You will get only one chance to develop a piece of software on a clean slate, do it in the best possible manner without any compromise. Even one compromise will make the whole product unstable, no chain can be stronger than the weakest link.</p>
 
 <p><strong>Clean code over anything else</strong></p>
 
-<p>When coding follow OO principles (if you are using a OO language i.e.), name you methods and variables properly even if the name is very long, keep the cyclomatic complexity of a method to the minimum, follow TDD if you can. We all know this list, but we need to decide on a bare minimum and pin it to our desks or on our minds. Let this be a &#8220;No Compromise&#8221; list which improves as you gain experience. Your Product Owner may not know this, the user will never care for it as long as it works. But remember the old saying - &#8220;Write code as if you know that the guy who will maintain it is a psychopathic axe murderer who knows where you live.&#8221; :)</p>
+<p>When coding follow OO principles (if you are using a OO language i.e.), name you methods and variables properly even if the name is very long, keep the cyclomatic complexity of a method to the minimum, follow TDD if you can. We all know this list, but we need to decide on a bare minimum and pin it to our desks or on our minds. Let this be a "No Compromise" list which improves as you gain experience. Your Product Owner may not know this, the user will never care for it as long as it works. But remember the old saying - "Write code as if you know that the guy who will maintain it is a psychopathic axe murderer who knows where you live." :)</p>
+
               </div>
               <hr/>
               <div id="disqus_thread"></div>
@@ -93,212 +94,211 @@
             </article>
           </div>
         </div>
-        <div id="sidebar">
-  <div class="span3">
-    <h2>
-      <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
-      <br/>
-      <a href="/about">About</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
-      <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="/videos">Videos</a>
-    </h2>
-    <hr/>
-    <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
-    <div class="posts">
-      <ol>
-        
-          <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
-        
-          <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
-        
-          <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
-        
-          <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
-        
-          <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
-        
-          <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
-        
-          <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
-        
-          <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
-        
-          <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
-        
-          <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
-        
-          <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
-        
-          <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
-        
-          <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
-        
-          <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
-        
-          <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
-        
-          <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
-        
-          <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
-        
-          <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
-        
-          <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
-        
-          <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
-        
-          <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
-        
-          <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
-        
-          <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
-        
-          <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
-        
-          <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
-        
-          <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
-        
-          <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
-        
-          <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
-        
-          <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
-        
-          <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
-        
-          <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
-        
-          <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
-        
-          <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
-        
-          <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
-        
-          <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
-        
-          <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
-        
-          <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
-        
-          <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
-        
-          <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
-        
-      </ol>
-    </div>
-    <div class="tags">
-      <ol>
-        
-          <li><a href="/tags/git.html">Git (1)</a></li>
-        
-          <li><a href="/tags/agile.html">Agile (8)</a></li>
-        
-          <li><a href="/tags/jboss.html">JBoss (2)</a></li>
-        
-          <li><a href="/tags/jruby.html">JRuby (11)</a></li>
-        
-          <li><a href="/tags/cloud.html">Cloud (1)</a></li>
-        
-          <li><a href="/tags/java.html">Java (9)</a></li>
-        
-          <li><a href="/tags/maven.html">Maven (1)</a></li>
-        
-          <li><a href="/tags/jquery.html">jQuery (1)</a></li>
-        
-          <li><a href="/tags/jpa.html">JPA (1)</a></li>
-        
-          <li><a href="/tags/spring.html">Spring (2)</a></li>
-        
-          <li><a href="/tags/ruby.html">Ruby (8)</a></li>
-        
-          <li><a href="/tags/general.html">General (7)</a></li>
-        
-          <li><a href="/tags/rails.html">Rails (6)</a></li>
-        
-          <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
-        
-          <li><a href="/tags/linux.html">Linux (1)</a></li>
-        
-          <li><a href="/tags/programming.html">Programming (1)</a></li>
-        
-          <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
-        
-          <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
-        
-          <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
-        
-          <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
-        
-          <li><a href="/tags/solr.html">Solr (2)</a></li>
-        
-          <li><a href="/tags/jboss.html">Jboss (1)</a></li>
-        
-          <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
-        
-          <li><a href="/tags/backbone.html">Backbone (6)</a></li>
-        
-          <li><a href="/tags/android.html">Android (1)</a></li>
-        
-          <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
-        
-          <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
-        
-          <li><a href="/tags/scala.html">Scala (2)</a></li>
-        
-          <li><a href="/tags/akka.html">Akka (1)</a></li>
-        
-          <li><a href="/tags/node-js.html">Node.js (1)</a></li>
-        
-          <li><a href="/tags/require-js.html">Require.js (2)</a></li>
-        
-          <li><a href="/tags/play.html">Play (1)</a></li>
-        
-          <li><a href="/tags/puppet.html">Puppet (1)</a></li>
-        
-          <li><a href="/tags/devops.html">DevOps (1)</a></li>
-        
-          <li><a href="/tags/scrum.html">Scrum (1)</a></li>
-        
-          <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
-        
-      </ol>
-    </div>
-    <hr/>
+        <div class="span3">
+          <div id="sidebar">
+  <h3>
+    <!--<img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>-->
+    <br/>
+    <a href="/about">About</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
+    <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="/videos">Videos</a>
+  </h3>
+  <hr/>
+  <h3><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h3>
+  <div class="posts">
+    <ol>
+      
+        <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
+      
+        <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
+      
+        <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
+      
+        <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
+      
+        <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
+      
+        <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
+      
+        <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
+      
+        <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
+      
+        <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
+      
+        <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
+      
+        <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
+      
+        <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
+      
+        <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
+      
+        <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
+      
+        <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
+      
+        <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
+      
+        <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
+      
+        <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
+      
+        <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
+      
+        <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
+      
+        <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
+      
+        <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
+      
+        <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
+      
+        <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
+      
+        <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
+      
+        <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
+      
+        <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
+      
+        <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
+      
+        <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
+      
+        <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
+      
+        <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
+      
+        <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
+      
+        <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
+      
+        <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
+      
+        <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
+      
+        <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
+      
+        <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
+      
+        <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
+      
+        <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
+      
+    </ol>
   </div>
+  <div class="tags">
+    <ol>
+      
+        <li><a href="/tags/git.html">Git (1)</a></li>
+      
+        <li><a href="/tags/agile.html">Agile (8)</a></li>
+      
+        <li><a href="/tags/jboss.html">JBoss (2)</a></li>
+      
+        <li><a href="/tags/jruby.html">JRuby (11)</a></li>
+      
+        <li><a href="/tags/cloud.html">Cloud (1)</a></li>
+      
+        <li><a href="/tags/java.html">Java (9)</a></li>
+      
+        <li><a href="/tags/maven.html">Maven (1)</a></li>
+      
+        <li><a href="/tags/jquery.html">jQuery (1)</a></li>
+      
+        <li><a href="/tags/jpa.html">JPA (1)</a></li>
+      
+        <li><a href="/tags/spring.html">Spring (2)</a></li>
+      
+        <li><a href="/tags/ruby.html">Ruby (8)</a></li>
+      
+        <li><a href="/tags/general.html">General (7)</a></li>
+      
+        <li><a href="/tags/rails.html">Rails (6)</a></li>
+      
+        <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
+      
+        <li><a href="/tags/linux.html">Linux (1)</a></li>
+      
+        <li><a href="/tags/programming.html">Programming (1)</a></li>
+      
+        <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
+      
+        <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
+      
+        <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
+      
+        <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
+      
+        <li><a href="/tags/solr.html">Solr (2)</a></li>
+      
+        <li><a href="/tags/jboss.html">Jboss (1)</a></li>
+      
+        <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
+      
+        <li><a href="/tags/backbone.html">Backbone (6)</a></li>
+      
+        <li><a href="/tags/android.html">Android (1)</a></li>
+      
+        <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
+      
+        <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
+      
+        <li><a href="/tags/scala.html">Scala (2)</a></li>
+      
+        <li><a href="/tags/akka.html">Akka (1)</a></li>
+      
+        <li><a href="/tags/node-js.html">Node.js (1)</a></li>
+      
+        <li><a href="/tags/require-js.html">Require.js (2)</a></li>
+      
+        <li><a href="/tags/play.html">Play (1)</a></li>
+      
+        <li><a href="/tags/puppet.html">Puppet (1)</a></li>
+      
+        <li><a href="/tags/devops.html">DevOps (1)</a></li>
+      
+        <li><a href="/tags/scrum.html">Scrum (1)</a></li>
+      
+        <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
+      
+    </ol>
+  </div>
+  <hr/>
 </div>
 
 <script type="text/javascript">
@@ -324,6 +324,7 @@
     });
   });
 </script>
+        </div>
       </div>
     </div>
   </body>

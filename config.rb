@@ -6,7 +6,7 @@ activate :blog do |blog|
   blog.permalink = ":year/:month/:day/:title.html"
   blog.sources = ":year-:month-:day-:title.html"
   blog.taglink = "tags/:tag.html"
-  blog.summary_separator = /(READMORE)/
+  blog.summary_generator = Proc.new { |b, l, e| b.body[0..250] + " ..." }
   blog.summary_length = 250
   blog.year_link = ":year.html"
   blog.month_link = ":year/:month.html"

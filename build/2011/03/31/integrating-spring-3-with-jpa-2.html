@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8" />
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <link href="/stylesheets/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/github.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/punchable.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/app.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="/javascripts/jquery.js" type="text/javascript"></script>
-  <script src="/javascripts/bootstrap.js" type="text/javascript"></script>
+  <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
   <script src="/javascripts/highlight.pack.js" type="text/javascript"></script>
 </head>
   <body>
@@ -28,70 +28,75 @@
           <div id="main" role="main">
             <article>
               <h2 style="padding-bottom: 10px;">
-                  <span class="color-orange">Integrating Spring 3 with JPA 2</span> 
+                  <span class="highlighted">Integrating Spring 3 with JPA 2</span> 
                   <span>Mar 31 2011</span>
               </h2>
               <div class="post">
                 <p>I have been working on Grails recently and am amazed with the productivity gains it gives. Grails is great for giving you a kick-start, it uses convention over configuration and gives you things such as ORM, transaction management, dependency injection among others, without you writing a single line of configuration.</p>
 
-<p>I decided to mimic the Grails behavior in a Spring + Hibernate application. To stay on the cutting edge I decided to use Hibernate 3.5 and Spring 3, to top it up I decided to use Hibernate as an implementation of JPA 2. Recently released, Hibernate 3.5 combines the Hibernate Annotations and the Hibernate Entity-Manager projects into Hibernate-Core, so basically its just one jar which provides the full implementation of JPA 2. For advantages of using JPA 2 see the excellent presentation here - <a href='http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf'>http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf</a></p>
+<p>I decided to mimic the Grails behavior in a Spring + Hibernate application. To stay on the cutting edge I decided to use Hibernate 3.5 and Spring 3, to top it up I decided to use Hibernate as an implementation of JPA 2. Recently released, Hibernate 3.5 combines the Hibernate Annotations and the Hibernate Entity-Manager projects into Hibernate-Core, so basically its just one jar which provides the full implementation of JPA 2. For advantages of using JPA 2 see the excellent presentation here - <a href="http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf">http://jazoon.com/portals/0/Content/ArchivWebsite/jazoon.com/jazoon09/download/presentations/8461.pdf</a></p>
 
 <p><strong>Integrating Hibernate with JPA 2</strong></p>
 
-<p>As usual, I started with a vanilla maven web project and started adding dependencies, the first being Hibernate -</p>
+<p>As usual, I started with a vanilla maven web project and started adding dependencies, the first being Hibernate - </p>
 
 <pre><code>&lt;dependency&gt;
 &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
 &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
 &lt;version&gt;3.5.4-Final&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 
-<p>This dependency is found in the repository - <a href='https://repository.jboss.org/nexus/content/groups/public/'>https://repository.jboss.org/nexus/content/groups/public/</a> as mentioned on the Hibernate site. After a lot of pain I found that this jar did not match the jar you from <a href='http://sourceforge.net/projects/hibernate/files/hibernate3'>http://sourceforge.net/projects/hibernate/files/hibernate3</a>. So, I had to manually install the jar in my local repository (remember, I found this out after setting up JPA, Spring etc. which I will cover next). Similarly, in the JBoss repository I could not find the JPA 2 specfication jar (again available if you download the Hibernate distribution from sourceforge).I had to install that manually as well. After all this jiggery-pokery and some more, I somehow got Hibernate and JPA working.</p>
+<p>This dependency is found in the repository - <a href="https://repository.jboss.org/nexus/content/groups/public/">https://repository.jboss.org/nexus/content/groups/public/</a> as mentioned on the Hibernate site. After a lot of pain I found that this jar did not match the jar you from <a href="http://sourceforge.net/projects/hibernate/files/hibernate3">http://sourceforge.net/projects/hibernate/files/hibernate3</a>. So, I had to manually install the jar in my local repository (remember, I found this out after setting up JPA, Spring etc. which I will cover next). Similarly, in the JBoss repository I could not find the JPA 2 specfication jar (again available if you download the Hibernate distribution from sourceforge).I had to install that manually as well. After all this jiggery-pokery and some more, I somehow got Hibernate and JPA working.</p>
 
-<p>JPA needs a persistence.xml file in META-INF folder in the classpath. I added META-INF folder in source/main/resources with persistence.xml reading as -</p>
+<p>JPA needs a persistence.xml file in META-INF folder in the classpath. I added META-INF folder in source/main/resources with persistence.xml reading as - </p>
 
-<pre><code>&lt;persistence xmlns=&quot;http://java.sun.com/xml/ns/persistence&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&quot;
-    version=&quot;2.0&quot;&gt;
-	&lt;persistence-unit name=&quot;postage&quot; transaction-type=&quot;RESOURCE_LOCAL&quot;&gt;
+<pre><code>&lt;persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0"&gt;
+	&lt;persistence-unit name="postage" transaction-type="RESOURCE_LOCAL"&gt;
 		&lt;provider&gt;org.hibernate.ejb.HibernatePersistence&lt;/provider&gt;
 	&lt;/persistence-unit&gt;
-&lt;/persistence&gt;</code></pre>
+&lt;/persistence&gt;
+</code></pre>
 
-<p>So, here I basically tell JPA that Hibernate is providing its implementation. Plus I give my persistence-unit a name &#8220;postage&#8221; (the name of my application).</p>
+<p>So, here I basically tell JPA that Hibernate is providing its implementation. Plus I give my persistence-unit a name "postage" (the name of my application).</p>
 
 <p><strong>Integrating Spring with JPA</strong></p>
 
 <p>Now, I need to get Spring working with JPA and it is not exactly a cakewalk. With a lot of people pointing in different directions and the Spring documentation itself not very helpful in this particular aspect.</p>
 
-<p>The Spring JPA support itself offers three ways of setting up the JPA EntityManagerFactory, so that it can be used by the application to obtain an entity manager. I chose the &#8220;LocalContainerEntityManagerFactoryBean&#8221; because it gives full control over EntityManagerFactory configuration and is appropriate for fine-grained customization, if required. Below is my config -</p>
+<p>The Spring JPA support itself offers three ways of setting up the JPA EntityManagerFactory, so that it can be used by the application to obtain an entity manager. I chose the "LocalContainerEntityManagerFactoryBean" because it gives full control over EntityManagerFactory configuration and is appropriate for fine-grained customization, if required. Below is my config - </p>
 
-<pre><code>&lt;bean id=&quot;entityManagerFactory&quot; class=&quot;org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean&quot;
-	p:dataSource-ref=&quot;dataSource&quot;&gt;
-	&lt;property name=&quot;jpaProperties&quot;&gt;
+<pre><code>&lt;bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+	p:dataSource-ref="dataSource"&gt;
+	&lt;property name="jpaProperties"&gt;
 		&lt;props&gt;
-			&lt;prop key=&quot;hibernate.dialect&quot;&gt;${hibernate.dialect}&lt;/prop&gt;
-			&lt;prop key=&quot;hibernate.hbm2ddl.auto&quot;&gt;${hibernate.hbm2ddl.auto}&lt;/prop&gt;
-			&lt;prop key=&quot;hibernate.show_sql&quot;&gt;${hibernate.show_sql}&lt;/prop&gt;
+			&lt;prop key="hibernate.dialect"&gt;${hibernate.dialect}&lt;/prop&gt;
+			&lt;prop key="hibernate.hbm2ddl.auto"&gt;${hibernate.hbm2ddl.auto}&lt;/prop&gt;
+			&lt;prop key="hibernate.show_sql"&gt;${hibernate.show_sql}&lt;/prop&gt;
 		&lt;/props&gt;
 	&lt;/property&gt;      
-&lt;/bean&gt;</code></pre>
+&lt;/bean&gt;
+</code></pre>
 
-<p>As evident, you need a &#8220;dataSource&#8221; bean defined, which looks like -</p>
+<p>As evident, you need a "dataSource" bean defined, which looks like - </p>
 
-<pre><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;
-	p:driverClassName=&quot;${dataSource.driverClassName}&quot;
-	p:url=&quot;${dataSource.url}&quot;
-	p:username=&quot;${dataSource.username}&quot;
-	p:password=&quot;${dataSource.password}&quot;
-/&gt;</code></pre>
+<pre><code>&lt;bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	p:driverClassName="${dataSource.driverClassName}"
+	p:url="${dataSource.url}"
+	p:username="${dataSource.username}"
+	p:password="${dataSource.password}"
+/&gt;
+</code></pre>
 
-<p>To get the &#8220;${}&#8221; thingy working, i.e. a properties file lookup, add -</p>
+<p>To get the "${}" thingy working, i.e. a properties file lookup, add - </p>
 
-<pre><code>&lt;context:property-placeholder location=&quot;classpath:datasource.properties&quot;/&gt;</code></pre>
+<pre><code>&lt;context:property-placeholder location="classpath:datasource.properties"/&gt;
+</code></pre>
 
-<p>datasource.properties can look like -</p>
+<p>datasource.properties can look like - </p>
 
 <pre><code>dataSource.driverClassName=org.hsqldb.jdbcDriver
 dataSource.url=jdbc:hsqldb:mem:postage
@@ -100,19 +105,22 @@ dataSource.password=
 #Hibernate Properties
 hibernate.hbm2ddl.auto=create-drop
 hibernate.dialect=org.hibernate.dialect.HSQLDialect
-hibernate.show_sql=true</code></pre>
+hibernate.show_sql=true
+</code></pre>
 
-<p>To get transactions working, add -</p>
+<p>To get transactions working, add - </p>
 
-<pre><code>&lt;tx:annotation-driven/&gt;</code></pre>
+<pre><code>&lt;tx:annotation-driven/&gt;
+</code></pre>
 
-<p>And define a transaction manager -</p>
+<p>And define a transaction manager - </p>
 
-<pre><code>&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.orm.jpa.JpaTransactionManager&quot;
-		p:entityManagerFactory-ref=&quot;entityManagerFactory&quot;
-/&gt;</code></pre>
+<pre><code>&lt;bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+		p:entityManagerFactory-ref="entityManagerFactory"
+/&gt;
+</code></pre>
 
-<p>Now, assuming that you have an Entity &#8220;Post&#8221;, lets create the DAO -</p>
+<p>Now, assuming that you have an Entity "Post", lets create the DAO - </p>
 
 <pre><code>@Repository
 @Transactional
@@ -126,18 +134,17 @@ public class PostageDAOImpl implements PostageDAO {
 		em.flush();
 	}
 
-}</code></pre>
+} The @Transactional annotation makes the DAO transactional (remember we added &lt;tx:annotation-driven/&gt;). Let's look at the other Annotations - @Repository annotation is a "stereotype" annotation added in Spring 2.5 which enables Spring to identify Beans for AOP pointcuts. In our case @Repository annotation also enables Spring to automatically convert JPA exceptions to Spring exception hierarchy. Finally, the EntityManager is automatically injected by Spring as it is annotated by @PersistenceContext. Also add - 
+  
+  &lt;context:component-scan base-package="net.rocky.postage"/&gt;
+</code></pre>
 
-<p>The @Transactional annotation makes the DAO transactional (remember we added <a href='tx:annotation-driven/'>tx:annotation-driven/</a>). Let&#8217;s look at the other Annotations - @Repository annotation is a &#8220;stereotype&#8221; annotation added in Spring 2.5 which enables Spring to identify Beans for AOP pointcuts. In our case @Repository annotation also enables Spring to automatically convert JPA exceptions to Spring exception hierarchy. Finally, the EntityManager is automatically injected by Spring as it is annotated by @PersistenceContext. Also add -</p>
+<p>This tag enables dependency injection with annotations and also auto-detects stereotype classes in the specified package and registers the corresponding beans. </p>
 
-<pre><code>  &lt;context:component-scan base-package=&quot;net.rocky.postage&quot;/&gt;</code></pre>
-
-<p>This tag enables dependency injection with annotations and also auto-detects stereotype classes in the specified package and registers the corresponding beans.</p>
-
-<p>That&#8217;s it! We have integrated Spring with JPA 2 and Hibernate. Let&#8217;s write a test case to verify our setup -</p>
+<p>That's it! We have integrated Spring with JPA 2 and Hibernate. Let's write a test case to verify our setup - </p>
 
 <pre><code>@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(&quot;/applicationContext.xml&quot;)
+@ContextConfiguration("/applicationContext.xml")
 public class PostageDAOImplTest {
 
 	@Resource
@@ -146,18 +153,20 @@ public class PostageDAOImplTest {
 	@Test
 	public void testPostStorage() throws Exception {
 		Post post = new Post();
-		post.setComments(&quot;A simple comment&quot;);
-		post.setDescription(&quot;A simple description&quot;);
+		post.setComments("A simple comment");
+		post.setDescription("A simple description");
 		postageDAOImpl.savePost(post);
 	}
 
-...</code></pre>
+...
+</code></pre>
 
 <p><strong>Parting thoughts</strong></p>
 
 <p>This whole exercise took me a long time due to lack of comprehensive documentation, version mismatches and multiple approaches suggested by documents/bloggers. The advantage of the approach I have suggested above is that it allows you to switch to different databases for test/production as the datasource and dialect is specified in a .properties file.</p>
 
 <p>The big idea behind this exercise was to setup a DAO and domain layer akin to Grails which can be easily scaled up. We can further add a service layer to access the data and then use it over a UI. For my next blog I will build on this and create a web application that uses GWT as the front-end.</p>
+
               </div>
               <hr/>
               <div id="disqus_thread"></div>
@@ -184,212 +193,211 @@ public class PostageDAOImplTest {
             </article>
           </div>
         </div>
-        <div id="sidebar">
-  <div class="span3">
-    <h2>
-      <img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>
-      <br/>
-      <a href="/about">About</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
-      <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
-    </h2>
-    <hr/>
-    <h2>
-      <a href="/videos">Videos</a>
-    </h2>
-    <hr/>
-    <h2><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h2>
-    <div class="posts">
-      <ol>
-        
-          <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
-        
-          <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
-        
-          <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
-        
-          <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
-        
-          <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
-        
-          <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
-        
-          <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
-        
-          <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
-        
-          <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
-        
-          <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
-        
-          <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
-        
-          <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
-        
-          <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
-        
-          <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
-        
-          <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
-        
-          <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
-        
-          <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
-        
-          <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
-        
-          <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
-        
-          <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
-        
-          <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
-        
-          <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
-        
-          <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
-        
-          <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
-        
-          <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
-        
-          <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
-        
-          <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
-        
-          <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
-        
-          <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
-        
-          <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
-        
-          <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
-        
-          <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
-        
-          <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
-        
-          <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
-        
-          <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
-        
-          <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
-        
-          <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
-        
-          <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
-        
-          <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
-        
-          <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
-        
-          <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
-        
-          <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
-        
-          <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
-        
-          <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
-        
-      </ol>
-    </div>
-    <div class="tags">
-      <ol>
-        
-          <li><a href="/tags/git.html">Git (1)</a></li>
-        
-          <li><a href="/tags/agile.html">Agile (8)</a></li>
-        
-          <li><a href="/tags/jboss.html">JBoss (2)</a></li>
-        
-          <li><a href="/tags/jruby.html">JRuby (11)</a></li>
-        
-          <li><a href="/tags/cloud.html">Cloud (1)</a></li>
-        
-          <li><a href="/tags/java.html">Java (9)</a></li>
-        
-          <li><a href="/tags/maven.html">Maven (1)</a></li>
-        
-          <li><a href="/tags/jquery.html">jQuery (1)</a></li>
-        
-          <li><a href="/tags/jpa.html">JPA (1)</a></li>
-        
-          <li><a href="/tags/spring.html">Spring (2)</a></li>
-        
-          <li><a href="/tags/ruby.html">Ruby (8)</a></li>
-        
-          <li><a href="/tags/general.html">General (7)</a></li>
-        
-          <li><a href="/tags/rails.html">Rails (6)</a></li>
-        
-          <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
-        
-          <li><a href="/tags/linux.html">Linux (1)</a></li>
-        
-          <li><a href="/tags/programming.html">Programming (1)</a></li>
-        
-          <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
-        
-          <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
-        
-          <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
-        
-          <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
-        
-          <li><a href="/tags/solr.html">Solr (2)</a></li>
-        
-          <li><a href="/tags/jboss.html">Jboss (1)</a></li>
-        
-          <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
-        
-          <li><a href="/tags/backbone.html">Backbone (6)</a></li>
-        
-          <li><a href="/tags/android.html">Android (1)</a></li>
-        
-          <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
-        
-          <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
-        
-          <li><a href="/tags/scala.html">Scala (2)</a></li>
-        
-          <li><a href="/tags/akka.html">Akka (1)</a></li>
-        
-          <li><a href="/tags/node-js.html">Node.js (1)</a></li>
-        
-          <li><a href="/tags/require-js.html">Require.js (2)</a></li>
-        
-          <li><a href="/tags/play.html">Play (1)</a></li>
-        
-          <li><a href="/tags/puppet.html">Puppet (1)</a></li>
-        
-          <li><a href="/tags/devops.html">DevOps (1)</a></li>
-        
-          <li><a href="/tags/scrum.html">Scrum (1)</a></li>
-        
-          <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
-        
-      </ol>
-    </div>
-    <hr/>
+        <div class="span3">
+          <div id="sidebar">
+  <h3>
+    <!--<img src="/images/Rocky_Jaiswal.jpg" alt="Rocky Jaiswal" width="121" height="115" style="max-width: 100%;"/>-->
+    <br/>
+    <a href="/about">About</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="https://github.com/rocky-jaiswal" target="_blank">Github</a> /
+    <a href="https://twitter.com/whatsuprocky" target="_blank">Twitter</a>
+  </h3>
+  <hr/>
+  <h3>
+    <a href="/videos">Videos</a>
+  </h3>
+  <hr/>
+  <h3><a id="show-posts" href="#/posts">Posts</a> / <a id="show-tags" href="#/tags">Tags</a></h3>
+  <div class="posts">
+    <ol>
+      
+        <li><a href="/2013/05/24/angular_hacks.html">Angular.js Hacks</a> <span>May 24 2013</span></li>
+      
+        <li><a href="/2013/05/11/yeoman_and_backbone.html">Building HTML5 Apps with Yeoman and Backbone</a> <span>May 11 2013</span></li>
+      
+        <li><a href="/2013/05/03/what_motivates_programmers.html">What motivates programmers</a> <span>May  3 2013</span></li>
+      
+        <li><a href="/2013/05/02/ajaxify_with_backbone.html">Ajaxify a Form with Backbone</a> <span>May  2 2013</span></li>
+      
+        <li><a href="/2013/04/08/puppet_in_a_rush.html">Puppet in a rush</a> <span>Apr  8 2013</span></li>
+      
+        <li><a href="/2013/04/01/building_single_page_applications_and_cors.html">Building Single Page Applications and CORS</a> <span>Apr  1 2013</span></li>
+      
+        <li><a href="/2013/03/22/integrating_node_and_rails_with_redis.html">Integrating Rails and Node.js via Redis</a> <span>Mar 22 2013</span></li>
+      
+        <li><a href="/2012/12/13/backbone_and_coffeescript.html">Backbone.js and CoffeeScript - A Perfect Match</a> <span>Dec 13 2012</span></li>
+      
+        <li><a href="/2012/12/02/serving_rails_from_windows.html">Serving Rails from Windows</a> <span>Dec  2 2012</span></li>
+      
+        <li><a href="/2012/10/15/why_does_js_require_requirejs.html">Why does JavaScript require Require.js</a> <span>Oct 15 2012</span></li>
+      
+        <li><a href="/2012/09/22/rails_on_only_jvm.html">Rails on only JVM</a> <span>Sep 22 2012</span></li>
+      
+        <li><a href="/2012/09/15/akka_with_jruby.html">Akka with JRuby</a> <span>Sep 15 2012</span></li>
+      
+        <li><a href="/2012/09/09/rails_on_ruby_jruby_a_performance_comparison.html">Running Rails on Ruby or JRuby - A Performance Comparison</a> <span>Sep  9 2012</span></li>
+      
+        <li><a href="/2012/09/01/deploying_java_apps_with_capistrano.html">Deploying Java applications with Capistrano</a> <span>Sep  1 2012</span></li>
+      
+        <li><a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html">Accessing server data from a native Android app</a> <span>Aug 26 2012</span></li>
+      
+        <li><a href="/2012/08/18/why_javascript_is_important.html">Why JavaScript is important</a> <span>Aug 18 2012</span></li>
+      
+        <li><a href="/2012/06/08/non_tangibles_of_agile.html">The non-tangibles of Agile</a> <span>Jun  8 2012</span></li>
+      
+        <li><a href="/2012/05/28/moved_to_html.html">Blog moved to pure HTML5, CSS3</a> <span>May 28 2012</span></li>
+      
+        <li><a href="/2012/05/25/intro_to_backbone_jQuery.html">A gentle introduction to Backbone with jQuery</a> <span>May 25 2012</span></li>
+      
+        <li><a href="/2012/05/21/video_rubyconf_india.html">Video of my talk with @arunagw at RubyConf India 2012</a> <span>May 21 2012</span></li>
+      
+        <li><a href="/2012/05/08/setting_up_solr.html">Setting up Solr</a> <span>May  8 2012</span></li>
+      
+        <li><a href="/2012/03/27/old_jboss_video.html">Old JBoss Video</a> <span>Mar 27 2012</span></li>
+      
+        <li><a href="/2012/03/26/ruby_conf_india_with_arunagw.html">Slides of my talk with @arunagw in Ruby Conf India 2012</a> <span>Mar 26 2012</span></li>
+      
+        <li><a href="/2012/03/23/embracing_jruby_1.html">Embracing JRuby - Part 1</a> <span>Mar 23 2012</span></li>
+      
+        <li><a href="/2012/03/05/musings_on_india_and_technology.html">Musings on India and Technology</a> <span>Mar  5 2012</span></li>
+      
+        <li><a href="/2012/01/31/job_of_a_software_developer.html">The Job of a Software Developer</a> <span>Jan 31 2012</span></li>
+      
+        <li><a href="/2011/12/27/configuring-nginx-with-jboss-tomcat.html">Configuring nginx with JBoss / Tomcat</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/27/a-weekend-with-couchdb-solr-and-torquebox.html">A weekend with CouchDB, Solr and Torquebox</a> <span>Dec 27 2011</span></li>
+      
+        <li><a href="/2011/12/01/jquery-flavored-coffeescript.html">jQuery flavored CoffeeScript</a> <span>Dec  1 2011</span></li>
+      
+        <li><a href="/2011/07/26/and-then-there-was-closure.html">And then there was Closure</a> <span>Jul 26 2011</span></li>
+      
+        <li><a href="/2011/07/04/the-problem-is-choice.html">The problem is choice</a> <span>Jul  4 2011</span></li>
+      
+        <li><a href="/2011/06/29/using-spring-for-scheduling-tasks.html">Using Spring for Scheduling Tasks</a> <span>Jun 29 2011</span></li>
+      
+        <li><a href="/2011/06/25/working-with-oracle-on-linux-ubuntu-fedora.html">Installing Oracle on Linux (Ubuntu / Fedora)</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/25/excel-manipulation-and-testing-in-java.html">Excel manipulation and testing in Java</a> <span>Jun 25 2011</span></li>
+      
+        <li><a href="/2011/06/06/putting-couchdb-and-rails-on-the-cloud.html">Putting CouchDB and Rails on the Cloud</a> <span>Jun  6 2011</span></li>
+      
+        <li><a href="/2011/05/16/integrating-google-re-captcha-with-a-rails-app.html">Integrating Google Re-Captcha with a Rails app</a> <span>May 16 2011</span></li>
+      
+        <li><a href="/2011/05/03/the-real-purpose-of-a-sprint-goal.html">The real purpose of a Sprint Goal</a> <span>May  3 2011</span></li>
+      
+        <li><a href="/2011/05/02/thoughts-of-the-week-24-30-april.html">Thoughts of the week 24 - 30 April</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/05/02/views-from-across-the-table.html">Views from across the table</a> <span>May  2 2011</span></li>
+      
+        <li><a href="/2011/04/20/be-happy-to-fail.html">Be Happy to Fail</a> <span>Apr 20 2011</span></li>
+      
+        <li><a href="/2011/04/14/using-rvm-on-ubuntu-to-install-multiple-versions-of-ruby.html">Using RVM on Ubuntu to install (multiple versions of) Ruby</a> <span>Apr 14 2011</span></li>
+      
+        <li><a href="/2011/04/11/thoughts-of-the-week-4-10-april.html">Thoughts of the week (4 - 10 April)</a> <span>Apr 11 2011</span></li>
+      
+        <li><a href="/2011/04/08/mapreduce-in-english.html">MapReduce in English</a> <span>Apr  8 2011</span></li>
+      
+        <li><a href="/2011/04/01/hello-world.html">Integrating JRuby and Java to create a mini rules engine</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/04/01/java-and-ruby-integration-via-soap.html">Java and Ruby integration via SOAP</a> <span>Apr  1 2011</span></li>
+      
+        <li><a href="/2011/03/31/google-app-engine-maven-jsf2.html">Google App Engine + Maven + JSF2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/hello-jquery.html">Hello jQuery!</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/integrating-spring-3-with-jpa-2.html">Integrating Spring 3 with JPA 2</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/accessing-jboss-managed-resources-using-mbeans.html">Accessing JBoss managed resources using MBeans</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/31/from-zero-to-a-crud-app-without-writing-a-single-line-of-code-using-jruby.html">From Zero to a CRUD App (without writing a single line of code) using JRuby</a> <span>Mar 31 2011</span></li>
+      
+        <li><a href="/2011/03/11/big-bad-projects.html">Big bad projects</a> <span>Mar 11 2011</span></li>
+      
+        <li><a href="/2011/03/01/working-with-git.html">Working with Git</a> <span>Mar  1 2011</span></li>
+      
+    </ol>
   </div>
+  <div class="tags">
+    <ol>
+      
+        <li><a href="/tags/git.html">Git (1)</a></li>
+      
+        <li><a href="/tags/agile.html">Agile (8)</a></li>
+      
+        <li><a href="/tags/jboss.html">JBoss (2)</a></li>
+      
+        <li><a href="/tags/jruby.html">JRuby (11)</a></li>
+      
+        <li><a href="/tags/cloud.html">Cloud (1)</a></li>
+      
+        <li><a href="/tags/java.html">Java (9)</a></li>
+      
+        <li><a href="/tags/maven.html">Maven (1)</a></li>
+      
+        <li><a href="/tags/jquery.html">jQuery (1)</a></li>
+      
+        <li><a href="/tags/jpa.html">JPA (1)</a></li>
+      
+        <li><a href="/tags/spring.html">Spring (2)</a></li>
+      
+        <li><a href="/tags/ruby.html">Ruby (8)</a></li>
+      
+        <li><a href="/tags/general.html">General (7)</a></li>
+      
+        <li><a href="/tags/rails.html">Rails (6)</a></li>
+      
+        <li><a href="/tags/couchdb.html">CouchDB (2)</a></li>
+      
+        <li><a href="/tags/linux.html">Linux (1)</a></li>
+      
+        <li><a href="/tags/programming.html">Programming (1)</a></li>
+      
+        <li><a href="/tags/javascript.html">JavaScript (11)</a></li>
+      
+        <li><a href="/tags/coffeescript.html">CoffeeScript (5)</a></li>
+      
+        <li><a href="/tags/nosql.html">NoSQL (1)</a></li>
+      
+        <li><a href="/tags/torquebox.html">Torquebox (4)</a></li>
+      
+        <li><a href="/tags/solr.html">Solr (2)</a></li>
+      
+        <li><a href="/tags/jboss.html">Jboss (1)</a></li>
+      
+        <li><a href="/tags/tomcat.html">Tomcat (1)</a></li>
+      
+        <li><a href="/tags/backbone.html">Backbone (6)</a></li>
+      
+        <li><a href="/tags/android.html">Android (1)</a></li>
+      
+        <li><a href="/tags/phonegap.html">Phonegap (1)</a></li>
+      
+        <li><a href="/tags/capistrano.html">Capistrano (1)</a></li>
+      
+        <li><a href="/tags/scala.html">Scala (2)</a></li>
+      
+        <li><a href="/tags/akka.html">Akka (1)</a></li>
+      
+        <li><a href="/tags/node-js.html">Node.js (1)</a></li>
+      
+        <li><a href="/tags/require-js.html">Require.js (2)</a></li>
+      
+        <li><a href="/tags/play.html">Play (1)</a></li>
+      
+        <li><a href="/tags/puppet.html">Puppet (1)</a></li>
+      
+        <li><a href="/tags/devops.html">DevOps (1)</a></li>
+      
+        <li><a href="/tags/scrum.html">Scrum (1)</a></li>
+      
+        <li><a href="/tags/angularjs.html">AngularJS (1)</a></li>
+      
+    </ol>
+  </div>
+  <hr/>
 </div>
 
 <script type="text/javascript">
@@ -415,6 +423,7 @@ public class PostageDAOImplTest {
     });
   });
 </script>
+        </div>
       </div>
     </div>
   </body>
