@@ -5,10 +5,105 @@
   <id>http://rockyj.in</id>
   <link href="http://rockyj.in"/>
   <link href="http://rockyj.in/feed.xml" rel="self"/>
-  <updated>2013-05-24T00:00:00Z</updated>
+  <updated>2013-07-02T00:00:00Z</updated>
   <author>
     <name>Rocky Jaiswal</name>
   </author>
+  <entry>
+    <title>Never Hit Reload Again</title>
+    <link rel="alternate" href="http://rockyj.in/2013/07/02/never_hit_reload_again.html"/>
+    <id>/2013/07/02/never_hit_reload_again.html</id>
+    <published>2013-07-02T00:00:00Z</published>
+    <updated>2013-07-02T00:00:00Z</updated>
+    <author>
+      <name>Rocky Jaiswal</name>
+    </author>
+    <summary type="html">&lt;p&gt;Imagine a nice world where you have a dual monitor setup for web development. On one monitor you have your favorite editor open and in another the browser, even in a less than perfect world if you have a single screen with a good resolution you can have two windows open side by side.&lt;/p&gt;
+
+&lt;p&gt;Heck, even on a basic Del ...</summary>
+    <content type="html">&lt;p&gt;Imagine a nice world where you have a dual monitor setup for web development. On one monitor you have your favorite editor open and in another the browser, even in a less than perfect world if you have a single screen with a good resolution you can have two windows open side by side.&lt;/p&gt;
+
+&lt;p&gt;Heck, even on a basic Dell laptop, you make a change in HTML or JS file, press Ctrl+S then Alt-Tab and Refresh you browser to see the change. &lt;strong&gt;What if you can avoid this pain?&lt;/strong&gt; :O&lt;/p&gt;
+
+&lt;p&gt;Now, that I have you interested, have I told you that I really like Grunt.js. It's an awesome task runner (kinda like make, rake etc.) built on top of node.js. Now, most of us don't use node.js as our server side platform but don't worry, you can still benefit from the awesomeness of Grunt.js.&lt;/p&gt;
+
+&lt;p&gt;Consider this, I am working on a Rails application (or a Java / .NET web application). Let's setup Grunt.js with minimum config.&lt;/p&gt;
+
+&lt;p&gt;First install node.js and npm (I think most of us have that).&lt;/p&gt;
+
+&lt;p&gt;Now install grunt-cli&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g grunt-cli
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now in your web application's root folder (Rails / Java / .NET), create a &lt;strong&gt;package.json&lt;/strong&gt; file with the following contents -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  "name": "demo-app",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "*"
+  },
+  "engines": {
+    "node": "&amp;gt;=0.8.0"
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Simple enough, a couple of development dependencies, if you want you can put this in your .gitignore file.&lt;/p&gt;
+
+&lt;p&gt;Now do -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will download the node pacakges in a folder &lt;strong&gt;node_modules&lt;/strong&gt;, gitignore it if you want.&lt;/p&gt;
+
+&lt;p&gt;Now create a file called &lt;strong&gt;Gruntfile.js&lt;/strong&gt; with the following contents -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;'use strict';
+
+module.exports = function (grunt) {
+
+  grunt.loadNpmTasks('grunt-contrib-watch');
+
+  grunt.initConfig({
+    watch: {
+      coffeefiles: {
+        files: ['app/assets/javascripts/*.coffee'],
+        options: {
+          livereload: true,
+        }
+      },
+      erbfiles: {
+        files: ['app/views/{,*/}*.erb'],
+        options: {
+          livereload: true,
+        }
+      }
+    }
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a sample file for a Rails project. All I am saying is, create a &lt;strong&gt;watch&lt;/strong&gt; task so that if a *.coffee file or a *.erb file changes in a certain folder run &lt;strong&gt;livereload&lt;/strong&gt;. For a Java or .NET project adjust the paths as you want.&lt;/p&gt;
+
+&lt;p&gt;In you main layout.html file or index.html file include this line of JavaScript -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src="http://localhost:35729/livereload.js"&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally open a terminal and run -&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt watch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That's it, get back to your development process and &lt;strong&gt;Never Hit Reload Again!&lt;/strong&gt;&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <title>Angular.js Hacks</title>
     <link rel="alternate" href="http://rockyj.in/2013/05/24/angular_hacks.html"/>
@@ -548,117 +643,6 @@ $ ./setup.sh
 &lt;/ul&gt;
 
 &lt;p&gt;I made a sample Puppet project which is available on &lt;a href="https://github.com/rocky-jaiswal/dashboard-devops"&gt;github&lt;/a&gt;. Please contribute and fix my mistakes if you find any.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Building Single Page Applications and CORS</title>
-    <link rel="alternate" href="http://rockyj.in/2013/04/01/building_single_page_applications_and_cors.html"/>
-    <id>/2013/04/01/building_single_page_applications_and_cors.html</id>
-    <published>2013-04-01T00:00:00Z</published>
-    <updated>2013-04-01T00:00:00Z</updated>
-    <author>
-      <name>Rocky Jaiswal</name>
-    </author>
-    <summary type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it's about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now  ...</summary>
-    <content type="html">&lt;p&gt;A while back I promised some insight on CORS &lt;a href="/2012/08/26/accessing_server_data_from_a_native_android_app.html"&gt;here&lt;/a&gt; and it's about time I delivered. Few things have changed since then, I worked a bit on the Play framework and found it to be quite nice and also a lot of project requests in my day job now ask for a web application and a "native" mobile application (atleast one that works well on tablets).&lt;/p&gt;
-
-&lt;p&gt;Building web applications that also work on tablets can be done in many ways but over a period of time I have realized it's good to create separate applications for server side and client side logic. While the server side serves JSON (and talks to the data store) the client side takes care of rendering the UI. &lt;/p&gt;
-
-&lt;p&gt;While both of these jobs can be done in a single Play / Rails application the advantage of the two component approach is that the client side app can be easily packaged later into a PhoneGap application and served as a native app. It also makes sure that the app is written cleanly and the sepraration of concerns is maintained. Ofcourse, this approach has it's disadvantages as it is not a very scalable way to write code but if the requirement is to create simple "Single Page Applications" it works well.&lt;/p&gt;
-
-&lt;p&gt;So in this blog we will talk about such an application which uses Scala + Play on the server side and on the client side we will use my favorite stack of Require.js and Backbone.js.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://yeoman.io"&gt;Yeoman.io&lt;/a&gt; is a collection of tools which makes building client heavy application easy. It takes care of creating, building, minifying our client side code among other things. You can head over to &lt;a href="http://yeoman.io"&gt;Yeoman.io's site&lt;/a&gt; to learn to create a simple web application and can easily add libraries like Backbone by running the following command -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bower install --save backbone
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As evident, adding libraries / components with Yeoman is trivial and the application it builds out the box uses Require.js etc. which makes life easy. Once you run "grunt server" it serves your application through a node.js server and developing and testing the app is also simplified due to node.js's speed and automatic refresh.&lt;/p&gt;
-
-&lt;p&gt;Moving back to the server side (Play) we want our server to just send over JSON so our controller could look something like -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;def data = Action {
-  Ok(Json.obj("message" -&amp;gt; ("Hello World!") )) // Or get data from DB backed model etc.
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With the correct routing added if we go to &lt;strong&gt;http://localhost:9000/data&lt;/strong&gt; we get a JSON greeting (our Play application runs on port 9000).&lt;/p&gt;
-
-&lt;p&gt;Now on our client side, which is running on the Node.js server (and can later be packaged in PhoneGap) we need to access this data and maybe display it. Without going into the details of Backbone we can define our model as -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;define ["jquery", "underscore", "backbone"], ($, _, Backbone) -&amp;gt;
-  'use strict'
-  
-  class RemoteModel extends Backbone.Model
-
-    url: -&amp;gt;
-      "http://localhost:9000/data"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And for the Backbone View -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;define ["jquery", "underscore", "backbone"], ($, _, Backbone) -&amp;gt;
-  'use strict'
-  
-  class RemoteView extends Backbone.View
-    
-    el: ".remote-message"
-
-    render: -&amp;gt;
-      @model.fetch({async: false})
-      $(@el).html(JSON.stringify @model)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now when we do -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;require(['remoteview', 'remotemodel', 'jquery', 'bootstrap'], function (RemoteView, RemoteModel, $) {
-    'use strict';
-
-    $(function () {
-        var model = new RemoteModel();
-        new RemoteView({model: model}).render();
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We should see the JSON from the server on our client application. Ofcourse, this won't work as the Node.js server is different from the Play server and security policies do now allow cross-origin requests. These restrictions prevent a client-side Web application running from one server from obtaining data retrieved from another server (which is a good thing) but in our case we want this to be allowed.&lt;/p&gt;
-
-&lt;p&gt;So we head over to &lt;a href="http://www.w3.org/TR/cors/"&gt;W3C site&lt;/a&gt; to see how this can be enabled. All we need to do is to add this header to our Play server's response -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ACCESS_CONTROL_ALLOW_ORIGIN: "http://localhost:8000"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We allow requests from "http://localhost:8000" since our client side application is running there, in case we have to PhoneGap the app there is no server on the client side so we will need to allow the "null" origin as well (trivial to do). &lt;/p&gt;
-
-&lt;p&gt;Now to add this header to our Play application, we could do something like this -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;def data = Action {
-  Ok(Json.obj("message" -&amp;gt; ("Hello from Play!") )).withHeaders(ACCESS_CONTROL_ALLOW_ORIGIN -&amp;gt; "http://localhost:8000")
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Of course, adding the header to each and every Action is a pain so we can simply do this in our Global class -&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;object Global extends GlobalSettings {
-
-  /**
-   * Global action composition.
-   */
-  override def doFilter(action: EssentialAction): EssentialAction = EssentialAction { request =&amp;gt;
-    action.apply(request).map(_.withHeaders(
-      ACCESS_CONTROL_ALLOW_ORIGIN -&amp;gt; "http://localhost:8000"
-    ))
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;That's it! Our server side JSON can now be used on our client app.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/yeoman_and_play.png" alt="Yeoman and Play" title="Yeoman and Play" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, for the production setup, we can serve our client side application from plain NGINX (after buiding it from Yeoman/Grunt) and the same code can be served in a PhoneGap application as well in case we want a more "native" application. The Play server meanwhile serves both these application from a sigle (or clustered) instance and we get awesome &lt;a href="http://www.techempower.com/blog/2013/03/28/framework-benchmarks/"&gt;speed&lt;/a&gt; as well.&lt;/p&gt;
-
-&lt;p&gt;p.s. Play here can be substituted with Rails as well.&lt;/p&gt;
 </content>
   </entry>
 </feed>
