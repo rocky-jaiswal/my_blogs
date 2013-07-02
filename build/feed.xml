@@ -102,6 +102,14 @@ module.exports = function (grunt) {
 
 &lt;p&gt;That's it, get back to your development process and &lt;strong&gt;Never Hit Reload Again!&lt;/strong&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;em&gt;Footnote (How does this work?):&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;When you do "grunt watch" a lightweight node.js server runs on port 35729 while "watching" the files you have configured it to watch and when these files change, it pushes an event to the client.&lt;/p&gt;
+
+&lt;p&gt;This livereload.js file on the client, receives the events sent by the server and reloads the page saving you the trouble from reloading it manually.&lt;/p&gt;
+
+&lt;p&gt;node.js is a great choice for this as it is fast, light-weight and works well with websockets (or server pushed events). Also, this server runs independently of your usual Rails / Java / .NET server watching your files and raising events.&lt;/p&gt;
+
 </content>
   </entry>
   <entry>

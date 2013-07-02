@@ -79,3 +79,11 @@ Finally open a terminal and run -
 
 That's it, get back to your development process and __Never Hit Reload Again!__
 
+_Footnote (How does this work?):_
+
+When you do "grunt watch" a lightweight node.js server runs on port 35729 while "watching" the files you have configured it to watch and when these files change, it pushes an event to the client.
+
+This livereload.js file on the client, receives the events sent by the server and reloads the page saving you the trouble from reloading it manually.
+
+node.js is a great choice for this as it is fast, light-weight and works well with websockets (or server pushed events). Also, this server runs independently of your usual Rails / Java / .NET server watching your files and raising events.
+
