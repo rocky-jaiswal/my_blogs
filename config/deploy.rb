@@ -18,7 +18,7 @@ after "deploy:cleanup", "custom:build"
 namespace :custom do
   task :build do
     puts "==================Building with Middleman======================" #Line 22
-    run "cd #{deploy_to}/current && bundle install --deployment"
+    #run "cd #{deploy_to}/current && bundle install --deployment"
     run "cd #{deploy_to}/current && bundle exec middleman build"
   end
 end
