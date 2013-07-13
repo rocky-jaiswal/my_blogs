@@ -1,5 +1,5 @@
 set :application, "my_blogs"
-set :repository,  "git@github.com:rocky-jaiswal/my_blogs.git"
+set :repository,  "https://github.com/rocky-jaiswal/my_blogs.git"
 
 set  :scm, :git
 set  :user, "deploy"
