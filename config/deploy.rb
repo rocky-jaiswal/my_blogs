@@ -13,3 +13,12 @@ role :db,  "198.211.98.21", :primary => true # This is where Rails migrations wi
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
+after "deploy:cleanup", "custom:build"
+
+namespace :custom do
+  task :build do
+    puts "==================Building with Middleman======================" #Line 22
+    run "cd #{deploy_to}/current && bundle install --deployment"
+    run "cd #{deploy_to}/current && bundle exec middleman build"
+  end
+end
