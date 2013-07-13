@@ -14,7 +14,7 @@ role :db,  "198.211.98.21", :primary => true # This is where Rails migrations wi
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
 
-after "deploy:setup", "custom:create_release_dir"
+after "deploy:update_code", "custom:create_release_dir"
 namespace :custom do
   task :create_release_dir, :except => {:no_release => true} do
     run "mkdir -p #{fetch :releases_path}"
