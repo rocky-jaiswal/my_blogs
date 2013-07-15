@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5 {
 
 .banner {
   padding: 10px 0px 8px 0px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   background: $main-color;
 }
 
@@ -23,11 +23,12 @@ h1, h2, h3, h4, h5 {
 }
 
 #main {
-  padding-top: 60px;
 }
 
 #sidebar {
-  padding-top: 15px;
+  h3.top {
+    margin-top: -30px;
+  }
 }
 
 .summary {
