@@ -4,7 +4,7 @@ tags: JavaScript, CoffeeScript, Backbone
 date: 19/07/2013
 ---
 
-These days I find myself saying *"structure your JavaScript code better"* a lot. Also, some of my friends assume that Backbone.js or Angular.js is only good for Single Page Applications. Since most applications work using server side templating and having a JavaScript file or so per page, most developers (including me at one time) consider using a framework an overkill since they don't need things like client templates or "#/" based routing.
+These days I find myself saying *"structure your JavaScript code better"* a lot. Also, some of my friends assume that Backbone.js or Angular.js are only good for Single Page Applications. Since most applications work using server side templating and having a JavaScript file or so per page, most developers (including me at one time) consider using a framework an overkill since they don't need things like client templates or "#/" based routing.
 
 However, I think that these days we write more client side code than on the server and while on the server we have all sorts or frameworks to structure our code, our client side code leads a lot to be desired. In fact, most client side code I see is a spaghetti, which is hard to maintain and debug if the original developer is not present.
 
@@ -61,7 +61,7 @@ My code to draw the graph is written as *chart1.coffee* -
       ctx = $("#chart-1")[0].getContext("2d")
       new Chart(ctx).Bar(getData(),{})
 
-This is all fine and self explanatory, but I have 20 pages like these so there are 20 coffee files, each for a graph. The logic in the graph keeps getting complex as we (let's say) fetch data from the server and after a while each of these coffee files get big.
+This is all fine and self explanatory, but I have 20 pages like these so there are 20 coffee files, each for a graph. The logic in the graphs keeps getting complex as we (let's say) fetch data from the server and after a while each of these coffee files get big.
 
 Also, one may load all JS file in the index.html page if there is some sort of templating engine being used, which leaves another developer guessing which coffee file is for which graph. A page may need three graphs so one of these coffee files gets crazy and all sorts of problems come up.
 
@@ -146,4 +146,4 @@ The Backbone view utilizes the jQuery code we created earlier -
           ctx = @$el[0].getContext("2d")
           new Chart(ctx).Bar(@getData(),{})
 
-That's it. Now to add a chart, all we need to do is to add it's configuration in app.coffee and create it's Backbone view. To me this design seems much more maintainable / clean and we have used Backbone to add structure to our JavaScript successfully.
+That's it. Now to add a chart, all we need to do is to add it's configuration in app.coffee and create it's Backbone view. To me this simple design change makes the code much more maintainable / clean and we have used Backbone to add structure to our JavaScript successfully. Mission accomplished.
