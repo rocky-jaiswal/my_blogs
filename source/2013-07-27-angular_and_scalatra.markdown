@@ -4,13 +4,13 @@ tags: JavaScript, CoffeeScript, AngularJS, Scala
 date: 27/07/2013
 ---
 
-Angular.js is pretty much my favorite way to develop web applications as of now. For building simple applications with Angular.js I look for a basic backend through which I can add persistence or do some heavy lifting. 
+Angular.js is pretty much my favorite way to develop web applications as of now. For building simple applications with Angular.js I look for a basic backend through which I can add persistence or do some heavy lifting.
 
 Node.js is a one possible backend which does the job and is pretty fast, Rails / [Rails-API](https://github.com/rails-api/rails-api) is another good option. However, being a Scala admirer, I thought of building a backend in Scala. A type safe, compiled language does offer speed and scalability as a backend service. 
 
 With Scala as my choice I was left with two options - Play framework or [Scalatra](http://scalatra.org/). Play framework with Reactive Mongo is a good combination to "play" with but I went for Scalatra as it is lighter and fits the description of a JSON spewing backend well.
 
-With my Scalatra backend, I want to use MongoDB for persistent and to finally make things spicier use [Akka](http://akka.io) to make the HTTP calls asynchronous. 
+With my Scalatra backend, I wanted to use MongoDB for persistent and to finally make things spicier use [Akka](http://akka.io) to make the HTTP calls asynchronous. 
 
 After installing and reading the Scalatra documentation, I was on my way. The documentation although good, does leave some gaps, so hope this blog helps someone.
 
