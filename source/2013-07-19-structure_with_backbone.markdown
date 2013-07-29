@@ -4,7 +4,7 @@ tags: JavaScript, CoffeeScript, Backbone
 date: 19/07/2013
 ---
 
-These days I find myself saying *"structure your JavaScript code better"* a lot. Also, some of my friends assume that Backbone.js or Angular.js are only good for Single Page Applications. Since most applications work using server side templating and having a JavaScript file or so per page, most developers (including me at one time) consider using a framework an overkill since they don't need things like client templates or "#/" based routing.
+These days I find myself saying *"structure the JavaScript code better"* a lot. Also, some of my friends assume that Backbone.js or Angular.js are only good for Single Page Applications. Since most applications work using server side templating and having a JavaScript file or so per page, most developers (including me at one time) consider using a framework an overkill since they don't need things like client templates or "#/" based routing.
 
 However, I think that these days we write more client side code than on the server and while on the server we have all sorts or frameworks to structure our code, our client side code leads a lot to be desired. In fact, most client side code I see is a spaghetti, which is hard to maintain and debug if the original developer is not present.
 
