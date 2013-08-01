@@ -1,15 +1,15 @@
-@import url(http://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro);
 
 $main-color: #2980b9;
 $gray: #ecf0f1;
 
 body {
   background-color: $gray;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica,Arial,sans-serif;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica,Arial,sans-serif;
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Bree Serif";
+  font-family: "Oswald";
   margin-bottom: 10px;
 }
 
@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5 {
 
 .summary p {
   font-size: 1.2em;
-  line-height: 150%;
+  line-height: 140%;
 }
 
 .post {
@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5 {
 
 .post p {
   font-size: 1.2em;
-  line-height: 150%;
+  line-height: 140%;
 }
 
 .highlighted {
