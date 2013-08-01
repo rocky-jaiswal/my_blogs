@@ -1,10 +1,11 @@
-@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+@import url(http://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans);
 
 $main-color: #2980b9;
 $gray: #ecf0f1;
 
 body {
   background-color: $gray;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica,Arial,sans-serif;
 }
 
 h1, h2, h3, h4, h5 {
@@ -37,7 +38,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .summary p {
-  font-size: 1.15em;
+  font-size: 1.2em;
 }
 
 .post {
@@ -45,7 +46,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .post p {
-  font-size: 1.15em;
+  font-size: 1.2em;
 }
 
 .highlighted {
