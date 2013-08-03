@@ -4,7 +4,7 @@ tags: JavaScript, CoffeeScript, AngularJS
 date: 03/08/2013
 ---
 
-As a Angular.js developer, I want to test my code, so that I can feel reasonably good about it. This sounds like a "User Story" in Scrum but it's more of a developer's quest. So in this blog we will look at ways to test our Angular.js code.
+As a Angular.js developer, I want to test my code, so that I can feel reasonably good about it. This sounds like a "User Story" in Scrum but it's more of a developer quest. So in this blog we will look at ways to test our Angular.js code.
 
 Let's see what we need -
 
