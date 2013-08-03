@@ -23,8 +23,8 @@ To kick off things, lets build a simple app which has a -
 
 Simple enough, this would look something like -
 
-![Login](/images/ang_login.png "Login")
-![Main](/images/ang_main.png "Main")
+![Login](http://rockyj.in/images/ang_login.png "Login")
+![Main](http://rockyj.in/images/ang_main.png "Main")
 
 We have 2 controllers and 2 services in this setup -
 
