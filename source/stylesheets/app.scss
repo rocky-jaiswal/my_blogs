@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro);
+@import url(http://fonts.googleapis.com/css?family=Arvo|Source+Sans+Pro);
 
 $main-color: #2980b9;
 $gray: #ecf0f1;
@@ -9,7 +9,7 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Oswald";
+  font-family: "Arvo";
   margin-bottom: 10px;
 }
 
@@ -44,11 +44,14 @@ h1, h2, h3, h4, h5 {
 
 .post {
   text-align: justify;
-}
-
-.post p {
-  font-size: 1.2em;
-  line-height: 140%;
+  p {
+    font-size: 1.2em;
+    line-height: 140%;
+  }
+  li {
+    font-size: 17px;
+    line-height: 140%;
+  }
 }
 
 .highlighted {
