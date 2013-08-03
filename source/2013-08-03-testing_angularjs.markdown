@@ -228,6 +228,8 @@ We now have two Grunt tasks to run Unit and E2E tests respectively - __grunt tes
 
 Let us write a E2E test -
 
+__test/e2e/smoke.coffee__
+
     'use strict'
 
     describe 'SmokeTest', () ->
