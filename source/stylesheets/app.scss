@@ -54,7 +54,27 @@ h1, h2, h3, h4, h5 {
   }
 }
 
+#main {
+  h3 {
+    a{
+      margin-right: 5px;
+    }
+  }
+  h2 {
+    padding-bottom: 10px;
+  }
+}
+
+#sidebar {
+  li {
+    a {
+      margin-right: 5px;
+    }
+  }
+}
+
 .highlighted {
+  margin-right: 10px;
   color: $main-color !important;
 }
 

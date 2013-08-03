@@ -1,0 +1,10 @@
+- blog.articles[0...10].each do |article|
+  .summary
+    h3
+      a href=(article.url)
+        = article.title
+      span= article.date.strftime('%b %e')
+    p= article.summary
+    a href=(article.url)
+      | More...
+  hr/

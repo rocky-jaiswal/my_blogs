@@ -1,0 +1,8 @@
+h1.highlighted
+  | Articles tagged '#{@tag}'
+- if @articles
+  - @articles[0...12].each do |article|
+    li
+      a href=(article.url)
+        = article.title
+      time= article.date.strftime('%b %e')

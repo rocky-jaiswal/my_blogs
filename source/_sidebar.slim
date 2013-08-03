@@ -1,0 +1,54 @@
+#sidebar
+  h3.top
+    br/
+    a href="/about" About
+  hr/
+  h3
+    a href="https://github.com/rocky-jaiswal" target="_blank" Github
+    |  / 
+    a href="https://twitter.com/whatsuprocky" target="_blank" Twitter
+  hr/
+  h3
+    a href="/videos" Videos
+  hr/
+  h3
+    a#show-posts href="#" Posts
+    |  / 
+    a#show-tags href="#" Tags
+  .posts
+    ol
+      - blog.articles.each do |article|
+        li
+          a href=(article.url) 
+            = article.title
+          span= article.date.strftime('%b %e %Y')
+  .tags
+    ol
+      - blog.tags.each do |tag, articles|
+        li
+          a href=(tag_path tag)
+            = tag
+            | (#{articles.size})
+  hr/
+javascript:
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10309067-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  
+  $(function() {
+    $('.tags').hide();
+    $("#show-tags").click(function() {
+      $('.tags').show();
+      $('.posts').hide();
+    });
+    $("#show-posts").click(function() {
+      $('.tags').hide();
+      $('.posts').show();
+    });
+  });
