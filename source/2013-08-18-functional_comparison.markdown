@@ -51,8 +51,8 @@ Finally, let's do this in Scala -
 
     //can we do better?
     //yes, create a partially applied, anonymous function
-    Calculate(2, 3){ _ * _ } //5
-    Calculate(2, 3){ _ + _ } //6
+    Calculate(2, 3){ _ * _ } //6
+    Calculate(2, 3){ _ + _ } //5
 
 So we see Scala provides us more powerful constructs like partially applied functions but makes the code a bit cryptic to new-comers. Scala code is more verbose but then again it provides us with type safety.
 
