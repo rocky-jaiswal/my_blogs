@@ -20,9 +20,12 @@ Let's start with Ruby -
       end
     end
 
-    #execute it
+    #execute it, with a lambda
     Calculate.do(2, 3, ->(a, b){a + b}) #5
     Calculate.do(2, 3, ->(a, b){a * b}) #6
+
+    #or use a Proc
+    Calculate.do(2, 3, Proc.new{|a, b|a * b})
 
 Pretty decent, let's do this in JavaScript or rather in CoffeScript to avoid the prototype syntax -
 
