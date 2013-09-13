@@ -10,7 +10,7 @@ Engineering Company A was building a bridge, the project was shutdown mid-way du
 
 Their logic was simple, since the last built ten kilometers of the bridge took ten months the next ten will take more or less the same time. So they propose a fee and estimated time of completion of one year (adding some buffer). ECB got the contract but midway (after building a few kilometers) they realized that the earth on the north-eastern side was not very stable and they needed to reinforce it to erect the columns of the bridge, this would take four more months. The government meanwhile had made some other plans and had publicly announced the opening of the bridge in six months. 
 
-Now what does ECB do? Since this is a construction project with probably human life at stake (what if the bridge collapses) they will ask the government for extension and most probably get it
+Now what does ECB do? Since this is a construction project with probably human life at stake (what if the bridge collapses) they will ask the government for an extension and most probably get it
 
 This is the situation in a lot of software projects, however, since there is rarely human life involved, ECB will usually ask its engineers "to do anything" to get the project out of the door. Heck, maybe they can even charge more money later to "maintain" it.
 
