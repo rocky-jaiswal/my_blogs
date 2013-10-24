@@ -8,7 +8,7 @@ Last weekend I was successfully able to launch the MVP of [StatusBoard](https://
 
 Scala [Futures](http://docs.scala-lang.org/overviews/core/futures.html) provide a nice abstraction of working with things in a non-blocking way without dealing with the headache of manually managing threads.
 
-Let us take an fictitious example - as I am sitting and thinking about how to buy GTA5 and Batman: Arkham Origins by December, my "manager" comes to me and asks me to parse a large log file and count the errors and warnings in it. Let us assume counting the words "error" and "warning" in the file will give me what the manager wants and I can go back to my calculations.
+Let us take a fictitious example - as I am sitting and thinking about how to buy GTA5 and Batman: Arkham Origins by December, my "manager" comes to me and asks me to parse a large log file and count the errors and warnings in it. Let us assume counting the words "error" and "warning" in the file will give me what the manager wants and I can go back to my calculations.
 
 Being a Linux n00b I quickly write a Ruby script to do the job -
 
