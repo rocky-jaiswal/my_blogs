@@ -1,22 +1,27 @@
-@import url(http://fonts.googleapis.com/css?family=Arvo|Source+Sans+Pro);
+@import url(http://fonts.googleapis.com/css?family=Coda|Source+Sans+Pro);
 
-$main-color: #2980b9;
-$gray: #ecf0f1;
+@import "_bootstrap.min";
+@import "_bootstrap-responsive.min";
+@import "_github";
+
+$banner-color: #2980b9;
+$back-color: #ecf0f1;
+$text-color: #454545;
 
 body {
-  background-color: $gray;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica,Arial,sans-serif;
+  background-color: $back-color;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Arvo";
+  font-family: "Coda", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 10px;
 }
 
 .banner {
   padding: 10px 0px 8px 0px;
   margin-bottom: 20px;
-  background: $main-color;
+  background: $banner-color;
 }
 
 .banner a:hover {
@@ -40,7 +45,7 @@ h1, h2, h3, h4, h5 {
 .summary p {
   font-size: 1.2em;
   line-height: 1.5;
-  color: #454545;
+  color: $text-color;
 }
 
 .post {
@@ -48,12 +53,12 @@ h1, h2, h3, h4, h5 {
   p {
     font-size: 1.2em;
     line-height: 151%;
-    color: #454545;
+    color: $text-color;
   }
   li {
     font-size: 17px;
     line-height: 151%;
-    color: #454545;
+    color: $text-color;
   }
 }
 
@@ -77,12 +82,16 @@ h1, h2, h3, h4, h5 {
 }
 
 .highlighted {
-  margin-right: 10px;
-  color: $main-color !important;
+  margin-right: 15px;
+  color: $banner-color !important;
+}
+
+.date {
+  font-size: 0.8em;
 }
 
 a {
-  color: $main-color !important;
+  color: $banner-color !important;
 }
 
 ul li {

@@ -10,7 +10,7 @@ html
             article
               h2
                 span.highlighted= current_article.try(:title)
-                span= current_article.date.strftime('%b %e %Y') if current_article
+                span.date= current_article.date.strftime('%b %e %Y') if current_article
               .post
                 = current_article.body if current_article
               hr/
