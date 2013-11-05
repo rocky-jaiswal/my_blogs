@@ -30,14 +30,14 @@ This is easily fixable by adding the middleware to our ApplicationController -
 
 Since we cannot use cookies we will setup a simple token based authentication mechanism, which works like this -
 
-1. User enters a username and password and sends a login request to the server
-2. Devise authenticates the user, and sends back a token which is also persisted on the server for the particular user
-3. We store the returned token on the client side as well (lets say in localStorage / or just in memory using an Angular.js service)
-4. Subsequent requests from the client add the token in the request header
-5. On receiving a request, the server extracts and matches the token & the user and authenticates the request
-6. When the user logs out, we delete the token from the client side and the server side
+1. User enters a username and password and sends a login request to the server.
+2. Devise authenticates the user, and sends back a token and encrypted email. The token is also persisted on the server for the particular user.
+3. We store the returned token and encrypted email on the client side as well (lets say in localStorage / or just in memory using an Angular.js service).
+4. Subsequent requests from the client add the token ane encrypted email in the request header.
+5. On receiving a request, the server extracts and matches the token & the user and authenticates the request.
+6. When the user logs out, we delete the token from the client side and the server side.
 
-Please note that this approach is not battle-tested but is pretty standard and should be fine over HTTPS and non-critical applications.
+_Please note that this approach is not battle-tested but is pretty standard and should be fine over HTTPS and non-critical applications._
 
 Now devise has removed the out-of-the-box token based auth as mentioned [here](http://blog.plataformatec.com.br/2013/08/devise-3-1-now-with-more-secure-defaults/) so we will have to do some work to set this up. Thankfully José Valim being the nice guy that he is, also pointed us to a possible solution [here](https://gist.github.com/josevalim/fb706b1e933ef01e4fb6). _Plus, I am no genuius, I merely stand on the shoulder of giants._
 
