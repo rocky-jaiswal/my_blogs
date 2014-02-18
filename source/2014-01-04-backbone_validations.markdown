@@ -57,7 +57,7 @@ Basically, all we needed to do was to override the validate method of the model 
 This is reasonably good but can we do better, I guess two things that can be improved are -
 
 1. Make the validations more declarative, not the if/else/unless mess.
-2. More reusable validations like Rails.
+2. Use more reusable validations like Rails.
 
 Luckily, there is a Backbone plugin that can help us - [Backbone Validation](http://thedersen.com/projects/backbone-validation/). Let's see how the code looks after using this plugin.
 
