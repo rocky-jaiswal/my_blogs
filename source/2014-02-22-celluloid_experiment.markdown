@@ -72,7 +72,7 @@ With the same code and 1 worker, the test run takes 4.7 secs for pos = 4000.
 
 With 8 workers (threads) running in parallel, it takes 12.5 secs while using a maximum of ~90% CPU, also it uses all cores.
 
-![CPU Usage](/images/jruby_cpu2.png "CPU usage on JRuby 2")
+![CPU Usage](/images/jruby_cpu2.png "CPU usage on JRuby")
 
 
 
@@ -82,4 +82,4 @@ MRI uses one core per process irrespective of number of threads spawned (due to 
 
 To use all CPU cores with MRI, we need to start more processes, with JRuby there is no such need.
 
-This also has implication for background processing systems like Sidekiq. With MRI starting Sidekiq with many workers (for a CPU intensive job) has negative impact. In this case Sidekiq should be started as many processes with 1-2 workers on each process to use all the cores. With JRuby one process with many workers can be started (this consumes lesser memory and utilizes CPU better).
+This also has implication for background processing systems like Sidekiq. With MRI starting Sidekiq processes with many workers (for a CPU intensive job) has negative impact. In this case Sidekiq should be started as many processes as CPU cores with 1-2 workers on each process to use all the cores while not starving the individual workers. With JRuby just one process with many workers can be started, this consumes lesser memory and utilizes all the cores of the CPU efficiently.
