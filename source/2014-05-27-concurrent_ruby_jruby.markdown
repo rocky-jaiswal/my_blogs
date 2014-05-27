@@ -1,5 +1,5 @@
 --- 
-title: "Concurrent Ruby MRI / JRuby"
+title: "Concurrent Ruby on MRI / JRuby"
 tags: Ruby, JRuby
 date: 27/05/2014
 ---
