@@ -6,7 +6,7 @@ date: 27/05/2014
 
 Truth be told I am a big fan of Ruby, it is a clean, easy to pick and productive language. Rails is also by far the most feature rich web application framework available. However, Ruby misses a few (modern) language features, most of them involving "Concurrency". JRuby solves some of those problems and with the rising popularity of the [concurrent-ruby](https://github.com/jdantonio/concurrent-ruby/) gem I am happy the direction the Ruby community is taking.
 
-This is a small blog post about the difference of behavior between MRI and JRuby when using the concurrent-ruby gem. Concurency is important today as most modern hardware has multiple cores. However, because of the GVL, MRI cannot utilize all the processor cores with the same process. JRuby however can, so let's see how concerrent-ruby behaves when we execute multiple asynchronous tasks.
+This is a small blog post about the difference of behavior between MRI and JRuby when using the concurrent-ruby gem. Concurrency is important today as most modern hardware has multiple cores. However, because of the GVL, MRI cannot utilize all the processor cores with the same process. JRuby however can, so let's see how concurrent-ruby behaves when we execute multiple asynchronous tasks.
 
 Our code is simple -
 
