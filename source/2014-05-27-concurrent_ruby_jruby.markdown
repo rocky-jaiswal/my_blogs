@@ -46,13 +46,13 @@ Our code is simple -
     puts futures.map(&:value)
 
 
-This is a simple CPU intensive program that I often use for testing. We find out the prime number at the 4000th position (which is 37813 btw) and we do it on four asyncronous tasks.
+This is a simple CPU intensive program that I often use for testing. We find out the prime number at the 4000th position (which is 37813 btw) and we do it on four asynchronous tasks.
 
 With MRI 2.1.2, this takes around 25 seconds on my machine. The CPU usage is as shown below -
 
-![Concurrency-MRI](/images/conc-mri.png "Concurreny MRI")
+![Concurrency-MRI](/images/conc-mri.png "Concurrency MRI")
 
-As evident, not all cores are utlized fully.
+As evident, not all cores are utilized fully.
 
 __The same code on JRuby takes 20 seconds but most importantly uses all the cores.__
 
