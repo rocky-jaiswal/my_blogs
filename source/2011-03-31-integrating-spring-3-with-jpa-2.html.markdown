@@ -99,6 +99,8 @@ Now, assuming that you have an Entity "Post", lets create the DAO -
 		}
 
 	}
+
+
 The @Transactional annotation makes the DAO transactional (remember we added <tx:annotation-driven/>). Let's look at the other Annotations - @Repository annotation is a "stereotype" annotation added in Spring 2.5 which enables Spring to identify Beans for AOP pointcuts. In our case @Repository annotation also enables Spring to automatically convert JPA exceptions to Spring exception hierarchy. Finally, the EntityManager is automatically injected by Spring as it is annotated by @PersistenceContext. Also add - 
       
       <context:component-scan base-package="net.rocky.postage"/>
