@@ -165,6 +165,7 @@ Now we can use this package in our main package -
 				printMovies(movies2012)
 			case movies2013 := <-channels[4]:
 				printMovies(movies2013)
+			}			
 		}
 	}
 
