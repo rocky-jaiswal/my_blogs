@@ -2,7 +2,6 @@
 
 @import "_bootstrap.min";
 @import "_bootstrap-responsive.min";
-@import "_github";
 
 $banner-color: #16a085;
 $back-color: #ecf0f1;
@@ -61,6 +60,9 @@ h1, h2, h3, h4, h5 {
     font-size: 17px;
     line-height: 151%;
     color: $text-color;
+  }
+  .hljs {
+    background-color: #F8F8F8;
   }
 }
 
