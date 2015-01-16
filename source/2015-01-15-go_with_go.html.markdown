@@ -1,0 +1,200 @@
+---
+title: "Let's go with Go"
+tags: Go
+date: 15/01/2015
+---
+
+Come to think of it, every programming language is a way to communicate with the computer. One could ask, computers are the same, why do we need so many languages? Given a certain task it can be written as an instruction to the computer using any programming language so why are new programming language being invented and why should we care to learn a new one?
+
+
+There are two answers to the question above - Specialization and Evolution. Some languages are more specialized for certain tasks such as R for statistics, Erlang for concurrency, C for low level system programming and so on. The other reason to invent or learn programming languages is that as computers and our human knowledge evolve, we invent ways to solve problems elegantly while making full use of available system resources. In today’s world while we may have reached a limit on how fast a single CPU can be, modern CPUs can have as many as sixteen cores to scale processing power. At the same time memory and storage get cheaper with each passing day. What is though still costly is programmer time. Modern programming languages such as Ruby and Python go a long way in writing complex programs quickly and elegantly. However, Ruby and Python lack speed and support for concurrency. Scala solves the last two problems, however one can find the learning curve to be quite steep and reading some else’s code a bit difficult.
+
+
+One can see that there is a void in programming world, we are looking for a programming language that is fast, simple, has support for concurrency and supports modern paradigms like first class functions. Enter Go - Go programming language or Golang is a programming language backed by Google, it is designed to be simple, statically typed language, with garbage collection and built with concurrency in mind. If a young programmer were to ask me why he / she should learn Go, I would simply say that it is easy to learn, it is fast, and the language has in-built support to be highly concurrent while avoiding common issues with concurrency.
+
+
+##Why Go?
+
+Before we embark on the journey to learn Go it is important to answer what will we gain by learning Go. Lets look at some of the features in a bit more detail -
+
+
+###Simple
+Go is easy to learn, the main language features can easily be learned by doing the “Offical Go Tour” on https://tour.golang.org/ in about 1-2 days. With some programming experience and a little effort one can start writing Go programs quickly, this is quite different from other programming languages like Scala or Clojure which have quite a steep learning curve. 
+
+
+###Type safety with type inference
+While type safety is nice, it can be verbose (I am looking at you Java). Like Scala, Go provides type safety and infers type intelligently which not only helps you write large programs safely but also does not get into your way while programming. The language documentation categorically states that Go is an attempt to combine the ease of programming of an interpreted, dynamically typed language with the efficiency and safety of a statically typed, compiled language.
+Garbage Collection
+
+While garbage collection can be slightly expensive, it save a lot of programmer time. Another important point is that a large part of the difficulty of concurrent and multi-threaded programming is memory management. Automatic garbage collection makes concurrent code far easier to write. Of course, implementing garbage collection in a concurrent environment is itself a challenge, but meeting it once rather than in every program helps everyone. While the current version of Go garbage collection is the simple mark-and-sweep pattern (used in older Ruby versions as well), future versions plan to introduce more efficient garbage collection algorithms.
+
+
+###Binaries for all major platforms
+One of the most annoying problems is software distribution. If you want to run a Java application you need the Java Runtime Environment, similarly all Ruby programs need the Ruby interpreter to be installed before you can do anything (not to mention package / dependency managers). Also, if you need to install something on the user’s machine (like a script or a desktop app) things get even murkier. Go has no such problems, it generates a single binary file for all major platforms, just transfer it and run it, that is it.
+
+
+###Concurrency support
+As mentioned earlier, multi-core CPUs are the norm now, to utilize the processing power available the programming language needs to support some form of concurrency. Dealing with low level threads is cumbersome, highly error-prone and hard to debug. There need to be some abstraction that helps deal with concurrency, Scala provides this with the Actor model, Go does this with Channels. Go’s philosophy is - Don't communicate by sharing memory; share memory by communicating. Channels allow you to pass references to data structures between goroutines. If you consider this as passing around ownership of the data (the ability to read and write it), they become a powerful and expressive synchronization mechanism. What’s more Channels are a core language feature and no external library is needed to write highly concurrent programs.
+
+
+###A large standard library with a growing community, ecosystem and a clear roadmap
+One of the best things about Go is that the standard library is super rich and takes care of most common needs. Things like a HTTP server, cryptographic utilities, compression, unicode are all baked into the standard library. For most common tasks you need not import any external library. Although the library ecosystem is continually growing, for a language introduced in 2009 you can find all sorts of libraries and frameworks on Github. There are fully fledged web frameworks like Revel and Beego and there are desktop application development libraries like https://github.com/andlabs/ui that can help you build a desktop applications. The language also releases all future development plans to the public, the code now lives on Github, there are releases every six months and there seems to be a clear direction as the language is progressing.
+
+
+###Growing adoption by leading technology companies
+Newer programming languages face challenges when it comes to adoption, Go on the other hand has had no such problems. Since being introduced around five years ago, Go is in production use by Google, Dropbox, Soundcloud and BBC among others. Also the next big thing in Linux container management - Docker is written in Go. This ensures that the language is here to stay, there are and will be jobs and the early adopters will of course have a slight advantage.
+
+
+Alright, enough talking let us start writing some code.
+
+###Our first Go program (of-course, Hello World)
+
+	package main //1
+
+
+	import ( //2
+		"fmt"
+	        "os"
+	)
+
+
+	func main() { //3
+		fmt.Println("Hello " + os.Args[1])
+	}
+
+
+With Go installed, this can be runs with -
+
+	go run main.go ‘World!’
+
+Let us quickly run through the code line by line -
+
+1. Every program in Go is made up of “packages”, the main package is the entry point from where the program is run.
+2. The import statement import external packages, both fmt and os packages are part of the standard library so we do not need to do anything to get them.
+3. Is pretty simple, the main function is run printing “Hello” with whatever command line argument is passed in.
+
+
+###Using the inbuilt OS package
+Let us write another program that uses the Operating System (os) package.
+
+
+	package main //1
+
+
+	import ( //2
+		"fmt"
+		"os"
+		"os/exec"
+	)
+
+
+	func main() {
+		query := os.Args[1] //3
+		out, err := exec.Command("find",".","-iname", query).Output()  //4
+		if err != nil { //5
+		        panic("Error!")
+		}
+		fmt.Printf("File: %s\n", out)
+	}
+
+
+Section 1 and 2 are similar to the last program we wrote, at 3 we see what we call Type Inference. The variable query has no declared Type but it is inferred from the return value of os.Args function. What is also interesting is that all functions in a package that start with a capital letter are exported (which is quite neat). In section 4, we use the unix “find” command and store the output in an “out” variable. We exit / panic out in case the find command returns an error and finally we print the result.
+
+
+If we run -
+
+
+	go build
+
+
+we will get an executable that we can copy to $HOME/bin, rename it as lookup and voila we have a lookup command available to us.
+
+
+###A simple web server in Go
+
+This example is taken from the Go wiki -
+
+
+	package main
+
+	import (
+	   "fmt"
+	   "net/http"
+	)
+
+	func handler(w http.ResponseWriter, r *http.Request) {
+	   fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	}
+
+	func main() {
+	   http.HandleFunc("/", handler)
+	   http.ListenAndServe(":8080", nil)
+	}
+
+
+The main function begins with a call to http.HandleFunc, which tells the http package to handle all requests to the web root ("/") with handler. It then calls http.ListenAndServe, specifying that it should listen on port 8080 on any interface (":8080"). (Don't worry about its second parameter, nil, for now.) This function will block until the program is terminated. The function handler is of the type http.HandlerFunc. It takes an http.ResponseWriter and an http.Request as its arguments. An http.ResponseWriter value assembles the HTTP server's response; by writing to it, we send data to the HTTP client.
+
+An http.Request is a data structure that represents the client HTTP request. r.URL.Path is the path component of the request URL. The trailing [1:] means "create a sub-slice ofPath from the 1st character to the end." This drops the leading "/" from the path name. We also notice that http.Request is passed in as a pointer. This is because normally in Go arguments are passed by values / copied to the function. When we declare a parameter as (r *http.Request) we are saying that the variable r points to the type http.Request stored somewhere. 
+
+
+If you run this program and access the URL:
+
+
+__http://localhost:8080/monkeys__
+
+
+the program would present a page containing:
+
+
+__Hi there, I love monkeys!__
+
+
+Thats it! With a few lines of code, we have a HTTP server running.
+
+                          
+###Concurrency
+Since we have talked so much about concurrency, let us see a working example -
+
+
+	package main
+
+
+	import (
+		"fmt"
+		"time"
+		"math/rand"
+	)
+
+	func main() {
+		rand.Seed(time.Now().UTC().UnixNano()) //put in a varying seed
+		tasks := []string{"a", "b", "c", "d", "e", "f"}
+		size := len(tasks)
+			ch := make(chan string, size)        
+			for i := 0; i < size; i++ {
+			go doTheTask(tasks[i], ch) //spawn a goroutine
+		}
+		for i := 0; i < size; i++ {
+			result := <- ch
+			fmt.Println(result)
+		}
+	}
+
+	func doTheTask(task string, ch chan string) {
+		time.Sleep(time.Duration(rand.Intn(1000))* time.Millisecond)
+		result := "Done with task: " + task
+		ch <- result
+	}
+
+
+This is a simple problem, we want to run multiple tasks, each of which takes a random amount of time so we run all of them in parallel and wait for all of them to be completed. The example is simplified but the tasks in real life can be making a HTTP request or a remote API call.
+
+
+With Go, the solution to this problem is simple and elegant. Just adding a keyword “go” before a function call runs it in a separate co-routine, we also pass the channel where the result is published. Since there are six co-routines / tasks we listen on the channel for six responses and print them as we get them. As you can guess, each run of this program will print a different output. Goroutines and channels really allow writing concurrent code cleanly and quickly.
+
+
+##Final thoughts
+
+As we have seen so far, Go is extremely useful and easy to pick up. If I were to think of a few downsides, it would be that the language has no 'official' package manager right now. Dependency Management can right now be solved by GPM and GVP (https://github.com/pote/gpm), but the community is divided and there is no single way to do it. Also, since the language is so new, the third party packages have to be used with caution. Finally, the Go mechanism of dealing with errors (as seen in example 2 above) can be a bit cumbersome, there are a lot of debates on this at the moment.
+
+
+However, if you are looking to build powerful command line utilities or simple JSON spewing web servers that can handle thousands of requests per second (while consuming very little system resources), you cannot go wrong with Go. Also, with time the language can only improve, it was first released in November 2009 but has gained tremendous traction in a few years. So, keep your eyes open and learn some Go!
