@@ -4,9 +4,9 @@ tags: Ruby, Adwords
 date: 25/01/2015
 ---
 
-The Adwords API is a beast, although it is very well [documented](https://developers.google.com/adwords/api/) it can take a while to wrap your head around it. Release v201406 of the API added support to manage Labels, this was further improved in v201409. Labels are a great tool to add metadata to Adwords Keywords. Labels can help in organizing, filtering and performing bulk actions on the the Adwords interface.
+The Adwords API is a beast, although it is well [documented](https://developers.google.com/adwords/api/) it can take a while to wrap your head around it. Release v201406 of the API added support to manage Labels, this was further improved in v201409. Labels are a great tool to add metadata to Adwords Keywords, they can help in organizing, filtering and performing bulk actions on the the Adwords interface.
 
-We here at [crealytics](http://www.crealytics.com/en/home.html) use [camato](www.camato.de/en) to manage large Adwords accounts and use Labels effectively to manage data. This blog post provides some guidance to add Labels to Keywords programmatically with Ruby, since this feature of the API is thinly documented I believe this post might help some of you developers out there.
+We here at [crealytics](http://www.crealytics.com/en/home.html) use [camato](www.camato.de/en) to manage large Adwords accounts and use Labels to effectively manage data. This blog post provides some guidance to add Labels to Keywords programmatically with Ruby, since this feature of the API is thinly documented I believe this post might help some developers out there.
 
 On a web browser this might look something like this -
 
@@ -49,7 +49,7 @@ Using the static config and merging it with our account specific OAuth config, w
 
 	  def self.config_hash(adwords_id)
 	    config = Adwords::Config.static_config
-	    oauth2_config = Coat::Client.request_token(adwords_id).adwords_oauth2_token_config
+	    oauth2_config = OAuthHandler.request_token(adwords_id).adwords_oauth2_token_config
 	    #Merge static and Oauth2 config
 	    config[:authentication][:oauth2_token] = oauth2_config
 	    config[:authentication][:client_customer_id] = adwords_id
@@ -98,7 +98,7 @@ Using this service builder we can create a Label management service -
 
 	  end
 
-The Labels class provides a __find_or_create__ method which first looks for a label and if it is not found creates one. For Label creation the operation in the code above is __label_service.mutate__ which uses the [Google Adwords API Ruby gem](https://github.com/googleads/google-api-ads-ruby) to interact with the LabelService. Adwords API operates primarily as a SOAP service, however dealing with SOAP requests / response is clunky and the Ruby gem provides a nice abstraction over raw SOAP calls for us.
+The Labels class provides a __find_or_create__ method which first looks for a label by its text in an Adwords account and if it is not found creates one. For Label creation the operation in the code above is __label_service.mutate__ which uses the [Google Adwords API Ruby gem](https://github.com/googleads/google-api-ads-ruby) to interact with the LabelService. Adwords API operates primarily as a SOAP service, however dealing with SOAP requests / response is clunky so we use the Ruby gem which provides a nice abstraction over raw SOAP calls for us.
 
 Now that we have created a Label, let us associate it with a Keyword -
 
@@ -170,4 +170,4 @@ So the controller's job is as simple as doing -
 	keyword.update_label_in_adwords(params['label_text'])
 
 
-That is it, using the excellent Adwords API gem we have been able to create and associate Labels elegantly. The main points are to build the services correctly, call the correct operations and pass them with the appropriate parameters. Hope the code above will help some developers out there, the same principles can be used to interact with Adwords API with other programming languages such as Python / Java.
+That is it, using the excellent Adwords API gem we have been able to create Labels and associate them with Keywords elegantly. The main gotchas are to build the services correctly, call the correct operations and pass them with the appropriate parameters. Hope the code above will help some developers out there, the same principles can be used to interact with Adwords API with other programming languages such as Python / Java.
