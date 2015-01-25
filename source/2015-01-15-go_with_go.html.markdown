@@ -19,7 +19,7 @@ Before we embark on the journey to learn Go it is important to answer what will 
 
 
 ###Simple
-Go is easy to learn, the main language features can easily be learned by doing the “Offical Go Tour” on https://tour.golang.org/ in about 1-2 days. With some programming experience and a little effort one can start writing Go programs quickly, this is quite different from other programming languages like Scala or Clojure which have quite a steep learning curve. 
+Go is easy to learn, the main language features can easily be learned by doing the “Offical Go Tour” on [https://tour.golang.org/](https://tour.golang.org/) in about 1-2 days. With some programming experience and a little effort one can start writing Go programs quickly, this is quite different from other programming languages like Scala or Clojure which have quite a steep learning curve. 
 
 
 ###Type safety with type inference
@@ -194,7 +194,7 @@ With Go, the solution to this problem is simple and elegant. Just adding a keywo
 
 ##Final thoughts
 
-As we have seen so far, Go is extremely useful and easy to pick up. If I were to think of a few downsides, it would be that the language has no 'official' package manager right now. Dependency Management can right now be solved by GPM and GVP (https://github.com/pote/gpm), but the community is divided and there is no single way to do it. Also, since the language is so new, the third party packages have to be used with caution. Finally, the Go mechanism of dealing with errors (as seen in example 2 above) can be a bit cumbersome, there are a lot of debates on this at the moment.
+As we have seen so far, Go is extremely useful and easy to pick up. If I were to think of a few downsides, it would be that the language has no 'official' package manager right now. Dependency Management can right now be solved by [GPM and GVP](https://github.com/pote/gpm), but the community is divided and there is no single way to do it. Also, since the language is so new, the third party packages have to be used with caution. Finally, the Go mechanism of dealing with errors (as seen in example 2 above) can be a bit cumbersome, there are a lot of debates on this at the moment.
 
 
 However, if you are looking to build powerful command line utilities or simple JSON spewing web servers that can handle thousands of requests per second (while consuming very little system resources), you cannot go wrong with Go. Also, with time the language can only improve, it was first released in November 2009 but has gained tremendous traction in a few years. So, keep your eyes open and learn some Go!
