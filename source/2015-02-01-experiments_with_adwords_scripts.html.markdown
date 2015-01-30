@@ -4,13 +4,13 @@ tags: Ruby, Adwords
 date: 01/02/2015
 ---
 
-[Adwords Scripts](https://developers.google.com/adwords/scripts/) are a neat way to automate small tasks in Adwords. There are many scripts [available](https://developers.google.com/adwords/scripts/docs/solutions/) which can help you automate routine tasks or run some checks on your Adwords account. However, there are also some [limits](https://developers.google.com/adwords/scripts/docs/limits) on what can be done with Scripts. For example, the script must do its job in 30 minutes or it is cancelled, also there is no way to invoke the Scripts via Adwords API.
+[Adwords Scripts](https://developers.google.com/adwords/scripts/) are a neat way to automate small tasks in Adwords. There are many scripts [available](https://developers.google.com/adwords/scripts/docs/solutions/) which can help you automate routine tasks or run some basic checks on your Adwords account. However, there are also some [limits](https://developers.google.com/adwords/scripts/docs/limits) on what can be done with Scripts. For example, the script must do its job in 30 minutes or it is cancelled, also there is no way to invoke the Scripts via Adwords API.
 
-But there are two great features that come with Adwords Scripts - one that they can be scheduled and another that they can access Google Drive. Which gives me an idea, we can ask to script to do a scdeduled check on a file in Google Drive and on certain conditions (either based on the presence / content of the file) do some action. Since the idea sounds exciting, lets do an experiment to see if it actually works.
+But there are two great features that come with Adwords Scripts - one that they can be scheduled and another that they can access Google Drive. Which gives me an idea, we can ask to script to do a scheduled check on a file in Google Drive and on certain conditions (either based on the presence or on content of the file) do some action. Since the idea sounds exciting, lets do an experiment to see if it actually works.
 
 For our experiment we will do something trivial, we want to automate the process of adding "Negative Keywords" to a campaign. Negative Keywords according to Google is - _A type of keyword that prevents your ad from being triggered by a certain word or phrase. It tells Google not to show your ad to anyone who is searching for that phrase_.
 
-So we want to collect all our Negative Keywords, paste them in an awesome tool like [camato](www.camato.de/en), submit the form and sit back and relax. Something like this -
+So we want to collect all our Negative Keywords, paste them in an awesome tool like [camato](www.camato.de/en), click a button and sit back and relax. Something like this -
 
 ![Adding Negative Keywords](/images/add_negative_keywords.png "Adding Negative Keywords")
 
@@ -92,7 +92,7 @@ So let us first look at the code to upload the keywords as a file in Google Driv
 	end
 
 
-When we sign up with the Google API, we are assigned a client id and client secret. The code above assumes that these two entities are set in Rails.config. Since uploading to Google drive requires OAuth tokens, we first need to authorize our customers and then do the upload. On the controller level, it looks like -
+When we sign up with the Google API, we are assigned a client id and client secret. The code above assumes that these two entities are set in Rails.config. Since uploading to Google drive requires OAuth tokens, we first need to authorize our customers and then do the upload. On the controller level, it may look like this -
 
 
 	class NegativeKeywordsController < ApplicationController
@@ -110,7 +110,7 @@ When we sign up with the Google API, we are assigned a client id and client secr
 	    redirect_to uri.to_s
 	  end
 
-	  #we can make this action our OAuth callback
+	  #we can make this action our OAuth callback for now
 	  def upload
 	    google_drive = GoogleDrive.new
 	    google_drive.authorize_client params['code']
@@ -129,6 +129,7 @@ Running this code will upload a file to the authorized user's Google Drive. We n
 Lets us now write a small Adwords script to use this file -
 
 	function addNegativeKeywordsToCampaigns(keywords_csv) {
+          //Get all accounts for our MCC
 	  var accounts = MccApp.accounts().get();
 	  
 	  while (accounts.hasNext()) {
@@ -166,6 +167,7 @@ Lets us now write a small Adwords script to use this file -
 
 
 As with all Adwords scripts, the entry point is the _function main()_. We first fetch the contents of the file from Google drive and then we pass the keywords over to be added to all Campaigns in our Account. If your account is an MCC like ours, you will need to iterate over all Accounts as well (as shown in code above). 
+
 We can now add this script via the Adwords UI and schedule it -
 
 ![Adding Adwords Scripts](/images/adding_adwords_scripts.png "Adding Adwords Scripts")
@@ -173,8 +175,7 @@ We can now add this script via the Adwords UI and schedule it -
 
 And when the script runs, it will add new Negative Keywords to our Campaigns -
 
-
 ![Adwords Negative Keywords](/images/adwords_negative_keywords.png "Adwords Negative Keywords")
 
 
-That's it! We have successfully added Negative Keywords using Adwords Scripts while not opening the Adwords interface at all. Please note that the code above is experimental and not meant for production use since not all validations / checks are in place. The idea was to see how we can work with Adwords Scripts from outside the Adwords interface, which I believe was successful.
+That's it! We have added Negative Keywords using Adwords Scripts while not opening the Adwords interface at all. Please note that the code above is experimental and not meant for production use (since not all validations / checks are in place and things are hardcoded). The idea was to see how we can work with Adwords Scripts from outside the Adwords interface, which I believe was successful.
