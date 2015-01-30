@@ -6,7 +6,11 @@ date: 25/01/2015
 
 The Adwords API is a beast, although it is well [documented](https://developers.google.com/adwords/api/) it can take a while to wrap your head around it. Release v201406 of the API added support to manage Labels, this was further improved in v201409. Labels are a great tool to add metadata to Adwords Keywords, they can help in organizing, filtering and performing bulk actions on the the Adwords interface.
 
-We here at [crealytics](http://www.crealytics.com/en/home.html) use [camato](www.camato.de/en) to manage large Adwords accounts and use Labels to effectively manage data. This blog post provides some guidance to add Labels to Keywords programmatically with Ruby, since this feature of the API is thinly documented I believe this post might help some developers out there.
+Labels can be applied to keywords, campaigns, ad groups, and ads, which also enables you to see how the custom categories you create are performing relative to each other and to the entities in your account. Labels provide an easy filtering mechanism also on the Adwords interface as seen in the screenshot below -
+
+![Adwords_Labels_Filtering](/images/adwords_label_filtering.png "Labels in Adwords")
+
+More information on Labels can be found in this [post](https://support.google.com/adwords/answer/2475865?hl=en). We here at [crealytics](http://www.crealytics.com/en/home.html) use [camato](www.camato.de/en) to manage large Adwords accounts and use Labels to effectively manage data. This blog post provides some guidance to add Labels to Keywords programmatically with Ruby, since this feature of the API is thinly documented I believe this post might help some developers out there.
 
 On a web browser this might look something like this -
 
