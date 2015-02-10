@@ -46,9 +46,15 @@ Then, when someone searches for "football cleats" AdWords puts together the URL 
 
 Making changes to your tracking template at any level—except at the ad level will not send your ad through the approval process i.e. your ad will continue to serve, uninterrupted. If you change the tracking template at the ad level directly, the ad needs to go through the approval process again.
 
-Additionally, Adwords added new ValueTrack parameters like __{loc_physical_ms}__: The ID of the geographical location of the click and __{loc_interest_ms}__: The ID of the location of interest that helped trigger the ad among others.
+Additionally, Adwords added new ValueTrack parameters like - 
 
-Apart from all this now we can also create custom parameters which you can add to keywords so that you can send additional tracking information which is not provided by the standard ValueTrack parameters. For example, adding a custom Keyword ID is super easy now.
+- __{campaign_id}__: The ID of the campaign.
+- __{adgroup_id}__: The ID of the Ad group.
+- __{targetid}__: The ID of the keyword (labeled "kwd"), dynamic search ad ("dsa"), or remarketing list target ("aud") that triggered an ad.
+- __{loc_physical_ms}__: The ID of the geographical location of the click. This can help you generate geographic reports.
+- __{loc_interest_ms}__: The ID of the location of interest that helped trigger the ad.
 
-With these changes it is apparent how serious Google Adwords is taking customer requests which allow for easier tracking and performance measurement. At [crealytics](http://www.crealytics.com/en/home.html) we use all these features to give you great insights into your ad performance and thereby applying visible improvements to your Adwords Campaigns.
+The first three new ValueTrack parameters are particulalrly interesting as they make tracking and reporting easier across Ad Groups and Campaigns. Apart from all this now we can also create custom parameters which you can add to keywords so that you can send additional tracking information which is not provided by the standard ValueTrack parameters. For example, adding a custom Keyword ID is super easy now.
+
+With these changes it is apparent how serious Google Adwords is taking customer requests which allow for easier tracking and performance measurement. At [crealytics](http://www.crealytics.com/en/home.html) we use all these features to give you great insights into your keyword performance and thereby applying visible improvements to your Adwords Campaigns.
 
