@@ -54,7 +54,7 @@ Additionally, Adwords added new ValueTrack parameters like -
 - __{loc_physical_ms}__: The ID of the geographical location of the click. This can help you generate geographic reports.
 - __{loc_interest_ms}__: The ID of the location of interest that helped trigger the ad.
 
-The first three new ValueTrack parameters are particulalrly interesting as they make tracking and reporting easier across Ad Groups and Campaigns. Apart from all this now we can also create custom parameters which you can add to keywords so that you can send additional tracking information which is not provided by the standard ValueTrack parameters. For example, adding a custom Keyword ID is super easy now.
+The first three new ValueTrack parameters are particularly interesting as they make tracking and reporting easier across Ad Groups and Campaigns. Apart from all this now we can also create custom parameters which you can add to keywords so that you can send additional tracking information which is not provided by the standard ValueTrack parameters. For example, adding a custom Keyword ID is super easy now.
 
 With these changes it is apparent how serious Google Adwords is taking customer requests which allow for easier tracking and performance measurement. At [crealytics](http://www.crealytics.com/en/home.html) we use all these features to give you great insights into your keyword performance and thereby applying visible improvements to your Adwords Campaigns.
 
