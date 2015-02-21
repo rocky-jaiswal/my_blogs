@@ -61,9 +61,6 @@ h1, h2, h3, h4, h5 {
     line-height: 151%;
     color: $text-color;
   }
-  .hljs {
-    background-color: #F8F8F8;
-  }
 }
 
 #main {
@@ -106,11 +103,6 @@ hr {
   border-bottom: 1px solid #ccc;
 }
 
-pre {
-  code {
-    background: white;
-  }
-}
 
 a.jsc {
   img {
@@ -125,7 +117,6 @@ img.side {
 
 img {
   margin: 20px 0;
-
 }
 
 img.bnnr {
