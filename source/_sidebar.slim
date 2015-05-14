@@ -9,22 +9,24 @@
   h3
     a href="https://github.com/rocky-jaiswal" target="_blank" Github
     |  / 
-    a href="https://twitter.com/whatsuprocky" target="_blank" Twitter
+    a href="https://twitter.com/usr_bin_rocky" target="_blank" Twitter
   hr/
   h3
     a href="/videos" Videos
   hr/
   h3
-    a#show-posts href="#" Posts
+    a#show-posts href="#/posts" Posts
     |  / 
-    a#show-tags href="#" Tags
+    a#show-tags href="#/tags" Tags
   .posts
     ol
-      - blog.articles.each do |article|
+      - blog.articles.take(20).each do |article|
         li
           a href=(article.url) 
             = article.title
           span= article.date.strftime('%b %e %Y')
+      li
+        a href="/posts" All...
   .tags
     ol
       - blog.tags.each do |tag, articles|

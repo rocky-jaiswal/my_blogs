@@ -1,7 +1,7 @@
 h1.highlighted
-  | Articles tagged '#{@tag}'
-- if @articles
-  - @articles[0...12].each do |article|
+  | Articles tagged "#{tagname}"
+- if articles
+  - articles.each do |article|
     li
       a href=(article.url)
         = article.title

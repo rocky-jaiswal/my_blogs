@@ -4,11 +4,11 @@ html
     = partial "head"
   body
     = partial "banner"
-    #main.container role="main"
+    #main.container-fluid role="main"
       .row
-        .span9
+        .col-md-9
           #main role="main"
             = yield
-        .span3
+        .col-md-3
           = partial "sidebar"
 
