@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 @import "bootstrap.min";
@@ -13,16 +14,42 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
+  font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  line-height: 1.1;
   margin-bottom: 10px;
+  font-size: 28px;
 }
 
 a {
   color: $highlight-color !important;
 }
 
+.jumbotron {
+  padding: 30px 15px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+}
+
+.jumbotron h1 {
+  font-size: 5em;
+}
+
+.jumbotron p {
+  margin-bottom: 15px;
+  font-size: 25px;
+  font-weight: 200;
+}
+
+.jumbotron .container {
+  max-width: 100%;
+}
+
 .banner {
   background-color: $banner-color;
   border-radius: 0px;
+  margin-bottom: 20px;
   .navbar {
     border-radius: 0px;
   }
@@ -49,7 +76,7 @@ a {
 }
 
 .summary p {
-  font-size: 1.3em;
+  font-size: 1.5em;
   line-height: 150%;
   color: $text-color;
 }
@@ -57,12 +84,12 @@ a {
 .post {
   text-align: justify;
   p {
-    font-size: 1.3em;
+    font-size: 1.5em;
     line-height: 150%;
     color: $text-color;
   }
   li {
-    font-size: 1.3em;
+    font-size: 1.5em;
     line-height: 151%;
     color: $text-color;
   }
