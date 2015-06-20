@@ -57,6 +57,11 @@ a {
   h3.top {
     margin-top: -30px;
   }
+  li {
+    a {
+      margin-right: 5px;
+    }
+  }
 }
 
 .summary {
@@ -86,14 +91,6 @@ a {
   }
   h2 {
     padding-bottom: 10px;
-  }
-}
-
-#sidebar {
-  li {
-    a {
-      margin-right: 5px;
-    }
   }
 }
 
