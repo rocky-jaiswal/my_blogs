@@ -113,7 +113,5 @@ This will ensure that there are two containers running on the Mesos setup and yo
 Finally, a few questions remain -
 
 1. The Mesos master is a single point of failure - In a production setup, you can have multiple masters (3, 5, 7 or more) on stand-by with the working leader elected via [Zookeeper](https://zookeeper.apache.org/).
-
 2. How do I add more resources to the setup? - Simply add a machine and configure it as a slave in the setup.
-
 3. The containers are mapped to different ports, how can I access them without knowing the ports - This is what we call Service Discovery. First add HAPROXY to the slaves and we can periodically ask Marathon for the services running and configure our HAPROXY so that it proxies all the running container's ports. See more [here](https://open.mesosphere.com/getting-started/service-discovery/).
