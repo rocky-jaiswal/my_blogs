@@ -25,13 +25,6 @@ a {
   color: $highlight-color !important;
 }
 
-.jumbotron {
-  padding: 15px 15px;
-  margin-bottom: 30px;
-  color: inherit;
-  background-color: #eeeeee;
-}
-
 .jumbotron h1 {
   font-size: 5em;
 }
@@ -40,10 +33,6 @@ a {
   margin-bottom: 15px;
   font-size: 25px;
   font-weight: 200;
-}
-
-.jumbotron .container {
-  max-width: 100%;
 }
 
 .banner {
@@ -73,24 +62,18 @@ a {
 .summary {
   margin-bottom: 10px;
   text-align: justify;
-}
-
-.summary p {
-  font-size: 1.5em;
-  line-height: 150%;
-  color: $text-color;
-}
-
-.post {
-  text-align: justify;
   p {
     font-size: 1.5em;
     line-height: 150%;
     color: $text-color;
   }
-  li {
+}
+
+.post {
+  text-align: justify;
+  p, ol, ul {
     font-size: 1.5em;
-    line-height: 151%;
+    line-height: 150%;
     color: $text-color;
   }
 }
@@ -121,10 +104,7 @@ a {
 
 .date {
   font-size: 0.8em;
-}
-
-ul li {
-  font-size: 1.1em;
+  margin-left: 10px;
 }
 
 hr {

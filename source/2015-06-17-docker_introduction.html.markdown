@@ -169,7 +169,7 @@ Our Dockerfile could look something like this -
 
 Let us quickly go over the Dockerfile -
 
-- Our image will be based upon http://phusion.github.io/baseimage-docker/. This base image has a lot of advantages, one of the foremost being having runit (http://smarden.org/runit/) installed and setup.
+- Our image will be based upon [http://phusion.github.io/baseimage-docker/](http://phusion.github.io/baseimage-docker/). This base image has a lot of advantages, one of the foremost being having runit ([http://smarden.org/runit/](http://smarden.org/runit/)) installed and setup.
 - Runit takes away the pain of setting up system services. It also provides service supervision, this means we can be assured that if the container is running our service is running.
 - The Dockerfile is pretty self-explanatory - we copy the code to the Docker container, install necessary software and setup the process monitoring with runit.
 
@@ -180,7 +180,7 @@ Configuring runit is as simple as copying a file in the right place -
     cd /home/app/hello-sinatra
     exec chpst -u app:app ./bin/thin -R ./config.ru start >>/var/log/thin.log 2>&1
 
-The file above is copied in /etc/service/thin/run. After that runit will ensure that the thin server is running all the time. The code for the application above is available on https://github.com/rocky-jaiswal/hello-sinatra.
+The file above is copied in /etc/service/thin/run. After that runit will ensure that the thin server is running all the time. The code for the application above is available on [https://github.com/rocky-jaiswal/hello-sinatra](https://github.com/rocky-jaiswal/hello-sinatra).
 We can then run the following command to build a Docker image based on the Dockerfile -
 
     $ docker build --rm=true --no-cache=false -t rockyj/hello-sinatra .
