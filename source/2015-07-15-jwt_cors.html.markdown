@@ -1,0 +1,210 @@
+---
+title: "JWT and CORS"
+tags: JavaScript
+date: 15/07/2015
+---
+
+_This article was to be published in Healthy Code Magazine, India_
+
+In this article let us look at how we can ensure secure APIs and test and develop the frontend and backend components easily and independently. The example we will choose is of a simple web-application, lets say a ToDo management application (since the world needs more of these), but you can apply the principles to any application with separate frontend and backend components.
+
+###Some code
+
+As you start frontend code development you will be hit with sheer amount of choice, there a dozen build managers for JavaScript, more than a few dozen frameworks and then another dozen transpilers (CoffeeScript, TypeScript, JSX etc.). Since it is our sincere attempt to not go crazy we will stick with the simple choices. Backbone.js ([http://backbonejs.org/](http://backbonejs.org/)) as our main framework, Broccoli ([http://broccolijs.com/](http://broccolijs.com/)) as our build manager and Babel ([https://babeljs.io/](https://babeljs.io/)) as our transpiler since ES6 will be a standard anyway one soon.
+
+The broccoli config file (Brocfile.js) -
+
+    /* Brocfile.js */
+
+    // Import some Broccoli plugins
+    var compileSass     = require('broccoli-sass');
+    var babelTranspiler = require("broccoli-babel-transpiler");
+    var mergeTrees      = require('broccoli-merge-trees');
+
+    // Specify the Sass and ES6 directories
+    var sassDir = 'app/scss';
+    var es6Dir  = 'app/es6';
+
+    // Tell Broccoli how we want the assets to be compiled
+    var styles     = compileSass([sassDir], 'app.scss', 'app.css');
+    var scripts    = babelTranspiler(es6Dir, {filterExtensions:['es6']});
+
+    // Merge the compiled styles and scripts into one output directory.
+    module.exports = mergeTrees([styles, scripts]);
+
+Here we simply transpile our ES6 and SASS files in the right directory. A simplified index.html may look like -
+
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Hello</title>
+        <link rel="stylesheet" href="dist/app.css">
+      </head>
+      <body>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/lodash/lodash.js"></script>
+        <script src="bower_components/backbone/backbone.js"></script>
+        <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="bower_components/system.js/dist/system.js"></script>
+        <script>
+        //need to copy es6-module-loader.js and babel's browser.js in system.js dist
+        System.transpiler = 'babel';
+        System.import('dist/app');
+        </script>
+        <div class="app">
+        <a href="#/users/new">Register User</a>
+        </div>
+      </body>
+    </html>
+
+For our demo we are mainly concerned with registering / creating a user, for which the Backbone view and model may look like -
+
+    //new_user_view.es6
+    import newUserTemplate from "../templates/new_user";
+    import UserModel       from "../models/user_model";
+
+    var NewUserView  = Backbone.View.extend({
+
+      el: ".app",
+
+      events: {
+        "submit #new-user": "createUser"
+      },
+
+      initialize: function() {
+        this.template = Handlebars.compile(newUserTemplate);
+      },
+
+      render: function() {
+        $(this.el).html(this.template());
+      },
+
+      createUser: function(e) {
+        e.preventDefault();
+        var email = $($(e.currentTarget).find(':input')[0]).val();
+        var password = $($(e.currentTarget).find(':input')[1]).val();
+        var password_confirmation = $($(e.currentTarget).find(':input')[2]).val();
+
+        var user = new UserModel({email: email, password: password, password_confirmation: password_confirmation});
+        user.save();
+      }
+
+    });
+
+    export { NewUserView as default };
+
+
+    //user_model.es6
+    var UserModel  = Backbone.Model.extend({
+      urlRoot: "http://localhost:3000/users"
+    });
+    export { UserModel as default };
+
+
+If you have Ruby installed, we can run the code above with just one line -
+
+> ruby -run -ehttpd . -p9000
+
+If do do not understand the Backbone code above, it is no problem. Consider a simple HTML + JavaScript static website you have created, which talks to a backend that serves JSON.
+
+###CORS
+
+Since the static HTML + JS code is running on port 9000, you backend server will most likely run on a different port (let’s say 3000 or 8080). Without going into details of how the backend code looks like, if we try and save / register a user through code above, we will get an error message like -
+
+> XMLHttpRequest cannot load http://localhost:3000/users. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:9000' is therefore not allowed access. The response had HTTP status code 404.
+
+This is what we call a __Same Origin Policy__ error, whereby the browser does not allow us to do AJAX requests from a different domain. Since in our case the client side code runs on a different domain _http://localhost:9000_ than the server side _http://localhost:3000_ the browser says “NOT ALLOWED”! This makes sense since you usually do not want just anyone to be able to do a HTTP POST on your server (for example).
+
+But in our case this is a hindrance which is easily solvable by CORS. CORS stands for Cross Origin Resource Sharing and is essentially the standard for allowing HTTP calls between different domains. This is what we need to setup to allow our frontend code to call our backend.
+
+Essentially, CORS does a HTTP OPTIONS request on the server and looks for the header - “Access-Control-Allow-Origin”. If the header has a value that allows other requests to happen from different domains, the browser does the actual POST / GET / DELETE request. So essentially it is like the browser asking the server - “Hey, do you allow a POST from the domain http://localhost:9000?” and based on the server’s response the browser does or does not make the actual request.
+
+To continue our example we will develop a simple Rails backend for our ToDo application. If you are not aware of Rails, do not worry you can apply the same principles for Java, Node.js or Python based servers.
+
+Assuming we have a “backend” end-point in Rails that can consume a POST request to /users we need to allow access to it from other domains. With Rails it is simply a matter of adding a library (or gem) called “rack-cors” ([https://github.com/cyu/rack-cors](https://github.com/cyu/rack-cors)). The configuration of interest is -
+
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: :any
+      end
+    end
+
+This is the Rails way of saying that allow any kind of HTTP request from any domain / origin.
+Now if we try and save a user from our frontend code, we see two requests from the browser one for an OPTIONS and then the actual POST.
+
+The OPTIONS call has a response with the following headers -
+
+> Access-Control-Allow-Methods: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+> Access-Control-Allow-Origin: http://localhost:9000
+
+
+This tells the browser that it is allowed to send POST requests from the http://localhost:9000 origin, and our User is subsequently created with the POST request.
+
+###JWT
+
+So now we can make Cross Origin requests but what about security? To start with in production we may know the domains where our frontend is hosted beforehand, maybe it is on the same server / domain as the backend or on a CDN, in either case we can only allow requests from this known domain in our CORS configuration.
+
+The second level of security for our API will come through the form of tokens. In a normal web application we use sessions to add state to our HTTP requests or to identify users. For a pure JSON API, tokens do a similar job.
+
+JSON Web Tokens ([http://jwt.io/](http://jwt.io/)) act as a standard for handling user identification and authentication for API based applications in a secure manner. Essentially, JSON Web Tokens (or JWT) allow us to transport JSON data securely. The JSON data is Base64 encoded and then encrypted using a secret. This data can then be added to the HTTP header to authenticate the request / user.
+
+To demonstrate JWTs we will build upon our ToDo application example. We now want our user to have access to his/her list of ToDo items, of course we also do not want to allow the user to access anyone else’s data. Let’s see how we can use JWT to ensure this.
+
+When the user first logs in, we will authenticate the user and return a token, the browser can then store this token in localstorage and append to the HTTP headers for every request thereafter.
+
+In Rails code, this may look like -
+
+    #in users_controller.rb
+    def login
+      user = User.find_by(email: params[:email])
+                 .try(:authenticate, params[:password])
+      if user
+        token = JsonWebToken.encode(user_id: user.id)
+        render json: {token: token}, status: 200
+      else
+        render :nothing => true, status: 401
+      end
+    end
+
+    #json_web_token.rb
+    require 'jwt'
+
+    class JsonWebToken
+
+      def self.encode(payload, expiration = 4.hours.from_now)
+        payload = payload.dup
+        payload['exp'] = expiration.to_i
+        JWT.encode(payload, Rails.application.config.json_web_token_secret)
+      end
+
+      def self.decode(token)
+        JWT.decode(token, Rails.application.config.json_web_token_secret).first
+      end
+
+    end
+
+The gem we are using here is “jwt”, almost all popular languages have a JWT implementation (the mileage may vary of course). The token in our case also contains some metadata like the time in which it will expire. In the code above, using the ‘jwt’ library and some code we add our logged in user's id to the token’s payload (of course encrypted with a secret token).
+
+Now, when subsequent requests come in, we can inspect the header, decode the token and identify the user. The CURL request for this may look like -
+
+> curl -X GET -H "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE0MzM3MjA0NjR9.PbXLtPNlSlj2YkRVcLy6__NdjsLgI80FPPlP1utjV98" -H "Content-Type: application/json" http://localhost:3000/todos
+
+On the Rails side we use a request filter to authenticate the requests -
+
+    def check_authentication
+      render :nothing => true, status: 401 and return unless request.headers["x-access-token"]
+      decoded = JsonWebToken.decode request.headers["x-access-token"]
+      @user = User.find_by!(id: decoded["user_id"])
+    rescue => e
+      render :nothing => true, status: 401 and return
+    end
+
+Once this filter is added, it will ensure we authenticate / identify the user for the concerned requests and do not allow unauthenticated requests to pass through.
+
+Another advantage of JWT is that it makes the backend easy to scale, just keep adding servers behind a load balancer and you are done. This is possible since the HTTP requests are truly stateless and state is being added functionally using a header in the request.
+
+In production of course you can also setup CORS via a proxy like NGINX or HAPROXY and remember to keep your JWT secret a real secret because the encryption / decryption logic depends on it. Usually I recommend this by setting up environment variables and not have the secret in any files which can be hacked / copied.
+
+That's it, in this short article we have seen how we can setup simple, scalable frontend and backend components for an application, how we can allow them to communicate via CORS and finally how we can add authentication / security to the API using JWT. Hope this helped.
