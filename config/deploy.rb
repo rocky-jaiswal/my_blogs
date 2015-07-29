@@ -3,20 +3,21 @@ set :repository,  "https://github.com/rocky-jaiswal/my_blogs.git"
 
 set  :scm, :git
 set  :user, "deploy"
+set  :ip, "46.101.199.125"
 set  :use_sudo, false
 set  :deploy_via, :remote_cache
 set  :branch, "master"
 set  :deploy_to, "/home/#{user}/my_blogs"
-role :web, "46.101.199.125"                          # Your HTTP server, Apache/etc
-role :app, "46.101.199.125"                          # This may be the same as your `Web` server
-role :db,  "46.101.199.125", :primary => true # This is where Rails migrations will run
+role :web, "#{ip}"                          # Your HTTP server, Apache/etc
+role :app, "#{ip}"                          # This may be the same as your `Web` server
+role :db,  "#{ip}", :primary => true # This is where Rails migrations will run
 
 after "deploy:restart", "deploy:cleanup"
 after "deploy:cleanup", "custom:build"
 
 namespace :custom do
   task :build do
-    puts "==================Building with Middleman======================" #Line 22
+    puts "==================Building with Middleman======================"
     run "cd #{deploy_to}/current && docker build --rm=true --no-cache=false -t rockyj/my_blogs ."
     run "docker stop my_blogs"
     run "docker rm -fv my_blogs"

@@ -7,11 +7,14 @@ apt-get install -y fail2ban
 
 useradd deploy
 passwd deploy
+
 mkdir /home/deploy
 mkdir /home/deploy/my_blogs
 mkdir /home/deploy/.ssh
+
 chmod 700 /home/deploy/.ssh
 chown -R deploy /home/deploy
+chown -R deploy /home/deploy/.ssh
 
 apt-get install -y ufw
 ufw allow 22
@@ -21,9 +24,11 @@ ufw enable
 
 useradd rockyj
 passwd  rockyj
-usermod -aG sudo rockyj
+
 mkdir /home/rockyj
 chown -R rockyj /home/rockyj
+
+usermod -aG sudo rockyj
 
 su -l rockyj
 
