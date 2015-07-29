@@ -4,7 +4,7 @@ MAINTAINER http://fedoraproject.org/wiki/Cloud
 RUN dnf -y update  && dnf clean all
 RUN dnf -y install nginx ruby-devel nodejs git gcc && dnf clean all
 
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+COPY nginx_conf /etc/nginx/nginx.conf
 
 RUN gem update --system
 RUN gem install bundler
