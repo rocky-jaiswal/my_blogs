@@ -23,7 +23,7 @@ RUN bundle install --deployment
 RUN bundle exec middleman build
 
 USER root
-COPY build /usr/share/nginx/html/
+RUN cp -R /home/app/my_blogs/build/ /usr/share/nginx/html/
 
 EXPOSE 80
 
