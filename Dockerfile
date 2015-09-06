@@ -8,6 +8,8 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 RUN gem update --system
 RUN gem install bundler
+RUN mkdir /etc/nginx/sites-enabled
+COPY nginx_conf /etc/nginx/sites-enabled/rockyjin
 
 #Add user
 RUN /usr/sbin/groupadd --gid 9999 app
@@ -23,8 +25,6 @@ RUN bundle install --deployment
 RUN bundle exec middleman build
 
 USER root
-COPY build /usr/share/nginx/html/
-
 EXPOSE 80
 
 CMD [ "/usr/sbin/nginx" ]

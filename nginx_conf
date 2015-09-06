@@ -1,0 +1,23 @@
+server {
+    listen       80;
+    server_name  rockyj.in;
+    charset      utf-8;
+    gzip_static  on;
+    gzip_types   text/plain application/xml text/javascript text/css;
+    access_log   /var/log/nginx/rockyjin.access.log;
+    expires      10m;
+
+    location / {
+        root /home/app/my_blogs/build;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering off;
+    }
+}
+
+server {
+    listen 80;
+    server_name www.rockyj.in;
+    return 301 $scheme://rockyj.in$request_uri;
+}
