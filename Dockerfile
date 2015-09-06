@@ -1,8 +1,7 @@
 FROM fedora
 MAINTAINER http://fedoraproject.org/wiki/Cloud
 
-RUN dnf -y update  && dnf clean all
-RUN dnf -y install nginx ruby-devel nodejs git gcc && dnf clean all
+RUN dnf -y update && dnf -y install nginx ruby-devel nodejs git gcc && dnf clean all
 
 COPY nginx_conf /etc/nginx/nginx.conf
 
@@ -28,4 +27,3 @@ RUN cp -R /home/app/my_blogs/build/* /usr/share/nginx/html/
 EXPOSE 80
 
 CMD [ "/usr/sbin/nginx" ]
-

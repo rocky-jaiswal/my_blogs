@@ -1,6 +1,6 @@
 ---
 title: "Get started with Docker"
-tags: JavaScript
+tags: Docker
 date: 17/06/2015
 ---
 
