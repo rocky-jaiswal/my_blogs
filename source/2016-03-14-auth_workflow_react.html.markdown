@@ -1,6 +1,6 @@
 ---
 title: "Authentication workflow with React"
-tags: Clojure, JavaScript, React
+tags: JavaScript, React
 date: 14/03/2016
 ---
 
