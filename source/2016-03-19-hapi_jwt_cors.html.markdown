@@ -8,7 +8,7 @@ In the [last post](http://rockyj.in/2016/03/14/auth_workflow_react.html) we setu
 
 ![HapiJS](/images/hapi.svg "HapiJS")
 
-Setting up CORS and JWT with Hapi is actually quite easy. For CORS all we need to do is provide the right options to hapi's _server.connection_ and JWT setup is available as a Hapi [plugin](https://www.npmjs.com/package/hapi-auth-jwt2). Let's look at a working example -
+Setting up CORS and JWT with Hapi is actually quite easy. For CORS all we need to do is provide the right options to hapi's _server.connection_ and JWT setup is available as a hapi [plugin](https://www.npmjs.com/package/hapi-auth-jwt2). Let's look at a working example -
 
 server.js -
 
