@@ -3,7 +3,7 @@
 
 @import "bootstrap.min";
 
-$highlight-color: #e74c3c;
+$highlight-color: #2980b9;
 $banner-color: #bdc3c7;
 $back-color: #ecf0f1;
 $text-color: #454545;
@@ -14,7 +14,7 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Raleway","Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   font-weight: bold;
   line-height: 1.1;
   margin-bottom: 10px;
@@ -52,7 +52,7 @@ a {
   }
 }
 
-#sidebar {
+.sidebar {
   margin-top: 30px;
   h3.top {
     margin-top: -30px;
@@ -83,7 +83,7 @@ a {
   }
 }
 
-#main {
+.main {
   h3 {
     a {
       margin-right: 5px;

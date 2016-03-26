@@ -3,7 +3,7 @@ html
   = partial "head"
   body
     = partial "blog_banner"
-    #main.container-fluid role="main"
+    .main.container-fluid role="main"
       .row
         .col-md-10.col-md-offset-1
           #main role="main"
@@ -28,7 +28,7 @@ html
 
                 document.addEventListener("DOMContentLoaded", function(event) {
                   hljs.initHighlightingOnLoad();
-                  
+
                   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
                   var disqus_shortname = 'rockyj'; // required: replace example with your forum shortname
 
@@ -46,3 +46,4 @@ html
                 blog comments powered by
                 span.logo-disqus Disqus
 
+    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js'

@@ -57,7 +57,12 @@ A simple Ansible playbook to setup a machine with Docker and other software need
 
 The [docker-ubuntu](https://galaxy.ansible.com/angstwad/docker_ubuntu/) downloadable role does the grunt job of installing docker and built-in Ansible modules do the rest for us. At the end of this we can point Ansible to any host and get a server up and ready for capistrano deployment in no time.
 
-We can build upon this further by creating a __machine image__ on top of this setup using [Packer](https://packer.io), which is _an open source tool for creating identical machine images for multiple platforms from a single source configuration._ The advantage of this is that once we have these images built we can have a server up and running with all the software / configuration we need in no time. This is also useful when we need a cluster setup and most machines are identical to each other. What is even more cool with Packer is that it is provider independent, so with one single configuration we can build images for EC2, DigitalOcean and others at the same time. Let us look at a sample Packer configuration for our setup (packer.json) -
+We can build upon this further by creating a __machine image__ on top of this setup using [Packer](https://packer.io), which is _an open source tool for creating identical machine images for multiple platforms from a single source configuration._ The advantage of this is that once we have these images built we can have a server up and running with all the software / configuration we need in no time. This is also useful when we need a cluster setup and most machines are identical to each other. What is even more cool with Packer is that it is provider independent, so with one single configuration we can build images for EC2, DigitalOcean and others at the same time.
+
+
+![Packer Ansible Docker](/images/packer_ansible_docker.png)
+
+Let us look at a sample Packer configuration for our setup (packer.json) -
 
     {
       "provisioners": [
