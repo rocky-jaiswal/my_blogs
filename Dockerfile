@@ -1,7 +1,7 @@
 FROM centos:7
 MAINTAINER "Rocky Jaiswal" <rocky.jaiswal@gmail.com>
 
-RUN yum -y update && yum -y install nginx ruby-devel rubygem-json nodejs git gcc gcc-c++ && dnf clean all
+RUN yum -y update && yum -y install nginx ruby-devel rubygem-json nodejs git gcc gcc-c++ && yum clean all
 
 COPY nginx_conf /etc/nginx/nginx.conf
 
