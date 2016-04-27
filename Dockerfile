@@ -5,7 +5,6 @@ RUN curl --silent --location https://rpm.nodesource.com/setup_5.x | bash -
 RUN yum -y install epel-release
 RUN yum -y update && yum -y groupinstall "Development tools" && yum -y install nginx ruby-devel git gcc gcc-c++ nodejs && yum clean all
 
-
 COPY nginx_conf /etc/nginx/nginx.conf
 
 RUN gem install bundler || true

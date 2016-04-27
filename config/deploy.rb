@@ -2,8 +2,8 @@ set :application, "my_blogs"
 set :repository,  "https://github.com/rocky-jaiswal/my_blogs.git"
 
 set  :scm, :git
-set  :user, "deploy"
-set  :ip, "46.101.199.125"
+set  :user, "app"
+set  :ip, "139.59.142.143"
 set  :use_sudo, false
 set  :deploy_via, :remote_cache
 set  :branch, "master"
