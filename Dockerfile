@@ -1,7 +1,7 @@
 FROM fedora
 MAINTAINER http://fedoraproject.org/wiki/Cloud
 
-RUN dnf -y update && dnf -y install nginx ruby-devel nodejs git gcc && dnf clean all
+RUN dnf -y update && dnf -y install nginx ruby-devel rubygem-json nodejs git gcc && dnf clean all
 
 COPY nginx_conf /etc/nginx/nginx.conf
 
