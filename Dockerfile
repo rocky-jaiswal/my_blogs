@@ -1,7 +1,9 @@
 FROM centos:7
 MAINTAINER "Rocky Jaiswal" <rocky.jaiswal@gmail.com>
 
-RUN yum -y update && yum -y groupinstall "Development tools" && yum -y install nginx ruby-devel nodejs git gcc gcc-c++ && yum clean all
+RUN curl --silent --location https://rpm.nodesource.com/setup_5.x | bash -
+RUN yum -y update && yum -y groupinstall "Development tools" && yum -y install nginx ruby-devel git gcc gcc-c++ nodejs && yum clean all
+
 
 COPY nginx_conf /etc/nginx/nginx.conf
 
