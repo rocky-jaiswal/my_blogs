@@ -5,8 +5,7 @@ RUN yum -y update && yum -y install nginx ruby-devel nodejs git gcc gcc-c++ && y
 
 COPY nginx_conf /etc/nginx/nginx.conf
 
-RUN gem update --system
-RUN gem install bundler
+RUN gem install bundler || true
 
 #Add user
 RUN /usr/sbin/groupadd --gid 9999 app
