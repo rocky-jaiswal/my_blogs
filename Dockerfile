@@ -1,7 +1,7 @@
-FROM fedora
-MAINTAINER http://fedoraproject.org/wiki/Cloud
+FROM centos:7
+MAINTAINER "Rocky Jaiswal" <rocky.jaiswal@gmail.com>
 
-RUN dnf -y update && dnf -y install nginx ruby-devel rubygem-json nodejs git gcc && dnf clean all
+RUN yum -y update && yum -y install nginx ruby-devel rubygem-json nodejs git gcc gcc-c++ && dnf clean all
 
 COPY nginx_conf /etc/nginx/nginx.conf
 
