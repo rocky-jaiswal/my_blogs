@@ -1,5 +1,5 @@
 ---
-title: "Classes and patterns Node.js"
+title: "Classes and patterns in Node.js"
 tags: JavaScript
 date: 30/04/2016
 ---
