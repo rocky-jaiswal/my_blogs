@@ -1,8 +1,7 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "middleman"
-gem "middleman-blog"
-gem "slim"
-gem "capistrano", "~> 2.15"
+gem 'middleman'
+gem 'middleman-blog'
+gem 'capistrano', '~> 2.15'
 # For feed.xml.builder
-gem "builder"
+gem 'builder'

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+%html
+  %head
+    = partial "head"
+  %body
+    .container
+      = partial "blog_banner"
+      .main
+        .content
+          ~ yield
+        = partial "sidebar"

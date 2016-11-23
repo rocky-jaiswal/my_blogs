@@ -1,0 +1,23 @@
+.sidebar
+  %h3
+    %a{href: "/about"} About
+  %h3
+    %a{href: "/feed.xml"} Feed
+  %h3
+    %a(href="https://github.com/rocky-jaiswal" target="_blank") Github
+  %h3
+    %a(href="https://twitter.com/var_log_rockyj" target="_blank") Twitter
+  %h3
+    %a(href="/videos") Videos
+  %h3
+    %a#show-posts(href="/posts") Posts
+  .posts
+    %ol
+      - blog.articles.take(20).each do |article|
+        %li
+          %a{href: article.url}
+            = article.title
+          %span= article.date.strftime('%b %e %Y')
+      %li
+        %a(href="/posts") All...
+  %hr

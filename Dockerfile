@@ -1,9 +1,10 @@
-FROM centos:7
+FROM fedora:25
 MAINTAINER "Rocky Jaiswal" <rocky.jaiswal@gmail.com>
 
-RUN curl --silent --location https://rpm.nodesource.com/setup_5.x | bash -
-RUN yum -y install epel-release
-RUN yum -y update && yum -y groupinstall "Development tools" && yum -y install nginx ruby-devel git gcc gcc-c++ nodejs && yum clean all
+RUN dnf update -y
+RUN dnf install -y gcc gcc-c++ nodejs ruby-devel nginx
+RUN dnf group install -y "C Development Tools and Libraries"
+RUN dnf install -y redhat-rpm-config
 
 COPY nginx_conf /etc/nginx/nginx.conf
 

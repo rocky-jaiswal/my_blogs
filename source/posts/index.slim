@@ -1,7 +1,0 @@
-h2 Posts
-ol
-  - blog.articles.each do |article|
-    li
-      a href=(article.url) 
-        = article.title
-          span= article.date.strftime('%b %e %Y')

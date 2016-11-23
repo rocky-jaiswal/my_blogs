@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+%html
+  = partial "head"
+  %body
+    .container
+      = partial "blog_banner"
+      .main
+        %article
+          %h2
+            = current_article.try(:title)
+          %span.date
+            = current_article.date.strftime('%b %e %Y') if current_article
+          .post
+            ~ current_article.body if current_article
+          %hr
+          #disqus_thread
+:javascript
+  var stateCheck = setInterval(() => {
+    if (document.readyState === 'complete') {
+      clearInterval(stateCheck);
+      (function() { // DON'T EDIT BELOW THIS LINE
+        document.querySelectorAll('pre code').forEach(function(block) {
+          hljs.highlightBlock(block);
+        });
+        var d = document, s = d.createElement('script');
+        s.src = '//rockyj.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    }
+  }, 200);
+
+= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js'

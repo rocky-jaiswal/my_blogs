@@ -1,14 +1,15 @@
-h1
-  | Archive for
+%h1
+  Archive for
   - if @day
     = Date.new(@year, @month, @day).strftime('%b %e %Y')
   - elsif @month
     = Date.new(@year, @month, 1).strftime('%b %Y')
   - else
     = @year
-ul
+%ul
   - blog.articles.each_with_index do |article, i|
-    li
-      a href=(article.url)
-        = article.title
-      span= article.date.strftime('%b %e')
+    %li
+      %a{href: article.url}
+        article.title
+      %span
+        article.date.strftime('%b %e')
