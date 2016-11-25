@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Merriweather");
-@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro|Merriweather");
 
 :root {
   --highlight-color: #53aee0;
@@ -28,22 +27,30 @@ a {
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .banner {
   background-color: var(--banner-color);
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.banner p {
+.banner-text {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 20px;
+  width: 1024px;
   font-size: 1.2em;
-  color: var(--back-color);
+  color: var(--highlight-color);
 }
 
 .main {
   display: flex;
   flex-direction: row;
   padding: 20px;
+  max-width: 1024px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -71,7 +78,16 @@ a {
   margin-right: 5px;
 }
 
-.summary, .post {
+.sidebar li span {
+  color: var(--text-color);
+}
+
+.sidebar .posts ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.summary, .post, .about {
   text-align: justify;
 }
 
@@ -97,7 +113,7 @@ table.table td {
   min-width: 300px;
 }
 
-.summary p, .post p, .about p, .about li, table.table {
+.summary p, .post p, .post li, .about p, .about li, table.table {
   font-size: 1.2em;
   line-height: 150%;
   color: var(--text-color);
