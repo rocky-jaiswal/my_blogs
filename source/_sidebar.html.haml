@@ -6,14 +6,12 @@
   %h3
     %a(href="https://github.com/rocky-jaiswal" target="_blank") Github
   %h3
-    %a(href="https://twitter.com/var_log_rockyj" target="_blank") Twitter
-  %h3
     %a(href="/videos") Videos
   %h3
     %a#show-posts(href="/posts") Posts
   .posts
     %ol
-      - blog.articles.take(20).each do |article|
+      - blog.articles.take(5).each do |article|
         %li
           %a{href: article.url}
             = article.title
@@ -21,3 +19,6 @@
       %li
         %a(href="/posts") All...
   %hr
+  %h3
+  %a.twitter-timeline(data-height="700" href="https://twitter.com/var_log_rockyj")
+  %script(async src="//platform.twitter.com/widgets.js" charset="utf-8")

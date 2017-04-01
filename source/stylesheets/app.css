@@ -1,9 +1,9 @@
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro|Merriweather");
 
 :root {
-  --highlight-color: #3b80ff;
-  --banner-color: #414141;
-  --back-color: #efefef;
+  --highlight-color: #514D63;
+  --banner-color: #A4AD87;
+  --back-color: #EDECD5;
   --text-color: #454545;
 }
 
@@ -86,6 +86,10 @@ p.head {
   color: var(--text-color);
 }
 
+.sidebar .posts {
+  margin-top: -25px;
+}
+
 .sidebar .posts ol {
   list-style: none;
   padding-left: 0;
@@ -125,7 +129,7 @@ table.table td {
 
 hr {
   border-bottom: 1px solid var(--banner-color);
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 img {
