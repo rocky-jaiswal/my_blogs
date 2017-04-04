@@ -99,6 +99,14 @@ p.head {
   text-align: justify;
 }
 
+.content a, .post a, .about a {
+  text-decoration: underline;
+}
+
+.content h2 a {
+  text-decoration: none;
+}
+
 .posts li {
   margin-bottom: 20px;
 }
