@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 %html
-  = partial "head"
+  %head
+    = partial "head"
   %body
     .container
       = partial "blog_banner"
@@ -30,4 +31,4 @@
     }
   }, 200);
 
-= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js'
+%script(async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" charset="utf-8")
