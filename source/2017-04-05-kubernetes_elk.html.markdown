@@ -20,11 +20,11 @@ At this point I assume AWS CLI and Kops are in your PATH and working. Also decid
 
 ## Step 1 - Setup new AWS VPC
 
-This is actually an optional step, but I do this to have complete control on the cluster. This step creates an AWS VPC in a specific region (e.g. eu-central-1) with two subets - 1 Public and 1 Private. The public subnet is reachable from the internet and the private subnet is erm.. private, it can call out to the internet but is inaccessible directly from outside (thus making is more secure).
+This is actually an optional step, but I do this to have complete control on the cluster. This step creates an AWS VPC in a specific region (e.g. eu-central-1) with two subnets - 1 Public and 1 Private. The public subnet is reachable from the internet and the private subnet is erm.. private, it can call out to the internet but is inaccessible directly from outside (thus making is more secure).
 
 Using my ansible-script [https://github.com/rocky-jaiswal/ansible-aws-vpc](https://github.com/rocky-jaiswal/ansible-aws-vpc) this whole setup is a matter of filling in entries in a YAML file and running a shell script.
 
-The most important thing is to check the VPC + subnet ids and the tags of the subnets and routing tables. The tag KubernetesCluster => Cluster Name (e.g. k8-0405.rockyj.de) should be present on subnets and routing tables. The script will automatically do the tagging for you.
+The most important thing is to check the VPC + subnet ids and the tags of the subnets and routing tables. The tag KubernetesCluster => Cluster Name (e.g. k8-0405.rockyj.de) should be present on subnets and routing tables. The Ansible script will automatically do this tagging for you.
 
 ## Step 2 - Setup kops
 
@@ -51,7 +51,7 @@ Now the most important command, we setup kops so that we get all nodes in the pr
 
 The values in the command above can be changed depending on your new VPC setup and preferences (specially the VPC Id). You can read the reference [here](https://github.com/kubernetes/kops/blob/master/docs/cli/kops_create_cluster.md).
 
-At this point we need to check and make minor modifications to the cluster, since all is not possible from the create command. Run -
+At this point we need to check and make minor modifications to the cluster, since everything is not possible from the create command. Run -
 
     kops edit cluster k8-0405.rockyj.de --state=s3://k8-state-03april2017-v4
 
@@ -61,13 +61,13 @@ Check the configuration to make sure all looks fine and run -
 
     kops update cluster k8-0405.rockyj.de --state=s3://k8-state-03april2017-v4 --yes
 
-Things will take a while and hopefully in a matter of 10 minutes we will have a new cluster ready to go. The step that takes most time is DNS propogation which cannot happen soon enough.
+Things will take a while and hopefully in a matter of 10 minutes we will have a new cluster ready to go. The step that takes most time is DNS propagation which cannot happen soon enough.
 
 You can validate the cluster with -
 
     kops validate cluster k8-0405.rockyj.de --state=s3://k8-state-03april2017-v4
 
-All should be fine, or wait for a few more minutes. Then get the kubeconfig file from its default location -
+All should be fine, or wait for a few more minutes. Then get the _kubeconfig_ file from its default location -
 
     mv ~/.kube/config ./kubeconfig
     kubectl --kubeconfig=./kubeconfig get nodes
@@ -95,11 +95,11 @@ Next up, we will setup centralized logging.
 
 <img src="/images/container_logs.png" />
 
-With such a distributed setup and potentially scores of services, it is extremely important to have centralized logging. [ELK](https://www.elastic.co/products/logstash) is a wonderful tool for this.
+With such a distributed setup and potentially scores of services on dozens of nodes, it is extremely important to have centralized logging. [ELK](https://www.elastic.co/products/logstash) is a wonderful tool for this.
 
-There are a few pieces to this, the Kubernetes services / deployments should log to console, [fluentd](http://www.fluentd.org/) will then pick the logs from each physical node and post them to the configured ElasticSearch server, finally we can view the logs on Kibana which again is connected with the same ElasticSearch server. So we need the perfectly synchronized configuration for all the 3 components here.
+There are a few pieces to this, the Kubernetes services / deployments should themselves log to stdout/stderr, [fluentd](http://www.fluentd.org/) will then pick the logs from each physical node and post them to the configured ElasticSearch server, finally we can view the logs on Kibana which again is connected with the same ElasticSearch server. So we need the perfectly synchronized configuration for all the 3 components here.
 
-Fortunately, most of the hard work is done for us by the Kubernetes team and other developers, I just chopped and changed the configuration and created the right combinations. Now, we just need to download and apply these definition files. You can get them from my repository mentioned [above](https://github.com/rocky-jaiswal/kube-setup-v2/tree/master/services). To get ElasticSearch, FluentD and Kibana running we need to run -
+Fortunately, most of the hard work is done for us by the Kubernetes team and other developers, I just chopped and changed the configuration and created the right combinations. Now, we just need to download and apply these definition files. You can get them from my repository mentioned [above](https://github.com/rocky-jaiswal/kube-setup-v2/tree/master/services). To get ElasticSearch, fluentd and Kibana running we need to run (in this order) -
 
     kubectl --kubeconfig=./kubeconfig apply -f services/k8/k8-es-simple-service.yml
     kubectl --kubeconfig=./kubeconfig apply -f services/k8/fluentd-ds.yml
@@ -119,7 +119,7 @@ And you should see the logs in Kibana.
 
 <img src="/images/kibana.png" width="800px" height="425px" />
 
-K8 also provides a nice dashboard, you can get it by -
+K8 also provides a nice dashboard, you can get it by running -
 
     kubectl --kubeconfig=./kubeconfig apply -f services/k8/k8-dashboard-service.yml
 
