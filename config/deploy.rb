@@ -18,5 +18,6 @@ after "deploy:cleanup", "custom:build"
 namespace :custom do
   task :build do
     puts "==================Building with Middleman======================"
+    run "/home/app/blog.sh"
   end
 end
