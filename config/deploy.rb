@@ -3,7 +3,7 @@ set :repository,  "https://github.com/rocky-jaiswal/my_blogs.git"
 
 set  :scm, :git
 set  :user, "app"
-set  :ip, "139.59.142.143"
+set  :ip, "45.76.90.48"
 set  :use_sudo, false
 set  :deploy_via, :remote_cache
 set  :branch, "master"
@@ -18,9 +18,5 @@ after "deploy:cleanup", "custom:build"
 namespace :custom do
   task :build do
     puts "==================Building with Middleman======================"
-    run "cd #{deploy_to}/current && docker build --rm=true --no-cache=false -t rockyj/my_blogs ."
-    run "docker stop my_blogs"
-    run "docker rm -fv my_blogs"
-    run "docker run -tid -p 80:80 --name my_blogs rockyj/my_blogs"
   end
 end
