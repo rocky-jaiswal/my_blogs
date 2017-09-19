@@ -1,5 +1,5 @@
 ---
-title: "No callback file oprations"
+title: "No callback file operations"
 tags: JavaScript
 date: 19/09/2017
 ---
