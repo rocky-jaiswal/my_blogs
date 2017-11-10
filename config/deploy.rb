@@ -3,7 +3,7 @@ set :repository,  "https://github.com/rocky-jaiswal/my_blogs.git"
 
 set  :scm, :git
 set  :user, "app"
-set  :ip, "45.76.90.48"
+set  :ip, "45.77.52.12"
 set  :use_sudo, false
 set  :deploy_via, :remote_cache
 set  :branch, "master"

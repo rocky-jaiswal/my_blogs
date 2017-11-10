@@ -1,33 +1,12 @@
-FROM fedora:25
-MAINTAINER "Rocky Jaiswal" <rocky.jaiswal@gmail.com>
+FROM ruby:2.4.2-jessie
 
-RUN dnf update -y
-RUN dnf install -y gcc gcc-c++ nodejs ruby-devel nginx redhat-rpm-config
-RUN dnf group install -y "C Development Tools and Libraries"
+RUN apt-get update && apt-get install -y build-essential
+RUN gem install bundler
+RUN gem install therubyracer
 
-COPY nginx_conf /etc/nginx/nginx.conf
+RUN mkdir -p /opt/my_blogs
+WORKDIR /opt/my_blogs
 
-RUN gem install bundler || true
-
-#Add user
-RUN /usr/sbin/groupadd --gid 9999 app
-RUN /usr/sbin/adduser  --uid 9999 --gid 9999 app
-RUN usermod -L app
-RUN mkdir -p /home/app/my_blogs
-RUN chown -R app:app /home/app/
-COPY Gemfile /home/app/my_blogs
-COPY Gemfile.lock /home/app/my_blogs
-
-USER app
-WORKDIR /home/app/my_blogs
+ADD . /opt/my_blogs
 RUN bundle install --deployment
-
-ADD . /home/app/my_blogs
 RUN bundle exec middleman build
-
-USER root
-RUN cp -R /home/app/my_blogs/build/* /usr/share/nginx/html/
-
-EXPOSE 80
-
-CMD [ "/usr/sbin/nginx" ]
