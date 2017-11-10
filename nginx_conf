@@ -1,57 +1,23 @@
-user  nginx;
-worker_processes  1;
+worker_processes 1;
 daemon off;
-
-error_log   /var/log/nginx/error.log;
-#error_log  /var/log/nginx/error.log  notice;
-#error_log  /var/log/nginx/error.log  info;
-
-pid        /run/nginx.pid;
+error_log /dev/stdout warn;
 
 events {
-    worker_connections  1024;
+    worker_connections 1024;
 }
 
 http {
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
-
-    access_log  /var/log/nginx/access.log  main;
-
-    sendfile        on;
-
-    keepalive_timeout  65;
-
-    index   index.html index.htm;
-    
     server {
-        listen       80 default_server;
-        server_name  rockyj.in;
-        root         /usr/share/nginx/html;
-        charset      utf-8;
-        gzip         on;
-        gzip_static  on;
-        gzip_types   text/plain application/xml text/javascript text/css;
-        access_log   /var/log/nginx/rockyjin.access.log;
-        expires      10m;
+        listen       8080;
+        error_log    /dev/stdout warn;
 
         location / {
-            proxy_set_header X-Forwarded-Host $host;
-            proxy_set_header X-Forwarded-Server $host;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_buffering off;
+            root         /opt/my_blogs/build;
+            index        index.html index.htm;
         }
     }
-
-    server {
-        listen 80;
-        server_name www.rockyj.in;
-        return 301 $scheme://rockyj.in$request_uri;
-    }
-
 }
 

@@ -38,6 +38,7 @@ GEM
     highline (1.7.8)
     i18n (0.7.0)
     kramdown (1.13.2)
+    libv8 (3.16.14.19)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -99,8 +100,12 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    ref (2.0.0)
     sass (3.4.23)
     servolux (0.13.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
@@ -117,6 +122,7 @@ DEPENDENCIES
   capistrano (~> 2.15)
   middleman
   middleman-blog
+  therubyracer
 
 BUNDLED WITH
-   1.13.5
+   1.16.0
