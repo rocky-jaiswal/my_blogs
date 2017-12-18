@@ -1,0 +1,88 @@
+---
+title: "Hapi(ness) v17"
+tags: HapiJS, JavaScript
+date: 18/12/2017
+---
+
+Node 8 hit LTS status recently and now we have full async/await support (yay!) on a stable Node version. This also means that a lot of JS libraries and frameworks have the oppurtunity to do code cleanups / rewrites to give us simpler APIs and faster / simpler code. [KoaJS](http://koajs.com/) was the first to get on this train and now [HapiJS](https://hapijs.com/) also joined the party and released a big upgrade with v17.
+
+In this short post we will look at setting up basic authentication and logging functionality with hapi v17 (since I usually need this for all projects). First thing of note is that since v17 is a major re-write, a lot of plugins for hapi have / had to be re-written as well. Two plugins that I usually rely on __hapi-auth-jwt-2__ and __good__ right now do not work with v17. However, with [hapi-auth-jwt2 plugin there is already a PR](https://github.com/dwyl/hapi-auth-jwt2/pull/249) so it is just a matter of forking it for now and applying the PR. For logging we will use [hapi-pino](https://github.com/pinojs/hapi-pino). So the basic hapi v17 server setup looks like -
+
+    'use strict';
+
+    const Hapi        = require('hapi');
+    const Config      = require('config');
+    const HapiAuthJWT = require('hapi-auth-jwt2');
+    const HapiPino    = require('hapi-pino');
+
+    const Routes      = require('./lib/routes/');
+    const Token       = require('./lib/services/token');
+
+    // Create a server with a host and port
+    const server = new Hapi.Server({
+      port: Config.get('api.port'),
+      routes: { cors: Config.get('api.cors') }
+    });
+
+    const init = async () => {
+
+      // Register plugins
+      await server.register(HapiAuthJWT);
+      await server.register(HapiPino);
+
+      // Auth setup
+      server.auth.strategy('jwt', 'jwt',{
+        key: Config.get('token.secret'),
+        validate: Token.validate,
+        verifyOptions: { algorithms: ['HS256'] }
+      });
+      server.auth.default('jwt');
+
+      // Routes
+      server.route(Routes);
+
+      await server.start();
+      return server;
+    };
+
+    init()
+      .catch((err) => console.error(err));
+
+    module.exports = server;
+
+Sample routes -
+
+    const PingController     = require('../controllers/ping_controller');
+    const MessagesController = require('../controllers/messages_controller');
+    const TokenController    = require('../controllers/token_controller');
+    const UsersController    = require('../controllers/users_controller');
+    const SharedMessagesController = require('../controllers/shared_messages_controller');
+
+    const routes = [
+      { method: 'GET',   path: '/ping',          options: { auth: false }, handler: PingController.show       },
+      { method: 'POST',  path: '/token',         options: { auth: false }, handler: TokenController.create    },
+      { method: 'GET',   path: '/me',            options: { auth: 'jwt' }, handler: UsersController.show      },
+      { method: 'GET',   path: '/messages',      options: { auth: 'jwt' }, handler: MessagesController.index  },
+      { method: 'GET',   path: '/messages/{id}', options: { auth: 'jwt' }, handler: MessagesController.show   },
+      { method: 'DELETE',path: '/messages/{id}', options: { auth: 'jwt' }, handler: MessagesController.delete },
+      { method: 'PUT',   path: '/messages/{id}', options: { auth: 'jwt' }, handler: MessagesController.update },
+      { method: 'POST',  path: '/messages',      options: { auth: false }, handler: MessagesController.create },
+      { method: 'GET',   path: '/sharedMessages',options: { auth: false }, handler: SharedMessagesController.index  }
+    ];
+
+    module.exports = routes;
+
+And a sample handler -
+
+    class Ping {
+
+      show(request, h) {
+
+        return { pong: true };
+      }
+
+    }
+
+    module.exports = new Ping();
+
+That's it, we are all set with a simple hapi v17 server with JWT authentication & logging and for sure it is simpler and faster.
