@@ -41,7 +41,7 @@ a {
   display: flex;
   flex-direction: column;
   padding: 15px 20px;
-  width: 80%;
+  width: 75%;
   font-size: 1.2em;
   color: var(--highlight-color);
 }
@@ -54,7 +54,7 @@ p.head {
   display: flex;
   flex-direction: row;
   padding: 20px;
-  max-width: 80%;
+  max-width: 75%;
 }
 
 @media screen and (max-width: 1000px) {
