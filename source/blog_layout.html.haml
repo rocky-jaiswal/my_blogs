@@ -15,20 +15,15 @@
             ~ current_article.body if current_article
           %hr
           #disqus_thread
-:javascript
-  var stateCheck = setInterval(() => {
-    if (document.readyState === 'complete') {
-      clearInterval(stateCheck);
-      (function() { // DON'T EDIT BELOW THIS LINE
-        document.querySelectorAll('pre code').forEach(function(block) {
-          hljs.highlightBlock(block);
-        });
-        var d = document, s = d.createElement('script');
-        s.src = '//rockyj.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-      })();
-    }
-  }, 200);
 
-%script(async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" charset="utf-8")
+  %script{type: "text/javascript", src: "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"}
+  :javascript
+    document.addEventListener('DOMContentLoaded', function (_e) {
+      document.querySelectorAll('pre code').forEach(function(block) {
+        hljs.highlightBlock(block);
+      });
+      var d = document, s = d.createElement('script');
+      s.src = '//rockyj.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    });

@@ -1,0 +1,122 @@
+---
+title: "Fun with React & D3"
+tags: JavaScript, React
+date: 01/05/2018
+---
+
+My last React post was a while [back](https://rockyj.in/2017/08/30/react-redux-typescript.html), actually in my day job I spend most of my time writing React applications so let's go back to React to have some fun. [d3](https://d3js.org/) is actally really nice and React itself works really well with SVG on its own, however when you combine React and D3 you get the issue of __"Who is managing the DOM"?__ Since both React and D3 manipulate the DOM, if we are not careful we can lose all benefits of React (with shadow DOM and diffing). So we have got two powerful libraries fighting over the control of UI state and DOM.
+
+![BatmanVsSuperman](/images/bat_vs_supes.png)
+
+The solution to this problem lies in allowing React + Redux to manage the overall DOM + state of the application while allowing D3 components to manage their own little area of the DOM and their own state (like a tiny stateful component).
+
+To explain this we will create a React component, that can be used in any React application and within the component we will allow D3 to create and animate the
+underlying SVG. So let's build a simple animated loading indicator. Here is the code -
+
+
+
+    import * as React from 'react';
+    import * as d3 from 'd3';
+
+    interface Props {
+      visible: boolean;
+    }
+
+    interface StateProps {
+      x: number;
+      timer: number;
+    }
+
+    class LoadingSpinner extends React.Component<Props> {
+
+      // tslint:disable-next-line:no-any
+      svgRef: React.RefObject<any>;
+      state: StateProps;
+
+      constructor(props: Props) {
+        super(props);
+        this.svgRef = React.createRef();
+        this.state = {
+          x: 1,
+          timer: window.setInterval(() => props.visible && this.updateState(), 100)
+        };
+      }
+
+      updateState() { // ***** line 28 *****
+        this.setState({
+          x: this.state.x <= 6 ? this.state.x + 1 : 1
+        });
+
+        d3.select(this.svgRef.current)
+          .select('#loading-spinner-rotator path')
+          .transition()
+          .duration(100)
+          .attr('transform', 'translate(100, 100)')
+          .attr('transform', `rotate(${45 * this.state.x})`);
+      }
+
+      componentDidMount() { // ***** line 41 *****
+        const svgWidth = 35, svgHeight = 35;
+
+        const svg = d3
+          .select(this.svgRef.current)
+          .attr('width', svgWidth)
+          .attr('height', svgHeight);
+
+        const arcBase = d3.arc()
+          .innerRadius(10)
+          .outerRadius(15)
+          .startAngle(0)
+          .endAngle(2 * Math.PI);
+
+        const arcRotator = d3.arc()
+          .innerRadius(10)
+          .outerRadius(15)
+          .startAngle(0)
+          .endAngle(0.25 * 2 * Math.PI);
+
+        svg
+          .append('g')
+          .attr('transform', 'translate(20, 20)')
+          .append('path')
+          .attr('d', arcBase)
+          .attr('fill', '#ccc');
+
+        svg
+          .append('g')
+          .attr('id', 'loading-spinner-rotator')
+          .attr('transform', 'translate(20, 20)')
+          .append('path')
+          .attr('d', arcRotator)
+          .attr('fill', '#F76560');
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.state.timer);
+      }
+
+      render() {
+        if (!this.props.visible) {
+          return <span />;
+        }
+        return ( // ***** line 85 *****
+          <svg id="loading-spinner" ref={this.svgRef} />
+        );
+      }
+
+    }
+
+    export default LoadingSpinner;
+
+
+The core logic here is -
+
+1. _Line 85_: With React we create a placeholder SVG.
+2. _Line 41_: With the component mounted, we allow d3 to take over, we use a React ref to get hold of the SVG DOM and start creating arcs etc.
+3. _Line 28_: Using localized state and a timer, we update the SVG periodically with d3 and add some simple transitions.
+
+I do not recommend connecting the local state of the d3 component to Redux since this state is pretty isolated and only manages a small part of the DOM for animation (it has no business logic as well). The end result is a nice "Ironman" like animated SVG loader, written in pure JavaScript that can be used as a React component anywhere.
+
+You can also check out the working code [here](https://codesandbox.io/s/workzozo85).
+
+What is cool about this approach is that we can create highly reusable & customizable D3 components, e.g. a graph component that takes in data as React props and outputs a clean SVG bar graph built with d3.
