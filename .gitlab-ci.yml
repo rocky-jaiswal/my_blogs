@@ -29,5 +29,5 @@ docker:
 deploy:
   stage: deploy
   script:
-    - 'curl -X GET https://test-sandbox.live/deployer/health -H "Authorization: Basic $DEPLOYER_AUTH"'
-    - 'curl -X PUT https://test-sandbox.live/deployer/service -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data {"service-name": "my-blogs", "image-name": "BLOG_IMAGE_ID", "image-id": "$CI_JOB_ID"}'
+    - 'echo "{\"service-name\": \"my-blogs\", \"image-name\": \"BLOG_IMAGE_ID\", \"image-id\": \"$CI_JOB_ID\"}" > body.json'
+    - 'curl -X PUT https://test-sandbox.live/deployer/service -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @body.json'
