@@ -3,6 +3,7 @@ image: ruby:2.3
 stages:
   - build
   - docker
+  - deploy
 
 build:
   stage: build
@@ -24,4 +25,8 @@ docker:
     - docker login registry.gitlab.com -u rocky-jaiswal -p $GITLAB_TOKEN
     - docker build -t registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_JOB_ID .
     - docker push registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_JOB_ID
-    - curl -X GET https://test-sandbox.live/deployer/health -H "Authorization: Basic $DEPLOYER_AUTH"
+
+deploy:
+  stage: deploy
+  script:
+    - 'curl -X GET https://test-sandbox.live/deployer/health -H "Authorization: Basic $DEPLOYER_AUTH"'
