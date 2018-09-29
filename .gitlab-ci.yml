@@ -23,12 +23,12 @@ docker:
     - build
   script:
     - docker login registry.gitlab.com -u rocky-jaiswal -p $GITLAB_TOKEN
-    - docker build -t registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_JOB_ID .
-    - docker push registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_JOB_ID
+    - docker build -t registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_COMMIT_SHA .
+    - docker push registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_COMMIT_SHA
 
 deploy:
   stage: deploy
   script:
-    - 'echo "{\"service-name\": \"my-blogs\", \"image-name\": \"BLOG_IMAGE_ID\", \"image-id\": \"$CI_JOB_ID\"}" > body.json'
+    - 'echo "{\"service-name\": \"my-blogs\", \"image-name\": \"BLOG_IMAGE_ID\", \"image-id\": \"$CI_COMMIT_SHA\"}" > body.json'
     - 'cat body.json'
     - 'curl -X PUT https://test-sandbox.live/deployer/service -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @body.json'
