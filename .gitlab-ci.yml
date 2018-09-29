@@ -30,4 +30,5 @@ deploy:
   stage: deploy
   script:
     - 'echo "{\"service-name\": \"my-blogs\", \"image-name\": \"BLOG_IMAGE_ID\", \"image-id\": \"$CI_JOB_ID\"}" > body.json'
+    - 'cat body.json'
     - 'curl -X PUT https://test-sandbox.live/deployer/service -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @body.json'
