@@ -1,6 +1,6 @@
 ---
 title: "Hello Kubernetes"
-tags: Kubernetes, AWS
+tags: Kubernetes, AWS, DevOps
 date: 01/10/2016
 ---
 

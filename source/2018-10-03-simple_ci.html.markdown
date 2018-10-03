@@ -1,0 +1,67 @@
+---
+title: "Simple CI/CD with docker-compose"
+tags: Docker, DevOps
+date: 03/10/2018
+---
+
+## Introduction
+
+Back in the day running side projects was easier, we bought a server, then installed Ruby and Postgres on it boom the server was ready for deployment, then we used good old Capistrano to push the newer versions of the application to the server somehow. Trouble came when new Ruby versions were released and then we had to update the servers and so on. Lately, with SPA gaining popularity, setting up the rapidly releasing Node.js based projects (with backend and frontend) can be very challenging and time consuming if not done right. Thankfully with Docker one should not be worried about installing anything on the server. Just install docker, then package and run everything as a docker container. But still the question remains how to do CI/CD with these docker services given the fact that side projects usually are running on single low powered machines.
+
+## Scale and economics
+
+The idea of this blog is to demonstate a simple, low ceremony, free CI/CD setup based on docker / docker-compose that I have concoted. Ofcourse, this is not meant for serious or enterprisey projects which need scale & security but small setups like this very blog. The annual running cost of this setup is around $185 __annually__ based on -
+
+- Domain name (annual fee): from $2 to whatever the price of your domain is
+- Server (monthly fee): from $5 to $25, I recommend Hetzner or DigitalOcean
+
+## Software and tooling
+
+To stick to our plan of minimum fuss / maintenance, ideally all we want / need on any server is only -
+
+- Docker
+- docker-compose
+- Nginx
+- Let's encrypt "certbot" for HTTPS (because who build anything without HTTPS these days really)
+
+Why NGINX? Any web facing docker service we build will be proxied by the NGINX running on the host to provide HTTPS (with Let's Encrypt)and also this ensures a single point of entry on the server. We will also install a __"deployer"__ service but more on that in a moment.
+
+Since this is a simple, single server setup we will use Ansible to install the necessary software there. The Ansible setup is available [here](https://gitlab.com/rocky-jaiswal/app-devops).
+
+[Gitlab.com](Gitlab.com) provides free private projects and CI/CD (2000 minutes a month) so we will use them for code hosting, CI/CD as well as use their free docker registry.
+
+## Step by step server setup walkthrough
+
+The server setup can be divided into 2 parts -
+- Initial setup with manual steps e.g. buying the server, domain etc.
+- Initial automated setup with Ansible
+
+So let's get started with the manual steps -
+
+1. First step is of-course to get a server from Hetzner or Digitalocean.
+  - Make sure you select Ubuntu 18.04 and you can SSH into it
+  - Make sure the base repos and kernel is updated before we start
+1a. If you do not have non-root SSH access, you can add a sudo user with these simple commands -
+  - ```adduser rockyj```
+  - ```usermod -aG sudo rockyj```
+  - Copy your SSH key for _rockyj_ user
+2. Buy your domain and in the "DNS A Records", give the IP of the newly created server (takes some time to replicate)
+3. On the server with root or sudoer, run -
+  - ```cd /etc/ssl/certs```
+  - ```sudo openssl dhparam -out dhparam.pem 4096```
+  - We need this file for HTTPS setup later, this is also a time consuming process (10-15 mins) so a good time to check youtube
+
+Now let's setup the software needed on the server with Ansible (we need some preparations for the Ansible run though) -
+
+1. Checkout [our ansible project](https://gitlab.com/rocky-jaiswal/app-devops)
+2. Update the __hosts__ file to the IP of the new server and update the domain variable value in __main.yml__ to your domain
+3. Now one tricky bit, since we do not have the necessary certificates from Let's Encrypt, comment 3 lines in "roles/nginx/templates/app.conf.j2" where Let's Encrypt certs are listed. We will get them in a short while.
+4. The ansible project also contains our main project's "docker-compose.yml" file. Have a look at the sample file, "docker-compose" may not work now since our docker images are not yet published so we will need to update this file later.
+5. Run __"./setup_server.sh"__, you will be asked for your user's sudo password.
+6. SSH into the server to get the Let's Encrypt certs now -
+  - ```sudo certbot --nginx certonly```
+7. Now that we have the necessary certs, we can uncomment the 3 line in nginx app.conf.j2 file and run __"./setup_server.sh"__ again
+
+We now have our base setup ready, let's start building those containers.
+
+

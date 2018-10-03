@@ -1,6 +1,6 @@
 ---
 title: "Docker + Capistrano = Warp Speed"
-tags: Docker, Ruby
+tags: Docker, Ruby, DevOps
 date: 06/09/2015
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Packer, Ansible and Docker"
-tags: Docker
+tags: Docker, DevOps
 date: 26/03/2016
 ---
 

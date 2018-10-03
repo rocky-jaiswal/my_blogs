@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes with ELK Setup"
-tags: HapiJS, JavaScript
+tags: Kubernetes, DevOps
 date: 05/04/2017
 ---
 
