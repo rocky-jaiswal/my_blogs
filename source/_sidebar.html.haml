@@ -1,14 +1,14 @@
 .sidebar
   %h3
-    %a{href: "/about"} About
+    %a{href: "/about/index.html"} About
   %h3
     %a{href: "/feed.xml"} Feed
   %h3
     %a(href="https://github.com/rocky-jaiswal" target="_blank") Github
   %h3
-    %a(href="/videos") Videos
+    %a(href="/videos/index.html") Videos
   %h3
-    %a#show-posts(href="/posts") Posts
+    %a#show-posts(href="/posts/index.html") Posts
   .posts
     %ol
       - blog.articles[0...5].each do |article|
