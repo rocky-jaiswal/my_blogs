@@ -121,8 +121,6 @@ Technically this is very simple, we create a __.gitlab-ci.yml__ file to describe
       stage: deploy
       script:
         - 'echo "{\"service-name\": \"my-blogs\"," > body.json'
-        - 'echo "\"image-name\": \"BLOG_IMAGE_ID\"," >> body.json'
-        - 'echo "\"image-id\": \"$CI_COMMIT_SHA\"," >> body.json'
         - 'echo "\"image-path\": \"registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_COMMIT_SHA\"}" >> body.json'
         - 'cat body.json'
         - 'curl -X PUT https://rockyj.in/__deployer/service -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @body.json'
