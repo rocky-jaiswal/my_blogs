@@ -130,7 +130,7 @@ table.table td {
 }
 
 .summary p, .post p, .post li, .about p, .about li, table.table {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   line-height: 150%;
   color: var(--text-color);
 }
