@@ -36,10 +36,10 @@ __Core Principle__
 
 The main idea of this setup is -
 
-1. The server has nothing but a nginx proxy and docker-compose (plus a thin "deployer" service used in point 5 below)
+1. The server has nothing but nginx and docker-compose installed (plus a thin "deployer" service used in point 5 below)
 2. All our containers are run via docker-compose
 3. We build all our containers with free Gitlab CI
-4. We will publish our containers on the cost free Gitlab docker registry
+4. We will publish our containers on the cost-free Gitlab docker registry
 5. When we run a new build, we will "inform" our server that a new container is available (this is the HTTP interface that "deployer" provides).
 6. The server will then pull this new container image and restart the container with the new image.
 
@@ -59,7 +59,7 @@ So let's get started with the manual steps -
 1. First step is of-course to get a server from Hetzner or Digitalocean.
     - Make sure you select Ubuntu 18.04 and you can SSH into it
     - Make sure the base repos and kernel is updated before we start
-2. If you do not have non-root SSH access, you can add a sudo user with these (sample) simple commands -
+2. If you do not have non-root SSH access, you can create a sudo user with these (sample) simple commands -
     - __adduser rockyj__
     - __usermod -aG sudo rockyj__
     - Copy your SSH key for _rockyj_ user
@@ -70,7 +70,6 @@ So let's get started with the manual steps -
     - We need this file for HTTPS setup later, this is also a time consuming process (10-15 mins) so a good time to check youtube
 
 Now let's setup the software needed on the server with Ansible (we need some preparations for the Ansible run though) -
-
 
 1. Checkout [the sample ansible project](https://gitlab.com/rocky-jaiswal/app-devops)
 2. Update the __hosts__ file to the IP of the new server and update the domain variable value in __main.yml__ to your domain
@@ -85,7 +84,7 @@ We now have our base setup ready, if you browse to your domain with https you sh
 
 __Part 2 - Building containers on Gitlab__
 
-Technically this is very simple, we create a __.gitlab-ci.yml__ file to describe our CI/CD process. A few points to note are since Gitlab CI also runs in a docker container we need a docker-in-docker (dind) setup to build our images. To push our containers via the API, we need to create an API token in Gitlab. We will save this as a secure variable in our CI process. The second secure variable we need is the HTTPS Basic token to contact the deployer service on our server. A self explanatory, sample YML file would look like (taken from this very blog) -
+Technically this is very simple, we create a __.gitlab-ci.yml__ file to describe our CI/CD process. A few points to note, since Gitlab CI also runs in a docker container we need a docker-in-docker (dind) setup to build our images. To push our containers via the API, we need to create an API token in Gitlab. We will save this as a secure variable in our CI process. The second secure variable we need is the HTTPS Basic token to contact the deployer service on our server. A self explanatory, sample YML file would look like (taken from this very blog) -
 
     ---
     # .gitlab-ci.yml
@@ -127,21 +126,21 @@ Technically this is very simple, we create a __.gitlab-ci.yml__ file to describe
 
 The 3 step process here is simple -
 
-1. Run tests & build your project
+1. Run tests & build the project
 2. Build a docker image and push it to the gitlab registry
 3. Tell "deployer" service about this newly built image
 
 __Part 3 - Tying it all together__
 
-We now have a server with all the packages we need plus we also have a CI process so let's tie it all together. Since we do not have docker-compose running on the server so far comment the last line of the .gitlab-ci.yml file.
+We now have a server with all the packages we need plus we also have a CI process so let's tie it all together. Since we do not have docker-compose running on the server (so far) comment the last line of the .gitlab-ci.yml file.
 
 We also do not know our container image ids to start docker-compose so we have a chicken-egg problem. This is an easy fix, you can now set the container versions by checking your project's git commit SHA and updating your docker-compose .env file directly so that we know which container image to pull.
 
-Once we know this we can update our docker-compose.yml file with the image names and start the docker-compose process with -
+Once we know this we can update our .env file with the image names and start the docker-compose process with -
 
     docker-compose up --build --detach
 
-The thing to remember here is - to ensure easy deployments we inject the container versions as environment variables. So when new containers are built we just update the .env file and restart the container (this is exactly what "deployer" service does). So for the initial setup, we need to manually read the git SHA and update the .env file. Please note that this is only needed once for the first time deployment.
+The thing to remember here is - To ensure easy deployments we inject the container versions as environment variables. So when new containers are built we just update the .env file and restart the container (this is exactly what "deployer" service does). So for the initial setup, we need to manually read the git SHA and update the .env file. Please note that this is only needed once for the first time deployment.
 
 __Part 4 - Nginx and Deployer__
 
