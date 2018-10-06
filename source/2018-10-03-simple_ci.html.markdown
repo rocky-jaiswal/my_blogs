@@ -119,7 +119,7 @@ Technically this is very simple, we create a __.gitlab-ci.yml__ file to describe
     deploy:
       stage: deploy
       script:
-        - 'echo "{\"service-name\": \"my-blogs\"," > body.json'
+        - 'echo "{\"service-name\": \"my_blogs\"," > body.json'
         - 'echo "\"image-path\": \"registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_COMMIT_SHA\"}" >> body.json'
         - 'cat body.json'
         - 'curl -X PUT https://rockyj.in/__deployer/service -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @body.json'
@@ -128,7 +128,7 @@ The 3 step process here is simple -
 
 1. Run tests & build the project
 2. Build a docker image and push it to the gitlab registry
-3. Tell "deployer" service about this newly built image
+3. Tell "deployer" service about this newly built image (with a curl request on the deployer)
 
 __Part 3 - Tying it all together__
 
