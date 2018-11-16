@@ -57,6 +57,10 @@ p.head {
   max-width: 75%;
 }
 
+.main article {
+  width: 100%;
+}
+
 @media screen and (max-width: 1000px) {
   .main {
     display: flex;
