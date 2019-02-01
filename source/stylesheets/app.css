@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro|Merriweather");
 
 :root {
-  --highlight-color: #514D63;
-  --banner-color: #A4AD87;
-  --back-color: #EDECD5;
-  --text-color: #454545;
+  --highlight-color: #FC3C3C;
+  --banner-color: #ebdddd;
+  --back-color: #FFF4E0;
+  --text-color: #00000C;
 }
 
 body {
