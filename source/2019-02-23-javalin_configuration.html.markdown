@@ -68,6 +68,7 @@ The main magic here is in the __second last line__, we use the Gradle system pro
 
 Since we want to stay type safe, we use a type safe configuration library in our application called [konf](https://github.com/uchuhimo/konf). We then setup a "Configuration" singleton where we can use the passed in JVM argument to decide which YAML configuration file to pick.
 
+    // Configuration.kt
     package de.rockyj.configuration
 
     import com.uchuhimo.konf.Config
