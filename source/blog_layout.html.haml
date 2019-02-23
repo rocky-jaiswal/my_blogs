@@ -7,10 +7,11 @@
       = partial "blog_banner"
       .main
         %article
-          %h2
-            = current_article.try(:title)
-          %span.date
-            = current_article.date.strftime('%b %e %Y') if current_article
+          .blog_heading
+            %h2
+              = current_article.try(:title)
+            .blog_date
+              = current_article.date.strftime('%b %e %Y') if current_article
           .post
             ~ current_article.body if current_article
           %hr

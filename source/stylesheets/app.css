@@ -120,8 +120,18 @@ p.head {
   color: var(--highlight-color) !important;
 }
 
+.blog_heading {
+  display: flex;
+  justify-content: space-between;
+}
+
 .date {
   font-size: 0.9em;
+  color: var(--text-color);
+}
+
+.blog_date {
+  font-size: 1.2rem;
   color: var(--text-color);
 }
 
@@ -148,10 +158,8 @@ img {
   margin: 20px 0;
 }
 
-a.jsc {
-  img {
-    padding-top: 20px;
-  }
+a.jsc img {
+  padding-top: 20px;
 }
 
 img.side {

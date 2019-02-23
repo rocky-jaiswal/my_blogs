@@ -1,10 +1,11 @@
 - blog.articles[0...6].each do |article|
   .summary
-    %h2
-      %a{ href: article.url }
-        = article.title
-      %span.date
-        = ' | ' + article.date.strftime('%b %e')
+    .blog_headline
+      %h2
+        %a{ href: article.url }
+          = article.title
+        %span.date
+          = ' | ' + article.date.strftime('%b %e')
     = article.summary
     %a{ href: article.url }
       More...
