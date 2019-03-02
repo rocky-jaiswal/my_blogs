@@ -38,10 +38,12 @@ a {
 }
 
 .banner-text {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding: 15px 20px;
-  width: 75%;
+  width: 100%;
+  max-width: 1024px;
   font-size: 1.2em;
   color: var(--highlight-color);
 }
@@ -54,7 +56,9 @@ p.head {
   display: flex;
   flex-direction: row;
   padding: 20px;
-  max-width: 75%;
+  width: 100%;
+  max-width: 1024px;
+  box-sizing: border-box;
 }
 
 .main article {
@@ -70,7 +74,6 @@ p.head {
 }
 
 .content {
-  padding-right: 20px;
   display: flex;
   flex-direction: column;
   flex: 3;
@@ -80,6 +83,7 @@ p.head {
   display: flex;
   flex-direction: column;
   flex: 1;
+  padding: 0 20px;
 }
 
 .sidebar li a {
@@ -132,7 +136,8 @@ p.head {
 
 .blog_date {
   font-size: 1.2rem;
-  color: var(--text-color);
+  font-weight: 800;
+  color: var(--highlight-color);
 }
 
 table.table, .about ol {
