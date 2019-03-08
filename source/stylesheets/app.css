@@ -140,15 +140,17 @@ p.head {
   color: var(--highlight-color);
 }
 
-table.table, .about ol {
-  margin-bottom: 30px;
+.about_section {
+  margin-bottom: 45px;
 }
 
-table.table td {
-  min-width: 300px;
+.skill_matrix {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
 }
 
-.summary p, .post p, .post li, .about p, .about li, table.table {
+.summary p, .post p, .post li, .about p, .about li {
   font-size: 1.2rem;
   line-height: 150%;
   color: var(--text-color);

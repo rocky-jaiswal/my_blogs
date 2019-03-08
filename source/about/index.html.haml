@@ -1,16 +1,82 @@
 .about
 	%img{src: "/images/Rocky_Jaiswal_2019.png", alt: "Rocky Jaiswal"}
 
-	.profile
+	.about_section
 		%h2 Profile
 		%p
 			Hi! I am Rocky. I am a professional software developer (or have been trying to be a good one) since 2002. I love to code, I like to help people through my code and I love to work with a team of good developers. I have some experience under my belt and I really like web and mobile app development. I am super interested in design, performance, data-modeling and shipping products fast.
 		%p
-			I have spoken at a few conferences, written a few blogs and created a popular screencast. I have developed a lot of web applications, a few mobile apps and a couple of GIS applications. I have programmed for companies like Morgan Stanley, Goldman Sachs and McKinsey&Company among other clients in the US, UK, Europe and Japan.
+			I have spoken at a few conferences, written a few blogs and created a popular screencast. I have developed numerous web applications, a few mobile apps and a couple of GIS applications. I have programmed for companies like Morgan Stanley, Goldman Sachs and McKinsey&Company among other clients in the US, UK, Europe and Japan.
 		%p
 			I did a lot of Java early in my career, now I mostly work with JavaScript/TypeScript and Ruby. Occasionally I tinker with other programming languages like Clojure, Kotlin and Elixir.
 
-	.highlights
+	.skills.about_section
+		%h2 Skills
+
+		.skill_matrix
+			.skill_section
+				%h3 Programming languages
+				%ul
+					%li JavaScript/ECMAScript
+					%li TypeScript
+					%li Ruby / JRuby
+					%li Kotlin
+					%li Clojure
+					%li Elixir
+					%li Java
+
+			.skill_section
+				%h3 Frameworks / Libraries
+				%ul
+					%li ReactJS
+					%li NodeJS
+					%li HapiJS
+					%li React Native
+					%li Ruby on Rails
+
+			.skill_section
+				%h3 Databases
+				%ul
+					%li PostgreSQL
+					%li Redis
+					%li MongoDB
+					%li AWS RDS
+
+			.skill_section
+				%h3 DevOps
+				%ul
+					%li Docker
+					%li Kubernetes
+					%li DCOS
+					%li Ansible
+					%li AWS
+					%li GCP
+
+	.about_section
+		%h2 Certifications / courses
+		%ul
+			%li <a target="_blank" href="https://drive.google.com/file/d/1BOlsokHNmZHKedNn9Tos7HS4AAYZ9nKN/view?usp=sharing">Developing applications with GCP</a>
+			%li <a target="_blank" href="https://drive.google.com/file/d/1tpdviDqrYTYT1JeQRYaB55SF-RIRC_v6/view?usp=sharing">Kotlin for Java developers</a>
+			%li <a target="_blank" href="https://drive.google.com/file/d/0B2miw8ex-mkQREhocWZEWTQyZkU/view?usp=sharing">Certified Scrum Master</a>
+			%li <a target="_blank" href="https://drive.google.com/file/d/1YlJKGXbxKEZVNNQfrH0LpNj9gsxxCPTe/view?usp=sharing">SSR with React / Redux</a>
+			%li <a target="_blank" href="https://drive.google.com/file/d/1RYbE2sgxDcI3V1_qaPqwDMb0XdGX2xm_/view?usp=sharing">Functional Programming in Scala</a>
+			%li <a target="_blank" href="https://drive.google.com/file/d/0B2miw8ex-mkQZDZNLUt5emdYX1E/view?usp=sharing">MongoDB for DBAs</a>
+			%li <a target="_blank" href="https://drive.google.com/file/d/0B2miw8ex-mkQdTFTdG5MMm9wZHc/view?usp=sharing">Algorithms - Design & Analysis (Stanford)</a>
+			%li Sun ceritfied Java programmer (old)
+			%li Sun ceritfied Java web application developer (old)
+			%li Many others
+
+	.about_section
+		%h2 Experience
+		%ul
+			%li <a target="_blank" href="https://www.mckinsey.com/">McKinsey Digital Labs</a> - Digital Expert (Aug, 2015 - Present)
+			%li <a target="_blank" href="https://crealytics.com/">crealytics Gmbh</a> - Programmer (Nov, 2013 - Aug, 2015)
+			%li <a target="_blank" href="https://www.mckinsey.com/">McKinsey&Company</a> - Programmer (Apr, 2011 to Nov, 2013)
+			%li <a target="_blank" href="https://xebia.com/">Xebia IT Architects</a> - Programmer & Scrum Master (Jul, 2009 to Mar, 2011)
+			%li <a target="_blank" href="https://www.genpact.com/">Headstrong</a> - Programmer (Oct, 2006 to Jun, 2009)
+			%li <a target="_blank" href="https://www.tcs.com/">Tata Consultancy Services</a> - Programmer (Oct, 2002 to Oct, 2006)
+
+	.about_section
 		%h2 Worth a mention
 		%ul
 			%li
@@ -41,61 +107,14 @@
 			%li I have made small yet numerous open source contributions to Rails core and omniauth-twitter among others
 			%li I have some certifications as well which helped me learn
 
-	.education
+	.about_section
 		%h2 Education
-		%table.table
-			%tbody
-				%tr
-				%td Punjab Engineering College
-				%td Bachelor of Engineering
-				%td July 1998 to May 2002
+		%ul
+			%li Punjab Engineering College - Bachelor of Engineering (July 1998 to May 2002)
 
-	.experience
-		%h2 Experience
-		%table.table
-			%tbody
-				%tr
-					%td McKinsey Digital Labs
-					%td Programmer
-					%td Aug, 2015 -
-				%tr
-					%td crealytics Gmbh
-					%td Programmer
-					%td Nov, 2013 - Aug, 2015
-				%tr
-					%td McKinsey&Company
-					%td Programmer
-					%td Apr, 2011 to Nov, 2013
-				%tr
-					%td Xebia IT Architects
-					%td Programmer & Scrum Master
-					%td Jul, 2009 to Mar, 2011
-				%tr
-					%td Headstrong
-					%td Programmer
-					%td Oct, 2006 to Jun, 2009
-				%tr
-					%td Tata Consultancy Services
-					%td Programmer
-					%td Oct, 2002 to Oct, 2006
-
-	.skills
-		%h2 Skills
-		%p I claim to be an expert at nothing but I learn daily, eagerly and continuously.
-		%table.table
-			%tbody
-				%tr
-					%td JavaScript / TypeScript - NodeJS / HapiJS / ReactJS
-				%tr
-					%td Ruby / JRuby - Rails / RSpec
-				%tr
-					%td Clojure / ClojureScript
-				%tr
-					%td PostgreSQL / Redis / MongoDB
-				%tr
-					%td Docker / Ansible / Mesos / Packer / Kubernetes / AWS / GCP
-
-	%h3 LinkedIn
-	%p
-		For a detailed view of my projects / experience please visit LinkedIn -
-		%a{:href => "http://www.linkedin.com/in/rockyjaiswal", :target => "_blank"} http://www.linkedin.com/in/rockyjaiswal
+	.about_section
+		%h2 LinkedIn
+		%ul
+			%li
+				For a detailed view of my projects / experience please visit LinkedIn -
+				%a{:href => "http://www.linkedin.com/in/rockyjaiswal", :target => "_blank"} http://www.linkedin.com/in/rockyjaiswal
