@@ -32,4 +32,4 @@ deploy:
     - 'echo "{\"service-name\": \"my_blogs\"," > body.json'
     - 'echo "\"image-path\": \"registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_COMMIT_SHA\"}" >> body.json'
     - 'cat body.json'
-    - 'curl -X PUT https://rockyj.in/__deployer/deploy -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @body.json'
+    - 'curl -X POST https://rockyj.in/__deployer/deploy -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @body.json'
