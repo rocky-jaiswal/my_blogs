@@ -31,8 +31,8 @@ deploy:
   script:
     - 'echo "{\"token\": \"$GITLAB_TOKEN\"}" > token.json'
     - 'cat token.json'
-    - 'curl -X POST https://wortschatz.live/__deployer/session -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @token.json'
+    - 'curl -X POST https://rockyj.in/__deployer/session -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @token.json'
     - 'echo "{\"service-name\": \"my_blogs\"," > deploy.json'
     - 'echo "\"image-path\": \"registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_COMMIT_SHA\"}" >> deploy.json'
     - 'cat deploy.json'
-    - 'curl -X POST https://wortschatz.live/__deployer/deployment -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @deploy.json'
+    - 'curl -X POST https://rockyj.in/__deployer/deployment -H "Authorization: Basic $DEPLOYER_AUTH" -H "Content-Type: application/json" --data @deploy.json'
