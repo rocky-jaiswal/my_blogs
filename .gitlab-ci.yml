@@ -1,11 +1,10 @@
-image: ruby:2.6
-
 stages:
   - build
   - docker
   - deploy
 
 build:
+  image: ruby:2.6
   stage: build
   artifacts:
     paths:
@@ -15,8 +14,8 @@ build:
     - bundle exec middleman build
 
 docker:
+  image: docker:stable
   stage: docker
-  image: docker:git
   services:
     - docker:dind
   dependencies:
@@ -27,6 +26,7 @@ docker:
     - docker push registry.gitlab.com/rocky-jaiswal/my_blogs:$CI_COMMIT_SHA
 
 deploy:
+  image: alpine:latest
   stage: deploy
   script:
     - 'echo "{\"token\": \"$GITLAB_TOKEN\"}" > token.json'
