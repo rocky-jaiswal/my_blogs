@@ -178,3 +178,7 @@ blockquote {
   font-size: 1.1em;
   border-left: 3px solid var(--banner-color);
 }
+
+.skill_section li {
+  font-size: 1.0rem;
+}
