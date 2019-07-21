@@ -12,7 +12,7 @@ So let's start with a small experiment then, if I were to write a simple endpoin
     {
       method: 'GET',
       path: '/nodefast',
-      handler: (request, \_) => {
+      handler: (request, _) => {
         axios.get('http://localhost:7000/javaslow');
         return { result: true };
       }
