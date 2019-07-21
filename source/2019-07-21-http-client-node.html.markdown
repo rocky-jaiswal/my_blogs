@@ -79,4 +79,4 @@ Similar load but this time we hit the JVM service first -
 
     ab -n 2000 -c 10 "http://localhost:7000/javafast"
 
-After multiple runs I saw that not only the JVM did not crash or consume enormous amounts of memory, the Node server received all 2000 requests and logged them successfully. So the JVM has a better HTTP client + resource managment setup and Node does have a solid HTTP server setup to handle big I/O loads. You cannot say the same about Node HTTP clients though. Hope this was fun, happy coding!
+After multiple runs I saw that not only the JVM did not crash or consume enormous amounts of memory, the Node server received all 2000 requests and logged them successfully. So the JVM seems to have a better HTTP client + resource managment setup and Node does have a solid HTTP server setup to handle big I/O loads. You cannot say the same about Node HTTP clients though. Ofcourse all of this is based on a small experiment, even the JVM can have problems under heavy load. Hope this provided some "info-tainment", happy coding!
