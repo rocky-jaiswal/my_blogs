@@ -1,20 +1,24 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro|Merriweather&display=optional");
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro|Merriweather&display=optional');
 
 :root {
-  --highlight-color: #0277BD;
-  --banner-color: #BBDEFB;
-  --back-color: #FAFAFA;
+  --highlight-color: #0277bd;
+  --banner-color: #bbdefb;
+  --back-color: #eeeeee;
   --text-color: #263238;
 }
 
 body {
   background-color: var(--back-color);
-  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   margin: 0 0;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: "Merriweather", Times, serif;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Merriweather', Times, serif;
   color: var(--highlight-color) !important;
   margin: 0 0 15px 0;
 }
@@ -103,11 +107,15 @@ p.head {
   padding-left: 0;
 }
 
-.summary, .post, .about {
+.summary,
+.post,
+.about {
   text-align: justify;
 }
 
-.content a, .post a, .about a {
+.content a,
+.post a,
+.about a {
   text-decoration: underline;
 }
 
@@ -150,7 +158,11 @@ p.head {
   grid-template-rows: 50% 50%;
 }
 
-.summary p, .post p, .post li, .about p, .about li {
+.summary p,
+.post p,
+.post li,
+.about p,
+.about li {
   font-size: 1.2rem;
   line-height: 150%;
   color: var(--text-color);
@@ -180,5 +192,5 @@ blockquote {
 }
 
 .skill_section li {
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
