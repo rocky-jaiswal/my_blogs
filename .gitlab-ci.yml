@@ -10,7 +10,7 @@ build:
     paths:
       - ./build
   script:
-    - bundle update --bundler
+    - gem install bundler -v "~>2.0.2"
     - bundle install --deployment
     - bundle exec middleman build
 
