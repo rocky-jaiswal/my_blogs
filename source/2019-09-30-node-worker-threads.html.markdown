@@ -12,12 +12,12 @@ date: 30/09/2019
 
 To answer these questions and more, I looked into applying worker threads to solve some random problem. So I looked online and [found some public datasets](https://github.com/awesomedata/awesome-public-datasets#sports) to experiment with. Using worker threads we can now write a program to crunch this data and see how that goes. Coming from India, I downloaded the [cricsheet](https://cricsheet.org/) dataset since I can easily imagine some analysis on this.
 
-The IPL (Indian Premier League) data is split into multiple YAML files. Each file has ball-by-ball record of what happened in the match. So we have a classic "map-reduce" problem on our hands. With the threads we can parse each file individually, run some numbers and aggregate this data. So what we will do is calcaulate the maximum runs any team as hit in the powerplay (first 36 legal balls in an innings).
+The IPL (Indian Premier League) data is split into multiple YAML files. Each file has ball-by-ball record of what happened in the match. So we have a classic "map-reduce" problem on our hands. With the threads we can parse each file individually, run some numbers and aggregate this data to get some insight. As an exercise, what we will do is calculate the maximum runs any team has hit in their powerplay (first 36 legal balls in an innings).
 
 I uploaded the data to AWS S3 (just for fun) and so that I can run the program anywhere, the idea is simple -
 
 1. Download the files (around 750)
-2. Each worker gets a file, parses it and reports back the runs hit in the powerplay for that match
+2. Each worker gets a file's content, parses it and reports back the runs hit in the powerplay for that match
 3. The main thread then selects the match with the maximum runs hit
 
 The TypeScript code for this looks like -
@@ -86,7 +86,7 @@ The TypeScript code for this looks like -
       // { firstInnings: { team: 'Royal Challengers Bangalore', runs: 40 },
       //  secondInnings: { team: 'Kolkata Knight Riders', runs: 105 } } }
 
-So the Kolkata Knight Riders hit an impressive 105 runs in 2017 IPL. The full code for parsing the YAML etc. can be found on [Github](https://github.com/rocky-jaiswal/ipl-fun).
+So the Kolkata Knight Riders hit an impressive 105 runs in IPL 2017 in their first 36 balls. The full code for parsing the YAML etc. can be found on [Github](https://github.com/rocky-jaiswal/ipl-fun).
 
 To get straight to the answers -
 
