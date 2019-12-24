@@ -1,6 +1,4 @@
-my_blogs
-========
+My blog
+=======
 
-My Middleman blogs
-
-touch
+My Middleman blog - source for [https://rockyj.in](https://rockyj.in)
