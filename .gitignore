@@ -4,3 +4,6 @@ build
 build/
 build/*
 /.bundle/config
+node_modules
+.firebase
+.bundle

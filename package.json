@@ -1,0 +1,11 @@
+{
+  "name": "my_blogs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rocky-jaiswal/my_blogs.git",
+  "author": "Rocky Jaiswal <rocky.jaiswal@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "firebase-tools": "^7.11.0"
+  }
+}
