@@ -19,7 +19,7 @@ Usually when I start a new application there are a lot of things that I need to 
   - Integration (API request & db level)
   - Contract / Pact testing
   - CI testing with test DB setup etc.
-  - Test DB should be cleaned after each (unit) test run
+  - Test DB should be cleaned after each (integration) test run
 - Linting / style check for consistent code look & feel
   - Editorconfig setup
 - Multi env. configuration / setup
@@ -70,11 +70,11 @@ Usually when I start a new application there are a lot of things that I need to 
   - Infrastructure monitoring (e.g. disk space)
   - Service monitoring (e.g. slow response time)
   - API healthcheck endpoint (e.g. service / dependency down)
-- API documentation (e.g. openAPI / Swagger)
+- API documentation (e.g. OpenAPI / Swagger)
   - Look into automated generation
 - Docker & Docker-Compose setup
 - Horizontal scaling strategy (API should be stateless for example)
-- Strive for single deployemnt artifact e.g. docker image, JAR file, with only env. variable/s changing across environments
+- Strive for single deployement artifact e.g. docker image, JAR file, with only env. variable/s changing across environments
 
 ## Frontend
 
@@ -93,5 +93,9 @@ Usually when I start a new application there are a lot of things that I need to 
 - Building final artifact (CRA does this)
 - HTML headers
 - Icon files for all platforms
+- Accessibility
+- Lighthouse score (90+ in all aspects)
 - CI / CD
 - Deployment (S3 + CDN + Protection)
+- Error reporting (e.g. Sentry)
+- Analytics setup (e.g. GA)
