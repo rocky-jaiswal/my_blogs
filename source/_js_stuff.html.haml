@@ -21,13 +21,15 @@
     }
 
     colorButton.addEventListener("click", (e) => {
-      if (theme === "light") {
+      if (localStorage.getItem("ui-theme") === "light") {
+        console.log(1)
         localStorage.setItem("ui-theme", "dark");
         root.style.setProperty('--highlight-color', darkTheme[0]);
         root.style.setProperty('--banner-color', darkTheme[1]);
         root.style.setProperty('--back-color', darkTheme[2]);
         root.style.setProperty('--text-color', darkTheme[3]);
       } else {
+        console.log(2)
         localStorage.setItem("ui-theme", "light");
         root.style.setProperty('--highlight-color', lightTheme[0]);
         root.style.setProperty('--banner-color', lightTheme[1]);
