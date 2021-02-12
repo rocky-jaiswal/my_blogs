@@ -1,14 +1,16 @@
 ---
-title: "Path aliases with TypeScript"
+title: 'Path aliases with TypeScript'
 tags: TypeScript
 date: 29/06/2019
 ---
 
 You are working on a TypeScript project and everything feels right, the code is neat, not only it is working you also feel that it is correct. As you code increases, one day you encounter this monstrosity -
 
-    import { calculateMultiplier, roundToTwo } from '../../../utils'
+**import { calculateMultiplier, roundToTwo } from '../../../utils'**
 
-The deeply nested directory structure leads to long import paths like "__../../../..__" and they are a pain to refactor and maintain. Well fear not, with a little __tsconfig__ magic we can fix this. Using something like path aliases (or mapping) we aim to only have simple imports like - __src/utils__
+The deeply nested directory structure leads to long import paths like "**../../../..**" and they are a pain to refactor and maintain. Well fear not, with a little **tsconfig** magic we can fix this. Using something like path aliases (or mapping) we aim to only have simple imports like - **src/utils**
+
+READMORE
 
 This change however can be broken down into three paths -
 
@@ -28,29 +30,27 @@ To demo things I have a simple project setup like this -
                 ├── index.test.ts
                 └── index.ts
 
-
 ### Make the TS compiler work
 
 First, to add path aliases and compile the code (and also make VSCode work) we need to add the following to tsconfig.json (in the "compilerOptions") -
 
     "paths": {
-			"src/*": ["src/*"]
-		}
+    		"src/*": ["src/*"]
+    	}
 
 You can also get adventurous and try a cooler alias like -
 
     "paths": {
-			"@/*": ["src/*"]
-		}
+    		"@/*": ["src/*"]
+    	}
 
 Then your code can look like -
 
     import { calculateMultiplier, roundToTwo } from '@/utils'
 
-
 ### Make the tests work
 
-In a normal world one could have assumed that the change above fixes everything. However, our tests are usually compiled with "__ts-jest__" (since jest only recognizes JavaScript) which has it's own configuration. Thankfully ts-jest has thought of this scenario and provided a [solution](https://kulshekhar.github.io/ts-jest/user/config/). So we change our ts-jest configuration in package.json (in the "jest" section add) -
+In a normal world one could have assumed that the change above fixes everything. However, our tests are usually compiled with "**ts-jest**" (since jest only recognizes JavaScript) which has it's own configuration. Thankfully ts-jest has thought of this scenario and provided a [solution](https://kulshekhar.github.io/ts-jest/user/config/). So we change our ts-jest configuration in package.json (in the "jest" section add) -
 
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/src/$1"
@@ -69,7 +69,7 @@ Surely this should not be a thing, right? The code is compiled and the tests run
     Error: Cannot find module 'src/utils'
         at Function.Module._resolveFilename (module.js:548:15)
 
-This issue has been raised with the TS team but they have the opinion that this is not a compiler issue [https://github.com/Microsoft/TypeScript/issues/10866](https://github.com/Microsoft/TypeScript/issues/10866). So to make the built code run we need another solution, thankfully a simple one exists, we need to install the package __module-alias__. This is a normal Node.js package (nothing to do with TS) that allows for aliased module resolution. We need to install this package, then add a line in package.json -
+This issue has been raised with the TS team but they have the opinion that this is not a compiler issue [https://github.com/Microsoft/TypeScript/issues/10866](https://github.com/Microsoft/TypeScript/issues/10866). So to make the built code run we need another solution, thankfully a simple one exists, we need to install the package **module-alias**. This is a normal Node.js package (nothing to do with TS) that allows for aliased module resolution. We need to install this package, then add a line in package.json -
 
     "_moduleAliases": {
       "src": "dist" // dist is where the built TS -> JS code resides

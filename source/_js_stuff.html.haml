@@ -1,0 +1,51 @@
+:javascript
+  document.addEventListener('DOMContentLoaded', function (_e) {
+    let root = document.documentElement;
+    let colorButton = document.querySelector("#toggle-colors");
+
+    let lightTheme = ["#d33682", "#433b36", "#eee8d5", "#262626"];
+    let darkTheme = ["#268bd2", "#433b36", "#04232b", "#93a1a1"];
+    
+    let theme = localStorage.getItem("ui-theme") || "light";
+
+    if (theme === "light") {
+      root.style.setProperty('--highlight-color', lightTheme[0]);
+      root.style.setProperty('--banner-color', lightTheme[1]);
+      root.style.setProperty('--back-color', lightTheme[2]);
+      root.style.setProperty('--text-color', lightTheme[3]);
+    } else {
+      root.style.setProperty('--highlight-color', darkTheme[0]);
+      root.style.setProperty('--banner-color', darkTheme[1]);
+      root.style.setProperty('--back-color', darkTheme[2]);
+      root.style.setProperty('--text-color', darkTheme[3]);
+    }
+
+    colorButton.addEventListener("click", (e) => {
+      if (theme === "light") {
+        localStorage.setItem("ui-theme", "dark");
+        root.style.setProperty('--highlight-color', darkTheme[0]);
+        root.style.setProperty('--banner-color', darkTheme[1]);
+        root.style.setProperty('--back-color', darkTheme[2]);
+        root.style.setProperty('--text-color', darkTheme[3]);
+      } else {
+        localStorage.setItem("ui-theme", "light");
+        root.style.setProperty('--highlight-color', lightTheme[0]);
+        root.style.setProperty('--banner-color', lightTheme[1]);
+        root.style.setProperty('--back-color', lightTheme[2]);
+        root.style.setProperty('--text-color', lightTheme[3]);
+      }
+    });
+
+    let regex = new RegExp(/^\/\d{4}\/\d{2}\/\d{2}/);
+
+    if (window.location.pathname.match(regex)) {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+      
+      let d = document, s = d.createElement('script');
+      s.src = '//rockyj.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', + new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
