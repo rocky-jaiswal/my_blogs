@@ -3,7 +3,7 @@
 :root {
   --highlight-color: #d33682;
   --banner-color: #433b36;
-  --back-color: #eee8d5;
+  --back-color: #262626;
   --text-color: #262626;
 }
 
@@ -195,7 +195,7 @@ blockquote {
 }
 
 button#toggle-colors {
-  width: 100px;
+  width: 110px;
   height: 30px;
   position: absolute;
   top: 45px;

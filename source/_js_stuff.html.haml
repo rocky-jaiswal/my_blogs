@@ -4,11 +4,9 @@
     let colorButton = document.querySelector("#toggle-colors");
 
     let lightTheme = ["#d33682", "#433b36", "#eee8d5", "#262626"];
-    let darkTheme = ["#268bd2", "#433b36", "#04232b", "#93a1a1"];
+    let darkTheme = ["#49a6e7", "#433b36", "#04232b", "#93a1a1"];
     
-    let theme = localStorage.getItem("ui-theme") || "light";
-
-    if (theme === "light") {
+    if (!localStorage.getItem("ui-theme") || localStorage.getItem("ui-theme") === "light") {
       root.style.setProperty('--highlight-color', lightTheme[0]);
       root.style.setProperty('--banner-color', lightTheme[1]);
       root.style.setProperty('--back-color', lightTheme[2]);
@@ -21,7 +19,7 @@
     }
 
     colorButton.addEventListener("click", (e) => {
-      if (localStorage.getItem("ui-theme") === "light") {
+      if (!localStorage.getItem("ui-theme") || localStorage.getItem("ui-theme") === "light") {
         console.log(1)
         localStorage.setItem("ui-theme", "dark");
         root.style.setProperty('--highlight-color', darkTheme[0]);
