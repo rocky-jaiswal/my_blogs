@@ -194,13 +194,24 @@ blockquote {
   font-size: 1rem;
 }
 
-button#toggle-colors {
-  width: 110px;
-  height: 30px;
+button#toggle-colors-1 {
   position: absolute;
   top: 45px;
   right: 10px;
   border: none;
-  background: darkgrey;
-  border-radius: 3px;
+  background: #eee8d5;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+button#toggle-colors-2 {
+  position: absolute;
+  top: 45px;
+  right: 40px;
+  border: none;
+  background: #04232b;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
 }
