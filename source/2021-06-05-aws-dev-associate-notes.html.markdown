@@ -4,10 +4,9 @@ tags: AWS, DevOps
 date: 05/06/2021
 ---
 
-### Courses / Practice Exams
+In May 2021 with God's grace I was able to pass the AWS Certified Developer Associate exam. This post will hopefully help you to prepare / revise the main concepts for the exam. This is based on my personal study / opinion and may or may not be the best way to prepare for you :) 
 
-Best way to prepare is by starting here - https://aws.amazon.com/certification/certified-developer-associate/.
-Then sign-up for Udemy and start doing the exam course/s
+I recommend that everyone starts with the exam overview here - https://aws.amazon.com/certification/certified-developer-associate/. Then sign-up for Udemy and start doing the exam course/s that they feel suit them best.
 
 **Recommendations**
 

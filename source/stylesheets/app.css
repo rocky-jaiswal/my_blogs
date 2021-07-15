@@ -47,7 +47,7 @@ a {
   flex-direction: column;
   padding: 15px 20px;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1100px;
   color: var(--highlight-color);
 }
 
@@ -60,7 +60,7 @@ p.head {
   flex-direction: row;
   padding: 20px;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1100px;
   box-sizing: border-box;
 }
 
