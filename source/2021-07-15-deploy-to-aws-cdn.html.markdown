@@ -130,7 +130,7 @@ Although the YAML above is CircleCI specific configuration, any CI script can be
 
 In the last "deployment" step we clone the Python CDK code, install the dependencies and then finally run the CDK commands pointing it to our built code (built in the last step).
 
-All you need to do here is change the environment variables to your domain, AWS account Id and AWS region. For authentication you also need to set the AWS_KEY and AWS_SECRET for the IAM user (we created above) as CI secrets.
+All you need to do here is __change the environment variables to your Domain, AWS account Id and AWS region__. For authentication you also need to set the __AWS_KEY__ and __AWS_SECRET__ for the IAM user (we created above) as CI secrets.
 
 With a few changes in the YAML configuration and the right CI setup, we can deploy any directory containing HTML+CSS+JS to the powerful AWS CDN. Now you can change your code anytime and the CI setup will deploy it to CloudFront.
 
