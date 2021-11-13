@@ -1,40 +1,5 @@
 :javascript
   document.addEventListener('DOMContentLoaded', function (_e) {
-    let root = document.documentElement;
-    let colorButton1 = document.querySelector("#toggle-colors-1");
-    let colorButton2 = document.querySelector("#toggle-colors-2");
-
-    let lightTheme = ["#d33682", "#433b36", "#eee8d5", "#262626"];
-    let darkTheme = ["#49a6e7", "#433b36", "#04232b", "#93a1a1"];
-    
-    if (!localStorage.getItem("ui-theme") || localStorage.getItem("ui-theme") === "light") {
-      root.style.setProperty('--highlight-color', lightTheme[0]);
-      root.style.setProperty('--banner-color', lightTheme[1]);
-      root.style.setProperty('--back-color', lightTheme[2]);
-      root.style.setProperty('--text-color', lightTheme[3]);
-    } else {
-      root.style.setProperty('--highlight-color', darkTheme[0]);
-      root.style.setProperty('--banner-color', darkTheme[1]);
-      root.style.setProperty('--back-color', darkTheme[2]);
-      root.style.setProperty('--text-color', darkTheme[3]);
-    }
-
-    colorButton2.addEventListener("click", (e) => {
-      localStorage.setItem("ui-theme", "dark");
-      root.style.setProperty('--highlight-color', darkTheme[0]);
-      root.style.setProperty('--banner-color', darkTheme[1]);
-      root.style.setProperty('--back-color', darkTheme[2]);
-      root.style.setProperty('--text-color', darkTheme[3]);
-    });
-
-    colorButton1.addEventListener("click", (e) => {
-      localStorage.setItem("ui-theme", "light");
-      root.style.setProperty('--highlight-color', lightTheme[0]);
-      root.style.setProperty('--banner-color', lightTheme[1]);
-      root.style.setProperty('--back-color', lightTheme[2]);
-      root.style.setProperty('--text-color', lightTheme[3]);
-    });
-
     let regex = new RegExp(/^\/\d{4}\/\d{2}\/\d{2}/);
 
     if (window.location.pathname.match(regex)) {

@@ -1,8 +1,10 @@
 ---
-title: 'New Application Checklist'
+title: "New Application Checklist"
 tags: DevOps
 date: 26/12/2020
 ---
+
+_Updated Q4 2021_
 
 Usually when I start a new application there are a lot of things that I need to keep in mind, so I thought it would be a nice idea to make a checklist and keep it updated as I grow in experience. There are two parts to this checklist, one for an API backend and one for frontend. So without much further delay, here it is -
 
@@ -39,7 +41,7 @@ Usually when I start a new application there are a lot of things that I need to 
   - DB connection pooling
   - DB seeding / data loading
   - ORM / Query builder
-  - DB migration strategy
+  - DB migration strategy (e.g. Flyway or Knex.js)
 - Logging (please log)
   - URL
   - Status
@@ -48,7 +50,7 @@ Usually when I start a new application there are a lot of things that I need to 
   - CorrelationID
   - UserID
   - Errors / stacktrace (as detailed as possible)
-  - Blacklist sensitive data (e.g. passwords)
+  - Blacklist sensitive data in logs (e.g. passwords)
   - Logs should be easily searchable
 - CI / CD Setup
 - Code quality analysis / measurement
@@ -71,9 +73,11 @@ Usually when I start a new application there are a lot of things that I need to 
   - Service monitoring (e.g. slow response time)
   - API healthcheck endpoint (e.g. service / dependency down)
 - API documentation (e.g. OpenAPI / Swagger)
+  - GraphQL has in-built docs / playground
   - Look into automated generation
 - Docker & Docker-Compose setup
 - Horizontal scaling strategy (API should be stateless for example)
+- Metrics (reporting & dashboard e.g. requests per second, response times & custom metrics)
 - Strive for single deployement artifact e.g. docker image, JAR file, with only env. variable/s changing across environments
 
 ## Frontend
@@ -85,7 +89,7 @@ Usually when I start a new application there are a lot of things that I need to 
 - i18n
 - Form validation
 - Backend communication (REST / GraphQL)
-- Configuration for multiple environments
+- Configuration for multiple environments (e.g. staging vs production)
 - Linting
 - Editor setup (Prettier + Editor Config)
 - Unit testing (Jest)

@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Coda|Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Coda|Roboto&display=swap");
 
 :root {
-  --highlight-color: #d33682;
+  --highlight-color: #db4f93;
   --banner-color: #433b36;
-  --back-color: #262626;
-  --text-color: #262626;
+  --back-color: #292a2d;
+  --text-color: #ccc;
 }
 
 body {
   background-color: var(--back-color);
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   margin: 0 0;
 }
 
@@ -18,7 +18,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Coda', Times, serif;
+  font-family: "Coda", Times, serif;
   color: var(--highlight-color) !important;
   margin: 0 0 15px 0;
 }
