@@ -41,7 +41,7 @@ As you can imagine this is a slightly complex piece of logic and the imperative 
 3. For any synchronous IO we use the "IO" monad.
 4. For any asynchronous functions we need some sort of async versions of the monads above.
 
-Please note that these are just guidelines and I not going into the mathematical details. The idea is that we want to compose code with functions and do away with all the null, async & error checks. Remember we said that the **main** challenge we face is that these functions don't always return a value, but what if all of these functions do return a value and that value is a "container" encapsulating the "success path" value or the "failure path" value? Since this container will always have a "usable / intelligent" value, we can compose functions as if we do not have to care about managing the "failure paths" individually at all.
+Please note that these are just guidelines and I not going into the mathematical details. The idea is that we want to compose code with functions and do away with all the null, async & error checks. Remember we said that the **main** challenge we face is that these functions don't always return a simple value, but what if all of these functions do return a "smart" value and that smart value is a "container" encapsulating the "success path" value or the "failure path" value? Since this container will always have a "usable / smart" value, we can compose functions as if we do not have to care about managing the "failure paths" individually at all.
 
 So let's try this with [Purify TS](https://gigobyte.github.io/purify/) -
 
