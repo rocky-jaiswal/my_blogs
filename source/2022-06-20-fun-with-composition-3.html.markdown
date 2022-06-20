@@ -4,7 +4,7 @@ tags: FP, TypeScript, Kotlin
 date: 20/06/2022
 ---
 
-[Kotlin](https://kotlinlang.org/) is one of those languages which makes me happy. Somehow it feels very close to TypeScript (which I use daily) and yet provides some novel features like [Channels](https://kotlinlang.org/docs/channels.html) which can make some routine tasks quite pleasant. It also feels close to my old favorite JRuby and of-course can use all of JVMs ecosystem. In the last two posts we have tried to use TypeScript to write some functional code, in this post we will try and do similar things with Kotlin and see if it is works well with composing functions.
+[Kotlin](https://kotlinlang.org/) is one of those languages which makes me happy. Somehow it feels very close to TypeScript (which I use daily) and yet provides some novel features like [Coroutines](https://kotlinlang.org/docs/coroutines-basics.html) and [Channels](https://kotlinlang.org/docs/channels.html) which can make some routine tasks quite pleasant. It also feels close to my old favorite JRuby and of-course can use all of JVMs ecosystem. In the last two posts we have tried to use TypeScript to write some functional code, in this post we will try and do similar things with Kotlin and see if it is works well with composing functions.
 
 An dummy experiment we are going to play with is a common HTTP handler - "creating a user" from an incoming HTTP request. The usual steps are -
 
@@ -115,6 +115,8 @@ Let us see what the Kotlin + Arrow equivalent looks like -
         data class TokenGenerationError(val value: String) : UserCreationError("System Error - $value")
     }
 
+    private fun generateRandomNumber() = ceil(Math.random() * 10)
+
     fun validateInput(
         email: String,
         password: String,
@@ -136,7 +138,7 @@ Let us see what the Kotlin + Arrow equivalent looks like -
     suspend fun checkIfUserExists(email: String): Either<UserCreationError.UserAlreadyExists, Boolean> {
         println("in checkIfUserExists")
         delay(1500L)
-        return if (ceil(Math.random() * 10) > 5) {
+        return if (generateRandomNumber() > 5) {
             Either.Right(false)
         } else {
             Either.Left(UserCreationError.UserAlreadyExists(email))
@@ -151,7 +153,7 @@ Let us see what the Kotlin + Arrow equivalent looks like -
     suspend fun insertUserInDB(email: String, encryptedPassword: String): Either<UserCreationError.DatabaseError, String> {
         println("in insertUserInDB")
         delay(2000L)
-        return if (ceil(Math.random() * 10) > 5) {
+        return if (generateRandomNumber() > 5) {
             Either.Right("UserId")
         } else {
             Either.Left(UserCreationError.DatabaseError("DB error!!"))
@@ -161,7 +163,7 @@ Let us see what the Kotlin + Arrow equivalent looks like -
     suspend fun createToken(userId: String): Either<UserCreationError.TokenGenerationError, String> {
         println("in createToken")
         delay(1000L)
-        return if (ceil(Math.random() * 10) > 5) {
+        return if (generateRandomNumber() > 5) {
             Either.Right("token123")
         } else {
             Either.Left(UserCreationError.TokenGenerationError("Token error!!"))
