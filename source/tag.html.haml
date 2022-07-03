@@ -1,9 +1,0 @@
-%h1.highlighted
-  Articles tagged "#{tagname}"
-- if articles
-  - articles.each do |article|
-    %li
-      %a{href: article.url}
-        article.title
-      %time
-        article.date.strftime('%b %e')
