@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "clean": "rm -rf out/",
-    "build": "next build && next export",
+    "build": "yarn clean && next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "firebase:deploy": "yarn clean && yarn build && yarn firebase deploy"
+    "firebase:deploy": "yarn build && yarn firebase deploy"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
@@ -20,7 +20,6 @@
     "remark-html": "^15.0.1"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",

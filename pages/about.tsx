@@ -1,6 +1,7 @@
 import React from 'react'
 
 import type { NextPage } from 'next'
+import profilePic from '../public/images/Rocky_Jaiswal_2019.png'
 
 import Banner from '../components/Banner'
 import Image from 'next/image'
@@ -16,12 +17,7 @@ const AboutPage: NextPage = (props: any) => {
         <div className="main">
           <div className="about">
             <div className="image_holder">
-              <Image
-                alt="Rocky Jaiswal"
-                src="/images/Rocky_Jaiswal_2019.png"
-                width="200px"
-                height="200px"
-              />
+              <Image alt="Rocky Jaiswal" src={profilePic} />
             </div>
             <div className="about_section">
               <h2>Profile</h2>

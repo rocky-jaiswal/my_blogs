@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-
 import type { NextPage } from 'next'
 
 import hljs from 'highlight.js'
@@ -26,7 +25,7 @@ export async function getStaticProps(params: any) {
     props: {
       contentHtml: result.contentHtml,
       data: result.data,
-    }, // will be passed to the page component as props
+    },
   }
 }
 
