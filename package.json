@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "clean": "rm -rf out/",
-    "build": "yarn clean && next lint && next build && next export",
     "start": "next start",
     "lint": "next lint",
+    "build": "yarn clean && next lint && next build && next export",
     "firebase:deploy": "yarn build && yarn firebase deploy"
   },
   "dependencies": {

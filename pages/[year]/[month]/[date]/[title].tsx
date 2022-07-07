@@ -8,6 +8,16 @@ import { getPostData } from '../../../../lib/getPostData'
 import Banner from '../../../../components/Banner'
 import BlogHead from '../../../../components/BlogHead'
 
+interface PostData {
+  date: string
+  title: string
+}
+
+interface Props {
+  data?: PostData
+  contentHtml?: string
+}
+
 export async function getStaticPaths() {
   const paths = getAllPosts()
 
@@ -17,9 +27,9 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps(params: any) {
+export async function getStaticProps(params: unknown) {
   // console.log(params)
-  const result = await getPostData(params)
+  const result = await getPostData(params as { params: Record<string, string | number> })
 
   return {
     props: {
@@ -29,7 +39,7 @@ export async function getStaticProps(params: any) {
   }
 }
 
-const PostPage: NextPage = (postData: any) => {
+const PostPage: NextPage = (postData: Props) => {
   useEffect(() => {
     hljs.highlightAll()
   }, [postData])
@@ -49,7 +59,10 @@ const PostPage: NextPage = (postData: any) => {
               <h2>{postData?.data?.title}</h2>
               <div className="blog_date">{postData?.data?.date}</div>
             </div>
-            <div className="post" dangerouslySetInnerHTML={{ __html: postData.contentHtml }}></div>
+            <div
+              className="post"
+              dangerouslySetInnerHTML={{ __html: postData.contentHtml ?? '' }}
+            ></div>
           </article>
         </div>
       </div>

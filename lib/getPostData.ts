@@ -1,7 +1,7 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import { remark } from 'remark'
 import html from 'remark-html'
+import { remark } from 'remark'
 
 interface Params {
   params: Record<string, string | number>

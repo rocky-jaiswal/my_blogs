@@ -7,17 +7,31 @@ import { getAllPosts } from '../lib/getAllPosts'
 import Banner from '../components/Banner'
 import BlogHead from '../components/BlogHead'
 
+interface Post {
+  params: {
+    year: string
+    month: string
+    date: string
+    title: string
+    displayTitle: string
+  }
+}
+
+interface Props {
+  results?: Post[]
+}
+
 export async function getStaticProps() {
-  const result = getAllPosts()
+  const results = getAllPosts()
 
   return {
     props: {
-      result,
+      results,
     },
   }
 }
 
-const AllPostsPage: NextPage = (props: any) => {
+const AllPostsPage: NextPage = (props: Props) => {
   return (
     <>
       <BlogHead title="Rocky Jaiswal - All Posts" description="Rocky Jaiswal - All Posts" />
@@ -26,8 +40,8 @@ const AllPostsPage: NextPage = (props: any) => {
         <Banner />
         <div className="main">
           <article>
-            {props.result &&
-              props.result.map((result: any, index: number) => {
+            {props.results &&
+              props.results.map((result: Post, index: number) => {
                 return (
                   <div key={index} className="summary">
                     <div className="blog_headline">

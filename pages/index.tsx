@@ -9,16 +9,26 @@ import Banner from '../components/Banner'
 import Sidebar from '../components/Sidebar'
 import BlogHead from '../components/BlogHead'
 
-export async function getStaticProps(foo: any) {
+interface PostSummary {
+  title: string
+  date: string
+  path: string
+  contentHtml: string
+}
+
+interface Props {
+  results?: PostSummary[]
+}
+
+export async function getStaticProps() {
   const results = await getHomePageSummary()
-  // console.log(result)
 
   return {
     props: { results },
   }
 }
 
-const Home: NextPage = (props: any) => {
+const Home: NextPage = (props: Props) => {
   return (
     <>
       <BlogHead title="Rocky Jaiswal" description="Rocky Jaiswal - Technical blogs" />
@@ -27,7 +37,7 @@ const Home: NextPage = (props: any) => {
         <Banner />
         <div className="main">
           <article className="content">
-            {props.results?.map((result: any, index: number) => {
+            {props.results?.map((result: PostSummary, index: number) => {
               return (
                 <div key={index} className="summary">
                   <div className="blog_headline">
