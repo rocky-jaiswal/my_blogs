@@ -7,7 +7,7 @@ import Banner from '../components/Banner'
 import Image from 'next/image'
 import BlogHead from '../components/BlogHead'
 
-const AboutPage: NextPage = (props: any) => {
+const AboutPage: NextPage = (_props: unknown) => {
   return (
     <>
       <BlogHead title="Rocky Jaiswal - About" description="Rocky Jaiswal - Technical blogs" />
