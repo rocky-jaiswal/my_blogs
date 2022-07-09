@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Link from 'next/link'
 import type { NextPage } from 'next'
 
 import { getAllPosts } from '../lib/getAllPosts'
@@ -46,11 +45,11 @@ const AllPostsPage: NextPage = (props: Props) => {
                   <div key={index} className="summary">
                     <div className="blog_headline">
                       <h2>
-                        <Link
-                          href={`/${result.params.year}/${result.params.month}/${result.params.date}/${result.params.title}`}
+                        <a
+                          href={`/${result.params.year}/${result.params.month}/${result.params.date}/${result.params.title}.html`}
                         >
-                          <a>{result.params.displayTitle}</a>
-                        </Link>
+                          {result.params.displayTitle}
+                        </a>
                         <span className="date">
                           {' '}
                           <pre>{`${result.params.year}/${result.params.month}/${result.params.date}`}</pre>

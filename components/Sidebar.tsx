@@ -6,12 +6,12 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <h3>
-        <Link href="/about.html">
+        <Link href="/about">
           <a>About</a>
         </Link>
       </h3>
       <h3>
-        <Link href="/allPosts.html">
+        <Link href="/allPosts">
           <a>All Posts</a>
         </Link>
       </h3>
