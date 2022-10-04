@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "build": "yarn clean && next lint && next build && next export",
-    "firebase:deploy": "yarn build && yarn firebase deploy"
+    "firebase:deploy": "yarn lint && yarn build && yarn firebase deploy"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
