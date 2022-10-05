@@ -10,7 +10,7 @@ We have talked a lot about functional composition in the last few posts. As I lo
 
 ClojureScript for JS devs [here](https://clojurescript.org/guides/faq-js) is also a great read in general.
 
-In functional programming the most important values are composability, functional purity, and immutability (and of-course first class functions with currying). Clojure excels in all of these areas (JS on the other hand has no immutablity out-of-the-box). So I tried to build an small "feature" using Clojure, however since I mostly use Node.js I did not want to jump into the deep end with JVM but try something simple with [shadow-cljs](https://shadow-cljs.github.io/docs/UsersGuide.html) and [Fastify.js](https://www.fastify.io/) (so technically this is all ClojureScript).
+In functional programming the most important values are composability, functional purity, and immutability (and of-course first class functions with currying). Clojure excels in all of these areas (JS on the other hand has no immutablity out-of-the-box). So I tried to build a small "feature" using Clojure, however since I mostly use Node.js I did not want to jump into the deep end with JVM but try something simple with [shadow-cljs](https://shadow-cljs.github.io/docs/UsersGuide.html) and [Fastify.js](https://www.fastify.io/) (so technically this is all ClojureScript).
 
 I also looked at [NBB](https://github.com/babashka/nbb) which is great for starting up or building scripts in ClojureScript. In the node world, the main issue is composition of "async" and normal functions, I tried to build that bridge with [promesa](https://github.com/funcool/promesa) which is from the NBB world.
 
