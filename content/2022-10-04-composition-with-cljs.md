@@ -27,30 +27,18 @@ So this is pretty simple, we have some sync and some async functions in there. W
 
     (ns app.web.controllers.users
         (:require [clojure.string :as str]
-                    [promesa.core :as p]
-                    ["node-fetch" :as fetch]))
+            [promesa.core :as p]
+            ["node-fetch" :as fetch]))
 
         (def base-state {:email ""
-                        :password ""
-                        :password-confirmation ""
-                        :location ""
-                        :valid false
-                        :created false
-                        :some-db-conn {}
-                        :some-http-client {}
-                        :response {}})
-
-        (def handler-state
-            (atom base-state))
-
-        (defn reset-to-base-state! []
-            (reset! handler-state base-state))
-
-        (add-watch handler-state :watcher
-                (fn [_key _atom old-state new-state]
-                    (prn "-- handler-state changed --")
-                    (prn "old-state" old-state)
-                    (prn "new-state" new-state)))
+                 :password ""
+                 :password-confirmation ""
+                 :location ""
+                 :valid false
+                 :created false
+                 :some-db-conn {}
+                 :some-http-client {}
+                 :response {}})
 
         (defn validate [email password password-confirmation]
             (->>
@@ -61,8 +49,7 @@ So this is pretty simple, we have some sync and some async functions in there. W
             (p/let [response (fetch "https://httpbin.org/uuid")]
                 (.json response)))
 
-        (defn init-state [req-body]
-            (reset-to-base-state!)
+        (defn init-state [handler-state req-body]
             (swap! handler-state assoc :email (get req-body "email"))
             (swap! handler-state assoc :password (get req-body "password"))
             (swap! handler-state assoc :password-confirmation (get req-body "password_confirmation"))
@@ -75,13 +62,13 @@ So this is pretty simple, we have some sync and some async functions in there. W
 
         (defn enrich-data [state]
             (p/->>
-                (p/delay 100) ;; assume we do some service invocation here
+                (p/delay 50) ;; assume we do some service invocation here
                 (swap! state assoc :location "de")
                 (p/promise state)))
 
         (defn insert-in-db [state]
             (p/->>
-                (p/delay 200) ;; assume we do some DB invocation here
+                (p/delay 25) ;; assume we do some DB invocation here
                 (swap! state assoc :created true)
                 (p/promise state)))
 
@@ -92,13 +79,19 @@ So this is pretty simple, we have some sync and some async functions in there. W
                 (p/promise state)))
 
         (defn create [req-body]
-            (p/->> req-body
-                    (init-state)
+            (let [handler-state (atom base-state)]
+                (add-watch handler-state :watcher
+                    (fn [_key _atom old-state new-state]
+                        (prn "-- handler-state changed --")
+                        (prn "old-state" old-state)
+                        (prn "new-state" new-state)))
+                (p/->> req-body
+                    (init-state handler-state)
                     (validate-request)
                     (enrich-data)
                     (insert-in-db)
                     (set-response)
-                    (:response @handler-state)))
+                    (:response @handler-state))))
 
 In the last 8 lines, we have our main "composition". In each of these state modifiers / functions we get a state and return a modified state. In ClojureScript global state is very cleanly expressed and encapsulated in an aptly named **"atom"**, on top of everything an atom also provides hooks to add watchers and validations to it.
 
