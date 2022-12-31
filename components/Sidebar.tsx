@@ -1,18 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
-import Script from 'next/script'
 
 function Sidebar() {
   return (
     <div className="sidebar">
       <h3>
         <Link href="/about">
-          <a>About</a>
+          About
         </Link>
       </h3>
       <h3>
         <Link href="/allPosts">
-          <a>All Posts</a>
+          All Posts
         </Link>
       </h3>
       <h3>
@@ -20,14 +19,11 @@ function Sidebar() {
           Github
         </a>
       </h3>
-      <div>
-        <a
-          className="twitter-timeline"
-          data-height="700"
-          href="https://twitter.com/var_log_rockyj"
-        ></a>
-        <Script src="//platform.twitter.com/widgets.js" async={true} />
-      </div>
+      <h3>
+        <a href="https://dizl.de/@rockyj" target="_blank" rel="noreferrer">
+          Social
+        </a>
+      </h3>
     </div>
   )
 }

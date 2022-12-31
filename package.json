@@ -13,7 +13,7 @@
   "dependencies": {
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.5.1",
-    "next": "12.2.1",
+    "next": "^13.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "remark": "^14.0.2",
@@ -26,7 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
     "eslint": "^8.19.0",
-    "eslint-config-next": "12.2.0",
+    "eslint-config-next": "^13.1.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.3",

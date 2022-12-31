@@ -43,7 +43,7 @@ const Home: NextPage = (props: Props) => {
                   <div className="blog_headline">
                     <h2>
                       <Link href={`${result.path}`}>
-                        <a>{result.title}</a>
+                        {result.title}
                       </Link>
                       <span className="date">
                         <pre>{result.date}</pre>
