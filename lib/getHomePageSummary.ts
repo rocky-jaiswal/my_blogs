@@ -25,7 +25,7 @@ export async function getHomePageSummary() {
       return {
         title: result.data.title,
         date: result.data.date,
-        path: `/${year}/${month}/${date}/${title}`,
+        path: `/${year}/${month}/${date}/${title}.html`,
         contentHtml,
       }
     })

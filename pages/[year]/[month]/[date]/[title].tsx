@@ -28,7 +28,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(params: unknown) {
-  // console.log(params)
   const result = await getPostData(params as { params: Record<string, string | number> })
 
   return {

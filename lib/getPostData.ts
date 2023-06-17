@@ -8,7 +8,13 @@ interface Params {
 }
 
 export async function getPostData({ params }: Params) {
-  const filePath = `content/${params.year}-${params.month}-${params.date}-${params.title}.md`
+  let title = params.title.toString()
+
+  if (title.endsWith('.html')) {
+    title = title.substring(0, title.length - 5)
+  }
+
+  const filePath = `content/${params.year}-${params.month}-${params.date}-${title}.md`
 
   const markdown = fs.readFileSync(filePath).toString('utf-8')
 

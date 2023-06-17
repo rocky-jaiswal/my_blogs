@@ -42,7 +42,7 @@ const Home: NextPage = (props: Props) => {
                 <div key={index} className="summary">
                   <div className="blog_headline">
                     <h2>
-                      <Link href={`${result.path}`}>
+                      <Link href={`${result.path}`} prefetch={false}>
                         {result.title}
                       </Link>
                       <span className="date">
