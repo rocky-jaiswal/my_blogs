@@ -1,12 +1,11 @@
---- 
-title: "Are deadlines evil? - 2"
+---
+title: 'Are deadlines evil? - 2'
 tags: Agile, General
 date: 13/09/2013
 ---
 
-My [last](http://rockyj.in/2013/09/08/are_deadlines_evil.html) post generated a lot of reactions and it seemed like I was only asking questions and not giving any solutions. So here it goes, how would I release (or propose) to release software projects / products without a deadline.
+My [last](/2013/09/08/are_deadlines_evil.html) post generated a lot of reactions and it seemed like I was only asking questions and not giving any solutions. So here it goes, how would I release (or propose) to release software projects / products without a deadline.
 My answer is pretty simple (hence this short blog post), do it the Scrum way -
-
 
 1. Create a product backlog, identifying all the features / user stories / user requirements you would like your product to have. Arrange the features by priority.
 2. Ask yourself, what are the bare minimum features that you need to get the first release out. Ideally the first release should be timed between 3-6 months.

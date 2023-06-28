@@ -1,5 +1,5 @@
 ---
-title: "Scale up with Docker and Mesos"
+title: 'Scale up with Docker and Mesos'
 tags: Docker, JRuby, Ruby, Mesos
 date: 20/06/2015
 ---
@@ -19,16 +19,15 @@ To explain things we will build a demo -
 
 ###Setup Mesos
 
-The first part is easy, all you need is Vagrant installed and follow the instructions here - [https://github.com/mesosphere/playa-mesos](https://github.com/mesosphere/playa-mesos). Give the VM as many resources as you can, once you do __vagrant up__, you can check the Mesos server cluster on http://10.141.141.10:5050. You can see here that there is a slave node with certain resources available.
+The first part is easy, all you need is Vagrant installed and follow the instructions here - [https://github.com/mesosphere/playa-mesos](https://github.com/mesosphere/playa-mesos). Give the VM as many resources as you can, once you do **vagrant up**, you can check the Mesos server cluster on http://10.141.141.10:5050. You can see here that there is a slave node with certain resources available.
 
 ![Mesos](images/mesos_1.png)
 
 To have long running tasks on Mesos (like application servers) we need a framework on top of Mesos called [Marathon](https://github.com/mesosphere/marathon). _[Mesosphere](https://mesosphere.com/) is an organization which specializes in Mesos and have products built on top of it, Marathon is one such add-on (btw I do really like the work Mesosphere is doing)._ With our VM we already have Marathon setup and running and we can view the UI at - http://10.141.141.10:8080
 
-
 ###Containerize Application
 
-Next we want to have our application setup as a container. For this we will use a [an app](https://github.com/rocky-jaiswal/hello-sinatra) [we built earlier](http://rockyj.in/2015/06/17/docker_introduction.html). It is basically a simple Sintra API that says Hello {input}! given an {input}.
+Next we want to have our application setup as a container. For this we will use a [an app](https://github.com/rocky-jaiswal/hello-sinatra) [we built earlier](/2015/06/17/docker_introduction.html). It is basically a simple Sintra API that says Hello {input}! given an {input}.
 
 The Dockerfile for this application looks like -
 
@@ -96,19 +95,19 @@ With the Mesos VM running, we need to POST an application on the Marathon API. T
 
 After a while you can see that the application is running by looking at the Marathon UI - http://10.141.141.10:8080
 
-You can now also run __vagrant ssh__ to log into the Vagrant machine and then run -
+You can now also run **vagrant ssh** to log into the Vagrant machine and then run -
 
     $ sudo docker ps
 
-to see your container based on __rockyj/hello-sinatra__ image running.
+to see your container based on **rockyj/hello-sinatra** image running.
 
-The __sudo docker ps__ command will also tell you how the ports are mapped and you can most probably access you Sinatra application's API by pinging __http://10.141.141.10:31000/greet/world__.
+The **sudo docker ps** command will also tell you how the ports are mapped and you can most probably access you Sinatra application's API by pinging **http://10.141.141.10:31000/greet/world**.
 
 Now, If you look at the Mesos UI (http://10.141.141.10:5050) you can see if you have any spare resources, if you do, you can scale your application by simply clicking on the application name on the Marathon UI then clicking on 'scale' and then finally adding one more instance to the application.
 
 ![Mesos](images/mesos_2.png)
 
-This will ensure that there are two containers running on the Mesos setup and you can verify it by running __sudo docker ps__ on the VM. As you may see the second container is mapped to a different port.
+This will ensure that there are two containers running on the Mesos setup and you can verify it by running **sudo docker ps** on the VM. As you may see the second container is mapped to a different port.
 
 Finally, a few questions remain -
 

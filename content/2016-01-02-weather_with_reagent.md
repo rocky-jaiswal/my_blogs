@@ -1,13 +1,12 @@
 ---
-title: "Weather with Reagent"
+title: 'Weather with Reagent'
 tags: Clojure, JavaScript, React
 date: 02/01/2016
 ---
 
-In my [last blog](http://rockyj.in/2015/12/31/react_routers_comparison.html) I talked a bit about React and ClojureScript. In this post we will look at a simple [Reagent](http://reagent-project.github.io/) app that fetches the weather using the [http://openweathermap.org/](http://openweathermap.org/) API. The idea of this post is to show how easily we can develop React apps with Reagent and how simple the code is. Here is how the working app looks (without much CSS as you can imagine) -
+In my [last blog](/2015/12/31/react_routers_comparison.html) I talked a bit about React and ClojureScript. In this post we will look at a simple [Reagent](http://reagent-project.github.io/) app that fetches the weather using the [http://openweathermap.org/](http://openweathermap.org/) API. The idea of this post is to show how easily we can develop React apps with Reagent and how simple the code is. Here is how the working app looks (without much CSS as you can imagine) -
 
-![reagent_weather](/images/reagent_weather.gif "Reagent Weather API")
-
+![reagent_weather](/images/reagent_weather.gif 'Reagent Weather API')
 
 And here is the code -
 
@@ -83,7 +82,6 @@ And here is the code -
     (defn init! []
       (mount-root))
 
-
-The best part about Reagent is that any component that uses an __Atom__ is automagically re-rendered when its value changes, so we are not worried about managing DOM ourselves. Also since it uses React we have the shadow DOM built in, so only delta changes are applied to the DOM which makes it super fast. Even without much optimization the code above is blazing fast. 
+The best part about Reagent is that any component that uses an **Atom** is automagically re-rendered when its value changes, so we are not worried about managing DOM ourselves. Also since it uses React we have the shadow DOM built in, so only delta changes are applied to the DOM which makes it super fast. Even without much optimization the code above is blazing fast.
 
 I am really excited about Reagent, I think it builds upon React (which on its own is pretty good) and makes it even better. If you want the command line version of the above app you can also look at [https://github.com/rocky-jaiswal/weatherman-clj](https://github.com/rocky-jaiswal/weatherman-clj).

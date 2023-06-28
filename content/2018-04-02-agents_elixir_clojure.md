@@ -1,18 +1,18 @@
 ---
-title: "Asynchronous state management with Agents"
+title: 'Asynchronous state management with Agents'
 tags: Elixir, Clojure
 date: 02/04/2018
 ---
 
-In my [last](https://rockyj.in/2018/03/03/macros_elixir_clojure.html) post we compared the implementation of macros in Elixir and Clojure. As I also mentioned, these two languages share a lot of features and terminology. In this post let's look at how we can handle simple asynchronous work and also manage state asynchronously with __Agents__.
+In my [last](/2018/03/03/macros_elixir_clojure.html) post we compared the implementation of macros in Elixir and Clojure. As I also mentioned, these two languages share a lot of features and terminology. In this post let's look at how we can handle simple asynchronous work and also manage state asynchronously with **Agents**.
 
 To understand these concepts we will write a simple program - we will fetch the price of five cryptocurrencies asynchronously and independently (in separate threads / processes) and once all the prices are retieved we will print them. To manage the state of our results, we will use an "Agent". An agent can be thought of a background thread / process that has it's own state. In both Clojure and Elixir the state of an Agent can be updated independently and asynchronously.
 
 Pictorially, this works like -
 
-![Agent State](/images/agents.png "Agent State")
+![Agent State](/images/agents.png 'Agent State')
 
-To start off, to hand over work in a separate thread in Clojure we use the __future__ form wheras in Elixir we use a __Task__. Agents in both the languages work pretty much the same. We initialize the agent with an initial state, then we asynchronously update the agent's state by passing a function that takes the existing state and returns the new state (after some computation).
+To start off, to hand over work in a separate thread in Clojure we use the **future** form wheras in Elixir we use a **Task**. Agents in both the languages work pretty much the same. We initialize the agent with an initial state, then we asynchronously update the agent's state by passing a function that takes the existing state and returns the new state (after some computation).
 
 The code in Clojure -
 

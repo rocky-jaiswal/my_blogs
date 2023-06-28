@@ -4,7 +4,7 @@ tags: Kubernetes, DevOps
 date: 05/04/2017
 ---
 
-As it turns out this is my **100th** [post](http://rockyj.in/posts/). The first one was published in March 2011 and a lot has changed since then. A lot of new technologies have come in and a lot of my posts have become obsolete. In all these years nothing has created more impact for me than Docker and Kubernetes. Both these technologies have revolutionized the way I work.
+As it turns out this is my **100th** [post](/posts/). The first one was published in March 2011 and a lot has changed since then. A lot of new technologies have come in and a lot of my posts have become obsolete. In all these years nothing has created more impact for me than Docker and Kubernetes. Both these technologies have revolutionized the way I work.
 
 In this special 100th post we will setup a solid Kubernetes cluster that we can use in most projects with ease. The main objective for me is to create the most secure and scalable setup possible. For example, the nodes should not be accessible from the internet (as far as possible) and they should be managed via an [Auto Scaling Group](https://aws.amazon.com/autoscaling) among other things.
 

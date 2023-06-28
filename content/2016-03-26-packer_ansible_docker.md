@@ -1,13 +1,12 @@
 ---
-title: "Packer, Ansible and Docker"
+title: 'Packer, Ansible and Docker'
 tags: Docker, DevOps
 date: 26/03/2016
 ---
 
-A [little while back](http://rockyj.in/2015/09/06/docker_capistrano.html) we looked at an operational setup that can get us up and running with any simple application by using Docker and capistrano. What was missing was the setup of the machine itself, we __do not__ want to __manually__ set up Docker and other related infrastructure on any machine. So we will use [Ansible](https://www.ansible.com/) to do the work for us. Ansible is really powerful, feature packed and simple at the same time.
+A [little while back](/2015/09/06/docker_capistrano.html) we looked at an operational setup that can get us up and running with any simple application by using Docker and capistrano. What was missing was the setup of the machine itself, we **do not** want to **manually** set up Docker and other related infrastructure on any machine. So we will use [Ansible](https://www.ansible.com/) to do the work for us. Ansible is really powerful, feature packed and simple at the same time.
 
 A simple Ansible playbook to setup a machine with Docker and other software needed for a capistrano deployment may look like (blog.yml) -
-
 
     - name: Setup blog server
       hosts: blog-server
@@ -57,8 +56,7 @@ A simple Ansible playbook to setup a machine with Docker and other software need
 
 The [docker-ubuntu](https://galaxy.ansible.com/angstwad/docker_ubuntu/) downloadable role does the grunt job of installing docker and built-in Ansible modules do the rest for us. At the end of this we can point Ansible to any host and get a server up and ready for capistrano deployment in no time.
 
-We can build upon this further by creating a __machine image__ on top of this setup using [Packer](https://packer.io), which is _an open source tool for creating identical machine images for multiple platforms from a single source configuration._ The advantage of this is that once we have these images built we can have a server up and running with all the software / configuration we need in no time. This is also useful when we need a cluster setup and most machines are identical to each other. What is even more cool with Packer is that it is provider independent, so with one single configuration we can build images for EC2, DigitalOcean and others at the same time.
-
+We can build upon this further by creating a **machine image** on top of this setup using [Packer](https://packer.io), which is _an open source tool for creating identical machine images for multiple platforms from a single source configuration._ The advantage of this is that once we have these images built we can have a server up and running with all the software / configuration we need in no time. This is also useful when we need a cluster setup and most machines are identical to each other. What is even more cool with Packer is that it is provider independent, so with one single configuration we can build images for EC2, DigitalOcean and others at the same time.
 
 ![Packer Ansible Docker](/images/packer_ansible_docker.png)
 

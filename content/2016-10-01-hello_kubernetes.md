@@ -1,10 +1,10 @@
 ---
-title: "Hello Kubernetes"
+title: 'Hello Kubernetes'
 tags: Kubernetes, AWS, DevOps
 date: 01/10/2016
 ---
 
-__Introduction__
+**Introduction**
 
 Pretty much everyone in the technology world has heard about Kubernetes by now. But before we dive into it, let's try and understand the problems it solves -
 
@@ -16,38 +16,37 @@ Even with all this awesomeness, Docker still had a problem of management at scal
 
 ![Container Management](containers.jpg)
 
-__Kubernetes__
+**Kubernetes**
 
-Like [other](http://rockyj.in/2015/06/20/scale_docker_mesos.html) [container managers / schedulers](https://dcos.io) Kubernetes lets us abstract away from the relationship between the server and the container. For example, with a container manager we just need to know that our container is running, we do not care about which server it is running on. The container manager will also make sure that in case a server dies, the container will be provisioned on another server.
+Like [other](/2015/06/20/scale_docker_mesos.html) [container managers / schedulers](https://dcos.io) Kubernetes lets us abstract away from the relationship between the server and the container. For example, with a container manager we just need to know that our container is running, we do not care about which server it is running on. The container manager will also make sure that in case a server dies, the container will be provisioned on another server.
 
 Kubernetes provides all this and more. Managing containers at scale is a breeze with Kubernetes, plus it provides features like configuration and secret management which are really useful for all applications.
 
 Alright enough talk, let's setup Kubernetes (K8) and install something on it.
 
-__Our Application__
+**Our Application**
 
 To start things off we have a simple [HapiJS](http://hapijs.com/) based API which simply responds with success on a certain route. The application is Dockerized and the code is available on [Github](https://github.com/rocky-jaiswal/hello-hapi). Also since the code is hardly ground breaking I have published my image on Docker [Hub](https://hub.docker.com/r/rockyj/hello-hapi/). So that's that, we have a simple Node application packaged in a container ready to go. We now need to setup Kubernetes to manage our application container.
 
-__AWS VPC__
+**AWS VPC**
 
 In my humble opinion Amazon Web Services Virtual Private Cloud is a decent, secure setup to host any application. By deploying the application components between the public and private subnets we can make the application more secure. I usually use a VPC with 2 subnets - Public (e.g. CIDR: 10.0.0.0/24) which hosts nothing but the web & bastion servers (for example) and Private (e.g. CIDR 10.0.1.0/24) which hosts the rest of the application like the application servers and the DB servers.
 
 Setting up a AWS VPC is a well documented process, so I will not go into that. Our setup will start with the assumption that you have a VPC with 2 subnets setup. Only thing to note is we should open all traffic within the subnet, since this rule will be only applied to within the subnet we should be fine (no one can access the private subnet instances from the internet anyways).
 
-
-__AWS EC2 Instances__
+**AWS EC2 Instances**
 
 Now we will setup 3 instances one t2.small and one t2.micro. The t2.small will act as the Kubernetes master and will be setup in the Public subnet and the 2 micro instances will be our minions. This horsepower is enough for a simple weekend project like ours.
 
 ![AWS Instances overview](aws_vpc_instances.png)
 
-__Kubernetes Setup__
+**Kubernetes Setup**
 
 Now that we have our instances and their networking setup it is time to install and setup Kubernetes. For this we will use the recently launched _kubeadm_ tool. Most of the documentation is [here](http://kubernetes.io/docs/getting-started-guides/kubeadm/). I followed it to the letter till step 4, except I did not "taint" my master, so that all the containers run on the minions.
 
 After this simple setup of installing the Kubernetes repositories along with the software and running a few commands to setup the cluster we should be all set to use Kubernetes.
 
-__Back to the Application__
+**Back to the Application**
 
 Back to our HapiJS [application](https://hub.docker.com/r/rockyj/hello-hapi/), well we just found a home for it. So we will now set it up on our K8 cluster.
 
@@ -169,11 +168,11 @@ Check it -
 
 We can also scale down the replicas this way easily. To update the service, when we have made code changes to our HapiJS project, all we need to do is publish the new Docker image and apply it back to the service. It's that simple.
 
-__Downsides__
+**Downsides**
 
 Our current setup is not perfect, there is only 1 master instance which is also exposed to the internet, even though we can bring a new master up in minutes we do have a single point of failure. Also, we can only administer the cluster via _kubectl_ on the master node. Ideally we want to manage it from our laptop, CI server etc. This is a limitation of the _kubeadm_ tool we used.
 
-__To Do__
+**To Do**
 
 We can do some improvements on this setup to use it for serious projects -
 
@@ -183,6 +182,6 @@ We can do some improvements on this setup to use it for serious projects -
 4. Create a more real-life application scenario. e.g. where we use a RDBMS for example.
 5. Show sample CI setup to automate application updates.
 
-__End__
+**End**
 
 So for now, that's all folks! I hope this was a useful post and will help get you started on K8. I for one cannot imagine working on any other setup now. The container management and scaling capabilities of K8 are unparalleled and what's more it is still a young project with a lot more features coming soon.

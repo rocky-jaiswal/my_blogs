@@ -1,12 +1,12 @@
 ---
-title: "hapi.js, JWT and CORS"
+title: 'hapi.js, JWT and CORS'
 tags: JavaScript
 date: 19/03/2016
 ---
 
-In the [last post](http://rockyj.in/2016/03/14/auth_workflow_react.html) we setup a React based authentication workflow for a sample application. In this short post we will look at a [hapi.js](http://hapijs.com/) backend that can handle authentication using [JWT](http://jwt.io/) and since the React frontend runs on a different port (via Webpack) we will also setup CORS.
+In the [last post](/2016/03/14/auth_workflow_react.html) we setup a React based authentication workflow for a sample application. In this short post we will look at a [hapi.js](http://hapijs.com/) backend that can handle authentication using [JWT](http://jwt.io/) and since the React frontend runs on a different port (via Webpack) we will also setup CORS.
 
-![HapiJS](/images/hapi.svg "HapiJS")
+![HapiJS](/images/hapi.svg 'HapiJS')
 
 Setting up CORS and JWT with Hapi is actually quite easy. For CORS all we need to do is provide the right options to hapi's _server.connection_ and JWT setup is available as a hapi [plugin](https://www.npmjs.com/package/hapi-auth-jwt2). Let's look at a working example -
 
@@ -60,7 +60,6 @@ server.js -
 
     module.exports = server;
 
-
 app.js (where we have the CORS configuration enabled for development) -
 
     var config = {
@@ -79,7 +78,6 @@ app.js (where we have the CORS configuration enabled for development) -
 
     var env = process.env['NODE_ENV'] || 'development';
     module.exports = config[env];
-    
 
 An example routes.js -
 

@@ -1,10 +1,10 @@
 ---
-title: "Pi Calculation with Clojure"
+title: 'Pi Calculation with Clojure'
 tags: Clojure
 date: 21/11/2015
 ---
 
-A while back I wrote a post on using [Akka with JRuby](http://rockyj.in/2012/09/15/akka_with_jruby.html) to calculate the value of pi. Since I am learning Clojure these days I thought it would a good idea to implement the same pi calculation algorithm using Clojure and core.async. The idea of this post is to share how simple and concise Clojure can be and also to get some reviews for my first Github Clojure project (although it is a trivial one). The algorithm is basically -
+A while back I wrote a post on using [Akka with JRuby](/2012/09/15/akka_with_jruby.html) to calculate the value of pi. Since I am learning Clojure these days I thought it would a good idea to implement the same pi calculation algorithm using Clojure and core.async. The idea of this post is to share how simple and concise Clojure can be and also to get some reviews for my first Github Clojure project (although it is a trivial one). The algorithm is basically -
 
 ![Pi calculation formula](/images/pi-formula.png)
 

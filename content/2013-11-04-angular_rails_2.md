@@ -1,14 +1,14 @@
---- 
-title: "Working with Angular.js and Rails - 2"
+---
+title: 'Working with Angular.js and Rails - 2'
 tags: Rails, AngularJS
 date: 04/11/2013
 ---
 
-In my [last](http://rockyj.in/2013/10/24/angular_rails.html) blog I covered setting up a basic Rails + Angular.js webapp with [Rails-API](https://github.com/rails-api/rails-api) and [Yeoman](http://yeoman.io/). As promised in this post we will look at building a simple Authentication and Authorization mechanism on top of our application.
+In my [last](/2013/10/24/angular_rails.html) blog I covered setting up a basic Rails + Angular.js webapp with [Rails-API](https://github.com/rails-api/rails-api) and [Yeoman](http://yeoman.io/). As promised in this post we will look at building a simple Authentication and Authorization mechanism on top of our application.
 
 _Plase note, the code shown in this blog is available on [Github](https://github.com/rocky-jaiswal/ebenezer)._
 
-For authentication we will use __Devise__ and for Authorization we will use __Pundit__, which are pretty standard gems used for these purposes.
+For authentication we will use **Devise** and for Authorization we will use **Pundit**, which are pretty standard gems used for these purposes.
 
 ###Devise
 
@@ -58,13 +58,6 @@ To test authorization we will use Pundit and the very original User has many Pos
 
 Finally, we want to write a reponse interceptor on the client side so that if the response code from the server is 401 we show the user the login page instead of throwing an error. This is easily done with Angular.js config as done [here](https://github.com/rocky-jaiswal/ebenezer/blob/master/public/angular/app/scripts/app.coffee#l18).
 
-That's it, we now a basic and secure Angular.js + Rails-API application working. All you need to do is to add business logic and you have a fast*, clean working application built in real quick time.
+That's it, we now a basic and secure Angular.js + Rails-API application working. All you need to do is to add business logic and you have a fast\*, clean working application built in real quick time.
 
-_*I would also throw in Redis for the User / Token based lookup._
-
-
-
-
-
-
-
+_\*I would also throw in Redis for the User / Token based lookup._

@@ -4,7 +4,7 @@ tags: FP, TypeScript
 date: 24/03/2022
 ---
 
-Sometimes I do not write any blog for months but this new post comes within a week of the last one :) some things just get you this excited. In the [last post](https://rockyj.in/2022/03/12/fun-with-composition.html), we looked at how functional composition helps us and how certain data types (also called "Monads") help us write functional code. We left off with a scenario and tried to solve it with [Purify TS](https://gigobyte.github.io/purify/). The scenario was -
+Sometimes I do not write any blog for months but this new post comes within a week of the last one :) some things just get you this excited. In the [last post](/2022/03/12/fun-with-composition.html), we looked at how functional composition helps us and how certain data types (also called "Monads") help us write functional code. We left off with a scenario and tried to solve it with [Purify TS](https://gigobyte.github.io/purify/). The scenario was -
 
 1. Get an HTTP request
 2. A valid user request should have an "authorization" header

@@ -1,10 +1,10 @@
 ---
-title: "Fun with function composition"
+title: 'Fun with function composition'
 tags: FP, TypeScript
 date: 12/03/2022
 ---
 
-[Previously](https://rockyj.in/2021/04/03/go-with-functions.html) we looked at why it is nice to write software with function composition. We saw that it leads to simpler code which is easy to read and test. I think a lot of Functional Programming (FP) tutorials tell you the concepts but do not mention the advantages. In this post (using TS) we will try and turn this around, I am not going to tell you what FP is or what **"Monads"** are but show you how all these ideas make our lives easier.
+[Previously](/2021/04/03/go-with-functions.html) we looked at why it is nice to write software with function composition. We saw that it leads to simpler code which is easy to read and test. I think a lot of Functional Programming (FP) tutorials tell you the concepts but do not mention the advantages. In this post (using TS) we will try and turn this around, I am not going to tell you what FP is or what **"Monads"** are but show you how all these ideas make our lives easier.
 
 _If you wish to build a ship, do not divide the men into teams and send them to the forest to cut wood. Instead, teach them to long for the vast and endless sea._
 

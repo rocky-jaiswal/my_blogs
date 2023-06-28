@@ -1,24 +1,24 @@
 ---
-title: "Authentication workflow with React"
+title: 'Authentication workflow with React'
 tags: JavaScript, React
 date: 14/03/2016
 ---
 
 Having worked with a few frontend frameworks, I definitely find [React](https://facebook.github.io/react/) to be a very good choice. For me, it delivers on the promise of creating clean frontend components that can be used across projects while being easily extensible and flexible. On top of that React encourages good functional programming practices and also has mobile covered with [React Native](https://facebook.github.io/react-native/).
 
-We have looked at Reagent [before](http://rockyj.in/2016/01/02/weather_with_reagent.html) and also at building Single Page Apps with [Rails API](http://rockyj.in/2013/10/24/angular_rails.html) and [AngularJS](http://rockyj.in/2013/11/04/angular_rails_2.html). Building on that, in this post we will create a common authentication workflow with React and [React Router](https://github.com/reactjs/react-router). Before we look at the code, here is how the application looks like (the solid lines outline the components) -
+We have looked at Reagent [before](/2016/01/02/weather_with_reagent.html) and also at building Single Page Apps with [Rails API](/2013/10/24/angular_rails.html) and [AngularJS](/2013/11/04/angular_rails_2.html). Building on that, in this post we will create a common authentication workflow with React and [React Router](https://github.com/reactjs/react-router). Before we look at the code, here is how the application looks like (the solid lines outline the components) -
 
-Login user - 
+Login user -
 
-![React Login Page](/images/react_login.png "React Login Page")
+![React Login Page](/images/react_login.png 'React Login Page')
 
 Register user -
 
-![React Register Page](/images/react_register.png "React Register Page")
+![React Register Page](/images/react_register.png 'React Register Page')
 
 Once the user logs in, the home page is displayed and the navigation bar is updated accordingly -
 
-![React Home Page](/images/react_home.png "React Home Page")
+![React Home Page](/images/react_home.png 'React Home Page')
 
 The code for this application is available on [Github](https://github.com/rocky-jaiswal/lehrer-node). Let's look at some main components -
 
@@ -68,10 +68,10 @@ It starts with the Router -
         </Route>
       </Router>
     );
-    
+
     module.exports = routes;
 
-The main AppContainer - 
+The main AppContainer -
 
     var React = require('react');
     var Navbar = require('../components/Navbar');
@@ -332,7 +332,7 @@ authentication.js -
 
     module.exports = authentication;
 
-Finally, an eventing system to keep the sibling components in sync - 
+Finally, an eventing system to keep the sibling components in sync -
 
     var {EventEmitter} = require('fbemitter');
 
