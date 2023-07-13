@@ -4,7 +4,7 @@ tags: FP, Nodejs
 date: 13/07/2023
 ---
 
-One of my core philosophies is to build software systems which are more of less **"data transformers"** e.g. our code provides a description of how data flows through our program. I usually want to write functions that get some data and return some data, this should be done as deterministically (e.g. using types) and declaratively as possible, and then whole systems can be built composing these functions.
+One of my core philosophies is to build software systems which are more or less **"data transformers"** e.g. our code provides a description of how data flows through our program. I usually want to write functions that get some data and return some data, this should be done as deterministically (e.g. using types) and declaratively as possible, and then whole systems can be built composing these functions.
 
 ![construction worker with pipes](/images/pipelines.png)
 _Random AI generated image_
@@ -85,11 +85,11 @@ A library that I use - [aync-utils](https://github.com/rocky-jaiswal/async-utils
         reply.code(200).send(context.response)
     }
 
-In the code above, we have handled a HTTP request with functions composed together - _validateRequestBody, searchOrCreateUser and buildResponse_. The advantage of this approach is that each function has a clear job, is unit testable and simple. We can build almost any **pipeline** of functions using **pipeAsync**.
+In the code above, we have handled a HTTP request with a few functions composed together - `validateRequestBody, searchOrCreateUser and buildResponse`. The advantage of this approach is that each function has a clear job and is unit testable. We can build almost any **pipeline** of functions using **pipeAsync**.
 
 ### Next Level
 
-This composition approach with some **currying** can take us to the next level to handle more complex data flows. e.g. building a simple state machine to handle a complex job. A very simple example could be -
+This composition approach with some **currying** can take us to the next level to handle more complex data flows. e.g. building a small state machine to handle a complex job. An example could be -
 
 - We get a message
 - We validate the message
@@ -97,7 +97,7 @@ This composition approach with some **currying** can take us to the next level t
 - We call another external service to give us a "decision" based on the data we have
 - Based on the "decision" we record a response
 
-Now given the fact that our **pipeAsync** can handle anything of the type **(state: T) => Promise<T>**, we can create a simple state machine like this -
+Now given the fact that our **pipeAsync** can handle anything of the type `(state: T) => Promise<T>`, we can create a state machine like this -
 
     import { delay, pipeAsync } from '@rockyj/async-utils'
 
@@ -186,7 +186,7 @@ In the example above **transitionState** takes away the heavy-lifting of error h
 
 ### With some conditional matching
 
-The code above is capable of handling a lot of complex scenarios, but let's see if we can extend it even further. To expand the last example, what if the external service we call to give us a "decision" can return different values, and based on the returned value we need to perform more actions. Let's see how we can declaratively compose this -
+The code above is capable of handling a lot of scenarios, but let's see if we can extend it even further. To expand the last example, what if the external service we call to give us a "decision" can return different values, and based on the returned decision we need to perform more actions. Let's see how we can declaratively compose this -
 
     const sampleActionWithLog = (msg: string) => async (context: MessageContext) => {
         console.log(msg)
