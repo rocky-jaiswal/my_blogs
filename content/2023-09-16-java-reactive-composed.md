@@ -28,7 +28,7 @@ The 2 paragraphs above for me are the “Achilles heels” of server-side Java, 
 
 One main thing to note here is that this problem kicks in when we have heavy I/O since the request handling thread is just waiting while at the same time requests are piling up. This waiting can be due DB calls, or network requests etc. In a world where there are a lot of services calling each other (microservices) this problem is very common.
 
-But worry not the folks at Java say - we have a “Reactive” model. All major Java frameworks acknowledge this problem and provide a solution (like Spring Webflux).
+But worry not the folks at Java say - we have a “Reactive” model. All major Java frameworks acknowledge this problem and provide a solution (like Spring Webflux). Also see [Asynchronicity to the Rescue?](https://projectreactor.io/docs/core/release/reference/index.html#_asynchronicity_to_the_rescue)
 
 ![interconnected pipes](/images/pipes_16092023.png)
 
@@ -37,16 +37,16 @@ But worry not the folks at Java say - we have a “Reactive” model. All major 
 So let's get started with a simple example. We will create a request handler that will -
 
 - Do a simple request validation
-- Then query the DB for user's emails and some other details
+- Then query the DB for the users emails and some other details
 - Another DB query to get the "cities of interest" of this user
 - For each of these cities we will call a remote service to get the weather (min / max temperature)
 - Finally, we aggregate all this data and send back a response to the user
 
 The main thing to note here is that ideally the DB queries and the HTTP calls should be made in parallel. Let us assume that things are bad and querying the DB takes 2 seconds and getting the weather for a city takes 3 seconds. So if we do this in a traditional main thread linear style we are looking at 2 (DB query for email) + 2 (DB query for cities) + 2 \* 3 (assuming there are 2 cities and HTTP call for each takes 3 seconds) = 10 seconds of total response time (at-least).
 
-If we were to do this in async style we can do all this in 5 seconds since the DB calls and the HTTP call can be made in parallel. This saves us a huge 5 seconds in response time just for this example.
+If we were to do this in async style we can do all this in 5 seconds since the DB calls and the HTTP call can be made in parallel. This saves us a huge 5 seconds in response time just for this example. Not to mention the server can handle new requests while it is waiting on I/O.
 
-Also in the Java world there is no such thing as "async/await" like Node.js and we do not want our "reactive / async" code to look very different from the normal linear code. If we were to do this in a callback / [CompletableFuture](https://www.baeldung.com/java-completablefuture#bd-Combining) style this can be done without any library but the code would be an eyesore (like Node.js with the callback style of 2004). To solve this problem we use [Project Reactor](https://projectreactor.io/docs/core/release/reference/index.html). I will not go into the details of Mono / Flux since there is enough documentation out there.
+Also in the Java world there is no such thing as "async / await" like Node.js and we do not want our "reactive / async" code to look very different from the normal linear code. If we were to do this in a callback / [CompletableFuture](https://www.baeldung.com/java-completablefuture#bd-Combining) style this can be done without any library but the code would be an eyesore (like Node.js with the callback style of 2004). To solve this problem we use [Project Reactor](https://projectreactor.io/docs/core/release/reference/index.html). I will not go into the details of Mono / Flux since there is enough documentation out there.
 
 So without much ado, here is the main "controller" code -
 
@@ -71,7 +71,9 @@ So without much ado, here is the main "controller" code -
                     })
                     .flatMap((Tuple3<User, UserPreference, List<UserCity>> tuple) -> {
                         var cities = tuple.getT3();
-                        var fluxOfWeather = Flux.fromIterable(cities).flatMap((var city) -> weatherService.getWeather(city.getCityName())); // --> 4
+                        var fluxOfWeather = Flux
+                          .fromIterable(cities)
+                          .flatMap((var city) -> weatherService.getWeather(city.getCityName())); // --> 4
 
                         return Mono.zip(Mono.just(tuple.getT1()), Mono.just(tuple.getT2()), fluxOfWeather.collectList());
                     })
