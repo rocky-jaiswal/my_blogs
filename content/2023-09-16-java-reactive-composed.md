@@ -14,7 +14,7 @@ Then came Node.js, around 2015-16 things started to take off, it sort of provide
 
 It seems now lately Java has improved a lot, Java 17 has closed a lot of gap between languages like Kotlin (which is what I loved working on in my free time) and also with the introduction of “Virtual Threads” the future of Java looks bright. Spring Boot allows developers to avoid a lot of boilerplate (in exchange of “magic” like Rails does) and offers a seriously good platter of features. So perhaps it is time to have a re-look at Java.
 
-But since I like a little bit of FP, Async style of code let us look at some ways to do this in modern Java using Spring / Micronaut.
+But since I like a little bit of FP, async style of code let us look at some ways to do this in modern Java using Spring / Micronaut.
 
 ### Blocking is wasteful
 
