@@ -1,7 +1,7 @@
 import React from 'react'
 
 import type { NextPage } from 'next'
-import profilePic from '../public/images/Rocky_Jaiswal_2019.png'
+import profilePic from '../public/images/Rocky_Jaiswal_2023.png'
 
 import Banner from '../components/Banner'
 import Image from 'next/image'
