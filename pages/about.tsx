@@ -145,7 +145,7 @@ const AboutPage: NextPage = (_props: unknown) => {
                 <li>
                   <a
                     target="_blank"
-                    href="https://www.certmetrics.com/amazon/public/transcript.aspx?transcript=TT09FCG1DFFQ1K9T"
+                    href="https://drive.google.com/file/d/1_6Tf-NbPqbEpEm1C9ndroJp43ofy9IHm/view?usp=sharing"
                     rel="noreferrer"
                   >
                     AWS Certified Developer Associate
