@@ -24,21 +24,21 @@ const AboutPage: NextPage = (_props: unknown) => {
               <p>
                 I am an experienced software engineer who has been building web and mobile
                 applications professionally since 2002. I started programming way back in school
-                using Pascal &amp; C (around 1996) and learned my craft through developing,
+                using Pascal &amp; C (around 1996) and learned my craft through by developing,
                 architecting and leading software projects. I love to code, I like to help people
                 through code and I enjoy working with a good team of developers.
               </p>
               <p>
-                Currently I enjoy working with Node.js, React.js, TypeScript, Java / Kotlin and
-                DevOps (AWS / Docker). I was a Java programmer from 2002-2011, Ruby programmer for
-                3-4 years after that. Now, I mostly work with TypeScript or JVM languages. I am also
-                interested in functional programming languages like Clojure.
+                Currently I enjoy working with NodeJS, ReactJS, TypeScript, Kotlin &amp; DevOps (AWS
+                / Docker / Python). I was a Java programmer from 2002-2011, Ruby programmer for 3-4
+                years after that. Now, I mostly work with TypeScript or JVM languages like Kotlin. I
+                am also interested in functional programming languages like Clojure.
               </p>
               <p>
                 I have developed numerous mobile / web applications and worked on building large
                 enterprise software for McKinsey &amp; Company, Morgan Stanley, Goldman Sachs, Ergo
                 among other clients in the US, UK , Europe and Japan. I have lived and worked in as
-                many as nine countries.
+                many as as nine countries.
               </p>
               <p>
                 On the personal front, I now live with my family in the beautiful city of Berlin,
@@ -52,7 +52,7 @@ const AboutPage: NextPage = (_props: unknown) => {
                   <div className="skill_section">
                     <h3>Programming languages</h3>
                     <ul>
-                      <li>JavaScript / TypeScript / Node.js</li>
+                      <li>JavaScript / TypeScript</li>
                       <li>Java / Kotlin</li>
                       <li>Ruby / JRuby</li>
                       <li>Python (for scripting)</li>
@@ -62,8 +62,8 @@ const AboutPage: NextPage = (_props: unknown) => {
                   <div className="skill_section">
                     <h3>Frameworks / Libraries</h3>
                     <ul>
-                      <li>React.js / React Native</li>
-                      <li>Node.js</li>
+                      <li>ReactJS / React Native</li>
+                      <li>NodeJS</li>
                       <li>Ruby on Rails</li>
                     </ul>
                   </div>
