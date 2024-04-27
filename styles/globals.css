@@ -233,3 +233,8 @@ em {
   padding: 4px;
   border-radius: 6px;
 }
+
+code {
+  background-color: #282a36;
+  color: #f8f8f2;
+}
