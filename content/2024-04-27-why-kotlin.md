@@ -91,6 +91,26 @@ The Kotlin code for doing things in the background and/or in parallel is simple 
 
 We can play around with the `delay` numbers and `async` blocks to see that the total time to execute the program depends on what is run asynchronously or in parallel. As you can see this setup is easy to develop and easy to understand which is not the case with Java.
 
+You can also "launch" thousands of Coroutines with no problem -
+
+    fun main() {
+        val demo = AsyncDemo()
+
+        val start = Instant.now().toEpochMilli()
+
+        runVirtual {
+            (1..100000).forEach {
+                launch(Dispatchers.Default) {
+                    demo.insertUserInDB()
+                }
+            }
+        }
+
+        println("${Instant.now().toEpochMilli() - start} millisecs consumed")
+    }
+
+The code above ran on my laptop easily under a second and used all my CPU cores. Although some knowledge is needed to understand Dispatchers, Couroutine Context etc.
+
 ## Some subjective opinions
 
 - The FP story is much better, you can have functions inside functions, functions outside classes, you do not have to explicitly declare the interface for a function / lambda.
