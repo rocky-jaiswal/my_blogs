@@ -109,7 +109,7 @@ You can also "launch" thousands of Coroutines with no problem -
         println("${Instant.now().toEpochMilli() - start} millisecs consumed")
     }
 
-The code above ran on my laptop easily under a second and used all my CPU cores. Although some knowledge is needed to understand Dispatchers, Couroutine Context etc.
+The code above ran on my laptop easily in a few seconds and used all my CPU cores without taxing the memory. _Although some knowledge is needed to understand Dispatchers, Couroutine Context etc._
 
 ## Some subjective opinions
 
