@@ -6,7 +6,7 @@ date: 22/12/2024
 
 Well, it is that wonderful time of the year where we are at home for a few days enjoying the company of our family and feasting on all kinds of tasty treats. So first of all I would like to wish you a **Merry Christmas!** As the days melt into each other and us developers find some free time and venture into [Advent of Code](https://github.com/rocky-jaiswal/advent-2024) and similar shenanigans, I stumbled upon [JBang](https://www.jbang.dev/) which allows us to run Java (or Kotlin / Groovy) programs with one command. Officially JRuby is not supported, though I was intrigued.
 
-I was a Ruby developer a while back (these days it's mostly TypeScript, and if I get lucky some Kotlin) but being a Java developer from around 2002-2010, I always found JRuby to be an exciting technology. Simply put it holds the promise of JVM performance and the productivity and pleasure of developing in Ruby (Kotlin is the only language that comes close to this). I will not go into the details of JRuby but simply put I always wanted to use something like [Javalin](https://javalin.io/) with JRuby. However while JRuby has good support for the Ruby ecosystem dependency management tools (like Bundler) it is a bit lacking on the JVM side, which has complex tooling like Gradle and Maven.
+I was a Ruby developer a while back (these days it's mostly TypeScript, and if I get lucky some Kotlin) but being a Java developer from around 2002-2010, I always found JRuby to be an exciting technology. Simply put, it holds the promise of JVM performance and the productivity and pleasure of developing in Ruby (Kotlin is the only language that comes close to this). I will not go into the details of JRuby but I always wanted to use something like [Javalin](https://javalin.io/) with JRuby. However while JRuby has good support for the Ruby ecosystem dependency management tools (like Bundler) it is a bit lacking on the JVM side, which has complex tooling like Gradle and Maven.
 
 So while a small JRuby program like below should work in principle -
 
@@ -164,7 +164,7 @@ We then add some more Java depedencies in our Jbang / Java file  -
         }
     }
 
-Then we have a Javalin CRUD like app with some JWT auth also thrown in -
+Finally we have a Javalin CRUD like app with some JWT auth also thrown in -
 
     require 'java'
     require 'jwt'
@@ -278,7 +278,7 @@ See sample output below -
     [JettyServerThreadPool-Virtual-10] INFO javalin app - received request ...
 
 
-And some hacky performance test with apache-benchmark (ab) tool -
+And some hacky performance testing with apache-benchmark (ab) tool -
 
     ❯ ab -n 1500 -c 25 -H 'Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4ifQ.7kgFUPogfLqftn7F34TnM9LzU_ZbqwYfkk5ZAJsUMEE' http://localhost:7070/api/users/
 
@@ -295,4 +295,4 @@ And some hacky performance test with apache-benchmark (ab) tool -
 
 So 95% of the 1500 requests with a concurrency of 25 were handled in under 10 milli-seconds, which is pretty good! Not to mention the code is pretty minimal and clean. With the latest version of Javalin we also served all requests with Jetty and Virtual Threads which is known to be pretty performant. So we finally have the promised combination of performance and productivity.
 
-Sadly, this is only a hacky setup and not meant to be taken seriously but I hope you had some fun reading this. Have a great holiday!
+Here is the [github repo](https://github.com/rocky-jaiswal/jbang-jruby-javalin). Sadly, this is only a hacky setup and not meant to be taken seriously but I hope you had some fun reading this. Have a great holiday!

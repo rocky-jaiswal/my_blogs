@@ -89,12 +89,13 @@ Usually when I start a new application there are a lot of things that I need to 
 - i18n
 - Form validation
 - Backend communication (REST / GraphQL)
+- Typed / Schema based frontend to backend communication (optional)
 - Configuration for multiple environments (e.g. staging vs production)
 - Linting
 - Editor setup (Prettier + Editor Config)
-- Unit testing (Jest)
+- Unit testing (Jest / RTL)
 - Integration testing (Cypress)
-- Building final artifact (CRA does this)
+- Building final artifact
 - HTML headers
 - Icon files for all platforms
 - Accessibility
@@ -103,3 +104,4 @@ Usually when I start a new application there are a lot of things that I need to 
 - Deployment (S3 + CDN + Protection)
 - Error reporting (e.g. Sentry)
 - Analytics setup (e.g. GA)
+- PWA (perhaps)
