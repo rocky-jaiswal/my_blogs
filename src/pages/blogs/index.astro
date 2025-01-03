@@ -1,5 +1,6 @@
 ---
 import { parse, compareDesc } from 'date-fns'
+import { getCollection  } from 'astro:content';
 
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
@@ -7,7 +8,7 @@ import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection,  } from 'astro:content';
+import { postToUrlComponents } from '../../lib/utils';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => compareDesc(parse(a.data.date, 'dd/MM/yyyy', new Date()), parse(b.data.date, 'dd/MM/yyyy', new Date())) ,
@@ -29,18 +30,11 @@ const posts = (await getCollection('blog')).sort(
 				<section class="postlist">
 					{
 						posts.map((post) => {
-							
-							const date = parse(post.data.date, 'dd/MM/yyyy', new Date())
-							const year = date.getFullYear()
-							const month = date.getMonth() + 1
-							const datex = date.getDate()
-							const title = post.id.substring(11)
-
-							const monthPadded = month < 10 ? `0${month}` : `${month}`
+							const { year, month, dateStr, date, title } = postToUrlComponents(post)
 								
 							return (
 								<div>
-									<a href={`/${year}/${monthPadded}/${datex}/${title}.html`}>
+									<a href={`/${year}/${month}/${dateStr}/${title}.html`}>
 										<h4 class="title">{post.data.title}</h4>
 									</a>
 									<p class="date">

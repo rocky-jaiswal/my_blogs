@@ -1,7 +1,8 @@
 import rss from '@astrojs/rss';
-import { parse } from 'date-fns';
 import { getCollection } from 'astro:content';
+
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { postToUrlComponents } from '../lib/utils';
 
 export async function GET(context) {
 	const posts = await getCollection('blog');
@@ -12,17 +13,11 @@ export async function GET(context) {
 		site: context.site,
 		items: posts.map((post) => {
 
-			const date = parse(post.data.date, 'dd/MM/yyyy', new Date())
-			const year = date.getFullYear()
-			const month = date.getMonth() + 1
-			const datex = date.getDate()
-			const title = post.id.substring(11)
-
-			const monthPadded = month < 10 ? `0${month}` : `${month}`
+			const { year, month, dateStr, title } = postToUrlComponents(post)
 
 			return {
 				...post.data,
-				link: `/${year}/${monthPadded}/${datex}/${title}.html`,
+				link: `/${year}/${month}/${dateStr}/${title}.html`,
 			}
 		}),
 	});
