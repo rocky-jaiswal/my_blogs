@@ -1,18 +1,13 @@
 ---
-import { parse, compareDesc } from 'date-fns'
-import { getCollection  } from 'astro:content';
-
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { postToUrlComponents } from '../../lib/utils';
+import { postToUrlComponents, sortedPosts } from '../../lib/utils';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => compareDesc(parse(a.data.date, 'dd/MM/yyyy', new Date()), parse(b.data.date, 'dd/MM/yyyy', new Date())) ,
-);
+const allPosts = await sortedPosts();
 
 ---
 
@@ -29,7 +24,7 @@ const posts = (await getCollection('blog')).sort(
 			<div class="main">
 				<section class="postlist">
 					{
-						posts.map((post) => {
+						allPosts.map((post) => {
 							const { year, month, dateStr, date, title } = postToUrlComponents(post)
 								
 							return (

@@ -60,6 +60,7 @@ Nothing complicated here, we start with a JDK base image and download JRuby and 
 
 The meat of this silly experiment is a simple Java file -
 
+    // RunJRuby.java
     ///usr/bin/env jbang "$0" "$@" ; exit $?
 
     //DEPS org.slf4j:slf4j-simple:2.0.16
@@ -144,6 +145,7 @@ We have simply added a "gem" for JWT management and pointed JBang to a larger JR
 
 We then add some more Java depedencies in our Jbang / Java file  -
 
+    // RunJRuby.java
     ///usr/bin/env jbang "$0" "$@" ; exit $?
 
     //DEPS org.slf4j:slf4j-simple:2.0.16

@@ -12,7 +12,6 @@ export async function GET(context) {
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: posts.map((post) => {
-
 			const { year, month, dateStr, title } = postToUrlComponents(post)
 
 			return {
