@@ -18,9 +18,11 @@ export async function GET(context) {
 			const datex = date.getDate()
 			const title = post.id.substring(11)
 
+			const monthPadded = month < 10 ? `0${month}` : `${month}`
+
 			return {
 				...post.data,
-				link: `/${year}/${month}/${datex}/${title}.html`,
+				link: `/${year}/${monthPadded}/${datex}/${title}.html`,
 			}
 		}),
 	});

@@ -35,10 +35,12 @@ const posts = (await getCollection('blog')).sort(
 							const month = date.getMonth() + 1
 							const datex = date.getDate()
 							const title = post.id.substring(11)
+
+							const monthPadded = month < 10 ? `0${month}` : `${month}`
 								
 							return (
 								<div>
-									<a href={`/${year}/${month}/${datex}/${title}.html`}>
+									<a href={`/${year}/${monthPadded}/${datex}/${title}.html`}>
 										<h4 class="title">{post.data.title}</h4>
 									</a>
 									<p class="date">

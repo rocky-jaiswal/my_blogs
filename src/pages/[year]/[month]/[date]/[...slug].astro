@@ -18,8 +18,10 @@ export async function getStaticPaths() {
 		const datex = date.getDate()
 		const title = post.id.substring(11)
 
+		const monthPadded = month < 10 ? `0${month}` : `${month}`
+
 		return {
-			params: { slug: title, year, month, date: datex },
+			params: { slug: title, year, month: monthPadded, date: datex },
 			props: post,
 		}
 	});

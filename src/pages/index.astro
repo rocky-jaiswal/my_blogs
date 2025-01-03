@@ -37,12 +37,14 @@ const latestPosts = (allPosts as any[]).slice(0, 10)
 							const month = date.getMonth() + 1
 							const datex = date.getDate()
 							const title = post.id.substring(11)
+
+							const monthPadded = month < 10 ? `0${month}` : `${month}`
 								
 							return (
 								<div  class="summary">
 									<div class="blog_headline">
 										<h2>
-											<a href={`/${year}/${month}/${datex}/${title}.html`}>
+											<a href={`/${year}/${monthPadded}/${datex}/${title}.html`}>
 												<h4 class="title">{post.data.title}</h4>
 											</a>
 										</h2>
