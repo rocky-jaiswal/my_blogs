@@ -1,0 +1,40 @@
+---
+import { parse } from 'date-fns'
+
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { render } from 'astro:content';
+
+import BlogPost from '../../../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+
+	return posts.map((post) => {
+		
+		const date = parse(post.data.date, 'dd/MM/yyyy', new Date())
+		
+		const year = date.getFullYear()
+		const month = date.getMonth() + 1
+		const datex = date.getDate()
+		const title = post.id.substring(11)
+
+		return {
+			params: { slug: title, year, month, date: datex },
+			props: post,
+		}
+	});
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogPost {...post.data}>
+	<div>
+		<div class="content">
+			<Content />
+		</div>
+	</div>
+</BlogPost>

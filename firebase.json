@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "out",
+    "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "redirects": [
       {
@@ -9,8 +9,8 @@
         "type": 301
       },
       {
-        "source": "/allPosts",
-        "destination": "/allPosts.html",
+        "source": "/blogs",
+        "destination": "/blogs.html",
         "type": 301
       }
     ]

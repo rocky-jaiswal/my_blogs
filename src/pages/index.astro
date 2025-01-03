@@ -1,0 +1,63 @@
+---
+import { parse, compareDesc } from 'date-fns'
+
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import { getCollection  } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const allPosts = (await getCollection('blog')).sort(
+	(a, b) => compareDesc(parse(a.data.date, 'dd/MM/yyyy', new Date()), parse(b.data.date, 'dd/MM/yyyy', new Date())) ,
+);
+
+const latestPosts = (allPosts as any[]).slice(0, 10)
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<div class="container">
+			<Header />
+			<div class="main">
+				<article class="content">
+					{
+						latestPosts.map((post) => {
+							
+							const date = parse(post.data.date, 'dd/MM/yyyy', new Date())
+							const year = date.getFullYear()
+							const month = date.getMonth() + 1
+							const datex = date.getDate()
+							const title = post.id.substring(11)
+								
+							return (
+								<div  class="summary">
+									<div class="blog_headline">
+										<h2>
+											<a href={`/${year}/${month}/${datex}/${title}.html`}>
+												<h4 class="title">{post.data.title}</h4>
+											</a>
+										</h2>
+										<p class="date">
+											<FormattedDate date={date} />
+										</p>
+										<p>{post.data.description ?? `${post.body?.substring(0, 100) ?? ''}...`}</p>
+										<hr />
+									</div>
+								</div>
+							)})
+						}
+				</article>
+				<Sidebar />
+			</div>
+		<Footer />
+	</body>
+</html>
