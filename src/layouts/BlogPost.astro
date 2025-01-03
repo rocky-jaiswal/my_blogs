@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { parse } from 'date-fns'
+
+import { toDate } from '../lib/utils';
 
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
@@ -19,15 +20,15 @@ const { title, description, date } = Astro.props;
 	</head>
 
 	<body>
-		<Header />
 		<div class="container">
+			<Header />
 			<main class="main">
 				<article>
 					<div class="prose post">
 						<div class="title">
 							<h1>{title}</h1>
 							<div class="date">
-								<FormattedDate date={parse(date, 'dd/MM/yyyy', new Date())} />
+								<FormattedDate date={toDate(date)} />
 							</div>
 							<hr />
 						</div>
@@ -35,7 +36,7 @@ const { title, description, date } = Astro.props;
 					</div>
 				</article>
 			</main>
+			<Footer />
 		</div>
-		<Footer />
 	</body>
 </html>
