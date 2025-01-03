@@ -225,28 +225,6 @@ blockquote {
   font-size: 1rem;
 }
 
-button#toggle-colors-1 {
-  position: absolute;
-  top: 45px;
-  right: 10px;
-  border: none;
-  background: #eee8d5;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-}
-
-button#toggle-colors-2 {
-  position: absolute;
-  top: 45px;
-  right: 40px;
-  border: none;
-  background: #04232b;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-}
-
 .image_holder {
   display: flex;
   justify-content: center;
@@ -265,6 +243,5 @@ code {
 
 .postlist {
   min-width: 720px;
-  padding: 20px;
   font-size: 1.2rem;
 }
