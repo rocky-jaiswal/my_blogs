@@ -9,7 +9,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { postToUrlComponents, sortedPosts } from '../lib/utils';
 
 const allPosts = await sortedPosts();
-const latestPosts = (allPosts as any[]).slice(0, 10)
+const latestPosts = allPosts.slice(0, 10)
 ---
 
 <!doctype html>

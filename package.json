@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "firebase:deploy": "npm run astro build && npx firebase deploy"
+    "firebase:deploy": "rm -rf dist/ && npm run astro build && npx firebase deploy"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",

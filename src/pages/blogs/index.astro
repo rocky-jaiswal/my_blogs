@@ -8,7 +8,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { postToUrlComponents, sortedPosts } from '../../lib/utils';
 
 const allPosts = await sortedPosts();
-
 ---
 
 <!doctype html>
@@ -19,8 +18,8 @@ const allPosts = await sortedPosts();
 		</style>
 	</head>
 	<body>
-		<Header />
-		<main class="container">
+		<div class="container">
+			<Header />
 			<div class="main">
 				<section class="postlist">
 					{
@@ -40,7 +39,7 @@ const allPosts = await sortedPosts();
 						}
 				</section>
 			</div>
-		</main>
+		</div>
 		<Footer />
 	</body>
 </html>
