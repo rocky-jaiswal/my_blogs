@@ -1,23 +1,24 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from "astro:content";
 
-import { postToUrlComponents } from '../../../../lib/utils';
+import { postToUrlComponents, toDate } from "../../../../lib/utils";
 
-import BlogPost from '../../../../layouts/BlogPost.astro';
+import Layout from "../../../../layouts/Layout.astro";
+import FormattedDate from "../../../../components/FormattedDate.astro";
 
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+  const posts = await getCollection("blog");
 
-	return posts.map((post) => {
-		const { year, month, dateStr, title } = postToUrlComponents(post)
+  return posts.map((post) => {
+    const { year, month, dateStr, title } = postToUrlComponents(post);
 
-		return {
-			params: { slug: title, year, month, date: dateStr },
-			props: post,
-		}
-	});
+    return {
+      params: { slug: title, year, month, date: dateStr },
+      props: post,
+    };
+  });
 }
 
 const post = Astro.props;
@@ -25,8 +26,16 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
-	<div>
-		<Content />
-	</div>
-</BlogPost>
+<Layout sidebar={false}>
+  <div class="post">
+    <div class="title">
+      <h1>{post.data.title}</h1>
+      <div class="date">
+        <FormattedDate date={toDate(post.data.date)} />
+      </div>
+      <hr />
+    </div>
+    <Content />
+  </div>
+  <div></div>
+</Layout>

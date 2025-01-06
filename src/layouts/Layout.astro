@@ -1,0 +1,30 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+const { title, sidebar } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={title || SITE_DESCRIPTION} />
+  </head>
+
+  <body>
+    <div class="container">
+      <Header />
+      <div class="main">
+        <article class="content">
+          <slot />
+        </article>
+        {sidebar ? <Sidebar /> : <div />}
+      </div>
+      <Footer />
+    </div>
+  </body>
+</html>

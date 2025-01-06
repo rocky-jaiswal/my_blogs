@@ -1,51 +1,38 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Sidebar from '../components/Sidebar.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import FormattedDate from "../components/FormattedDate.astro";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { postToUrlComponents, sortedPosts } from '../lib/utils';
+import Layout from "../layouts/Layout.astro";
+
+import { postToUrlComponents, sortedPosts } from "../lib/utils";
 
 const allPosts = await sortedPosts();
-const latestPosts = allPosts.slice(0, 10)
+const latestPosts = allPosts.slice(0, 10);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<div class="container">
-			<Header />
-			<div class="main">
-				<article class="content">
-					{
-						latestPosts.map((post) => {
-							const { year, month, dateStr, date, title } = postToUrlComponents(post)
-								
-							return (
-								<div class="summary">
-									<div class="blog_headline">
-										<h2>
-											<a href={`/${year}/${month}/${dateStr}/${title}.html`}>
-												<h4 class="title">{post.data.title}</h4>
-											</a>
-										</h2>
-										<p class="date">
-											<FormattedDate date={date} />
-										</p>
-										<p>{post.data.description ?? `${post.body?.substring(0, 100) ?? ''}...`}</p>
-										<hr />
-									</div>
-								</div>
-							)})
-					}
-				</article>
-				<Sidebar />
-			</div>
-		<Footer />
-	</body>
-</html>
+<Layout sidebar={true}>
+  {
+    latestPosts.map((post) => {
+      const { year, month, dateStr, date, title } = postToUrlComponents(post);
+
+      return (
+        <div class="summary">
+          <div class="blog_headline">
+            <h2>
+              <a href={`/${year}/${month}/${dateStr}/${title}.html`}>
+                <h4 class="title">{post.data.title}</h4>
+              </a>
+            </h2>
+            <p class="date">
+              <FormattedDate date={date} />
+            </p>
+            <p>
+              {post.data.description ??
+                `${post.body?.substring(0, 100) ?? ""}...`}
+            </p>
+            <hr />
+          </div>
+        </div>
+      );
+    })
+  }
+</Layout>
