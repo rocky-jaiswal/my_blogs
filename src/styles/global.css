@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Coda|Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Play|Roboto&display=swap");
 
 :root {
   --accent: #2337ff;
@@ -42,7 +42,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Coda", Times, serif;
+  font-family: "Play", Times, serif;
   color: var(--highlight-color) !important;
   margin: 0 0 15px 0;
 }
