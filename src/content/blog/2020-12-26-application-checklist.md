@@ -89,6 +89,11 @@ Usually when I start a new application there are a lot of things that I need to 
 - i18n
 - Form validation
 - Backend communication (REST / GraphQL)
+  - Handle auth centrally
+  - Handle errors centrally
+- Route management (redirect etc.)
+  - Protect auth routes
+- Error / Warning display
 - Typed / Schema based frontend to backend communication (optional)
 - Configuration for multiple environments (e.g. staging vs production)
 - Linting
