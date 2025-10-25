@@ -4,7 +4,7 @@ tags: JVM, Kotlin, FP
 date: 25/10/2025
 ---
 
-It has almost been a year since I last made a post. With everything in software development going the AI way and the small ideas I had, when I tried to put them in Claude I usually got the post I wanted to make in a few seconds. So it was kind of demotivating to spend hours on doing some research when people can get the same answer from AI anytime in seconds.
+It has almost been a year since I last made a post. With everything in software development going the AI way and the small ideas I had, when I tried to put them in Claude I usually got the post I wanted to make in a few seconds. So it was kind of demotivating to spend hours on doing some research when people can get the same answer from AI anytime in seconds. Things have changed, now we need not search for answers, we need to ask the right questions 😁
 
 Having said that, I still do not feel AI is there yet - yes, it is very good with small boilerplate stuff (and even then around 80% of the time) one cannot leave all development to AI if you really care about quality. Speaking of code quality, one major theme with AI churning out code is - __code organization__. Yes, AI can write code but if the code organization is not good, not only AI outputs worse code but at the end of the day code is all over the place - unreadable and unmaintainable.
 
@@ -24,7 +24,7 @@ So how do I personally look at code organization? There is no single or golden w
   - All these classes should be as stateless and isolated as possible, e.g. the kafka connection class should have no idea about the DB Connection and vice versa
   - This code should also not care about business logic, it should only care about its own interface / contract
 - Service level code -
-  - Provide business logic on top of the interface code
+  - Provide small, isolated business logic slice on top of the interface code
   - Again as simple and stateless as possible, e.g. a function to create user in DB if none exists, push a message to SQS under certain conditions, upload a file to S3 etc.
   - At the end of the day the functions declared in the services should be "small" - do only 1 thing in 1 function
 - Now we have the "foundational code" and the "service level code"
@@ -107,7 +107,7 @@ While this code works, as the checks increase it is littered by `if`, `try`, `ca
 
 If only there was a way to not care about null checks, errors and re-invent the wheel all the time. Enter - __Result__!
 
-Without going into the formal definition of a "Result", consider it as a "wrapper" which internally handles null checks and exceptions so our code looks like -
+Without going into the formal definition of a `Result`, consider it as a "wrapper" which internally handles null checks and exceptions so our code looks like -
 
     @Service
     class AuthCommand(
