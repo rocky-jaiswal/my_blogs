@@ -1,8 +1,14 @@
-# Building a basic sentiment analyzer with Claude, DSPy, and friends
+---
+title: "Building a basic sentiment analyzer with Claude, DSPy, and friends"
+tags: Python, GenAI
+date: 15/01/2026
+---
 
-So I've been playing around with building RAG / LLM-powered apps lately, and I thought I'd share my journey of creating a simple sentiment analyzer that's actually (somewhat) ready for the real world. This is just a quick demo, but also something with proper optimization, safety guardrails, and evaluation.
+So we kick off 2026 with GenAI. I've been playing around and building RAG / LLM-powered apps lately, and I thought I'd share my journey of creating a simple sentiment analyzer that's actually (somewhat) ready for the real world. This is just a quick demo, but also something with proper optimization, safety guardrails, and evaluation.
 
 I built this incrementally, one piece at a time, and I think that's the best way to learn this stuff. Let me walk you through it.
+
+![GenAI Sentiment Analysis](/images/python_dspy.png)
 
 ## What We're Building
 
@@ -45,7 +51,7 @@ class SentimentAnalyzer(dspy.Module):
 
 Code is now clean and typed.
 
-## Step 3: The Optimizer - Teaching the Model with Examples
+## Step 2: The Optimizer - Teaching the Model with Examples
 
 This is the cool part. DSPy has this thing called `BootstrapFewShot` that automatically finds good few-shot examples for your task.
 
@@ -82,7 +88,7 @@ What this does is find examples from your training set that, when included in th
 
 The results? My baseline accuracy is better after optimization. The model just... got better at the task. No manual prompt tweaking required.
 
-## Step 4: RAGAs - Are We Hallucinating?
+## Step 3: Evaluation
 
 Getting the sentiment right is one thing, but what about the explanations? Is the model making stuff up?
 
@@ -103,7 +109,7 @@ A faithfulness score of 100% means the explanation only references things actual
 
 This caught a few cases where my model was being creative with its explanations. Not cool.
 
-## Step 5: Guardrails - Don't Let Bad Stuff In (or Out)
+## Step 4: Guardrails - Don't Let Bad Stuff In (or Out)
 
 This is where it gets production-ready. I used [Guardrails AI](https://www.guardrailsai.com/) to add input and output validation.
 
@@ -183,11 +189,12 @@ Optional [MLflow] ← Logs everything for observability
 - **Guardrails AI** - Input/output validation
 - **RAGAs** - Evaluation metrics
 - **better-profanity** - Profanity detection
+- **mlflow** - Instrumentation / tracing
 - **uv** - Fast Python package management
 
 ## Learnings
 
-1. **DSPy is a game-changer** - It helps to stop writing prompts as strings. Declare what you want and let the framework handle the rest.
+1. **DSPy is great** - It helps to stop writing prompts as strings. Declare what you want and let the framework handle the rest.
 
 2. **Optimization actually works** - BootstrapFewShot found examples that improved accuracy without me manually curating prompts.
 
@@ -195,4 +202,4 @@ Optional [MLflow] ← Logs everything for observability
 
 4. **Evaluation is not optional** - RAGAs faithfulness metric caught hallucinations I would have missed.
 
-Happy building!
+Full code in on [GitHub](https://github.com/rocky-jaiswal/classifier-demo). Happy building!
