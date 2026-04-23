@@ -10,15 +10,15 @@
     "firebase:deploy": "rm -rf dist/ && npm run astro build && npx firebase deploy"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.8",
+    "@astrojs/mdx": "^5.0.4",
     "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.2.1",
-    "astro": "^5.2.1",
-    "astro-expressive-code": "^0.38.3",
+    "@astrojs/sitemap": "^3.7.0",
+    "astro": "^6.1.0",
+    "astro-expressive-code": "^0.41.0",
     "date-fns": "^4.1.0",
-    "firebase-tools": "^13.29.1"
+    "firebase-tools": "^15.15.0"
   },
   "devDependencies": {
-    "prettier": "^3.4.2"
+    "prettier": "^3.8.2"
   }
 }

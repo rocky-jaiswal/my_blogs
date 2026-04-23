@@ -18,9 +18,9 @@ export const postToUrlComponents = (post: CollectionEntry<"blog">) => {
   const monthPadded = month < 10 ? `0${month}` : `${month}`;
 
   return {
-    year,
+    year: String(year),
     month: monthPadded,
-    dateStr: datex,
+    dateStr: String(datex),
     date,
     title,
   };
