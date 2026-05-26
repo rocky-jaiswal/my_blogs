@@ -22,7 +22,8 @@ The stack I want to talk about is -
 - **[Integrant](https://github.com/weavejester/integrant)** for system lifecycle
 - **[Reitit](https://github.com/metosin/reitit)** for routing
 - **[Hiccup](https://github.com/weavejester/hiccup)** for HTML generation
-- **[HTMX](https://htmx.org/)** for interactivity
+- **[HTMX](https://htmx.org/)** for XHR based interactivity
+- **[Alpinejs](https://alpinejs.dev/)** for basic JS interactivity
 - **PostgreSQL** as the database (duh!)
 
 ### Why Clojure?
