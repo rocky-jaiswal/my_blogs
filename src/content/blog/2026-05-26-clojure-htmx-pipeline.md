@@ -224,6 +224,6 @@ The stack - Clojure, Hiccup, HTMX - keeps the server as the source of truth and 
 
 The pipeline pattern on top of it keeps the business logic clean. The layering (repository → service → command → controller) gives everything a clear home. Malli schemas as data keep validation declarative and centralized.
 
-The result is an application where you can open any command file and understand the full business flow in 10 lines of code, where adding a feature means adding one function per layer, and where the test surface is small because each function does one thing and one thing only. The DevEx is already so good here that you can focus on operational excellence - logging, metrics, analytics, alerting etc. which will lead to a better end user experience. Not to mention all problems as they arise can be isolated and fixed quickly in a single shot.
+The result is an application where you can open any command file and understand the full business flow in 10 lines of code, where adding a feature means adding one function per layer, and where the test surface is small because each function does one thing and one thing only. The DevEx is already so good here that you can focus on operational excellence - logging, metrics, analytics, alerting etc. which will lead to a better end user experience. Not to mention all bugs / problems (as they arise) can be isolated and fixed in a single codebase in one deployment.
 
 A full working project is available on [github.com/rocky-jaiswal/htmx-app](https://github.com/rocky-jaiswal/htmx-app). Have fun!
